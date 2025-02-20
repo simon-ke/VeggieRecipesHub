@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>素食者食譜專題網站</title>
+    <link rel="stylesheet" href="../CSS/recipeSelector.css">
+</head>
+
+<body>
+
+    <!-- 導覽列 -->
+    <nav>
+        <div class="nav-container">
+            <!-- 第一列 -->
+            <div class="member-menu">
+                <a href="#"><img class="login-singup" src="../img/icons/user.png" alt="登入註冊"><span
+                        class="tooltip">登入註冊</span></a>
+                <a href="#"><img class="shopping-cart" src="../img/icons/shopping-cart.png" alt="購物車"><span
+                        class="tooltip">購物車</span></a>
+                <a href="#"><img class="contact-us" src="../img/icons/message.png" alt="聯絡我們"><span
+                        class="tooltip">聯絡我們</span></a>
+            </div>
+
+
+            <!-- 第二列 -->
+            <div class="logo-container">
+                <a href="../index.html"><img class="logo" src="../img/vegetable_LOGO.jpg" alt="綠藝饗宴 LOGO"></a>
+                <a href="../index.html">
+                    <h1 class="site-title">綠藝饗宴</h1>
+                </a>
+
+            </div>
+
+            <!-- 第三列 -->
+            <div class="menu-container">
+                <div class="hamburger-menu" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul class="main-menu">
+                    <li><a href="../index.html">首頁</a></li>
+                    <li class="dropdown">
+                        <a href="#">食譜分類&#9662;</a>
+                        <ul class="submenu">
+                            <li><a href="./recipeSelector.html">早餐</a></li>
+                            <li><a href="./recipeSelector.html">飯</a></li>
+                            <li><a href="./recipeSelector.html">麵</a></li>
+                            <li><a href="./recipeSelector.html">米粉</a></li>
+                            <li><a href="./recipeSelector.html">蔬菜</a></li>
+                            <li><a href="./recipeSelector.html">鹹點</a></li>
+                            <li><a href="./recipeSelector.html">甜點</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">營養資訊</a></li>
+                    <li><a href="#">購物清單</a></li>
+                    <li><a href="#">聯絡我們</a></li>
+                    <li><a href="#">常見問題</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 目前正在製作素食者食譜的專題網站單純使用前端技術不加入後端相關技術 -->
+    <!-- 內容 -->
+    <div class="recipeSelector-container">
+        <!-- 關鍵字搜尋 -->
+        <div class="search-container">
+            <h2>立即探索食譜</h2>
+            <form>
+                <input type="text" id="search" name="search" placeholder="搜尋食譜或輸入食材">
+                <button type="submit"><img class="svg-icon" src="../img/icons/search.png" alt=""></button>
+
+            </form>
+        </div>
+        <!-- 頁面頂部篩選和排序選項 -->
+        <div class="filter-sort-container">
+            <label for="filter">篩選：</label>
+            <select id="filter" name="filter">
+                <option value="all">全部</option>
+                <option value="time">烹飪時間</option>
+                <option value="difficulty">難度</option>
+                <option value="rating">評價</option>
+            </select>
+
+            <label for="sort">排序：</label>
+            <select id="sort" name="sort">
+                <option value="latest">最新</option>
+                <option value="popular">最受歡迎</option>
+            </select>
+            <!-- 上傳食譜 -->
+            <a href="#">上傳您的素食食譜</a>
+        </div>
+        <!-- 食譜簡介卡片 -->
+        <div>
+            <!-- 頁籤 -->
+            <div class="breadcrumb">
+                <a href="">首頁</a>
+                >
+                <a href="">蔬菜</a>
+            </div>
+
+            <!-- 燈箱結構 -->
+            <div class="lightbox" id="lightbox">
+                <div class="lightbox-content">
+                    <img src="" alt="放大檢視" id="lightbox-img">
+                </div>
+            </div>
+            <!-- 各類食譜 -->
+            <div class="recipe-card">
+                <img class="recipe-img" src="../img/食譜圖片/烤蔬菜.jpg" alt="Food Image 1">
+                <div>
+                    <a class="content" href="./recipe.html">
+                        <h2>香草烤蔬菜</h2>
+                        <p>分類：<span class="tag">蔬菜</span>,<span class="tag">健康料理</span></p>
+                        <p class="recipe-description">
+                            這道香草烤蔬菜色彩繽紛，味道濃郁，是一道健康又美味的素食料理。選用新鮮蔬菜，搭配香草和橄欖油烤至香脆，適合作為主菜或配菜。每一口都讓人感受到蔬菜的鮮嫩和香草的馥鬱香氣，絕對是素食餐桌上的一大亮點。提示：可以根據個人喜好添加不同的香草，如羅勒、百里香或迷迭香，讓這道菜更具風味。此料理富含維生素和礦物質，有助於提升免疫力，保持健康。
+                        </p>
+                        <p>主要食材：紅蘿蔔、甜椒、茄子、西葫蘆、洋蔥、橄欖油、迷迭香</p>
+                        <P>製作時間：30分鐘</P>
+                    </a>
+                    <div class="actions">
+                        <a href="#">評分：4.8 / 5 （250 評價）</a>
+                        <a href="">作者：栗子</a>
+                        <a href="#">喜歡：150</a>
+                        <a href="#">留言：30</a>
+                        <button class="bookmark-button">收藏</button>
+                        <button class="share-button">分享</button>
+                    </div>
+                </div>
+            </div>
+            <div class="recipe-card">
+                <img class="recipe-img" src="../img/食譜圖片/Stir-fried vegetables.jpg" alt="Food Image 1">
+                <div>
+                    <a class="content" href="./recipe.html">
+                        <h2>田園炒蔬菜</h2>
+                        <p>分類：<span class="tag">蔬菜</span>,<span class="tag">快手菜</span></p>
+                        <p class="recipe-description">
+                            這道田園炒蔬菜簡單易做，色彩鮮豔，是一道充滿營養和風味的快手素食料理。選用當季蔬菜，快炒至脆嫩，配上些許調味料即可上桌。
+                        </p>
+                        <p>主要食材：紅蘿蔔、甜椒、茄子、西葫蘆、洋蔥、橄欖油、迷迭香</p>
+                        <P>製作時間：30分鐘</P>
+                    </a>
+                    <div class="actions">
+                        <a href="#">評分：4.5 / 5 （200 評價）</a>
+                        <a href="">作者：栗子</a>
+                        <a href="#">喜歡：150</a>
+                        <a href="#">留言：30</a>
+                        <button class="bookmark-button">收藏</button>
+                        <button class="share-button">分享</button>
+                    </div>
+                </div>
+            </div>
+            <div class="recipe-card">
+                <img class="recipe-img" src="../img/食譜圖片/蔬菜炒飯.jpg" alt="Food Image 1">
+                <div>
+                    <a class="content" href="./recipe.html">
+                        <h2>五彩蔬菜炒飯</h2>
+                        <p>分類：<span class="tag">蔬菜</span>,<span class="tag">健康料理</span></p>
+                        <p class="recipe-description">
+                            這道五彩蔬菜炒飯使用了各式新鮮蔬菜，如甜椒、紅蘿蔔、綠豆芽與玉米，搭配上蒜香飯，色香味俱全，讓您每一口都充滿蔬食的美好滋味。
+                        </p>
+                        <p>主要食材：紅蘿蔔、甜椒、茄子、西葫蘆、洋蔥、橄欖油、迷迭香</p>
+                        <P>製作時間：30分鐘</P>
+                    </a>
+                    <div class="actions">
+                        <a href="#">評分：4.5 / 5 （200 評價）</a>
+                        <a href="">作者：栗子</a>
+                        <a href="#">喜歡：150</a>
+                        <a href="#">留言：30</a>
+                        <button class="bookmark-button">收藏</button>
+                        <button class="share-button">分享</button>
+                    </div>
+                </div>
+            </div>
+            <div class="recipe-card">
+                <img class="recipe-img" src="../img/食譜圖片/沙拉.jpg" alt="Food Image 1">
+                <div>
+                    <a class="content" href="./recipe.html">
+                        <h2>彩虹蔬菜沙拉</h2>
+                        <p>分類：<span class="tag">蔬菜</span>,<span class="tag">快手菜</span></p>
+                        <p class="recipe-description">
+                            結合了新鮮的生菜、番茄、小黃瓜、甜椒和紅蘿蔔，再加入自製的蜂蜜芥末醬，這款沙拉絕對是健康與美味的完美結合。
+                        </p>
+                        <p>主要食材：紅蘿蔔、甜椒、茄子、西葫蘆、洋蔥、橄欖油、迷迭香</p>
+                        <P>製作時間：30分鐘</P>
+                    </a>
+                    <div class="actions">
+                        <a href="#">評分：4.8 / 5 （250 評價）</a>
+                        <a href="">作者：栗子</a>
+                        <a href="#">喜歡：120</a>
+                        <a href="#">留言：25</a>
+                        <button class="bookmark-button">收藏</button>
+                        <button class="share-button">分享</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 最新/推薦食譜 -->
+        <div class="featured-recipes">
+            <h2>推薦素食食譜</h2>
+            <div class="featured-carousel">
+                <div class="featured-recipe-card">
+                    <img src="../img/食譜圖片/烤蔬菜.jpg" alt="Recipe Image 3">
+                    <h3>食譜名稱 3</h3>
+                    <div class="tags">
+                        <span>低碳水</span>
+                    </div>
+                    <p>這是一個簡短的食譜介紹...</p>
+                    <div class="actions">
+                        <a href="#">評分：4.8 / 5 （250 評價）</a>
+                        <div>
+                            <button>收藏</button>
+                            <button>分享</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="featured-recipe-card">
+                    <img src="../img/食譜圖片/香料烤胡蘿蔔.jpg" alt="Spiced Roasted Carrots">
+                    <h3>香料烤胡蘿蔔</h3>
+                    <div class="tags">
+                        <span>快速</span>
+                        <span>健康</span>
+                    </div>
+                    <p>利用各種香料和草本來提升胡蘿蔔的風味，簡單美味的健康小吃。</p>
+                    <div class="actions">
+                        <a href="#">評分：4.7 / 5 （180 評價）</a>
+                        <div>
+                            <button>收藏</button>
+                            <button>分享</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="featured-recipe-card">
+                    <img src="../img/食譜圖片/橄欖油義大利麵.jpg" alt="Garlic Olive Oil Pasta">
+                    <h3>橄欖油義大利麵</h3>
+                    <div class="tags">
+                        <span>快速</span>
+                    </div>
+                    <p>簡單的義大利麵食譜，只需幾種食材，就能享受橄欖油的絕妙搭配。</p>
+                    <div class="actions">
+                        <a href="#">評分：4.5 / 5 （220 評價）</a>
+                        <div>
+                            <button>收藏</button>
+                            <button>分享</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="featured-recipe-card">
+                    <img src="../img/食譜圖片/香草烤花椰菜.jpg" alt="Herb Roasted Cauliflower">
+                    <h3>香草烤花椰菜</h3>
+                    <div class="tags">
+                        <span>健康</span>
+                        <span>低熱量</span>
+                    </div>
+                    <p>將花椰菜與新鮮香草和橄欖油一起烘烤，外脆內嫩，口感豐富。</p>
+                    <div class="actions">
+                        <a href="#">評分：4.6 / 5 （150 評價）</a>
+                        <div>
+                            <button>收藏</button>
+                            <button>分享</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="featured-recipe-card">
+                    <img src="../img/食譜圖片/鮮菇炒菠菜.jpg" alt="Lemon Garlic Sauteed Spinach">
+                    <h3>鮮菇炒菠菜</h3>
+                    <div class="tags">
+                        <span>快速</span>
+                    </div>
+                    <p>菠菜搭配鮮菇簡單快速的營養佳餚。</p>
+                    <div class="actions">
+                        <a href="#">評分：4.8 / 5 （200 評價）</a>
+                        <div>
+                            <button>收藏</button>
+                            <button>分享</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="featured-recipe-card">
+                    <img src="../img/食譜圖片/椰奶咖哩豆腐.jpg" alt="Coconut Curry Tofu">
+                    <h3>椰奶咖哩豆腐</h3>
+                    <div class="tags">
+                        <span>異國風味</span>
+                    </div>
+                    <p>以椰奶和咖哩燉煮豆腐，搭配米飯或麵食，口感豐富順口且充滿異國風情。</p>
+                    <div class="actions">
+                        <a href="#">評分：4.9 / 5 （300 評價）</a>
+                        <div>
+                            <button>收藏</button>
+                            <button>分享</button>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </div>
+        
+
+
+
+        <!-- 反饋區塊 -->
+        <div class="feedback-section">
+            <h3>您的反饋</h3>
+            <form action="#" method="POST">
+                <textarea name="feedback" id="feedback" rows="4" placeholder="請留下您的意見和建議"></textarea>
+                <button type="submit">提交</button>
+            </form>
+        </div>
+
+    </div>
+
+
+    <!-- 回到頂部按鈕 -->
+    <img id="back-to-top" class="up-arrow" src="../img/icons/up-arrow_11044298.png" alt="回到頂部">
+
+    <!-- 頁尾 -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-links">
+                <a href="#">關於我們</a>
+                <a href="#">常見問題</a>
+                <a href="#">隱私政策</a>
+                <a href="#">使用條款</a>
+                <a href="#">聯絡我們</a>
+            </div>
+            <div class="social-media-icons">
+                <a href="#"><img src="../img/icons/line.png" alt="Line"></a>
+                <a href="#"><img src="../img/icons/instagram.png" alt="Instagram"></a>
+                <a href="#"><img src="../img/icons/facebook.png" alt="Facebook"></a>
+            </div>
+            <p>Copyright &copy; 2025 綠藝饗宴</p>
+        </div>
+    </footer>
+
+    <script src="../JS/recipeSelector.js"></script>
+</body>
+
+</html>

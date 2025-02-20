@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>綠藝饗宴</title>
+    <link rel="stylesheet" href="./CSS/style.css">
+    <link rel="stylesheet" href="./CSS/all.css">
+</head>
+
+<body>
+
+    <!-- 導覽列 -->
+    <nav>
+        <div class="nav-container">
+
+
+            <!-- 第一列 -->
+            <div class="top-section">
+                <ul class="member-menu">
+                    <li> <a href="#"><img class="icon-login"
+                                src="https://img.icons8.com/?size=100&id=85147&format=png&color=000000" alt="登入註冊"></a>
+                    </li>
+                    <li> <a href="#"><img class="icon-cart"
+                                src="https://img.icons8.com/?size=100&id=85180&format=png&color=000000" alt="購物車"></a>
+                    </li>
+                    <li> <a href="#contact"><img class="icon-contact"
+                                src="https://img.icons8.com/?size=100&id=82768&format=png&color=000000" alt="聯絡我們"></a>
+                    </li>
+                </ul>
+            </div>
+
+
+            <!-- 第二列 -->
+            <div class="logo-container"> <a href="#"><img class="logo" src="./img/vegetable_LOGO.jpg"
+                        alt="綠藝饗宴 LOGO"></a>
+                <h1 class="site-title">綠藝饗宴</h1>
+            </div>
+
+
+            <!-- 第三列 -->
+            <div class="menu-container">
+                <div class="hamburger-menu" onclick="toggleMenu()"> <span></span> <span></span> <span></span> </div>
+                <ul class="main-menu">
+                    <li><a href="./index.html">首頁</a></li>
+                    <li><a href="./HTML/breakfast01.html">早餐</a></li>
+                    <li><a href="#">主食</a></li>
+                    <li><a href="#">點心</a></li>
+                    <li><a href="#">營養資訊</a></li>
+                    <li><a href="#">購物清單</a></li>
+                    <li><a href="#contact">聯絡我們</a></li>
+                    <li><a href="#">常見問題</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- 主內容 -->
+    <div class="content-container">
+
+        <!-- 搜尋區塊 -->
+        <div class="search-container">
+            <h2>立即探索美味素食料理的秘密</h2>
+            <form action="#" method="GET"> <input type="text" name="search" placeholder="搜尋食譜">
+                <button type="submit">搜尋</button>
+            </form>
+        </div>
+
+
+        <!-- 主打橫幅 -->
+        <header class="hero-banner">
+            <div class="overlay"></div>
+            <div class="hero-content">
+                <a href="#" class="cta-button">立即探索食譜</a>
+            </div>
+        </header>
+
+
+        <!-- 熱門食譜 -->
+        <section class="recommended-recipes">
+            <h3>熱門食譜</h3>
+            <div class="recipe-cards-container">
+                <img class="prev-button" src="./img/icons/left-arrow.png" alt="">
+                <div class="recipe-cards">
+                    <!-- 熱門食譜卡片 (共6張) -->
+                    <div class="recipe-card">
+                        <img src="./img/食譜圖片/Stir-fried vegetables.jpg" alt="清炒蔬菜" class="recipe-image">
+                        <h4>1清炒蔬菜</h4>
+                        <p>簡單美味的素食佳餚。</p>
+                        <a href="#" class="recipe-link">查看食譜</a>
+                    </div>
+                    <div class="recipe-card">
+                        <img src="./img/食譜圖片/recipe01.jpg" alt="清炒蔬菜" class="recipe-image">
+                        <h4>2清炒蔬菜</h4>
+                        <p>清炒蔬菜是一道簡單而美味的素食佳餚，適合早餐、午餐和晚餐。只需簡單的食材和調味料，就能製作出一道色香味俱全的料理</p>
+                        <a href="#" class="recipe-link">查看食譜</a>
+                    </div>
+                    <div class="recipe-card">
+                        <img src="./img/食譜圖片/recipe01.jpg" alt="清炒蔬菜" class="recipe-image">
+                        <h4>3美味炒麵</h4>
+                        <p>這道美味炒麵融合了多種新鮮蔬菜，口感豐富且營養滿分。不論是作為主食還是點心，這道食譜都能滿足您的味蕾。</p>
+                        <a href="#" class="recipe-link">查看食譜</a>
+                    </div>
+                    <div class="recipe-card">
+                        <img src="./img/食譜圖片/recipe02.jpg" alt="炒飯" class="recipe-image">
+                        <h4>4炒飯</h4>
+                        <p>這道炒飯簡單又美味，使用新鮮蔬菜和香料，讓人愛不釋手。</p>
+                        <a href="#" class="recipe-link">查看食譜</a>
+                    </div>
+                    <div class="recipe-card">
+                        <img src="./img/食譜圖片/recipe03.jpg" alt="沙拉" class="recipe-image">
+                        <h4>5沙拉</h4>
+                        <p>這道沙拉清爽可口，適合炎熱的夏天享用。</p>
+                        <a href="#" class="recipe-link">查看食譜</a>
+                    </div>
+                    <div class="recipe-card">
+                        <img src="./img/食譜圖片/recipe04.jpg" alt="湯" class="recipe-image">
+                        <h4>6湯</h4>
+                        <p>這道湯營養豐富，適合全家共享。</p>
+                        <a href="#" class="recipe-link">查看食譜</a>
+                    </div>
+                </div>
+                <img class="next-button" src="./img/icons/right-arrow.png" alt="">
+
+            </div>
+        </section>
+
+        <!-- 最新食譜 -->
+        <section class="new-recipes">
+            <h3>最新食譜</h3>
+            <div class="recipe-cards-container">
+                <img class="new-prev-button" src="./img/icons/left-arrow.png" alt="">
+                <div class="new-recipe-cards">
+                    <!-- 最新食譜卡片 (共6張) -->
+                    <div class="new-recipe-card">
+                        <img src="./img/食譜圖片/recipe01.jpg" alt="清炒蔬菜" class="recipe-image">
+                        <h4>最新食譜分享</h4>
+                        <p>用戶XXX剛剛分享了一道美味的新食譜！</p>
+                        <a href="#" class="post-link">查看食譜</a>
+                    </div>
+                    <div class="new-recipe-card">
+                        <img src="./img/食譜圖片/Stir-fried vegetables.jpg" alt="清炒蔬菜" class="recipe-image">
+                        <h4>最新食譜分享</h4>
+                        <p>用戶XXX剛剛分享了一道美味的新食譜！這道食譜結合了多種新鮮蔬菜，讓您的餐桌上多一分色彩與風味。立即查看並試試這道健康的素食料理吧！</p>
+                        <a href="#" class="post-link">查看食譜</a>
+                    </div>
+                    <div class="new-recipe-card">
+                        <img src="./img/食譜圖片/recipe01.jpg" alt="清炒蔬菜" class="recipe-image">
+                        <h4>最新食譜分享</h4>
+                        <p>用戶XXX剛剛分享了一道美味的新食譜！這道食譜結合了多種新鮮蔬菜，讓您的餐桌上多一分色彩與風味。立即查看並試試這道健康的素食料理吧！</p>
+                        <a href="#" class="post-link">查看食譜</a>
+                    </div>
+                    <div class="new-recipe-card">
+                        <img src="./img/食譜圖片/recipe02.jpg" alt="炒飯" class="recipe-image">
+                        <h4>最新食譜分享</h4>
+                        <p>用戶YYY剛剛分享了一道美味的新食譜！這道炒飯簡單又美味，使用新鮮蔬菜和香料，讓人愛不釋手。</p>
+                        <a href="#" class="post-link">查看食譜</a>
+                    </div>
+                    <div class="new-recipe-card">
+                        <img src="./img/食譜圖片/recipe03.jpg" alt="沙拉" class="recipe-image">
+                        <h4>最新食譜分享</h4>
+                        <p>用戶ZZZ剛剛分享了一道美味的新食譜！這道沙拉清爽可口，適合炎熱的夏天享用。</p>
+                        <a href="#" class="post-link">查看食譜</a>
+                    </div>
+                    <div class="new-recipe-card">
+                        <img src="./img/食譜圖片/recipe04.jpg" alt="湯" class="recipe-image">
+                        <h4>最新食譜分享</h4>
+                        <p>用戶AAA剛剛分享了一道美味的新食譜！這道湯營養豐富，適合全家共享。</p>
+                        <a href="#" class="post-link">查看食譜</a>
+                    </div>
+                </div>
+                <img class="new-next-button" src="./img/icons/right-arrow.png" alt="">
+            </div>
+        </section>
+
+
+
+        <!-- 個人化推薦 -->
+        <section class="personalized-recommendations">
+            <h3>個人化推薦</h3>
+            <div class="recommendation-cards"> <!-- 推薦卡片 -->
+                <div class="recommendation-card">
+                    <div class="image-placeholder" style="background-color: #e0e0e0; width: 100%; height: 200px;"></div>
+                    <h4>素食營養指南</h4>
+                    <p>了解素食的健康益處。</p> <a href="#" class="recommendation-link">閱讀更多</a>
+                </div> <!-- 添加更多推薦卡片 -->
+            </div>
+        </section>
+
+
+        <!-- 健康與營養 -->
+        <section class="health-nutrition">
+            <h3>健康與營養</h3>
+            <div class="health-articles"> <!-- 健康文章範例 -->
+                <div class="health-article">
+                    <h4>素食的健康益處</h4>
+                    <p>了解素食對健康的諸多益處。</p> <a href="#" class="article-link">閱讀更多</a>
+                </div> <!-- 添加更多健康文章 -->
+            </div>
+        </section>
+
+
+        <!-- 合作品牌/推薦 -->
+        <section class="partners">
+            <h3>合作品牌/推薦</h3>
+            <div class="partner-logos"> <!-- 合作品牌範例 -->
+                <div class="partner-logo">
+                    <div class="image-placeholder" style="background-color: #e0e0e0; width: 100%; height: 200px;"></div>
+                </div> <!-- 添加更多合作品牌 -->
+            </div>
+        </section>
+    </div>
+
+    <!-- 回到頂部按鈕 -->
+    <img id="back-to-top" class="up-arrow" src="./img/icons/up-arrow_11044298.png" alt="回到頂部">
+
+
+
+
+    <!-- 頁尾 -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-links"> <a href="#">關於我們</a> <a href="#">常見問題</a> <a href="#">隱私政策</a> <a
+                    href="#">使用條款</a> <a href="#">聯絡我們</a> </div>
+            <div class="social-media-icons"> <a href="#"><img class="icon" style="color: green;"
+                        src="./img/icons/line.png" alt="Line"></a> <a href="#"><img class="icon" style="color: green;"
+                        src="./img/icons/instagram.png" alt="Instagram"></a> <a href="#"><img class="icon"
+                        style="color: green;" src="./img/icons/facebook.png" alt="Facebook"></a> </div>
+            <p>Copyright &copy; 2025 綠藝饗宴</p>
+        </div>
+    </footer>
+    <script src="./JS/script.js"></script>
+</body>
+
+</html>
