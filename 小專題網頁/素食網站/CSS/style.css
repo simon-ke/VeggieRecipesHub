@@ -93,13 +93,25 @@ section {
 .recipe-card,
 .new-recipe-card,
 .recommendation-card,
-.health-article,
-.partner-logo {
+.health-article {
     margin: 10px 0;
     padding: 12px;
     border: 2px solid #e7e7e7;
     border-radius: 5px;
     width: 300px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.partner-logo {
+    margin: 10px 0;
+    padding: 12px;
+    border: 2px solid #e7e7e7;
+    border-radius: 5px;
+    width: 500px;
     background-color: white;
     display: flex;
     flex-direction: column;
@@ -127,7 +139,6 @@ section {
 .recipe-card p,
 .new-recipe-card p,
 .recommendation-card p,
-.health-article p,
 .partner-logo p {
     margin: 10px;
     overflow: hidden;
@@ -136,12 +147,38 @@ section {
     -webkit-box-orient: vertical;
 }
 
+.health-article p {
+    margin: 10px 0;
+    padding: 10px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    text-align: justify;
+    /* 使段落兩端對齊 */
+    line-height: 1.5;
+    /* 增加行間距 */
+    background-color: #ededed;
+    /* 添加背景顏色 */
+    border-radius: 5px 5px 0 0;
+    /* 圓角邊框 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* 添加陰影 */
+}
+
 .recipe-card img,
 .new-recipe-card img,
-.recommendation-card img,
-.partner-logo img {
+.recommendation-card img {
     width: 100%;
     height: 180px;
+    border-radius: 5px;
+    object-fit: cover;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.partner-logo img {
+    width: 100%;
+    height: 300px;
     border-radius: 5px;
     object-fit: cover;
     transition: transform 0.3s ease, filter 0.3s ease;

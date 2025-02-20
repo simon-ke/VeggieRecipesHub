@@ -16,6 +16,7 @@ html {
 
 a {
     text-decoration: none;
+    color: black;
 }
 
 /* 導覽列 */
@@ -27,17 +28,11 @@ a {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.top-section,
-.logo-container,
-.menu-container {
-    width: 100%;
-    text-align: center;
-}
-
 /* 第一列 */
-.member-menu {
+.top-section {
+    display: flex;
     margin-left: auto;
-    padding: 16px;
+    padding: 10px;
 }
 
 .member-menu a {
