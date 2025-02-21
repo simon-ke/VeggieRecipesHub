@@ -4,17 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>素食者食譜專題網站</title>
+    <meta name="description" content="綠藝饗宴 - 最佳素食食譜平台">
+    <title>食譜瀏覽 - 綠藝饗宴</title>
     <link rel="stylesheet" href="../CSS/recipeSelector.css">
 </head>
 
 <!-- 此頁面為素食者食譜的瀏覽頁 專題網站單純使用前端技術不加入後端相關技術 -->
 
 <body>
-
-    <!-- 導覽列 -->
-    <nav>
-        <div class="nav-container">
+    <!-- 頁首 -->
+    <header>
+        <!-- 導覽列 -->
+        <nav class="nav-container">
             <!-- 第一列 -->
             <div class="member-menu">
                 <a href="#"><img class="login-singup" src="../img/icons/user.png" alt="登入註冊"><span
@@ -62,19 +63,20 @@
                     <li><a href="#">常見問題</a></li>
                 </ul>
             </div>
+        </nav>
+        <!-- 搜尋區塊 -->
+        <div class="search-container">
+            <label>立即探索美味素食料理的秘密</label>
+            <form>
+                <input type="text" id="search" name="search" placeholder="搜尋食譜或輸入食材">
+                <button type="submit"><img class="svg-icon" src="../img/icons/search.png" alt="搜尋"></button>
+            </form>
         </div>
-    </nav>
+    </header>
 
     <!-- 內容 -->
     <div class="recipeSelector-container">
-        <!-- 關鍵字搜尋 -->
-        <div class="search-container">
-            <h2>立即探索食譜</h2>
-            <form>
-                <input type="text" id="search" name="search" placeholder="搜尋食譜或輸入食材">
-                <button type="submit"><img class="svg-icon" src="../img/icons/search.png" alt=""></button>
-            </form>
-        </div>
+
         <!-- 頁面頂部篩選和排序選項 -->
         <div class="filter-sort-container">
             <label for="sort">排序：</label>
@@ -95,8 +97,8 @@
                 <option value="lacto-ovo-vegetarian">蛋奶素</option>
                 <option value="gluten-free">無麩質</option>
             </select>
-            
-            
+
+
             <!-- 上傳食譜 -->
             <a href="#">上傳您的素食食譜</a>
         </div>

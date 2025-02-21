@@ -4,17 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>綠藝饗宴</title>
+    <meta name="description" content="綠藝饗宴 - 最佳素食食譜平台">
+    <title>首頁 - 綠藝饗宴</title>
     <link rel="stylesheet" href="./CSS/style.css">
     <link rel="stylesheet" href="./CSS/all.css">
 </head>
 
 <body>
-
-    <!-- 導覽列 -->
-    <nav>
-        <div class="nav-container">
-
+    <!-- 頁首 -->
+    <header>
+        <!-- 導覽列 -->
+        <nav class="nav-container">
             <!-- 第一列 -->
             <div class="member-menu">
                 <a href="#"><img src="./img/icons/user.png" alt="登入註冊"><span class="tooltip">登入註冊</span></a>
@@ -57,31 +57,28 @@
                     <li><a href="#">常見問題</a></li>
                 </ul>
             </div>
-        </div>
-    </nav>
-
-
-    <!-- 主內容 -->
-    <div class="content-container">
+        </nav>
 
         <!-- 搜尋區塊 -->
         <div class="search-container">
-            <h2>立即探索美味素食料理的秘密</h2>
+            <label>立即探索美味素食料理的秘密</label>
             <form>
                 <input type="text" id="search" name="search" placeholder="搜尋食譜或輸入食材">
-                <button type="submit"><img class="svg-icon" src="./img/icons/search.png" alt=""></button>
+                <button type="submit"><img class="svg-icon" src="./img/icons/search.png" alt="搜尋"></button>
             </form>
         </div>
 
-
         <!-- 主打橫幅 -->
-        <header class="hero-banner">
+        <div class="hero-banner">
             <div class="overlay"></div>
             <div class="hero-content">
                 <a href="#" class="cta-button">立即探索食譜</a>
             </div>
-        </header>
+        </div>
+    </header>
 
+    <!-- 主內容 -->
+    <div class="content-container">
 
         <!-- 熱門食譜 -->
         <section class="recommended-recipes">
