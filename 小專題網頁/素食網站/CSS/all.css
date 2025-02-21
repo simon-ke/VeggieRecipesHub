@@ -1,5 +1,8 @@
 html {
     box-sizing: border-box;
+    scroll-behavior: smooth;
+    transition: top 0.3s ease-in-out;
+    /* 添加過渡效果 */
 }
 
 *,
@@ -21,17 +24,50 @@ a {
 
 /* 導覽列 */
 .nav-container {
+    height: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-bottom: 1px solid #ddd;
+    justify-content: center;
+    border-bottom: 1px solid white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    top: 100px;
+    transition: height 0.5s ;
 }
 
-.logo-container,
-.menu-container {
+/* 固定導覽列 */
+nav.fixed-nav {
+    position: fixed;
+    flex-direction: row;
+    top: 0px;
+    background-color: white;
     width: 100%;
-    text-align: center;
+    height: 80px;
+    z-index: 1000;
+}
+
+nav.fixed-nav .member-menu {
+    order: 3;
+}
+
+nav.fixed-nav .logo-container {
+    order: 1;
+    margin: 0 100px;
+}
+
+nav.fixed-nav .logo-container img {
+    width: 100%;
+    height: 75px;
+    border-radius: 50px;
+}
+
+nav.fixed-nav .logo-container .site-title {
+    font-size: 1.6em;
+}
+
+nav.fixed-nav .menu-container {
+    order: 2;
+    margin: 0 auto;
 }
 
 /* 第一列 */
@@ -72,13 +108,15 @@ a {
 
 /* 第二列 */
 .logo-container {
+    margin-top: -50px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 img.logo {
-    width: 100px;
+    width: 120px;
+    border-radius: 70px;
 }
 
 .site-title {
@@ -92,6 +130,7 @@ img.logo {
     display: flex;
     justify-content: center;
     padding: 20px 0;
+    margin-top: -10px;
 }
 
 .main-menu {
@@ -143,6 +182,11 @@ ul.submenu {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* 固定導覽列搜尋區塊修正 */
+.fixed-nav-search {
+    padding-top: 180px;
 }
 
 .search-container label {
