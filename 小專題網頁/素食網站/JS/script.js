@@ -1,23 +1,3 @@
-// 當頁面滾動時觸發
-window.onscroll = () => {
-    scrollFunction();
-};
-
-const scrollFunction = () => {
-    const backToTopButton = document.getElementById("back-to-top");
-    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-        backToTopButton.style.display = "block";
-    } else {
-        backToTopButton.style.display = "none";
-    }
-};
-
-// 點擊圖片回到頂部
-document.getElementById("back-to-top").onclick = () => {
-    window.scrollTo({top: 0, behavior: 'smooth'});
-};
-
-
 // 卡片的切換功能
 document.addEventListener("DOMContentLoaded", function () {
     function initCardSlider(containerSelector, cardSelector, prevButtonSelector, nextButtonSelector, cardsPerGroup = 3) {
