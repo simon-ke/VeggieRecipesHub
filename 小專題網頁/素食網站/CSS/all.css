@@ -230,11 +230,6 @@ ul.submenu {
     background-color: #a0d468;
 }
 
-section h3 {
-    font-size: 2em;
-    margin: 20px;
-}
-
 /* 回到頂部 */
 #back-to-top {
     display: none;
