@@ -6,10 +6,11 @@
 /* 主打橫幅 */
 .hero-banner {
     background-image: url('../img/banner1.jpeg');
+    height: 500px;
     background-size: cover;
     background-position: center;
     position: relative;
-    height: 600px;
+    margin: 0 15%;
 }
 
 /* 遮罩效果 */
@@ -28,6 +29,7 @@
     text-align: center;
 }
 
+/* 主打橫幅按鈕 */
 .cta-button {
     z-index: 1;
     color: white;
@@ -44,16 +46,16 @@
     transition: background-color 0.5s;
 }
 
-section {
-    margin-top: 30px;
-}
-
 /* 卡片設定 */
 .cards-container {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+section {
+    margin-top: 30px;
 }
 
 .recipe-cards-container {
@@ -153,7 +155,7 @@ section {
 }
 
 .health-article p {
-    margin: 10px ;
+    margin: 10px;
     padding: 10px;
     text-align: justify;
     line-height: 1.5;

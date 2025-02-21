@@ -145,8 +145,9 @@ ul.submenu {
     align-items: center;
 }
 
-.search-container h2 {
+.search-container label {
     font-size: 1.5em;
+    font-weight: bold;
 }
 
 .search-container form {
