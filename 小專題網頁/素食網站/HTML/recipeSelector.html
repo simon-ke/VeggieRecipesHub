@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="../CSS/recipeSelector.css">
 </head>
 
+<!-- 此頁面為素食者食譜的瀏覽頁 專題網站單純使用前端技術不加入後端相關技術 -->
+
 <body>
 
     <!-- 導覽列 -->
@@ -15,9 +17,12 @@
         <div class="nav-container">
             <!-- 第一列 -->
             <div class="member-menu">
-                <a href="#"><img class="login-singup" src="../img/icons/user.png" alt="登入註冊"><span class="tooltip">登入註冊</span></a>
-                <a href="#"><img class="shopping-cart" src="../img/icons/shopping-cart.png" alt="購物車"><span class="tooltip">購物車</span></a>
-                <a href="#"><img class="contact-us" src="../img/icons/message.png" alt="聯絡我們"><span class="tooltip">聯絡我們</span></a>
+                <a href="#"><img class="login-singup" src="../img/icons/user.png" alt="登入註冊"><span
+                        class="tooltip">登入註冊</span></a>
+                <a href="#"><img class="shopping-cart" src="../img/icons/shopping-cart.png" alt="購物車"><span
+                        class="tooltip">購物車</span></a>
+                <a href="#"><img class="contact-us" src="../img/icons/message.png" alt="聯絡我們"><span
+                        class="tooltip">聯絡我們</span></a>
             </div>
 
 
@@ -60,7 +65,6 @@
         </div>
     </nav>
 
-    <!-- 目前正在製作素食者食譜的專題網站單純使用前端技術不加入後端相關技術 -->
     <!-- 內容 -->
     <div class="recipeSelector-container">
         <!-- 關鍵字搜尋 -->
@@ -73,19 +77,26 @@
         </div>
         <!-- 頁面頂部篩選和排序選項 -->
         <div class="filter-sort-container">
-            <label for="filter">篩選：</label>
-            <select id="filter" name="filter">
+            <label for="sort">排序：</label>
+            <select id="sort" name="sort">
                 <option value="all">全部</option>
                 <option value="time">烹飪時間</option>
                 <option value="difficulty">難度</option>
                 <option value="rating">評價</option>
-            </select>
-
-            <label for="sort">排序：</label>
-            <select id="sort" name="sort">
                 <option value="latest">最新</option>
                 <option value="popular">最受歡迎</option>
             </select>
+            <label for="filter">篩選：</label>
+            <select id="filter" name="filter">
+                <option value="vegetables">蔬菜</option>
+                <option value="quick-dish">快手菜</option>
+                <option value="healthy-cooking">健康料理</option>
+                <option value="vegan">純素</option>
+                <option value="lacto-ovo-vegetarian">蛋奶素</option>
+                <option value="gluten-free">無麩質</option>
+            </select>
+            
+            
             <!-- 上傳食譜 -->
             <a href="#">上傳您的素食食譜</a>
         </div>
@@ -93,9 +104,9 @@
         <div>
             <!-- 頁籤 -->
             <div class="breadcrumb">
-                <a href="">首頁</a>
+                <a href="../index.html">首頁</a>
                 >
-                <a href="">蔬菜</a>
+                <a href="./recipeSelector.html">蔬菜</a>
             </div>
 
             <!-- 燈箱結構 -->
@@ -201,12 +212,14 @@
             <h2>推薦素食食譜</h2>
             <div class="featured-carousel">
                 <div class="featured-recipe-card">
-                    <img src="../img/食譜圖片/烤蔬菜.jpg" alt="Recipe Image 3">
-                    <h3>食譜名稱 3</h3>
-                    <div class="tags">
-                        <span>低碳水</span>
-                    </div>
-                    <p>這是一個簡短的食譜介紹...</p>
+                    <a href="./recipe.html">
+                        <img src="../img/食譜圖片/烤蔬菜.jpg" alt="Recipe Image 3">
+                        <h3>香草烤蔬菜</h3>
+                        <div class="tags">
+                            <span>低碳水</span>
+                        </div>
+                        <p>這道香草烤蔬菜色彩繽紛，味道濃郁，是一道健康又美味的素食料理。選用新鮮蔬菜，搭配香草和橄欖油烤至香脆，適合作為主菜或配菜。</p>
+                    </a>
                     <div class="actions">
                         <a href="#">評分：4.8 / 5 （250 評價）</a>
                         <div>
@@ -216,13 +229,15 @@
                     </div>
                 </div>
                 <div class="featured-recipe-card">
-                    <img src="../img/食譜圖片/香料烤胡蘿蔔.jpg" alt="Spiced Roasted Carrots">
-                    <h3>香料烤胡蘿蔔</h3>
-                    <div class="tags">
-                        <span>快速</span>
-                        <span>健康</span>
-                    </div>
-                    <p>利用各種香料和草本來提升胡蘿蔔的風味，簡單美味的健康小吃。</p>
+                    <a href="./recipe.html">
+                        <img src="../img/食譜圖片/香料烤胡蘿蔔.jpg" alt="Spiced Roasted Carrots">
+                        <h3>香料烤胡蘿蔔</h3>
+                        <div class="tags">
+                            <span>快速</span>
+                            <span>健康</span>
+                        </div>
+                        <p>利用各種香料和草本來提升胡蘿蔔的風味，簡單美味的健康小吃。</p>
+                    </a>
                     <div class="actions">
                         <a href="#">評分：4.7 / 5 （180 評價）</a>
                         <div>
@@ -232,12 +247,14 @@
                     </div>
                 </div>
                 <div class="featured-recipe-card">
-                    <img src="../img/食譜圖片/橄欖油義大利麵.jpg" alt="Garlic Olive Oil Pasta">
-                    <h3>橄欖油義大利麵</h3>
-                    <div class="tags">
-                        <span>快速</span>
-                    </div>
-                    <p>簡單的義大利麵食譜，只需幾種食材，就能享受橄欖油的絕妙搭配。</p>
+                    <a href="./recipe.html">
+                        <img src="../img/食譜圖片/橄欖油義大利麵.jpg" alt="Garlic Olive Oil Pasta">
+                        <h3>橄欖油義大利麵</h3>
+                        <div class="tags">
+                            <span>快速</span>
+                        </div>
+                        <p>簡單的義大利麵食譜，只需幾種食材，就能享受橄欖油的絕妙搭配。</p>
+                    </a>
                     <div class="actions">
                         <a href="#">評分：4.5 / 5 （220 評價）</a>
                         <div>
@@ -247,13 +264,15 @@
                     </div>
                 </div>
                 <div class="featured-recipe-card">
-                    <img src="../img/食譜圖片/香草烤花椰菜.jpg" alt="Herb Roasted Cauliflower">
-                    <h3>香草烤花椰菜</h3>
-                    <div class="tags">
-                        <span>健康</span>
-                        <span>低熱量</span>
-                    </div>
-                    <p>將花椰菜與新鮮香草和橄欖油一起烘烤，外脆內嫩，口感豐富。</p>
+                    <a href="./recipe.html">
+                        <img src="../img/食譜圖片/香草烤花椰菜.jpg" alt="Herb Roasted Cauliflower">
+                        <h3>香草烤花椰菜</h3>
+                        <div class="tags">
+                            <span>健康</span>
+                            <span>低熱量</span>
+                        </div>
+                        <p>將花椰菜與新鮮香草和橄欖油一起烘烤，外脆內嫩，口感豐富。</p>
+                    </a>
                     <div class="actions">
                         <a href="#">評分：4.6 / 5 （150 評價）</a>
                         <div>
@@ -263,12 +282,14 @@
                     </div>
                 </div>
                 <div class="featured-recipe-card">
-                    <img src="../img/食譜圖片/鮮菇炒菠菜.jpg" alt="Lemon Garlic Sauteed Spinach">
-                    <h3>鮮菇炒菠菜</h3>
-                    <div class="tags">
-                        <span>快速</span>
-                    </div>
-                    <p>菠菜搭配鮮菇簡單快速的營養佳餚。</p>
+                    <a href="./recipe.html">
+                        <img src="../img/食譜圖片/鮮菇炒菠菜.jpg" alt="Lemon Garlic Sauteed Spinach">
+                        <h3>鮮菇炒菠菜</h3>
+                        <div class="tags">
+                            <span>快速</span>
+                        </div>
+                        <p>菠菜搭配鮮菇簡單快速的營養佳餚。</p>
+                    </a>
                     <div class="actions">
                         <a href="#">評分：4.8 / 5 （200 評價）</a>
                         <div>
@@ -278,12 +299,14 @@
                     </div>
                 </div>
                 <div class="featured-recipe-card">
-                    <img src="../img/食譜圖片/椰奶咖哩豆腐.jpg" alt="Coconut Curry Tofu">
-                    <h3>椰奶咖哩豆腐</h3>
-                    <div class="tags">
-                        <span>異國風味</span>
-                    </div>
-                    <p>以椰奶和咖哩燉煮豆腐，搭配米飯或麵食，口感豐富順口且充滿異國風情。</p>
+                    <a href="./recipe.html">
+                        <img src="../img/食譜圖片/椰奶咖哩豆腐.jpg" alt="Coconut Curry Tofu">
+                        <h3>椰奶咖哩豆腐</h3>
+                        <div class="tags">
+                            <span>異國風味</span>
+                        </div>
+                        <p>以椰奶和咖哩燉煮豆腐，搭配米飯或麵食，口感豐富順口且充滿異國風情。</p>
+                    </a>
                     <div class="actions">
                         <a href="#">評分：4.9 / 5 （300 評價）</a>
                         <div>
@@ -291,12 +314,9 @@
                             <button>分享</button>
                         </div>
                     </div>
-                </div>                
+                </div>
             </div>
         </div>
-        
-
-
 
         <!-- 反饋區塊 -->
         <div class="feedback-section">

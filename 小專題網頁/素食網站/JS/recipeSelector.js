@@ -18,20 +18,46 @@ document.addEventListener('DOMContentLoaded', function () {
 // 卡片滑動
 document.addEventListener("DOMContentLoaded", () => {
     const carousel = document.querySelector(".featured-carousel");
-
     let isDragging = false;
     let startX, scrollLeft;
     let velocity = 0;
     let momentumID;
+    let lastMove = 0;
+    let moved = false;
 
-    // 滑鼠按下開始拖動
+    // 取消動量追蹤
+    function cancelMomentumTracking() {
+        cancelAnimationFrame(momentumID);
+    }
+
+    // 開始動量追蹤
+    function beginMomentumTracking() {
+        cancelMomentumTracking();
+
+        function momentumLoop() {
+            carousel.scrollLeft += velocity;
+            velocity *= 0.95; // 緩慢減速
+
+            // 當速度過小時停止動畫
+            if (Math.abs(velocity) > 0.5) {
+                momentumID = requestAnimationFrame(momentumLoop);
+            } else {
+                cancelMomentumTracking();
+            }
+        }
+        momentumLoop();
+    }
+
+    // 滑鼠按下
     carousel.addEventListener("mousedown", (e) => {
         e.preventDefault();
         isDragging = true;
+        moved = false;
+        carousel.style.cursor = "grabbing";
         startX = e.pageX - carousel.offsetLeft;
         scrollLeft = carousel.scrollLeft;
         velocity = 0;
-        carousel.style.scrollBehavior = "auto"; // 禁用 CSS 滑動效果，避免干擾
+        lastMove = 0;
         cancelMomentumTracking();
     });
 
@@ -39,63 +65,54 @@ document.addEventListener("DOMContentLoaded", () => {
     carousel.addEventListener("mousemove", (e) => {
         if (!isDragging) return;
         e.preventDefault();
+        moved = true;
+        carousel.style.cursor = "grabbing";
         const x = e.pageX - carousel.offsetLeft;
-        const move = (x - startX) * 1; // 控制滑動速度
-        velocity = move * 0.05; // 讓滑動更平滑
+        const move = x - startX;
+
+        // 記錄當前速度 (修正方向)
+        velocity = (lastMove - move) * 0.3;
+        lastMove = move;
+
         carousel.scrollLeft = scrollLeft - move;
     });
 
     // 滑鼠放開
-    carousel.addEventListener("mouseup", () => {
+    carousel.addEventListener("mouseup", (e) => {
         isDragging = false;
-        beginMomentumTracking();
+        carousel.style.cursor = "grab";
+
+        // 確保拖動後不會觸發點擊
+        if (moved) {
+            e.preventDefault();
+        }
+
+        // 如果有移動才啟動動量效果
+        if (moved) {
+            beginMomentumTracking();
+        }
     });
 
     // 滑鼠離開
     carousel.addEventListener("mouseleave", () => {
         isDragging = false;
+        carousel.style.cursor = "grab";
     });
 
-    // 觸控（手機）
-    let touchStartX, touchScrollLeft;
-
-    carousel.addEventListener("touchstart", (e) => {
-        touchStartX = e.touches[0].pageX - carousel.offsetLeft;
-        touchScrollLeft = carousel.scrollLeft;
-        velocity = 0;
-        cancelMomentumTracking();
-    });
-
-    carousel.addEventListener("touchmove", (e) => {
-        const x = e.touches[0].pageX - carousel.offsetLeft;
-        const move = (x - touchStartX) * 1;
-        velocity = move * 0.05;
-        carousel.scrollLeft = touchScrollLeft - move;
-    });
-
-    carousel.addEventListener("touchend", () => {
-        beginMomentumTracking();
-    });
-
-    // 啟動動量滾動
-    function beginMomentumTracking() {
-        cancelMomentumTracking();
-        momentumID = requestAnimationFrame(momentumLoop);
-    }
-
-    function cancelMomentumTracking() {
-        cancelAnimationFrame(momentumID);
-    }
-
-    function momentumLoop() {
-        carousel.scrollLeft -= velocity;
-        velocity *= 0.95; // 逐漸減速
-        if (Math.abs(velocity) > 0.5) {
-            momentumID = requestAnimationFrame(momentumLoop);
-        } else {
-            velocity = 0;
+    // 防止 a 標籤在拖動時觸發點擊
+    carousel.addEventListener("click", (e) => {
+        if (moved) {
+            e.preventDefault();
         }
-    }
+    });
 });
 
+// input 高度自適應
+const textarea = document.getElementById('feedback');
 
+textarea.addEventListener('input', () => {
+    // 重置高度，以便準確計算捲動高度
+    textarea.style.height = 'auto';
+    // 設置高度為內容的捲動高度
+    textarea.style.height = `${textarea.scrollHeight}px`;
+});
