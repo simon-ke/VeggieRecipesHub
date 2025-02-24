@@ -1,18 +1,17 @@
 @import './all.css';
 /* 共同樣式 */
 
-
-
 /* 食譜詳情頁面樣式 */
 .recipe-detail {
-    max-width: 1000px;
-    margin: 0 auto;
+    margin: 0 10%;
+    padding: 20px;
+
 }
 
 /* 導航面包屑 */
 .breadcrumb {
     border-top: 1px solid #e7e7e7;
-    padding: 10px;
+    padding: 20px 0;
     font-size: 1.1em;
 }
 
@@ -24,25 +23,85 @@
     text-decoration: underline;
 }
 
-/* 食譜標題和封面圖片 */
-.recipe-header {
-    text-align: center;
-    margin-bottom: 20px;
+/* 用戶資訊 */
+.user-info {
+    display: flex;
+    align-items: center;
+    width: 500px;
 }
 
-.recipe-title {
-    font-size: 2rem;
-    color: #333;
+.user-avatar {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+    margin-left: 10px;
 }
 
-.recipe-cover {
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-    margin-top: 10px;
+.user-name {
+    font-size: 1.5em;
+}
+
+.user-name:hover {
+    text-decoration: underline;
+}
+
+.user-info p {
+    margin-left: 10px;
+    color: #777;
 }
 
 /* 食譜資訊 */
+.recipe-header {
+    display: flex;
+    margin: 20px 0;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.2s;
+}
+
+.recipe-header:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.left-section {
+    width: 40%;
+    height: auto;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    object-position: center;
+    margin-right: 20px;
+    border-radius: 5px;
+}
+
+.right-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.recipe-title {
+    font-size: 2em;
+    color: #333;
+}
+
+.recipe-tag .tag {
+    background-color: #a0d468;
+    color: #fff;
+    padding: 4px;
+    margin: 0 5px;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.recipe-description {
+    font-size: 1.2em;
+    color: #555;
+}
+
 .recipe-info {
     display: flex;
     justify-content: space-between;

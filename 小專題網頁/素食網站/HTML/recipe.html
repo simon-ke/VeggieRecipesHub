@@ -70,7 +70,7 @@
         </nav>
         <!-- 搜尋區塊 -->
         <div class="search-container">
-            <label>立即探索美味素食料理的秘密</label>
+            <label>探索其他食譜</label>
             <form>
                 <input type="text" id="search" name="search" placeholder="搜尋食譜或輸入食材">
                 <button type="submit"><img class="svg-icon" src="../img/icons/search.png" alt="搜尋"></button>
@@ -88,39 +88,69 @@
             <a href="./recipeSelector.html">蔬菜</a>
         </div>
 
-        <!-- 食譜標題和封面圖片 -->
-        <header class="recipe-header">
-            <h1 class="recipe-title">清炒蔬菜</h1>
-            <img src="../img/食譜圖片/Stir-fried vegetables.jpg" alt="清炒蔬菜" class="recipe-cover">
-        </header>
+        <!-- 用戶資訊 -->
+        <a class="user-info" href="">
+            <img class="user-avatar" src="../img/User/大頭照2.jpg" alt="用戶頭像">
+            <p class="user-name" href="">用戶名稱</p>
+            <p>200篇食譜</p>
+            <p>3.8K粉絲</p>
+        </a>
 
         <!-- 食譜資訊 -->
-        <div class="recipe-info">
-            <span class="author">作者：用戶名稱</span>
-            <span class="date">發佈日期：2025-02-18</span>
-            <span class="rating">評價：★★★★☆</span>
+        <div class="recipe-header">
+            <img class="left-section" src="../img/食譜圖片/Stir-fried vegetables.jpg" alt="食譜圖片">
+            <div class="right-section">
+                <h2 class="recipe-title">清炒蔬菜</h2>
+                <p class="recipe-tag"><span class="tag">蔬菜</span>,<span class="tag">健康料理</span></p>
+                <p class="recipe-description">
+                    這是一道簡單又美味的蔬菜料理，適合健康飲食的人士。這是一道簡單又美味的蔬菜料理，適合健康飲食的人士。這是一道簡單又美味的蔬菜料理，適合健康飲食的人士。這是一道簡單又美味的蔬菜料理，適合健康飲食的人士。這是一道簡單又美味的蔬菜料理，適合健康飲食的人士。這是一道簡單又美味的蔬菜料理，適合健康飲食的人士。
+                </p>
+                <div class="recipe-info">
+                    <span class="date">發佈日期：2025-02-18</span>
+                    <a class="rating" href="#">4 / 5 評分：★★★★☆ （200 評價）</a>
+                    <a class="share" href="#">分享</a>
+                </div>
+            </div>
         </div>
 
         <!-- 食材列表 -->
         <section class="ingredients">
             <h2>食材</h2>
-            <ul>
-                <li>胡蘿蔔 - 2根</li>
-                <li>西蘭花 - 1顆</li>
-                <li>黃椒 - 1顆</li>
-                <!-- 添加更多食材 -->
-            </ul>
+            <table>
+                <tr>
+                    <td>胡蘿蔔</td>
+                    <td>2根</td>
+                </tr>
+                <tr>
+                    <td>西蘭花</td>
+                    <td>1顆</td>
+                </tr>
+                <tr>
+                    <td>黃椒</td>
+                    <td>1顆</td>
+                </tr>
+            </table>
         </section>
 
-        <!-- 製作步驟 -->
-        <section class="instructions">
-            <h2>製作步驟</h2>
-            <ol>
-                <li>將胡蘿蔔、西蘭花和黃椒洗淨、切片。</li>
-                <li>將所有食材放入炒鍋中翻炒，加入調味料。</li>
-                <li>炒至蔬菜熟透，即可裝盤享用。</li>
-                <!-- 添加更多步驟 -->
-            </ol>
+        <!-- 調味料 -->
+        <section class="ingredients">
+            <h2>調味料</h2>
+            <table>
+                <tr>
+                    <td>胡椒</td>
+                    <td>1湯匙</td>
+                </tr>
+                <tr>
+                    <td>鹽巴</td>
+                    <td>1湯匙</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- 製作時間 -->
+        <section class="">
+            <h2>製作時間</h2>
+            <p>30分鐘</p>
         </section>
 
         <!-- 營養成分 -->
@@ -133,6 +163,32 @@
                 <li>碳水化合物：35 克</li>
                 <!-- 添加更多營養成分 -->
             </ul>
+        </section>
+
+        <!-- 製作步驟 -->
+        <section class="instructions">
+            <h2>製作步驟</h2>
+            <div>
+                <img src="" alt="">
+                <div>
+                    <h3>1</h3>
+                    <p>將胡蘿蔔、西蘭花和黃椒洗淨、切片。</p>
+                </div>
+            </div>
+            <div>
+                <img src="" alt="">
+                <div>
+                    <h3>2</h3>
+                    <p>將所有食材放入炒鍋中翻炒，加入調味料。</p>
+                </div>
+            </div>
+            <div>
+                <img src="" alt="">
+                <div>
+                    <h3>3</h3>
+                    <p>炒至蔬菜熟透，即可裝盤享用。</p>
+                </div>
+            </div>
         </section>
 
         <!-- 用戶評論 -->
@@ -153,18 +209,18 @@
         <section class="related-recipes">
             <h2>相關食譜</h2>
             <div class="related-card">
-                <img src="../img/食譜圖片/沙拉.jpg" alt="相關食譜">
-                <h4>素食沙拉</h4>
+                <img src="../img/食譜圖片/鮮蔬沙拉.jpg" alt="相關食譜">
+                <h4>鮮蔬沙拉</h4>
                 <a href="#" class="related-link">查看食譜</a>
             </div>
             <div class="related-card">
-                <img src="../img/食譜圖片/沙拉.jpg" alt="相關食譜">
-                <h4>素食沙拉</h4>
+                <img src="../img/食譜圖片/鮮蔬沙拉.jpg" alt="相關食譜">
+                <h4>鮮蔬鮮蔬</h4>
                 <a href="#" class="related-link">查看食譜</a>
             </div>
             <div class="related-card">
-                <img src="../img/食譜圖片/沙拉.jpg" alt="相關食譜">
-                <h4>素食沙拉</h4>
+                <img src="../img/食譜圖片/鮮蔬沙拉.jpg" alt="相關食譜">
+                <h4>鮮蔬沙拉</h4>
                 <a href="#" class="related-link">查看食譜</a>
             </div>
             <!-- 添加更多推薦卡片 -->
