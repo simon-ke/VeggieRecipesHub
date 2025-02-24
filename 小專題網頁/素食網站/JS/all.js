@@ -6,17 +6,17 @@ window.onscroll = () => {
 // 固定導覽列
 const fixedNav = () => {
     const nav = document.querySelector('.nav-container');
-    const search = document.querySelector('.search-container');
+    const search = document.querySelector('.recipe-actions');
 
     if (window.scrollY > 200) {
         requestAnimationFrame(() => {
             nav.classList.add('fixed-nav');
-            search.classList.add('fixed-nav-search');
+            search.classList.add('fixed-recipe-actions');
         });
     } else {
         requestAnimationFrame(() => {
             nav.classList.remove('fixed-nav');
-            search.classList.remove('fixed-nav-search');
+            search.classList.remove('fixed-recipe-actions');
         });
     }
 }

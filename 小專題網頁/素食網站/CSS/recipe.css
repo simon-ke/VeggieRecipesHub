@@ -52,7 +52,7 @@
     color: #777;
 }
 
-/* 食譜資訊 */
+/* 食譜介紹 */
 .recipe-header {
     display: flex;
     margin: 20px 0;
@@ -69,9 +69,9 @@
 }
 
 .left-section {
-    width: 40%;
+    width: 50%;
     height: auto;
-    aspect-ratio: 4/3;
+    aspect-ratio: 4 / 3;
     object-fit: cover;
     object-position: center;
     margin-right: 20px;
@@ -81,6 +81,14 @@
 .right-section {
     display: flex;
     flex-direction: column;
+    gap: 10px;
+}
+
+.recipe-date {
+    color: #777;
+    display: flex;
+    justify-content: end;
+    margin-bottom: -30px;
 }
 
 .recipe-title {
@@ -88,11 +96,23 @@
     color: #333;
 }
 
+.rating {
+    font-size: 0.8em;
+    color: #777;
+    margin-top: -10px;
+}
+
+.rating span {
+    font-size: 1.5em;
+    margin: 0 10px;
+    color: rgb(255, 196, 0);
+}
+
 .recipe-tag .tag {
     background-color: #a0d468;
     color: #fff;
     padding: 4px;
-    margin: 0 5px;
+    margin-right: 10px;
     border-radius: 5px;
     font-size: 1em;
 }
@@ -102,121 +122,359 @@
     color: #555;
 }
 
-.recipe-info {
+.recipe-click {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    color: #777;
-    font-size: 0.9rem;
+    margin-top: auto;
+    font-size: 1em;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
 }
 
-.recipe-info span {
+.recipe-click button {
+    display: flex;
+    align-items: center;
+}
+
+.like-button,
+.comment-button,
+.bookmark-button,
+.share-button {
+    border: none;
+    background-color: transparent;
+    border-radius: 5px;
+    padding: 4px 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.recipe-click img {
+    width: 30px;
     margin-right: 10px;
 }
 
-/* 食材/步驟/成分 */
-.ingredients,
-.instructions,
-.nutrition,
-.comments,
-.related-recipes {
-    margin-bottom: 20px;
+/* 食譜資訊 */
+.recipe-info {
+    display: flex;
+    gap: 20px;
 }
 
-.ingredients h2,
-.instructions h2,
-.nutrition h2,
-.comments h2,
-.related-recipes h2 {
-    font-size: 1.5rem;
-    color: #333;
-    margin-bottom: 10px;
+.ingredient,
+.seasoning,
+.nutrition {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
 }
 
-.ingredients ul,
+.ingredient:hover,
+.seasoning:hover,
+.nutrition:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.ingredient-info {
+    display: flex;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
+}
+
+.ingredient-info div {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ingredient-info img {
+    width: 20px;
+    margin-right: 10px;
+}
+
+.section-title {
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
+}
+
+.ingredient table,
+.seasoning table {
+    width: 100%;
+}
+
+.ingredient table td,
+.seasoning table td {
+    width: 50%;
+    padding: 5px 0;
+}
+
+/* 營養成分 */
 .nutrition ul {
-    list-style-type: disc;
-    margin-left: 20px;
+    margin: 5px 0 0 -10px;
 }
 
-.instructions ol {
-    list-style-type: decimal;
-    margin-left: 20px;
+.nutrition li {
+    list-style-type: none;
+    padding-bottom: 5px;
+}
+
+/* 製作步驟 */
+.instructions {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.instructions h2 {
+    font-size: 2em;
+    color: #333;
+}
+
+.recipe-step {
+    display: flex;
+    gap: 20px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 0 20px;
+    transition: box-shadow 0.3s ease;
+}
+
+.recipe-step:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.recipe-step img {
+    width: 20%;
+    border-radius: 5px;
+}
+
+.recipe-step>div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-right: 10px;
+}
+
+.recipe-step p {
+    font-size: 1.2em;
+    color: #3b3b3b;
+
+}
+
+.progress-bar {
+    width: 100%;
+    background-color: #f3f3f3;
+    border-radius: 5px;
+    /* margin: auto 0 10px 0; */
+    padding: 5px;
+}
+
+.progress {
+    width: 20%;
+    background-color: #4caf50;
+    height: 5px;
+    border-radius: 5px;
 }
 
 /* 用戶評論 */
-.comments .comment {
-    border-bottom: 1px solid #e7e7e7;
-    padding: 10px 0;
+.comments h2 {
+    font-size: 2em;
+    color: #333;
 }
 
-.comments .comment span {
-    color: #777;
-    font-size: 0.9rem;
+.comments .comment {
+    border-bottom: 1px solid #e7e7e7;
+    padding: 10px;
+}
+
+.comment-user-avatar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.comment-user-avatar img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+}
+
+div.comment-user-avatar span {
+    font-size: 1.2em;
+    color: #333;
+    font-weight: bold;
+}
+
+.comment p {
+    line-height: 1.2;
+    margin: 10px 0 5px 5px;
+}
+
+.comment span {
+    color: #999;
+    font-size: 0.85rem;
+    margin: 10px 5px;
 }
 
 .comments form {
-    margin-top: 20px;
+    margin-top: 10px;
+    padding: 10px;
 }
 
 .comments textarea {
+    resize: none;
     width: 100%;
-    height: 100px;
+    height: auto;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-bottom: 10px;
+    scrollbar-width: none;
+}
+
+.comments textarea::-webkit-scrollbar {
+    display: none;
 }
 
 .comments button {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
     border: none;
+    background-color: #4CAF50;
+    padding: 10px 20px;
+    color: white;
     cursor: pointer;
     border-radius: 5px;
+    transition: background-color 0.3s;
 }
 
 .comments button:hover {
     background-color: #45a049;
 }
 
-/* 相關食譜推薦 */
-.related-recipes .related-card {
-    display: inline-block;
-    width: calc(33% - 10px);
-    margin-right: 10px;
-    margin-bottom: 10px;
-    vertical-align: top;
-    border: 1px solid #e7e7e7;
-    border-radius: 5px;
-    padding: 10px;
-    box-sizing: border-box;
+.comments button:active {
+    background-color: #3e8e41;
+    transform: scale(0.98);
 }
 
-.related-recipes .related-card img {
+/* 最新/推薦食譜 */
+.related-recipes {
+    margin: 20px 10px;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.related-recipes h2 {
+    margin: 5px 0 0 10px;
+}
+
+.related-carousel {
+    display: flex;
+    padding: 5px 15px 15px 15px;
+    gap: 15px;
+    /* 設定卡片之間的間距 */
+    overflow-x: auto;
+    /* 允許橫向滾動 */
+    cursor: grab;
+    /* 更改鼠標圖標 */
+    scrollbar-width: none;
+    /* Firefox 隱藏滾動條 */
+}
+
+/* 隱藏滾動條 */
+.related-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.related-recipe-card {
+    width: 300px;
+    border: 1px solid #d0d0d0;
+    border-radius: 5px;
+    padding: 10px;
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.related-recipe-card:hover {
+    transform: scale(1.01);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+}
+
+.related-recipe-card img {
     width: 100%;
-    height: auto;
+    height: 240px;
     border-radius: 5px;
+    object-fit: cover;
 }
 
-.related-recipes .related-card h4 {
-    font-size: 1.2rem;
-    color: #333;
-    margin: 10px 0;
+.related-recipe-card h3 {
+    margin: 5px 0;
 }
 
-.related-recipes .related-card .related-link {
-    display: block;
-    background-color: #4CAF50;
-    color: white;
-    text-decoration: none;
-    padding: 10px;
+.related-recipe-card p {
+    color: #666;
+    padding: 0 10px;
+    margin-bottom: 10px;
+
+    max-height: 3em;
+    /* 3 行，每行 1.5em */
+    line-height: 1.5em;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.related-recipe-card .tags {
+    display: flex;
+}
+
+.related-recipe-card span {
+    background-color: #a0d468;
+    color: #fff;
     border-radius: 5px;
-    text-align: center;
-    transition: background-color 0.3s;
+    padding: 3px;
+    margin: 5px 0 10px 10px;
 }
 
-.related-recipes .related-card .related-link:hover {
-    background-color: #45a049;
+.related-recipe-card .actions {
+    border-top: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    /* 這行確保 actions 貼齊最底部 */
+}
+
+.related-recipe-card .actions a {
+    color: #f16e3f;
+    margin: 10px;
+}
+
+.related-recipe-card button {
+    background-color: #ff7f50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 4px 8px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.related-recipe-card .actions a:hover {
+    font-weight: 600;
+}
+
+.related-recipe-card button:hover {
+    background-color: #ff4500;
 }

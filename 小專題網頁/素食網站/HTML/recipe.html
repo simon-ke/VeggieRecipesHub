@@ -68,13 +68,19 @@
                 </ul>
             </div>
         </nav>
-        <!-- 搜尋區塊 -->
-        <div class="search-container">
-            <label>探索其他食譜</label>
-            <form>
-                <input type="text" id="search" name="search" placeholder="搜尋食譜或輸入食材">
-                <button type="submit"><img class="svg-icon" src="../img/icons/search.png" alt="搜尋"></button>
-            </form>
+
+        <!-- 第四列 -->
+        <div class="recipe-actions">
+            <!-- 搜尋區塊 -->
+            <div class="search-container">
+                <label>探索其他食譜</label>
+                <form>
+                    <input type="text" id="search" name="search" placeholder="搜尋食譜或輸入食材">
+                    <button type="submit"><img class="search-icon" src="../img/icons/search.png" alt="搜尋"></button>
+                </form>
+            </div>
+            <!-- 上傳食譜 -->
+            <a class="upload-button" href="">上傳您的素食食譜</a>
         </div>
     </header>
 
@@ -96,97 +102,165 @@
             <p>3.8K粉絲</p>
         </a>
 
-        <!-- 食譜資訊 -->
+        <!-- 食譜介紹 -->
         <div class="recipe-header">
             <img class="left-section" src="../img/食譜圖片/Stir-fried vegetables.jpg" alt="食譜圖片">
             <div class="right-section">
+                <span class="recipe-date">2025-02-18</span>
                 <h2 class="recipe-title">清炒蔬菜</h2>
-                <p class="recipe-tag"><span class="tag">蔬菜</span>,<span class="tag">健康料理</span></p>
+                <a class="rating" href="#">4.1<span>★★★★☆</span>（200 評價）</a>
+                <p class="recipe-tag"><span class="tag">蔬菜</span><span class="tag">健康料理</span></p>
                 <p class="recipe-description">
                     這是一道簡單又美味的蔬菜料理，適合健康飲食的人士。這是一道簡單又美味的蔬菜料理，適合健康飲食的人士。這是一道簡單又美味的蔬菜料理，適合健康飲食的人士。這是一道簡單又美味的蔬菜料理，適合健康飲食的人士。這是一道簡單又美味的蔬菜料理，適合健康飲食的人士。這是一道簡單又美味的蔬菜料理，適合健康飲食的人士。
                 </p>
-                <div class="recipe-info">
-                    <span class="date">發佈日期：2025-02-18</span>
-                    <a class="rating" href="#">4 / 5 評分：★★★★☆ （200 評價）</a>
-                    <a class="share" href="#">分享</a>
+                <div class="recipe-click">
+                    <button class="like-button"><img src="../img/icons/heart_empty.png" alt="">150</button>
+                    <button class="comment-button"><img src="../img/icons/message4.png" alt="">30</button>
+                    <button class="bookmark-button"><img src="../img/icons/bookmark_icon2.png" alt=""></button>
+                    <button class="share-button"><img src="../img/icons/share_icon3.png" alt=""></button>
                 </div>
             </div>
         </div>
 
-        <!-- 食材列表 -->
-        <section class="ingredients">
-            <h2>食材</h2>
-            <table>
-                <tr>
-                    <td>胡蘿蔔</td>
-                    <td>2根</td>
-                </tr>
-                <tr>
-                    <td>西蘭花</td>
-                    <td>1顆</td>
-                </tr>
-                <tr>
-                    <td>黃椒</td>
-                    <td>1顆</td>
-                </tr>
-            </table>
-        </section>
+        <!-- 食譜資訊 -->
+        <div class="recipe-info">
 
-        <!-- 調味料 -->
-        <section class="ingredients">
-            <h2>調味料</h2>
-            <table>
-                <tr>
-                    <td>胡椒</td>
-                    <td>1湯匙</td>
-                </tr>
-                <tr>
-                    <td>鹽巴</td>
-                    <td>1湯匙</td>
-                </tr>
-            </table>
-        </section>
+            <!-- 食譜列表 -->
+            <section class="ingredient">
+                <!-- 份量/時間 -->
 
-        <!-- 製作時間 -->
-        <section class="">
-            <h2>製作時間</h2>
-            <p>30分鐘</p>
-        </section>
+                <!-- 食材 -->
+                <div>
+                    <div class="ingredient-info">
+                        <h2>食材</h2>
+                        <div>
+                            <img src="../img/icons/fork_spoon_icon.png" alt="">3人份
+                        </div>
+                        <div>
+                            <img src="../img/icons/clock_time_icon.png" alt="">30分鐘
+                        </div>
+                    </div>
+                    <table>
+                        <tr>
+                            <td>紅椒</td>
+                            <td>1顆</td>
+                        </tr>
+                        <tr>
+                            <td>黃椒</td>
+                            <td>1顆</td>
+                        </tr>
+                        <tr>
+                            <td>青椒</td>
+                            <td>1顆</td>
+                        </tr>
+                        <tr>
+                            <td>胡蘿蔔</td>
+                            <td>1根</td>
+                        </tr>
+                        <tr>
+                            <td>花椰菜</td>
+                            <td>1顆</td>
+                        </tr>
+                        <tr>
+                            <td>蘑菇</td>
+                            <td>200克</td>
+                        </tr>
+                        <tr>
+                            <td>扁豆</td>
+                            <td>200克</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
 
-        <!-- 營養成分 -->
-        <section class="nutrition">
-            <h2>營養成分</h2>
-            <ul>
-                <li>熱量：200 卡</li>
-                <li>蛋白質：5 克</li>
-                <li>脂肪：2 克</li>
-                <li>碳水化合物：35 克</li>
-                <!-- 添加更多營養成分 -->
-            </ul>
-        </section>
+            <section class="seasoning">
+                <!-- 調味料 -->
+                <div>
+                    <h2 class="section-title">調味料</h2>
+                    <table>
+                        <tr>
+                            <td>橄欖油</td>
+                            <td>2湯匙</td>
+                        </tr>
+                        <tr>
+                            <td>醬油</td>
+                            <td>3湯匙</td>
+                        </tr>
+                        <tr>
+                            <td>紅醋</td>
+                            <td>1湯匙</td>
+                        </tr>
+                        <tr>
+                            <td>糖</td>
+                            <td>1茶匙</td>
+                        </tr>
+                        <tr>
+                            <td>鹽巴</td>
+                            <td>1茶匙</td>
+                        </tr>
+                        <tr>
+                            <td>黑胡椒</td>
+                            <td>適量</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
 
-        <!-- 製作步驟 -->
+            <!-- 營養成分 -->
+            <section class="nutrition">
+                <h2 class="section-title">營養成分</h2>
+                <ul>
+                    <li>熱量：150卡路里</li>
+                    <li>蛋白質：4克</li>
+                    <li>脂肪：8 克</li>
+                    <li>碳水化合物：15克</li>
+                    <li>維生素A：100% DV</li>
+                    <li>維生素C：150% DV</li>
+                    <li>鈣：6% DV</li>
+                    <li>鐵：8% DV</li>
+                </ul>
+            </section>
+        </div>
+
+        <!-- 烹調步驟 -->
         <section class="instructions">
-            <h2>製作步驟</h2>
-            <div>
-                <img src="" alt="">
+            <h2>烹調步驟</h2>
+            <div class="recipe-step">
+                <img src="../img/breakfast01.jpg" alt="準備食材">
                 <div>
-                    <h3>1</h3>
-                    <p>將胡蘿蔔、西蘭花和黃椒洗淨、切片。</p>
+                    <div class="progress-bar">
+                        <div class="progress"></div>
+                    </div>
+                    <h2>1</h2>
+                    <p> 準備食材：先將所有食材洗乾淨，紅椒、黃椒、綠椒、胡蘿蔔切絲，西蘭花掰成小朵，蘑菇切片，秋葵切段。</p>
                 </div>
             </div>
-            <div>
-                <img src="" alt="">
+            <div class="recipe-step">
+                <img src="../img/breakfast01.jpg" alt="熱鍋">
                 <div>
-                    <h3>2</h3>
-                    <p>將所有食材放入炒鍋中翻炒，加入調味料。</p>
+                    <h2>2</h2>
+                    <p>熱鍋：在中火熱鍋中倒入2湯匙橄欖油，待油熱後加入胡蘿蔔絲，拌炒2分鐘。</p>
                 </div>
             </div>
-            <div>
-                <img src="" alt="">
+            <div class="recipe-step">
+                <img src="../img/breakfast01.jpg" alt="加入蔬菜">
                 <div>
-                    <h3>3</h3>
-                    <p>炒至蔬菜熟透，即可裝盤享用。</p>
+                    <h2>3</h2>
+                    <p>加入蔬菜：接著加入紅椒、黃椒、綠椒、西蘭花、蘑菇和秋葵，繼續翻炒5-7分鐘，直到蔬菜變軟。</p>
+                </div>
+            </div>
+            <div class="recipe-step">
+                <img src="../img/breakfast01.jpg" alt="調味">
+                <div>
+                    <h2>4</h2>
+                    <p>調味：加入3湯匙醬油、1湯匙紅酒醋、1茶匙糖，繼續翻炒均勻。根據口味加入適量黑胡椒。</p>
+                </div>
+            </div>
+            <div class="recipe-step">
+                <img src="../img/breakfast01.jpg" alt="完成">
+                <div>
+                    <h2>5</h2>
+                    <p>完成：拌炒均勻後，關火，裝盤即可享用。</p>
                 </div>
             </div>
         </section>
@@ -195,12 +269,63 @@
         <section class="comments">
             <h2>用戶評論</h2>
             <div class="comment">
+                <div class="comment-user-avatar">
+                    <img src="../img/User/大頭照1.png" alt="用戶頭像">
+                    <span>用戶名</span>
+                </div>
                 <p>這道菜真的很好吃！</p>
-                <span>用戶名 - 2025-02-18</span>
+                <span>2025-02-18</span>
             </div>
-            <!-- 添加更多評論 -->
-            <form>
-                <textarea placeholder="添加評論..."></textarea>
+            <div class="comment">
+                <div class="comment-user-avatar">
+                    <img src="../img/User/大頭照1.png" alt="用戶頭像">
+                    <span>用戶名</span>
+                </div>
+                <p>非常簡單易做，而且味道很棒！</p>
+                <span>2025-02-20</span>
+            </div>
+            <div class="comment">
+                <div class="comment-user-avatar">
+                    <img src="../img/User/大頭照1.png" alt="用戶頭像">
+                    <span>用戶名</span>
+                </div>
+                <p>色彩繽紛又健康，一定會再做一次。</p>
+                <span>2025-02-21</span>
+            </div>
+            <div class="comment">
+                <div class="comment-user-avatar">
+                    <img src="../img/User/大頭照1.png" alt="用戶頭像">
+                    <span>用戶名</span>
+                </div>
+                <p>孩子們都很喜歡，連挑食的也吃光了！</p>
+                <span>2025-02-22</span>
+            </div>
+            <div class="comment">
+                <div class="comment-user-avatar">
+                    <img src="../img/User/大頭照1.png" alt="用戶頭像">
+                    <span>用戶名</span>
+                </div>
+                <p>簡直是晚餐的完美選擇，謝謝你的食譜。</p>
+                <span>2025-02-23</span>
+            </div>
+            <div class="comment">
+                <div class="comment-user-avatar">
+                    <img src="../img/User/大頭照1.png" alt="用戶頭像">
+                    <span>用戶名</span>
+                </div>
+                <p>真的很好吃，而且準備起來也不難。</p>
+                <span>2025-02-24</span>
+            </div>
+            <div class="comment">
+                <div class="comment-user-avatar">
+                    <img src="../img/User/大頭照1.png" alt="用戶頭像">
+                    <span>用戶名</span>
+                </div>
+                <p>這是我吃過最好吃的蔬菜料理之一。</p>
+                <span>2025-02-24</span>
+            </div>
+            <form action="#" method="POST">
+                <textarea name="comment-input" id="comment-input" rows="4" placeholder="添加評論..."></textarea>
                 <button type="submit">提交</button>
             </form>
         </section>
@@ -208,22 +333,112 @@
         <!-- 相關食譜推薦 -->
         <section class="related-recipes">
             <h2>相關食譜</h2>
-            <div class="related-card">
-                <img src="../img/食譜圖片/鮮蔬沙拉.jpg" alt="相關食譜">
-                <h4>鮮蔬沙拉</h4>
-                <a href="#" class="related-link">查看食譜</a>
+            <div class="related-carousel">
+                <div class="related-recipe-card">
+                    <a href="./recipe.html">
+                        <img src="../img/食譜圖片/烤蔬菜.jpg" alt="Recipe Image 3">
+                        <h3>香草烤蔬菜</h3>
+                        <div class="tags">
+                            <span>低碳水</span>
+                        </div>
+                        <p>這道香草烤蔬菜色彩繽紛，味道濃郁，是一道健康又美味的素食料理。選用新鮮蔬菜，搭配香草和橄欖油烤至香脆，適合作為主菜或配菜。</p>
+                    </a>
+                    <div class="actions">
+                        <a href="#">評分：4.8 / 5 （250 評價）</a>
+                        <div>
+                            <button>收藏</button>
+                            <button>分享</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="related-recipe-card">
+                    <a href="./recipe.html">
+                        <img src="../img/食譜圖片/香料烤胡蘿蔔.jpg" alt="Spiced Roasted Carrots">
+                        <h3>香料烤胡蘿蔔</h3>
+                        <div class="tags">
+                            <span>快速</span>
+                            <span>健康</span>
+                        </div>
+                        <p>利用各種香料和草本來提升胡蘿蔔的風味，簡單美味的健康小吃。</p>
+                    </a>
+                    <div class="actions">
+                        <a href="#">評分：4.7 / 5 （180 評價）</a>
+                        <div>
+                            <button>收藏</button>
+                            <button>分享</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="related-recipe-card">
+                    <a href="./recipe.html">
+                        <img src="../img/食譜圖片/橄欖油義大利麵.jpg" alt="Garlic Olive Oil Pasta">
+                        <h3>橄欖油義大利麵</h3>
+                        <div class="tags">
+                            <span>快速</span>
+                        </div>
+                        <p>簡單的義大利麵食譜，只需幾種食材，就能享受橄欖油的絕妙搭配。</p>
+                    </a>
+                    <div class="actions">
+                        <a href="#">評分：4.5 / 5 （220 評價）</a>
+                        <div>
+                            <button>收藏</button>
+                            <button>分享</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="related-recipe-card">
+                    <a href="./recipe.html">
+                        <img src="../img/食譜圖片/香草烤花椰菜.jpg" alt="Herb Roasted Cauliflower">
+                        <h3>香草烤花椰菜</h3>
+                        <div class="tags">
+                            <span>健康</span>
+                            <span>低熱量</span>
+                        </div>
+                        <p>將花椰菜與新鮮香草和橄欖油一起烘烤，外脆內嫩，口感豐富。</p>
+                    </a>
+                    <div class="actions">
+                        <a href="#">評分：4.6 / 5 （150 評價）</a>
+                        <div>
+                            <button>收藏</button>
+                            <button>分享</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="related-recipe-card">
+                    <a href="./recipe.html">
+                        <img src="../img/食譜圖片/鮮菇炒菠菜.jpg" alt="Lemon Garlic Sauteed Spinach">
+                        <h3>鮮菇炒菠菜</h3>
+                        <div class="tags">
+                            <span>快速</span>
+                        </div>
+                        <p>菠菜搭配鮮菇簡單快速的營養佳餚。</p>
+                    </a>
+                    <div class="actions">
+                        <a href="#">評分：4.8 / 5 （200 評價）</a>
+                        <div>
+                            <button>收藏</button>
+                            <button>分享</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="related-recipe-card">
+                    <a href="./recipe.html">
+                        <img src="../img/食譜圖片/椰奶咖哩豆腐.jpg" alt="Coconut Curry Tofu">
+                        <h3>椰奶咖哩豆腐</h3>
+                        <div class="tags">
+                            <span>異國風味</span>
+                        </div>
+                        <p>以椰奶和咖哩燉煮豆腐，搭配米飯或麵食，口感豐富順口且充滿異國風情。</p>
+                    </a>
+                    <div class="actions">
+                        <a href="#">評分：4.9 / 5 （300 評價）</a>
+                        <div>
+                            <button>收藏</button>
+                            <button>分享</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="related-card">
-                <img src="../img/食譜圖片/鮮蔬沙拉.jpg" alt="相關食譜">
-                <h4>鮮蔬鮮蔬</h4>
-                <a href="#" class="related-link">查看食譜</a>
-            </div>
-            <div class="related-card">
-                <img src="../img/食譜圖片/鮮蔬沙拉.jpg" alt="相關食譜">
-                <h4>鮮蔬沙拉</h4>
-                <a href="#" class="related-link">查看食譜</a>
-            </div>
-            <!-- 添加更多推薦卡片 -->
         </section>
     </div>
 
@@ -252,6 +467,7 @@
     </footer>
 
     <script src="../JS/all.js"></script>
+    <script src="../JS/recipe.js"></script>
 </body>
 
 </html>

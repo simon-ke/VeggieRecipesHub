@@ -32,7 +32,7 @@ a {
     border-bottom: 1px solid white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     top: 100px;
-    transition: height 0.5s ;
+    transition: height 0.5s;
 }
 
 /* 固定導覽列 */
@@ -42,7 +42,7 @@ nav.fixed-nav {
     top: 0px;
     background-color: white;
     width: 100%;
-    height: 80px;
+    height: 60px;
     z-index: 1000;
 }
 
@@ -57,7 +57,7 @@ nav.fixed-nav .logo-container {
 
 nav.fixed-nav .logo-container img {
     width: 100%;
-    height: 75px;
+    height: 60px;
     border-radius: 50px;
 }
 
@@ -175,19 +175,24 @@ ul.submenu {
     color: #4CAF50;
 }
 
-/* 搜尋區塊 */
-.search-container {
-    margin: 30px;
-    text-align: center;
+.recipe-actions {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 }
 
 /* 固定導覽列搜尋區塊修正 */
-.fixed-nav-search {
+.fixed-recipe-actions {
     padding-top: 300px;
 }
+
+/* 搜尋區塊 */
+.search-container {
+    display: flex;
+    margin: 30px 60px;
+    align-items: center;
+}
+
 
 .search-container label {
     font-size: 1.5em;
@@ -218,9 +223,10 @@ ul.submenu {
     border-radius: 5px;
     cursor: pointer;
     display: flex;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-.search-container .svg-icon {
+.search-container .search-icon {
     width: 24px;
     padding: 2PX;
 }
@@ -228,6 +234,22 @@ ul.submenu {
 
 .search-container button:hover {
     background-color: #a0d468;
+}
+
+.upload-button {
+    background-color: #fff;
+    color: #3e9741;
+    padding: 6px;
+    border-radius: 5px;
+    font-size: 1.1em;
+    border: 2px solid #3e9741;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.upload-button:hover {
+    background-color: #3e9741;
+    color: #fff;
 }
 
 /* 回到頂部 */

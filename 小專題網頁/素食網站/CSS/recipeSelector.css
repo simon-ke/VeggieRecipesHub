@@ -26,21 +26,6 @@
     border-radius: 5px;
 }
 
-.filter-sort-container a {
-    background-color: #fff;
-    color: #257132;
-    padding: 6px;
-    border-radius: 5px;
-    font-size: 1.1em;
-    border: 2px solid #257132;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.filter-sort-container a:hover {
-    background-color: #257132;
-    color: #fff;
-}
-
 /* 導航面包屑 */
 .breadcrumb {
     padding: 10px;
@@ -98,7 +83,7 @@
     background-color: #a0d468;
     color: #fff;
     padding: 4px;
-    margin: 0 5px;
+    margin-right: 10px;
     border-radius: 5px;
     font-size: 1em;
 }

@@ -55,7 +55,11 @@
 }
 
 section {
-    margin-top: 30px;
+    margin-top: 40px;
+}
+section h3 {
+    font-size: 2em;
+    margin: 10px;
 }
 
 .recipe-cards-container {
