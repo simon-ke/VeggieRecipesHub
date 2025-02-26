@@ -24,13 +24,12 @@ const fixedNav = () => {
 // 當頁面滾動時觸發
 const scrollFunction = () => {
     const backToTopButton = document.getElementById("back-to-top");
-    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+    if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
         backToTopButton.style.display = "block";
     } else {
         backToTopButton.style.display = "none";
     }
 }
-
 
 // 點擊圖片回到頂部
 document.getElementById("back-to-top").onclick = () => {
