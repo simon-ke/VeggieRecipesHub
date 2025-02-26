@@ -1,0 +1,354 @@
+/* 上傳表單的主容器 */
+.upload-container {
+    width: auto;
+    margin: 40px 20%;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* 標題 */
+.upload-title {
+    text-align: center;
+    font-size: 1.8em;
+    color: #333;
+}
+
+/* 圖片上傳區塊 */
+.upload-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+    border: 2px solid #aaa;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+.upload-image:hover,
+.upload-image:focus {
+    border-color: #777;
+    background-color: #eee;
+}
+
+/* 預覽圖片 */
+.preview-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+}
+
+/* 預覽區塊的文字與圖示 */
+.upload-placeholder {
+    text-align: center;
+    color: #777;
+    font-size: 1.5em;
+}
+
+.upload-placeholder img {
+    width: 60px;
+}
+
+/* 隱藏圖片上傳按鈕 */
+#imageInput {
+    display: none;
+}
+
+/* 輸入區塊 */
+.upload-container .upload-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* 輸入框標題 */
+.upload-container .upload-text {
+    font-size: 1.2em;
+    width: auto;
+}
+
+/* 輸入框 */
+.upload-container .input-field {
+    border-color: #ccc;
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.input-field:focus {
+    border-color: #6da657;
+    outline: none;
+    box-shadow: 0 2px 5px rgba(109, 166, 87, 0.5);
+}
+
+
+/* 標籤區域 */
+.tag-box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    overflow-y: auto;
+    margin-top: 10px;
+    scrollbar-width: none;
+}
+
+
+/* 單個標籤樣式 */
+.tag {
+    background-color: #6da657;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+}
+
+.tag .remove-tag {
+    margin-left: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* 食譜介紹 */
+.upload-introduction {
+    height: 200px;
+    resize: none;
+    width: 100%;
+    scrollbar-width: none;
+}
+
+.upload-introduction::-webkit-scrollbar {
+    display: none;
+}
+
+/* 份量/時間 */
+.portion-time {
+    display: flex;
+    gap: 20px;
+}
+
+.portion-time div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* 食譜原料 */
+.material-title button {
+    font-size: 1em;
+    border: none;
+    color: #fff;
+    background-color: #6da657;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: box-shadow 0.6s ease;
+}
+
+.material {
+    display: flex;
+    gap: 10px;
+}
+
+.material input {
+    width: 100%;
+    border-color: #ccc;
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.material :nth-child(1) {
+    flex: 2;
+
+}
+
+.material :nth-child(2) {
+    flex: 1;
+}
+
+.material :nth-child(3) {
+    padding: 5px;
+    border: none;
+    background-color: rgb(231, 63, 63);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: box-shadow 0.6s ease;
+}
+
+.material :nth-child(3) img {
+    width: 24px;
+}
+
+#ingredients,
+#seasonings,
+#nutritions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* 食譜步驟 */
+.steps {
+    display: flex;
+    gap: 20px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#steps {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 圖片上傳區塊 */
+.steps-image {
+    width: 400px;
+    height: auto;
+    aspect-ratio: 4/3;
+    border: 2px solid #aaa;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+.steps-image:hover,
+.steps-image:focus {
+    border-color: #777;
+    background-color: #eee;
+}
+
+/* 預覽圖片 */
+.steps-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+}
+
+/* 預覽區塊的文字與圖示 */
+.steps-placeholder {
+    text-align: center;
+    color: #777;
+    font-size: 1em;
+}
+
+.steps-placeholder img {
+    width: 30px;
+}
+
+/* 隱藏圖片上傳按鈕 */
+#imageSteps {
+    display: none;
+}
+
+/* 步驟文字 */
+.steps-text {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.steps-text div {
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.steps-text h2 {
+    font-size: 2em;
+    color: #333;
+}
+
+.steps-text button {
+    padding: 5px;
+    border: none;
+    background-color: rgb(231, 63, 63);
+    border-radius: 5px;
+    margin-left: auto;
+    cursor: pointer;
+    transition: box-shadow 0.6s ease;
+}
+
+.steps-text button img {
+    width: 24px;
+    /* display: block;
+    margin: auto; */
+}
+
+.steps-text textarea {
+    resize: none;
+    height: 100%;
+    scrollbar-width: none;
+    padding: 10px;
+    font-size: 1em;
+    border-radius: 5px;
+    border-color: #ccc;
+}
+
+.steps-text textarea::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+/* 提交按鈕 */
+div.submit-btns {
+    display: flex;
+    gap: 20px;
+    margin: 0 auto;
+}
+
+.submit-btn {
+    flex: 1;
+    border: none;
+    padding: 6px 10px;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: box-shadow 0.6s ease;
+}
+
+.submit-btn.publish {
+    background-color: #6da657;
+    color: white;
+}
+
+
+.submit-btn.save {
+    background-color: #ff9009;
+    color: white;
+}
+
+.submit-btn.cancel {
+    background-color: #eb3e3e;
+    color: white;
+}
+
+
+button:hover {
+    box-shadow: #666 0 0 8px;
+    transition: box-shadow 0.3s ease;
+}

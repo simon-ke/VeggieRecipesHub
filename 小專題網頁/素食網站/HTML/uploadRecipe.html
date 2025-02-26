@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上傳食譜</title>
+    <link rel="stylesheet" href="../CSS/all.css">
+    <link rel="stylesheet" href="../CSS/uploadRecipe.css">
+</head>
+
+<body>
+    <!-- 頁首 -->
+    <header>
+        <!-- 導覽列 -->
+        <nav class="nav-container">
+            <!-- 第一列 -->
+            <div class="member-menu">
+                <a href="#">
+                    <img class="login-singup" src="../img/icons/user.png" alt="登入註冊">
+                    <span class="tooltip">登入註冊</span>
+                </a>
+                <a href="#">
+                    <img class="shopping-cart" src="../img/icons/shopping-cart.png" alt="購物車">
+                    <span class="tooltip">購物車</span>
+                </a>
+                <a href="#">
+                    <img class="contact-us" src="../img/icons/message.png" alt="聯絡我們">
+                    <span class="tooltip">聯絡我們</span>
+                </a>
+            </div>
+
+            <!-- 第二列 -->
+            <div class="logo-container">
+                <a href="../index.html"><img class="logo" src="../img/vegetable_LOGO.jpg" alt="綠藝饗宴 LOGO"></a>
+                <a href="../index.html">
+                    <h1 class="site-title">綠藝饗宴</h1>
+                </a>
+            </div>
+
+            <!-- 第三列 -->
+            <div class="menu-container">
+                <div class="hamburger-menu" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul class="main-menu">
+                    <li><a href="../index.html">首頁</a></li>
+                    <li class="dropdown">
+                        <a href="#">食譜分類&#9662;</a>
+                        <ul class="submenu">
+                            <li><a href="./recipeSelector.html">早餐</a></li>
+                            <li><a href="./recipeSelector.html">飯</a></li>
+                            <li><a href="./recipeSelector.html">麵</a></li>
+                            <li><a href="./recipeSelector.html">米粉</a></li>
+                            <li><a href="./recipeSelector.html">蔬菜</a></li>
+                            <li><a href="./recipeSelector.html">鹹點</a></li>
+                            <li><a href="./recipeSelector.html">甜點</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">營養資訊</a></li>
+                    <li><a href="#">購物清單</a></li>
+                    <li><a href="#">聯絡我們</a></li>
+                    <li><a href="#">常見問題</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- 第四列 -->
+        <div class="recipe-actions">
+            <!-- 搜尋區塊 -->
+            <div class="search-container">
+                <label>探索其他食譜</label>
+                <form>
+                    <input type="text" id="search" name="search" placeholder="搜尋食譜或輸入食材">
+                    <button type="submit"><img class="search-icon" src="../img/icons/search.png" alt="搜尋"></button>
+                </form>
+            </div>
+            <!-- 上傳食譜 -->
+            <a class="upload-button" href="./uploadRecipe.html">上傳您的素食食譜</a>
+        </div>
+    </header>
+
+    <!-- 食譜上傳表單 -->
+    <form class="upload-container" id="recipe-form">
+        <label class="upload-title">上傳食譜</label>
+        <!-- 圖片上傳區塊 -->
+        <div class="upload-image" onclick="document.getElementById('imageInput').click()">
+            <input type="file" id="imageInput" name="recipe_image" accept="image/*" hidden
+                onchange="previewImage(event)">
+            <img id="preview" class="preview-img" src="" alt="">
+            <div class="upload-placeholder" id="uploadPlaceholder">
+                <img src="../img/icons/camera_icon.png" alt="">
+                <p>點擊新增圖片</p>
+            </div>
+        </div>
+
+        <!-- 食譜標題 -->
+        <div class="upload-box">
+            <label class="upload-text" for="recipe-title">食譜標題</label>
+            <input class="input-field" type="text" id="recipe-title" name="recipe_title" placeholder="輸入食譜名稱">
+        </div>
+
+        <!-- 標籤輸入 -->
+        <div class="upload-box">
+            <label class="upload-text" for="tagInput">食譜標籤</label>
+            <div class="tag-box">
+                <input class="input-field" type="text" id="tagInput" name="recipe_tags" placeholder="輸入食譜標籤，按Enter新增">
+                <div id="tagList" class="tag-list"></div>
+            </div>
+        </div>
+
+        <!-- 食譜介紹 -->
+        <div class="upload-box">
+            <label class="upload-text">食譜介紹</label>
+            <textarea class="input-field upload-introduction" name="recipe_description" placeholder="輸入食譜介紹"
+                required></textarea>
+        </div>
+
+        <!-- 份量與時間 -->
+        <div class="portion-time">
+            <div>
+                <label class="upload-text" for="recipe-portion">食譜分量</label>
+                <select class="input-field" id="recipe-portion" name="recipe_portion" required>
+                    <option value="" disabled selected>未選擇</option>
+                    <option value="1">1人份</option>
+                    <option value="2">2人份</option>
+                    <option value="3">3人份</option>
+                    <option value="4">4人份</option>
+                    <option value="5">5人份</option>
+                    <option value="6">6人份</option>
+                    <option value="7">7人份</option>
+                    <option value="8">8人份</option>
+                    <option value="9">9人份</option>
+                    <option value="10">10人份以上</option>
+                </select>
+            </div>
+            <div>
+                <label class="upload-text" for="recipe-time">烹調時間</label>
+                <select class="input-field" id="recipe-time" name="recipe_cook_time" required>
+                    <option value="" disabled selected>未選擇</option>
+                    <option value="5">5分鐘</option>
+                    <option value="10">10分鐘</option>
+                    <option value="15">15分鐘</option>
+                    <option value="20">20分鐘</option>
+                    <option value="30">30分鐘</option>
+                    <option value="45">45分鐘</option>
+                    <option value="60">60分鐘</option>
+                    <option value="90">90分鐘</option>
+                    <option value="120">120分鐘</option>
+                    <option value="180">180分鐘以上</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- 食材 -->
+        <div class="upload-box">
+            <header class="material-title">
+                <label class="upload-text">食材</label>
+                <button type="button" onclick="addIngredient()">新增食材</button>
+            </header>
+            <div id="ingredients">
+                <div class="material">
+                    <input class="input-field" type="text" name="ingredient_name[]" placeholder="食材名稱">
+                    <input class="input-field" type="text" name="ingredient_quantity[]" placeholder="數量">
+                    <button type="button" onclick="removeMaterial(this)">
+                        <img src="../img/icons/trash_icon.png" alt="">
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 調味料 -->
+        <div class="upload-box">
+            <header class="material-title">
+                <label class="upload-text">調味料</label>
+                <button type="button" onclick="addSeasoning()">新增調味料</button>
+            </header>
+            <div id="seasonings">
+                <div class="material">
+                    <input class="input-field" type="text" name="seasoning_name[]" placeholder="調味料名稱">
+                    <input class="input-field" type="text" name="seasoning_quantity[]" placeholder="數量">
+                    <button type="button" onclick="removeMaterial(this)">
+                        <img src="../img/icons/trash_icon.png" alt="">
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 營養成分 -->
+        <div class="upload-box">
+            <header class="material-title">
+                <label class="upload-text">營養成分</label>
+                <button type="button" onclick="addNutrition()">新增營養成分</button>
+            </header>
+            <div id="nutritions">
+                <div class="material">
+                    <input class="input-field" type="text" name="nutrition_name[]" placeholder="營養成分名稱">
+                    <input class="input-field" type="text" name="nutrition_value[]" placeholder="數值">
+                    <button type="button" onclick="removeMaterial(this)">
+                        <img src="../img/icons/trash_icon.png" alt="">
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 烹調步驟 -->
+        <div class="upload-box">
+            <header class="material-title">
+                <label class="upload-text">烹調步驟</label>
+                <button type="button" onclick="addStep()">新增步驟</button>
+            </header>
+            <div id="steps">
+                <div class="steps">
+                    <div class="steps-image" onclick="document.getElementById('imageSteps').click()">
+                        <input class="input-field" type="file" id="imageSteps" name="step_image[]" accept="image/*"
+                            hidden onchange="previewImage(event)">
+                        <img id="steps-preview" class="steps-preview" src="" alt="">
+                        <div class="steps-placeholder" id="steps-uploadPlaceholder">
+                            <img src="../img/icons/camera_icon.png" alt="">
+                            <p>點擊新增圖片</p>
+                        </div>
+                    </div>
+                    <div class="steps-text">
+                        <div>
+                            <h2>1</h2>
+                            <button type="button" onclick="removeSteps(this)">
+                                <img src="../img/icons/trash_icon.png" alt="">
+                            </button>
+                        </div>
+                        <textarea class="input-field" name="step_description[]" placeholder="操作步驟描述"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="submit-btns">
+            <button class="submit-btn publish" type="submit" name="action" value="publish">發布</button>
+            <button class="submit-btn save" type="submit" name="action" value="save">儲存</button>
+            <button class="submit-btn cancel" type="submit" name="action" value="cancel">取消</button>
+        </div>
+    </form>
+
+
+    <!-- 回到頂部按鈕 -->
+    <img id="back-to-top" class="up-arrow" src="../img/icons/up-arrow_11044298.png" alt="回到頂部">
+
+
+    <!-- 頁尾 -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-links">
+                <a href="#">關於我們</a>
+                <a href="#">常見問題</a>
+                <a href="#">隱私政策</a>
+                <a href="#">使用條款</a>
+                <a href="#">聯絡我們</a>
+            </div>
+            <div class="social-media-icons">
+                <a href="#"><img src="../img/icons/line.png" alt="Line"></a>
+                <a href="#"><img src="../img/icons/instagram.png" alt="Instagram"></a>
+                <a href="#"><img src="../img/icons/facebook.png" alt="Facebook"></a>
+            </div>
+            <p>Copyright &copy; 2025 綠藝饗宴</p>
+        </div>
+    </footer>
+
+    <script src="../JS/all.js"></script>
+    <script src="../JS/uploadRecipe.js"></script>
+</body>
+
+</html>
