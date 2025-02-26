@@ -247,8 +247,11 @@
 }
 
 .recipe-step img {
-    width: 20%;
+    width: 300px;
     border-radius: 5px;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    object-position: center;
 }
 
 .recipe-step>div {
