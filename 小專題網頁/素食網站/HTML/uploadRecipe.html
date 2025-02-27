@@ -87,8 +87,7 @@
         <label class="upload-title">上傳食譜</label>
         <!-- 圖片上傳區塊 -->
         <div class="upload-image" onclick="document.getElementById('imageInput').click()">
-            <input type="file" id="imageInput" name="recipe_image" accept="image/*" hidden
-                onchange="previewImage(event)">
+            <input type="file" id="imageInput" name="recipe_image" accept="image/*" hidden>
             <img id="preview" class="preview-img" src="" alt="">
             <div class="upload-placeholder" id="uploadPlaceholder">
                 <img src="../img/icons/camera_icon.png" alt="">
@@ -106,23 +105,23 @@
         <div class="upload-box">
             <label class="upload-text" for="tagInput">食譜標籤</label>
             <div class="tag-box">
-                <input class="input-field" type="text" id="tagInput" name="recipe_tags" placeholder="輸入食譜標籤，按Enter新增">
-                <div id="tagList" class="tag-list"></div>
+                <input class="input-field" type="text" id="tagInput" placeholder="輸入食譜標籤，按Enter新增">
+                <div class="tag-list" id="tagList"></div>
             </div>
         </div>
 
         <!-- 食譜介紹 -->
         <div class="upload-box">
             <label class="upload-text">食譜介紹</label>
-            <textarea class="input-field upload-introduction" name="recipe_description" placeholder="輸入食譜介紹"
-                required></textarea>
+            <textarea class="input-field upload-introduction" name="recipe_description" placeholder="輸入食譜介紹"></textarea>
         </div>
 
         <!-- 份量與時間 -->
         <div class="portion-time">
             <div>
                 <label class="upload-text" for="recipe-portion">食譜分量</label>
-                <select class="input-field" id="recipe-portion" name="recipe_portion" required>
+                <select class="input-field" id="recipe-portion" name="recipe_portion">
+                    <!-- <select class="input-field" id="recipe-portion" name="recipe_portion" required> -->
                     <option value="" disabled selected>未選擇</option>
                     <option value="1">1人份</option>
                     <option value="2">2人份</option>
@@ -138,7 +137,8 @@
             </div>
             <div>
                 <label class="upload-text" for="recipe-time">烹調時間</label>
-                <select class="input-field" id="recipe-time" name="recipe_cook_time" required>
+                <select class="input-field" id="recipe-time" name="recipe_cook_time">
+                    <!-- <select class="input-field" id="recipe-time" name="recipe_cook_time" required> -->
                     <option value="" disabled selected>未選擇</option>
                     <option value="5">5分鐘</option>
                     <option value="10">10分鐘</option>
@@ -209,15 +209,14 @@
         <div class="upload-box">
             <header class="material-title">
                 <label class="upload-text">烹調步驟</label>
-                <button type="button" onclick="addStep()">新增步驟</button>
+                <button id="addStepButton" type="button" onclick="addStep()">新增步驟</button>
             </header>
             <div id="steps">
-                <div class="steps">
-                    <div class="steps-image" onclick="document.getElementById('imageSteps').click()">
-                        <input class="input-field" type="file" id="imageSteps" name="step_image[]" accept="image/*"
-                            hidden onchange="previewImage(event)">
-                        <img id="steps-preview" class="steps-preview" src="" alt="">
-                        <div class="steps-placeholder" id="steps-uploadPlaceholder">
+                <div class="steps" id="step_1">
+                    <div class="steps-image" onclick="document.getElementById('stepsImage_1').click()">
+                        <input class="input-field" type="file" id="stepsImage_1" name="step_image[]" accept="image/*" hidden>
+                        <img id="previewStepsImage_1" class="previewStepsImage" src="" alt="">
+                        <div class="stepsPlaceholder" id="stepsPlaceholder_1">
                             <img src="../img/icons/camera_icon.png" alt="">
                             <p>點擊新增圖片</p>
                         </div>
@@ -236,12 +235,19 @@
         </div>
 
         <div class="submit-btns">
-            <button class="submit-btn publish" type="submit" name="action" value="publish">發布</button>
-            <button class="submit-btn save" type="submit" name="action" value="save">儲存</button>
-            <button class="submit-btn cancel" type="submit" name="action" value="cancel">取消</button>
+            <button class="submit-btn" id="publish" type="submit" name="action" value="publish">發布</button>
+            <button class="submit-btn" id="save" type="submit" name="action" value="save">儲存</button>
+            <button class="submit-btn" id="cancel" type="submit" name="action" value="cancel">取消</button>
         </div>
     </form>
 
+    <!-- 遮罩和提示視窗 -->
+    <div id="loading-overlay" class="overlay">
+        <div class="loading-container">
+            <div class="spinner"></div>
+            <p id="loading-text">發布中...請勿關閉</p>
+        </div>
+    </div>
 
     <!-- 回到頂部按鈕 -->
     <img id="back-to-top" class="up-arrow" src="../img/icons/up-arrow_11044298.png" alt="回到頂部">
