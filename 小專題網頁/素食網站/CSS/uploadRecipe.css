@@ -21,7 +21,7 @@
 /* 圖片上傳區塊 */
 .upload-image {
     width: 100%;
-    height: auto;
+    height: 100%;
     aspect-ratio: 16/9;
     border: 2px solid #aaa;
     border-radius: 5px;
@@ -223,8 +223,9 @@
 
 /* 圖片上傳區塊 */
 .steps-image {
-    width: 400px;
-    height: auto;
+    flex: 40%;
+    width: 100%;
+    height: 100%;
     aspect-ratio: 4/3;
     border: 2px solid #aaa;
     border-radius: 5px;
@@ -242,7 +243,7 @@
 }
 
 /* 預覽圖片 */
-.steps-preview {
+.previewStepsImage {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -250,13 +251,13 @@
 }
 
 /* 預覽區塊的文字與圖示 */
-.steps-placeholder {
+.stepsPlaceholder {
     text-align: center;
     color: #777;
     font-size: 1em;
 }
 
-.steps-placeholder img {
+.stepsPlaceholder img {
     width: 30px;
 }
 
@@ -267,6 +268,7 @@
 
 /* 步驟文字 */
 .steps-text {
+    flex: 60%;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -331,18 +333,18 @@ div.submit-btns {
     transition: box-shadow 0.6s ease;
 }
 
-.submit-btn.publish {
+#publish {
     background-color: #6da657;
     color: white;
 }
 
 
-.submit-btn.save {
+#save {
     background-color: #ff9009;
     color: white;
 }
 
-.submit-btn.cancel {
+#cancel {
     background-color: #eb3e3e;
     color: white;
 }
@@ -351,4 +353,52 @@ div.submit-btns {
 button:hover {
     box-shadow: #666 0 0 8px;
     transition: box-shadow 0.3s ease;
+}
+
+/* 遮罩 */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* 提示視窗 */
+.loading-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 旋轉動畫 */
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #000;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 10px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
