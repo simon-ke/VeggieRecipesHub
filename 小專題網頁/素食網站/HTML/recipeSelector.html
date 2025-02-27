@@ -113,21 +113,22 @@
             <a href="./recipeSelector.html">蔬菜</a>
         </div>
 
-        <!-- 食譜簡介卡片 -->
-        <div>
-            <!-- 燈箱結構 -->
-            <div class="lightbox" id="lightbox">
-                <div class="lightbox-content">
-                    <img src="" alt="放大檢視" id="lightbox-img">
-                </div>
+        <!-- 燈箱結構 -->
+        <div class="lightbox" id="lightbox">
+            <div class="lightbox-content">
+                <img src="" alt="放大檢視" id="lightbox-img">
             </div>
+        </div>
+
+        <!-- 食譜簡介卡片 -->
+        <div id="recipeCardContainer">
             <!-- 各類食譜 -->
             <div class="recipe-card">
                 <img class="recipe-img" src="../img/食譜圖片/烤蔬菜.jpg" alt="Food Image 1">
                 <div>
                     <a class="content" href="./recipe.html">
                         <h2>香草烤蔬菜</h2>
-                        <p>分類：<span class="tag">蔬菜</span><span class="tag">健康料理</span></p>
+                        <p><span class="tag">蔬菜</span><span class="tag">健康料理</span></p>
                         <p class="recipe-description">
                             這道香草烤蔬菜色彩繽紛，味道濃郁，是一道健康又美味的素食料理。選用新鮮蔬菜，搭配香草和橄欖油烤至香脆，適合作為主菜或配菜。每一口都讓人感受到蔬菜的鮮嫩和香草的馥鬱香氣，絕對是素食餐桌上的一大亮點。提示：可以根據個人喜好添加不同的香草，如羅勒、百里香或迷迭香，讓這道菜更具風味。此料理富含維生素和礦物質，有助於提升免疫力，保持健康。
                         </p>
@@ -149,7 +150,7 @@
                 <div>
                     <a class="content" href="./recipe.html">
                         <h2>田園炒蔬菜</h2>
-                        <p>分類：<span class="tag">蔬菜</span><span class="tag">快手菜</span></p>
+                        <p><span class="tag">蔬菜</span><span class="tag">快手菜</span></p>
                         <p class="recipe-description">
                             這道田園炒蔬菜簡單易做，色彩鮮豔，是一道充滿營養和風味的快手素食料理。選用當季蔬菜，快炒至脆嫩，配上些許調味料即可上桌。
                         </p>
@@ -171,7 +172,7 @@
                 <div>
                     <a class="content" href="./recipe.html">
                         <h2>五彩蔬菜炒飯</h2>
-                        <p>分類：<span class="tag">蔬菜</span><span class="tag">健康料理</span></p>
+                        <p><span class="tag">蔬菜</span><span class="tag">健康料理</span></p>
                         <p class="recipe-description">
                             這道五彩蔬菜炒飯使用了各式新鮮蔬菜，如甜椒、紅蘿蔔、綠豆芽與玉米，搭配上蒜香飯，色香味俱全，讓您每一口都充滿蔬食的美好滋味。
                         </p>
@@ -193,7 +194,7 @@
                 <div>
                     <a class="content" href="./recipe.html">
                         <h2>彩虹蔬菜沙拉</h2>
-                        <p>分類：<span class="tag">蔬菜</span><span class="tag">快手菜</span></p>
+                        <p><span class="tag">蔬菜</span><span class="tag">快手菜</span></p>
                         <p class="recipe-description">
                             結合了新鮮的生菜、番茄、小黃瓜、甜椒和紅蘿蔔，再加入自製的蜂蜜芥末醬，這款沙拉絕對是健康與美味的完美結合。
                         </p>
@@ -215,7 +216,7 @@
         <!-- 最新/推薦食譜 -->
         <div class="featured-recipes">
             <h2>推薦食譜</h2>
-            <div class="featured-carousel">
+            <div class="featured-carousel" id="featuredCarousel">
                 <div class="featured-recipe-card">
                     <a href="./recipe.html">
                         <img src="../img/食譜圖片/烤蔬菜.jpg" alt="Recipe Image 3">
@@ -358,6 +359,83 @@
 
     <script src="../JS/recipeSelector.js"></script>
     <script src="../JS/all.js"></script>
+
+    <script>
+        // 取得 LocalStorage 裡的食譜數據
+        const storedRecipes = JSON.parse(localStorage.getItem('recipes') || '[]');
+
+        if (storedRecipes.length > 0) {
+            console.log('找到數據');
+            console.log('讀取的食譜數據：', storedRecipes); // 印出數據，確認正確性
+
+            // 排序數據（假設根據 recipe_title 排序）
+            storedRecipes.sort((a, b) => a.recipe_title.localeCompare(b.recipe_title));
+
+            // 生成食譜卡片
+            const recipeCardContainer = document.getElementById('recipeCardContainer');
+            // recipeCardContainer.innerHTML = ''; // 清空原本內容
+            storedRecipes.forEach((recipe, index) => {
+                const recipeCard = document.createElement('div');
+                recipeCard.className = 'recipe-card';
+                recipeCard.innerHTML = `
+                    <img class="recipe-img" src="${recipe.recipe_image || 'https://i.pinimg.com/736x/e0/a3/21/e0a3218856ac6bf7b68e3a7f7617a828.jpg'}" alt="${recipe.recipe_title || '未命名食譜'}">
+                    <div>
+                        <a class="content" href="./recipe.html">
+                            <h2>${recipe.recipe_title || "未命名食譜"}</h2>
+                            <p>${(recipe.tags || []).map(tag => `<span class="tag">${tag}</span>`).join('') || '<span class="tag">無描述</span>'}</p>
+                            <p class="recipe-description">${recipe.recipe_description || "無描述"}</p>
+                            <p>主要食材：${(recipe.ingredients || []).map(item => `<span>${item.name}</span>`).join('、') || "無食材資料"}</p>
+                            <p>製作時間：${recipe.recipe_cook_time || "未提供"}</p>
+                        </a>
+                        <div class="actions">
+                            <a href="#">評分：4.8 / 5 （250 評價）</a>
+                            <a href="">作者：栗子</a>
+                            <a href="#">喜歡：150</a>
+                            <a href="#">留言：30</a>
+                            <button class="bookmark-button">收藏</button>
+                            <button class="share-button">分享</button>
+                        </div>
+                    </div>
+                `;
+                // 根據索引值插入卡片
+                recipeCard.setAttribute('data-index', index);
+                recipeCardContainer.appendChild(recipeCard);
+            });
+
+            // 生成推薦卡片
+            const featuredCarousel = document.getElementById('featuredCarousel');
+            // featuredCarousel.innerHTML = ''; // 清空原本內容
+            storedRecipes.forEach((recipe, index) => {
+                const featuredCard = document.createElement('div');
+                featuredCard.className = 'featured-recipe-card';
+                featuredCard.innerHTML = `
+                    <a href="./recipe.html">
+                        <img src="${recipe.recipe_image ? recipe.recipe_image : 'https://i.pinimg.com/736x/e0/a3/21/e0a3218856ac6bf7b68e3a7f7617a828.jpg'}" alt="${recipe.recipe_title || "未命名食譜"}">
+                        <h3>${recipe.recipe_title || "未命名食譜"}</h3>
+                        <div class="tags">
+                            ${(recipe.tags || []).map(tag => `<span>${tag}</span>`).join('') || '<span class="tag">無描述</span>'}
+                        </div>
+                        <p>${recipe.recipe_description || "無描述"}</p>
+                    </a>
+                    <div class="actions">
+                        <a href="#">評分：4.1 / 5 （200 評價）</a>
+                        <div>
+                            <button>收藏</button>
+                            <button>分享</button>
+                        </div>
+                    </div>
+                `;
+                // 根據索引值插入卡片
+                featuredCard.setAttribute('data-index', index);
+                featuredCarousel.appendChild(featuredCard);
+            });
+
+            console.log('成功生成卡片');
+        } else {
+            console.log('未找到數據');
+        }
+    </script>
+
 </body>
 
 </html>
