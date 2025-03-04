@@ -199,24 +199,16 @@
 }
 
 .ingredient table,
-.seasoning table {
+.seasoning table,
+.nutrition table {
     width: 100%;
 }
 
 .ingredient table td,
-.seasoning table td {
+.seasoning table td,
+.nutrition table td {
     width: 50%;
     padding: 5px 0;
-}
-
-/* 營養成分 */
-.nutrition ul {
-    margin: 5px 0 0 -10px;
-}
-
-.nutrition li {
-    list-style-type: none;
-    padding-bottom: 5px;
 }
 
 /* 製作步驟 */
