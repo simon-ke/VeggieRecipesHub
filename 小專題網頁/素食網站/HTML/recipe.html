@@ -208,17 +208,43 @@
 
             <!-- 營養成分 -->
             <section class="nutrition">
-                <h2 class="section-title">營養成分</h2>
-                <ul>
-                    <li>熱量：150卡路里</li>
-                    <li>蛋白質：4克</li>
-                    <li>脂肪：8 克</li>
-                    <li>碳水化合物：15克</li>
-                    <li>維生素A：100% DV</li>
-                    <li>維生素C：150% DV</li>
-                    <li>鈣：6% DV</li>
-                    <li>鐵：8% DV</li>
-                </ul>
+                <div>
+                    <h2 class="section-title">營養成分</h2>
+                    <table>
+                        <tr>
+                            <td>熱量</td>
+                            <td>150卡路里</td>
+                        </tr>
+                        <tr>
+                            <td>蛋白質</td>
+                            <td>4克</td>
+                        </tr>
+                        <tr>
+                            <td>脂肪</td>
+                            <td>8克</td>
+                        </tr>
+                        <tr>
+                            <td>碳水化合物</td>
+                            <td>15克</td>
+                        </tr>
+                        <tr>
+                            <td>維生素A</td>
+                            <td>100% DV</td>
+                        </tr>
+                        <tr>
+                            <td>維生素C</td>
+                            <td>150% DV</td>
+                        </tr>
+                        <tr>
+                            <td>鈣</td>
+                            <td>6% DV</td>
+                        </tr>
+                        <tr>
+                            <td>鐵</td>
+                            <td>8% DV</td>
+                        </tr>
+                    </table>
+                </div>
             </section>
         </div>
 
@@ -468,6 +494,91 @@
 
     <script src="../JS/all.js"></script>
     <script src="../JS/recipe.js"></script>
+
+    <script>
+                // // 從 localStorage 中讀取數據
+        // const resultImage = document.getElementById('resultImage');
+        // const resultTitle = document.getElementById('resultTitle');
+        // const resultTags = document.getElementById('resultTags');
+        // const resultDescription = document.getElementById('resultDescription');
+        // const resultPortion = document.getElementById('resultPortion');
+        // const resultCookTime = document.getElementById('resultCookTime');
+        // const resultIngredients = document.getElementById('resultIngredients');
+        // const resultSeasonings = document.getElementById('resultSeasonings');
+        // const resultNutritions = document.getElementById('resultNutritions');
+        // const resultSteps = document.getElementById('resultSteps');
+
+        // // 獲取圖片預覽
+        // const recipeImage = localStorage.getItem('recipe_image');
+        // if (recipeImage) {
+        //     resultImage.src = recipeImage;
+        //     resultImage.style.display = 'block';
+        // }
+
+        // // 獲取食譜標題
+        // resultTitle.textContent = localStorage.getItem('recipe_title');
+
+        // // 獲取食譜標籤
+        // const tags = JSON.parse(localStorage.getItem('tags') || '[]');
+        // tags.forEach(tag => {
+        //     const tagElement = document.createElement('span');
+        //     tagElement.className = 'tag';
+        //     tagElement.textContent = tag;
+        //     resultTags.appendChild(tagElement);
+        // });
+
+        // // 獲取食譜介紹
+        // resultDescription.textContent = localStorage.getItem('recipe_description');
+
+        // // 獲取份量與時間
+        // // resultPortion.textContent = `食譜分量: ${localStorage.getItem('recipe_portion')}`;
+        // // resultCookTime.textContent = `烹調時間: ${localStorage.getItem('recipe_cook_time')}`;
+
+        // // 獲取食材
+        // const ingredients = JSON.parse(localStorage.getItem('ingredients') || '[]');
+        // ingredients.forEach(ingredient => {
+        //     const ingredientElement = document.createElement('p');
+        //     ingredientElement.textContent = `${ingredient.name} - ${ingredient.quantity}`;
+        //     resultIngredients.appendChild(ingredientElement);
+        // });
+
+        // 獲取調味料
+        // const seasonings = JSON.parse(localStorage.getItem('seasonings') || '[]');
+        // seasonings.forEach(seasoning => {
+        //     const seasoningElement = document.createElement('p');
+        //     seasoningElement.textContent = `${seasoning.name} - ${seasoning.quantity}`;
+        //     resultSeasonings.appendChild(seasoningElement);
+        // });
+
+        // 獲取營養成分
+        // const nutritions = JSON.parse(localStorage.getItem('nutritions') || '[]');
+        // nutritions.forEach(nutrition => {
+        //     const nutritionElement = document.createElement('p');
+        //     nutritionElement.textContent = `${nutrition.name} - ${nutrition.value}`;
+        //     resultNutritions.appendChild(nutritionElement);
+        // });
+
+        // 獲取烹調步驟
+        // const steps = JSON.parse(localStorage.getItem('steps') || '[]');
+        // steps.forEach((step, index) => {
+        //     const stepElement = document.createElement('div');
+        //     stepElement.className = 'steps';
+        //     stepElement.innerHTML = `
+        //         <div class="steps-image">
+        //             <img src="${step.image}" class="previewStepsImage" alt="">
+        //         </div>
+        //         <div class="steps-text">
+        //             <div>
+        //                 <h2>${index + 1}</h2>
+        //             </div>
+        //             <p>${step.description}</p>
+        //         </div>
+        //     `;
+        //     resultSteps.appendChild(stepElement);
+        // });
+    </script>
 </body>
 
 </html>
+
+
