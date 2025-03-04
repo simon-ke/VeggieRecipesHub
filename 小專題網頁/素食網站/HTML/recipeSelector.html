@@ -368,13 +368,13 @@
             console.log('找到數據');
             console.log('讀取的食譜數據：', storedRecipes); // 印出數據，確認正確性
 
-            // 排序數據（假設根據 recipe_title 排序）
-            storedRecipes.sort((a, b) => a.recipe_title.localeCompare(b.recipe_title));
+            // 將陣列倒序排列
+            storedRecipes.reverse();
 
             // 生成食譜卡片
             const recipeCardContainer = document.getElementById('recipeCardContainer');
-            // recipeCardContainer.innerHTML = ''; // 清空原本內容
-            storedRecipes.forEach((recipe, index) => {
+            // 迭代 storedRecipes 並生成食譜卡片
+            storedRecipes.forEach((recipe) => {
                 const recipeCard = document.createElement('div');
                 recipeCard.className = 'recipe-card';
                 recipeCard.innerHTML = `
@@ -397,9 +397,8 @@
                         </div>
                     </div>
                 `;
-                // 根據索引值插入卡片
-                recipeCard.setAttribute('data-index', index);
-                recipeCardContainer.appendChild(recipeCard);
+                // 將新的 recipeCard 插入到容器的第一個位置
+                recipeCardContainer.insertBefore(recipeCard, recipeCardContainer.firstChild);
             });
 
             // 生成推薦卡片
@@ -425,9 +424,8 @@
                         </div>
                     </div>
                 `;
-                // 根據索引值插入卡片
-                featuredCard.setAttribute('data-index', index);
-                featuredCarousel.appendChild(featuredCard);
+                // 將新的 recipeCard 插入到容器的第一個位置
+                featuredCarousel.insertBefore(featuredCard, featuredCarousel.firstChild);
             });
 
             console.log('成功生成卡片');
