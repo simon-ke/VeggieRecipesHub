@@ -299,11 +299,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // **從 LocalStorage 取得原有數據**
             const existingRecipes = JSON.parse(localStorage.getItem('recipes') || '[]');
 
-            // **將新數據插入到第一個位置**
-            existingRecipes.unshift(recipeData);
-
-            // **排序數據並反轉順序**
-            existingRecipes.sort((a, b) => a.recipe_title.localeCompare(b.recipe_title)).reverse();
+            // **將新數據插入**
+            existingRecipes.push(recipeData);
 
             // **存入 LocalStorage**
             localStorage.setItem('recipes', JSON.stringify(existingRecipes));
@@ -326,7 +323,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 2100);
         }
     });
-
 
     // 儲存
     const saveButton = document.getElementById('save');
