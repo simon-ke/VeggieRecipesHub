@@ -104,18 +104,17 @@
 
         <!-- 食譜介紹 -->
         <div class="recipe-header">
-            <img class="left-section" src="../img/食譜圖片/Stir-fried vegetables.jpg" alt="食譜圖片">
+            <!-- 動態生成食譜介紹 -->
+            <img class="left-section" id="left-section" src="" alt="">
             <div class="right-section">
-                <span class="recipe-date">2025-02-18</span>
-                <h2 class="recipe-title">清炒蔬菜</h2>
-                <a class="rating" href="#">4.1<span>★★★★☆</span>（200 評價）</a>
-                <p class="recipe-tag"><span class="tag">蔬菜</span><span class="tag">健康料理</span></p>
-                <p class="recipe-description">
-                    這是一道簡單又美味的蔬菜料理，適合健康飲食的人士。這是一道簡單又美味的蔬菜料理，適合健康飲食的人士。這是一道簡單又美味的蔬菜料理，適合健康飲食的人士。這是一道簡單又美味的蔬菜料理，適合健康飲食的人士。這是一道簡單又美味的蔬菜料理，適合健康飲食的人士。這是一道簡單又美味的蔬菜料理，適合健康飲食的人士。
-                </p>
+                <span class="recipe-date"></span>
+                <h2 class="recipe-title"></h2>
+                <a class="rating" href="#"></a>
+                <p class="recipe-tag"></p>
+                <p class="recipe-description"></p>
                 <div class="recipe-click">
-                    <button class="like-button"><img src="../img/icons/heart_empty.png" alt="">150</button>
-                    <button class="comment-button"><img src="../img/icons/message4.png" alt="">30</button>
+                    <button class="like-button"><img src="../img/icons/heart_empty.png" alt="">0</button>
+                    <button class="comment-button"><img src="../img/icons/message4.png" alt=""><span>0</span></button>
                     <button class="bookmark-button"><img src="../img/icons/bookmark_icon2.png" alt=""></button>
                     <button class="share-button"><img src="../img/icons/share_icon3.png" alt=""></button>
                 </div>
@@ -127,82 +126,29 @@
 
             <!-- 食譜列表 -->
             <section class="ingredient">
-                <!-- 份量/時間 -->
-
                 <!-- 食材 -->
                 <div>
                     <div class="ingredient-info">
                         <h2>食材</h2>
                         <div>
-                            <img src="../img/icons/fork_spoon_icon.png" alt="">3人份
+                            <img src="../img/icons/fork_spoon_icon.png" alt="">
+                            <span id="portion"></span>
                         </div>
                         <div>
-                            <img src="../img/icons/clock_time_icon.png" alt="">30分鐘
+                            <img src="../img/icons/clock_time_icon.png" alt="">
+                            <span id="time"></span>
                         </div>
                     </div>
-                    <table>
-                        <tr>
-                            <td>紅椒</td>
-                            <td>1顆</td>
-                        </tr>
-                        <tr>
-                            <td>黃椒</td>
-                            <td>1顆</td>
-                        </tr>
-                        <tr>
-                            <td>青椒</td>
-                            <td>1顆</td>
-                        </tr>
-                        <tr>
-                            <td>胡蘿蔔</td>
-                            <td>1根</td>
-                        </tr>
-                        <tr>
-                            <td>花椰菜</td>
-                            <td>1顆</td>
-                        </tr>
-                        <tr>
-                            <td>蘑菇</td>
-                            <td>200克</td>
-                        </tr>
-                        <tr>
-                            <td>扁豆</td>
-                            <td>200克</td>
-                        </tr>
-                    </table>
+                    <table id="ingredient_table"><!-- 動態生成食材表格 --></table>
+
                 </div>
             </section>
 
+            <!-- 調味料 -->
             <section class="seasoning">
-                <!-- 調味料 -->
                 <div>
                     <h2 class="section-title">調味料</h2>
-                    <table>
-                        <tr>
-                            <td>橄欖油</td>
-                            <td>2湯匙</td>
-                        </tr>
-                        <tr>
-                            <td>醬油</td>
-                            <td>3湯匙</td>
-                        </tr>
-                        <tr>
-                            <td>紅醋</td>
-                            <td>1湯匙</td>
-                        </tr>
-                        <tr>
-                            <td>糖</td>
-                            <td>1茶匙</td>
-                        </tr>
-                        <tr>
-                            <td>鹽巴</td>
-                            <td>1茶匙</td>
-                        </tr>
-                        <tr>
-                            <td>黑胡椒</td>
-                            <td>適量</td>
-                        </tr>
-                    </table>
+                    <table id="seasoning_table"><!-- 動態生成調味料表格 --></table>
                 </div>
             </section>
 
@@ -210,85 +156,18 @@
             <section class="nutrition">
                 <div>
                     <h2 class="section-title">營養成分</h2>
-                    <table>
-                        <tr>
-                            <td>熱量</td>
-                            <td>150卡路里</td>
-                        </tr>
-                        <tr>
-                            <td>蛋白質</td>
-                            <td>4克</td>
-                        </tr>
-                        <tr>
-                            <td>脂肪</td>
-                            <td>8克</td>
-                        </tr>
-                        <tr>
-                            <td>碳水化合物</td>
-                            <td>15克</td>
-                        </tr>
-                        <tr>
-                            <td>維生素A</td>
-                            <td>100% DV</td>
-                        </tr>
-                        <tr>
-                            <td>維生素C</td>
-                            <td>150% DV</td>
-                        </tr>
-                        <tr>
-                            <td>鈣</td>
-                            <td>6% DV</td>
-                        </tr>
-                        <tr>
-                            <td>鐵</td>
-                            <td>8% DV</td>
-                        </tr>
-                    </table>
+                    <table id="nutrition_table"><!-- 動態生成營養成分表格 --></table>
                 </div>
             </section>
         </div>
 
         <!-- 烹調步驟 -->
-        <section class="instructions">
+        <!-- <div class="progress-bar">
+            <div class="progress"></div>
+        </div> -->
+        <section class="recipe-steps">
             <h2>烹調步驟</h2>
-            <div class="recipe-step">
-                <img src="../img/食譜圖片/香料烤胡蘿蔔.jpg" alt="準備食材">
-                <div>
-                    <div class="progress-bar">
-                        <div class="progress"></div>
-                    </div>
-                    <h2>1</h2>
-                    <p> 準備食材：先將所有食材洗乾淨，紅椒、黃椒、綠椒、胡蘿蔔切絲，西蘭花掰成小朵，蘑菇切片，秋葵切段。</p>
-                </div>
-            </div>
-            <div class="recipe-step">
-                <img src="../img/breakfast01.jpg" alt="熱鍋">
-                <div>
-                    <h2>2</h2>
-                    <p>熱鍋：在中火熱鍋中倒入2湯匙橄欖油，待油熱後加入胡蘿蔔絲，拌炒2分鐘。</p>
-                </div>
-            </div>
-            <div class="recipe-step">
-                <img src="../img/breakfast01.jpg" alt="加入蔬菜">
-                <div>
-                    <h2>3</h2>
-                    <p>加入蔬菜：接著加入紅椒、黃椒、綠椒、西蘭花、蘑菇和秋葵，繼續翻炒5-7分鐘，直到蔬菜變軟。</p>
-                </div>
-            </div>
-            <div class="recipe-step">
-                <img src="../img/breakfast01.jpg" alt="調味">
-                <div>
-                    <h2>4</h2>
-                    <p>調味：加入3湯匙醬油、1湯匙紅酒醋、1茶匙糖，繼續翻炒均勻。根據口味加入適量黑胡椒。</p>
-                </div>
-            </div>
-            <div class="recipe-step">
-                <img src="../img/breakfast01.jpg" alt="完成">
-                <div>
-                    <h2>5</h2>
-                    <p>完成：拌炒均勻後，關火，裝盤即可享用。</p>
-                </div>
-            </div>
+            <div id="step_card"><!-- 動態生成烹調步驟 --></div>
         </section>
 
         <!-- 用戶評論 -->
@@ -359,112 +238,7 @@
         <!-- 相關食譜推薦 -->
         <section class="related-recipes">
             <h2>相關食譜</h2>
-            <div class="related-carousel">
-                <div class="related-recipe-card">
-                    <a href="./recipe.html">
-                        <img src="../img/食譜圖片/烤蔬菜.jpg" alt="Recipe Image 3">
-                        <h3>香草烤蔬菜</h3>
-                        <div class="tags">
-                            <span>低碳水</span>
-                        </div>
-                        <p>這道香草烤蔬菜色彩繽紛，味道濃郁，是一道健康又美味的素食料理。選用新鮮蔬菜，搭配香草和橄欖油烤至香脆，適合作為主菜或配菜。</p>
-                    </a>
-                    <div class="actions">
-                        <a href="#">評分：4.8 / 5 （250 評價）</a>
-                        <div>
-                            <button>收藏</button>
-                            <button>分享</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="related-recipe-card">
-                    <a href="./recipe.html">
-                        <img src="../img/食譜圖片/香料烤胡蘿蔔.jpg" alt="Spiced Roasted Carrots">
-                        <h3>香料烤胡蘿蔔</h3>
-                        <div class="tags">
-                            <span>快速</span>
-                            <span>健康</span>
-                        </div>
-                        <p>利用各種香料和草本來提升胡蘿蔔的風味，簡單美味的健康小吃。</p>
-                    </a>
-                    <div class="actions">
-                        <a href="#">評分：4.7 / 5 （180 評價）</a>
-                        <div>
-                            <button>收藏</button>
-                            <button>分享</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="related-recipe-card">
-                    <a href="./recipe.html">
-                        <img src="../img/食譜圖片/橄欖油義大利麵.jpg" alt="Garlic Olive Oil Pasta">
-                        <h3>橄欖油義大利麵</h3>
-                        <div class="tags">
-                            <span>快速</span>
-                        </div>
-                        <p>簡單的義大利麵食譜，只需幾種食材，就能享受橄欖油的絕妙搭配。</p>
-                    </a>
-                    <div class="actions">
-                        <a href="#">評分：4.5 / 5 （220 評價）</a>
-                        <div>
-                            <button>收藏</button>
-                            <button>分享</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="related-recipe-card">
-                    <a href="./recipe.html">
-                        <img src="../img/食譜圖片/香草烤花椰菜.jpg" alt="Herb Roasted Cauliflower">
-                        <h3>香草烤花椰菜</h3>
-                        <div class="tags">
-                            <span>健康</span>
-                            <span>低熱量</span>
-                        </div>
-                        <p>將花椰菜與新鮮香草和橄欖油一起烘烤，外脆內嫩，口感豐富。</p>
-                    </a>
-                    <div class="actions">
-                        <a href="#">評分：4.6 / 5 （150 評價）</a>
-                        <div>
-                            <button>收藏</button>
-                            <button>分享</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="related-recipe-card">
-                    <a href="./recipe.html">
-                        <img src="../img/食譜圖片/鮮菇炒菠菜.jpg" alt="Lemon Garlic Sauteed Spinach">
-                        <h3>鮮菇炒菠菜</h3>
-                        <div class="tags">
-                            <span>快速</span>
-                        </div>
-                        <p>菠菜搭配鮮菇簡單快速的營養佳餚。</p>
-                    </a>
-                    <div class="actions">
-                        <a href="#">評分：4.8 / 5 （200 評價）</a>
-                        <div>
-                            <button>收藏</button>
-                            <button>分享</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="related-recipe-card">
-                    <a href="./recipe.html">
-                        <img src="../img/食譜圖片/椰奶咖哩豆腐.jpg" alt="Coconut Curry Tofu">
-                        <h3>椰奶咖哩豆腐</h3>
-                        <div class="tags">
-                            <span>異國風味</span>
-                        </div>
-                        <p>以椰奶和咖哩燉煮豆腐，搭配米飯或麵食，口感豐富順口且充滿異國風情。</p>
-                    </a>
-                    <div class="actions">
-                        <a href="#">評分：4.9 / 5 （300 評價）</a>
-                        <div>
-                            <button>收藏</button>
-                            <button>分享</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="related-carousel"><!-- 動態生成相關食譜推薦 --></div>
         </section>
     </div>
 
@@ -496,89 +270,313 @@
     <script src="../JS/recipe.js"></script>
 
     <script>
-                // // 從 localStorage 中讀取數據
-        // const resultImage = document.getElementById('resultImage');
-        // const resultTitle = document.getElementById('resultTitle');
-        // const resultTags = document.getElementById('resultTags');
-        // const resultDescription = document.getElementById('resultDescription');
-        // const resultPortion = document.getElementById('resultPortion');
-        // const resultCookTime = document.getElementById('resultCookTime');
-        // const resultIngredients = document.getElementById('resultIngredients');
-        // const resultSeasonings = document.getElementById('resultSeasonings');
-        // const resultNutritions = document.getElementById('resultNutritions');
-        // const resultSteps = document.getElementById('resultSteps');
+        // 從 URL 取得所需的 recipe id
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+        const recipeId = getQueryParam('id');
 
-        // // 獲取圖片預覽
-        // const recipeImage = localStorage.getItem('recipe_image');
-        // if (recipeImage) {
-        //     resultImage.src = recipeImage;
-        //     resultImage.style.display = 'block';
-        // }
+        // 取得預設數據（從 JSON 檔案）與 localStorage 中的數據
+        function getRecipesData() {
+            // 從 localStorage 取得用戶新增的數據
+            const storedData = localStorage.getItem('recipesData');
+            const storedRecipes = storedData ? JSON.parse(storedData) : [];
 
-        // // 獲取食譜標題
-        // resultTitle.textContent = localStorage.getItem('recipe_title');
+            // 透過 fetch 取得預設數據
+            return fetch('../recipes.json')
+                .then(response => response.json())
+                .then(defaultRecipes => {
+                    // 合併預設數據與 localStorage 數據
+                    // 此處假設兩者皆為陣列
+                    return [...defaultRecipes, ...storedRecipes];
+                });
+        }
 
-        // // 獲取食譜標籤
-        // const tags = JSON.parse(localStorage.getItem('tags') || '[]');
-        // tags.forEach(tag => {
-        //     const tagElement = document.createElement('span');
-        //     tagElement.className = 'tag';
-        //     tagElement.textContent = tag;
-        //     resultTags.appendChild(tagElement);
-        // });
+        // 取得數據後，根據網址參數 id 去找到對應的食譜並生成頁面內容
+        getRecipesData()
+            .then(recipesData => {
+                //   localStorage.setItem('recipes', JSON.stringify(recipes));
+                //   recipe = recipes[recipeId];
+                //   displayRecipe(recipe);
+                // 根據 id 找到對應的一筆數據
+                const recipe = recipesData.find(recipe => recipe.recipe_id === recipeId);
+                if (recipe) {
+                    // ── 食譜介紹 ──
 
-        // // 獲取食譜介紹
-        // resultDescription.textContent = localStorage.getItem('recipe_description');
+                    // 左區塊：圖片
+                    const recipeImg = document.getElementById('left-section');
+                    if (recipeImg) {
+                        recipeImg.src = recipe.recipe_image;
+                        recipeImg.alt = recipe.recipe_title;
+                    }
 
-        // // 獲取份量與時間
-        // // resultPortion.textContent = `食譜分量: ${localStorage.getItem('recipe_portion')}`;
-        // // resultCookTime.textContent = `烹調時間: ${localStorage.getItem('recipe_cook_time')}`;
+                    // 右區塊
 
-        // // 獲取食材
-        // const ingredients = JSON.parse(localStorage.getItem('ingredients') || '[]');
-        // ingredients.forEach(ingredient => {
-        //     const ingredientElement = document.createElement('p');
-        //     ingredientElement.textContent = `${ingredient.name} - ${ingredient.quantity}`;
-        //     resultIngredients.appendChild(ingredientElement);
-        // });
+                    // 1. 時間
+                    function formatDate(createdAt) {
+                        const now = new Date();                   // 現在時間
+                        const createdDate = new Date(createdAt);    // 建立時間轉 Date 物件
+                        const timeDiff = now - createdDate;         // 毫秒差
 
-        // 獲取調味料
-        // const seasonings = JSON.parse(localStorage.getItem('seasonings') || '[]');
-        // seasonings.forEach(seasoning => {
-        //     const seasoningElement = document.createElement('p');
-        //     seasoningElement.textContent = `${seasoning.name} - ${seasoning.quantity}`;
-        //     resultSeasonings.appendChild(seasoningElement);
-        // });
+                        const seconds = Math.floor(timeDiff / 1000);
+                        const minutes = Math.floor(seconds / 60);
+                        const hours = Math.floor(minutes / 60);
+                        const days = Math.floor(hours / 24);
 
-        // 獲取營養成分
-        // const nutritions = JSON.parse(localStorage.getItem('nutritions') || '[]');
-        // nutritions.forEach(nutrition => {
-        //     const nutritionElement = document.createElement('p');
-        //     nutritionElement.textContent = `${nutrition.name} - ${nutrition.value}`;
-        //     resultNutritions.appendChild(nutritionElement);
-        // });
+                        // 小於一天：顯示「幾秒前」、「幾分鐘前」或「幾小時前」
+                        if (days < 1) {
+                            if (hours >= 1) {
+                                return `${hours} 小時前`;
+                            } else if (minutes >= 1) {
+                                return `${minutes} 分鐘前`;
+                            } else {
+                                return `${seconds} 秒前`;
+                            }
+                        }
 
-        // 獲取烹調步驟
-        // const steps = JSON.parse(localStorage.getItem('steps') || '[]');
-        // steps.forEach((step, index) => {
-        //     const stepElement = document.createElement('div');
-        //     stepElement.className = 'steps';
-        //     stepElement.innerHTML = `
-        //         <div class="steps-image">
-        //             <img src="${step.image}" class="previewStepsImage" alt="">
-        //         </div>
-        //         <div class="steps-text">
-        //             <div>
-        //                 <h2>${index + 1}</h2>
-        //             </div>
-        //             <p>${step.description}</p>
-        //         </div>
-        //     `;
-        //     resultSteps.appendChild(stepElement);
-        // });
+                        // 大於一天但小於七天：顯示「幾天前」
+                        if (days < 7) {
+                            return `${days} 天前`;
+                        }
+
+                        // 大於或等於八天：若當年度只顯示月日，否則顯示完整年月日
+                        const year = createdDate.getFullYear();
+                        const month = createdDate.getMonth() + 1;
+                        const day = createdDate.getDate();
+
+                        if (year === now.getFullYear()) {
+                            return `${month} 月 ${day} 日`;
+                        }
+                        return `${year} 年 ${month} 月 ${day} 日`;
+                    }
+                    const dateElement = document.querySelector('.recipe-date');
+                    if (dateElement) {
+                        dateElement.textContent = formatDate(recipe.created_at);
+                    }
+
+                    // 2. 標題
+                    const titleElement = document.querySelector('.recipe-title');
+                    if (titleElement) {
+                        titleElement.textContent = recipe.recipe_title;
+                    }
+
+                    // 3. 評價（包含數字與星級圖示）
+                    function generateStars(rating) {
+                        const fullStars = Math.floor(rating);           // 完整星數
+                        const halfStar = (rating % 1 >= 0.9) ? 1 : 0;     // 半星（此處邏輯可根據需求調整）
+                        const emptyStars = 5 - fullStars - halfStar;
+                        return '★'.repeat(fullStars) + '☆'.repeat(emptyStars);
+                    }
+                    const stars = document.createElement('span');
+                    stars.textContent = generateStars(recipe.rating);
+
+                    const ratingElement = document.querySelector('.rating');
+                    if (ratingElement) {
+                        // 利用 append 可同時加入字串與 DOM 節點
+                        ratingElement.append(recipe.rating + ' / 5', stars, `（${recipe.evaluate} 評價）`);
+                    }
+
+                    // 4. 標籤
+                    const recipeTagElement = document.querySelector('.recipe-tag');
+                    if (recipeTagElement) {
+                        recipe.tags.forEach(tagText => {
+                            const tag = document.createElement('span');
+                            tag.className = 'tag';
+                            tag.textContent = tagText;
+                            recipeTagElement.append(tag);
+                        });
+                    }
+
+                    // 5. 介紹
+                    const descriptionElement = document.querySelector('.recipe-description');
+                    if (descriptionElement) {
+                        descriptionElement.textContent = recipe.recipe_description;
+                    }
+
+                    // 6. 喜歡數
+                    const likeButton = document.querySelector('.like-button');
+                    // childNodes 包含了所有類型節點，數字在第二個節點（索引 1）
+                    if (likeButton && likeButton.childNodes[1]) {
+                        likeButton.childNodes[1].nodeValue = recipe.likes;
+                    }
+
+                    // 7. 留言
+                    const commentButtonSpan = document.querySelector('.comment-button span');
+                    if (commentButtonSpan) {
+                        commentButtonSpan.textContent = recipe.comments;
+                    }
+
+                    // ── 食譜資訊 ──
+
+                    // 份量與烹調時間
+                    const portionElement = document.getElementById('portion');
+                    if (portionElement) portionElement.textContent = recipe.portion;
+                    const timeElement = document.getElementById('time');
+                    if (timeElement) timeElement.textContent = recipe.recipe_cook_time;
+
+                    // 食材
+                    const ingredientTable = document.getElementById('ingredient_table');
+                    if (ingredientTable) {
+                        recipe.ingredients.forEach(ingredient => {
+                            const row = document.createElement('tr');
+                            const nameTd = document.createElement('td');
+                            nameTd.textContent = ingredient.name;
+                            const amountTd = document.createElement('td');
+                            amountTd.textContent = ingredient.amount;
+                            row.append(nameTd, amountTd);
+                            ingredientTable.append(row);
+                        });
+                    }
+
+                    // 調味料
+                    const seasoningTable = document.getElementById('seasoning_table');
+                    if (seasoningTable) {
+                        recipe.seasonings.forEach(seasoning => {
+                            const row = document.createElement('tr');
+                            const nameTd = document.createElement('td');
+                            nameTd.textContent = seasoning.name;
+                            const amountTd = document.createElement('td');
+                            amountTd.textContent = seasoning.amount;
+                            row.append(nameTd, amountTd);
+                            seasoningTable.append(row);
+                        });
+                    }
+
+                    // 營養成分
+                    const nutritionTable = document.getElementById('nutrition_table');
+                    if (nutritionTable) {
+                        recipe.nutritions.forEach(nutrition => {
+                            const row = document.createElement('tr');
+                            const nameTd = document.createElement('td');
+                            nameTd.textContent = nutrition.name;
+                            const valueTd = document.createElement('td');
+                            valueTd.textContent = nutrition.value;
+                            row.append(nameTd, valueTd);
+                            nutritionTable.append(row);
+                        });
+                    }
+
+                    // ── 烹調步驟 ──
+                    const stepCardContainer = document.getElementById('step_card');
+                    if (stepCardContainer) {
+                        recipe.steps.forEach((step, index) => {
+                            const stepCard = document.createElement('div');
+                            stepCard.className = 'recipe-step';
+
+                            // 步驟圖片
+                            const stepImg = document.createElement('img');
+                            if (step.image) {
+                                stepImg.src = step.image;
+                            } else {
+                                stepImg.className = 'not-found-img';
+                                stepImg.src = '../img/image_Not_Found.png';
+                            }
+                            stepImg.alt = `步驟 ${index + 1}`;
+
+                            // 步驟文字內容
+                            const stepContent = document.createElement('div');
+                            const stepTitle = document.createElement('h2');
+                            stepTitle.textContent = index + 1;
+                            const stepText = document.createElement('p');
+                            stepText.textContent = step.description;
+
+                            stepContent.append(stepTitle, stepText);
+                            stepCard.append(stepImg, stepContent);
+                            stepCardContainer.append(stepCard);
+                        });
+                    }
+                } else {
+                    console.error('Recipe not found for id:', recipeId);
+                }
+
+                // ── 相關食譜推薦 ──
+                // 取得容器【.related-carousel】
+                const relatedCarousel = document.querySelector('.related-carousel');
+                // 印出每筆 recipesData 資料
+                recipesData.forEach((recipe) => {
+                    // 建立一個新的 relatedCard 區塊
+                    const relatedCard = document.createElement('div');
+                    relatedCard.classList.add('related-recipe-card');
+
+                    // 建立連結元素，並設定連結到詳細食譜頁
+                    const link = document.createElement('a');
+                    link.href = `./recipe.html?id=${recipe.recipe_id}`;
+
+                    // 建立圖片元件
+                    const img = document.createElement('img');
+                    if (recipe.recipe_image) {
+                        img.src = recipe.recipe_image;
+                    } else {
+                        img.src = "img/image_Not_Found.png";
+                        img.classList.add('not-found-img');
+                    }
+                    img.alt = recipe.recipe_title;
+
+                    // 建立標題 (h3) 元素
+                    const title = document.createElement('h3');
+                    title.textContent = recipe.recipe_title;
+
+                    // 建立標籤區塊
+                    const tagBox = document.createElement('div');
+                    tagBox.classList.add('tags');
+                    // 遍歷每個標籤，並建立 <span>
+                    recipe.tags.forEach((tag) => {
+                        const relatedTag = document.createElement('span');
+                        relatedTag.textContent = tag;
+                        tagBox.append(relatedTag);
+                    });
+
+                    // 建立描述 (p) 元素
+                    const description = document.createElement('p');
+                    description.textContent = recipe.recipe_description;
+
+                    // 將圖、標題、標籤與描述加入連結元素中
+                    link.append(img, title, tagBox, description);
+
+                    // 建立動作按鈕區塊
+                    const actionsBox = document.createElement('div');
+                    actionsBox.classList.add('actions');
+
+                    // 建立顯示評分的連結文字
+                    const actionsLink = document.createElement('a');
+                    actionsLink.textContent = `評分：${recipe.rating} / 5（${recipe.evaluate} 評價）`;
+
+                    // 建立按鈕容器
+                    const actionsBtn = document.createElement('div');
+
+                    // 建立收藏按鈕，並綁定點擊事件
+                    const collectBtn = document.createElement('button');
+                    collectBtn.textContent = '收藏';
+                    collectBtn.onclick = () => {
+                        alert('使用 onclick 屬性綁定的點擊事件：收藏成功');
+                    };
+
+                    // 建立分享按鈕，並使用 addEventListener 綁定點擊事件
+                    const shareBtn = document.createElement('button');
+                    shareBtn.textContent = '分享';
+                    shareBtn.addEventListener('click', () => {
+                        alert('使用 addEventListener 綁定的點擊事件：分享成功');
+                    });
+
+                    // 將集合按鈕放入按鈕容器中
+                    actionsBtn.append(collectBtn, shareBtn);
+
+                    // 將評分連結和按鈕容器加入按鈕區塊中
+                    actionsBox.append(actionsLink, actionsBtn);
+
+                    // 將連結元素與按鈕區塊加入整個 relatedCard
+                    relatedCard.append(link, actionsBox);
+
+                    // 將該 relatedCard 加入到 relatedCarousel 中
+                    relatedCarousel.append(relatedCard);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching or processing data:', error);
+            });
     </script>
+
 </body>
 
 </html>
-
-

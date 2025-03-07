@@ -212,25 +212,22 @@
 }
 
 /* 製作步驟 */
-.instructions {
-    margin: 20px 0;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+.recipe-steps {
+    margin: 30px 0;
 }
 
-.instructions h2 {
+.recipe-steps h2 {
     font-size: 2em;
     color: #333;
 }
 
 .recipe-step {
+    margin-top: 20px;
     display: flex;
     gap: 20px;
     border: 1px solid #ddd;
     padding: 10px;
     border-radius: 5px;
-    margin: 0 20px;
     transition: box-shadow 0.3s ease;
 }
 
@@ -256,14 +253,16 @@
 .recipe-step p {
     font-size: 1.2em;
     color: #3b3b3b;
-
 }
 
-.progress-bar {
+.not-found-img {
+    border: 1px solid #ccc;
+}
+
+/* .progress-bar {
     width: 100%;
     background-color: #f3f3f3;
     border-radius: 5px;
-    /* margin: auto 0 10px 0; */
     padding: 5px;
 }
 
@@ -272,7 +271,7 @@
     background-color: #4caf50;
     height: 5px;
     border-radius: 5px;
-}
+} */
 
 /* 用戶評論 */
 .comments h2 {
