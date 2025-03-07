@@ -116,3 +116,6 @@ textarea.addEventListener('input', () => {
     // 設置高度為內容的捲動高度
     textarea.style.height = `${textarea.scrollHeight}px`;
 });
+
+
+// 生成卡片
