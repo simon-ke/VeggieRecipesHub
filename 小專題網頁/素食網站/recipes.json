@@ -3,17 +3,19 @@
         "recipe_id": "1",
         "created_at": "2024-09-15T10:23:45+08:00",
         "updated_at": "",
+        "rating": "4.3",
+        "evaluate": "80",
         "recipe_title": "清炒蔬菜",
-        "recipe_image": "img/食譜圖片/Stir-fried vegetables.jpg",
+        "recipe_image": "/小專題網頁/素食網站/img/食譜圖片/清炒蔬菜.jpg",
         "recipe_description": "這是一道簡單又美味的蔬菜料理，適合健康飲食的人士。",
         "recipe_cook_time": "30分鐘",
-        "serving_size": "3",
+        "portion": "3",
         "tags": [
             "蔬菜",
             "健康料理"
         ],
-        "likes": 150,
-        "comments": 30,
+        "likes": 155,
+        "comments": 36,
         "ingredients": [
             {
                 "name": "紅椒",
@@ -106,23 +108,23 @@
         ],
         "steps": [
             {
-                "image": "img/食譜圖片/香料烤胡蘿蔔.jpg",
+                "image": "",
                 "description": "準備食材：先將所有食材洗乾淨，紅椒、黃椒、綠椒、胡蘿蔔切絲，西蘭花掰成小朵，蘑菇切片，秋葵切段。"
             },
             {
-                "image": "img/食譜圖片/鮮菇炒菠菜.jpg",
+                "image": "",
                 "description": "熱鍋：在中火熱鍋中倒入2湯匙橄欖油，待油熱後加入胡蘿蔔絲，拌炒2分鐘。"
             },
             {
-                "image": "img/breakfast01.jpg",
+                "image": "",
                 "description": "加入蔬菜：接著加入紅椒、黃椒、綠椒、西蘭花、蘑菇和秋葵，繼續翻炒5-7分鐘，直到蔬菜變軟。"
             },
             {
-                "image": "img/breakfast01.jpg",
+                "image": "",
                 "description": "調味：加入3湯匙醬油、1湯匙紅酒醋、1茶匙糖，繼續翻炒均勻。根據口味加入適量黑胡椒。"
             },
             {
-                "image": "img/breakfast01.jpg",
+                "image": "",
                 "description": "完成：拌炒均勻後，關火，裝盤即可享用。"
             }
         ]
@@ -131,18 +133,20 @@
         "recipe_id": "2",
         "created_at": "2024-10-03T08:45:12+08:00",
         "updated_at": "",
+        "rating": "4.2",
+        "evaluate": "360",
         "recipe_title": "鮮菇炒菠菜",
-        "recipe_image": "img/食譜圖片/鮮菇炒菠菜.jpg",
+        "recipe_image": "/小專題網頁/素食網站/img/食譜圖片/鮮菇炒菠菜.jpg",
         "recipe_description": "這道鮮菇炒菠菜是一道簡單卻美味的蔬菜料理，結合了香菇的濃郁風味和菠菜的清新口感，適合各種場合享用。",
         "recipe_cook_time": "20分鐘",
-        "serving_size": "2",
+        "portion": "2",
         "tags": [
             "蔬菜",
             "素食",
             "健康料理"
         ],
         "likes": 170,
-        "comments": 35,
+        "comments": 37,
         "ingredients": [
             {
                 "name": "香菇",
@@ -211,23 +215,23 @@
         ],
         "steps": [
             {
-                "image": "img/食譜圖片/準備鮮菇菠菜.jpg",
+                "image": "",
                 "description": "準備食材：先將香菇洗淨切片，菠菜洗乾淨瀝乾。"
             },
             {
-                "image": "img/食譜圖片/炒鮮菇.jpg",
+                "image": "",
                 "description": "熱鍋：在中火熱鍋中倒入2湯匙橄欖油後加入香菇，將香菇片加入鍋中，拌炒3-5分鐘，直到香菇變軟並呈現金黃色。"
             },
             {
-                "image": "img/食譜圖片/加入菠菜.jpg",
+                "image": "",
                 "description": "加入菠菜：加入菠菜，快速翻炒2-3分鐘，直到菠菜變軟並均勻混合。"
             },
             {
-                "image": "img/食譜圖片/調味鮮菇菠菜.jpg",
+                "image": "",
                 "description": "調味：加入1湯匙醬油和1茶匙香油，翻炒均勻。根據口味加入適量鹽巴和黑胡椒。"
             },
             {
-                "image": "img/食譜圖片/完成鮮菇菠菜.jpg",
+                "image": "",
                 "description": "完成：拌炒均勻後，關火，裝盤即可享用。"
             }
         ]
@@ -236,11 +240,13 @@
         "recipe_id": "3",
         "created_at": "2024-11-22T08:14:30+08:00",
         "updated_at": "",
+        "rating": "4.9",
+        "evaluate": "170",
         "recipe_title": "椰奶咖哩豆腐",
-        "recipe_image": "img/食譜圖片/椰奶咖哩豆腐.jpg",
+        "recipe_image": "/小專題網頁/素食網站/img/食譜圖片/椰奶咖哩豆腐.jpg",
         "recipe_description": "這道椰奶咖哩豆腐以椰奶和香料為主料，搭配嫩滑的豆腐，充滿濃郁的異國風味，是一道健康又美味的素食料理。",
         "recipe_cook_time": "30分鐘",
-        "serving_size": "3",
+        "portion": "3",
         "tags": [
             "豆腐",
             "咖哩",
@@ -328,27 +334,27 @@
         ],
         "steps": [
             {
-                "image": "img/食譜圖片/準備豆腐.jpg",
+                "image": "",
                 "description": "準備食材：將豆腐切塊，紅椒切絲，菠菜洗淨，薑切末。"
             },
             {
-                "image": "img/食譜圖片/熱鍋咖哩.jpg",
+                "image": "",
                 "description": "熱鍋：在中火熱鍋中倒入2湯匙橄欖油，待油熱後加入薑末，炒至香氣釋放。"
             },
             {
-                "image": "img/食譜圖片/加入豆腐咖哩.jpg",
+                "image": "",
                 "description": "加入豆腐：將豆腐塊加入鍋中，拌炒5分鐘，直到豆腐表面金黃。"
             },
             {
-                "image": "img/食譜圖片/加入椰奶咖哩.jpg",
+                "image": "",
                 "description": "加入椰奶和咖哩粉：加入椰奶和咖哩粉，攪拌均勻，煮沸後轉小火燉煮10分鐘。"
             },
             {
-                "image": "img/食譜圖片/加入紅椒.jpg",
+                "image": "",
                 "description": "加入紅椒和菠菜：最後加入紅椒絲和菠菜，煮至菠菜變軟。"
             },
             {
-                "image": "img/食譜圖片/完成咖哩.jpg",
+                "image": "",
                 "description": "完成：加入糖，根據口味加入適量鹽巴和黑胡椒，攪拌均勻，關火，裝盤即可享用。"
             }
         ]
@@ -357,11 +363,13 @@
         "recipe_id": "4",
         "created_at": "2024-12-10T02:05:50+08:00",
         "updated_at": "",
+        "rating": "4.5",
+        "evaluate": "290",
         "recipe_title": "香草烤花椰菜",
-        "recipe_image": "img/食譜圖片/香草烤花椰菜.jpg",
+        "recipe_image": "/小專題網頁/素食網站/img/食譜圖片/香草烤花椰菜.jpg",
         "recipe_description": "這道香草烤花椰菜結合了新鮮香草和橄欖油的風味，使花椰菜外脆內嫩，是一道健康又美味的素食料理。",
         "recipe_cook_time": "35分鐘",
-        "serving_size": "4",
+        "portion": "4",
         "tags": [
             "花椰菜",
             "健康料理"
@@ -457,11 +465,13 @@
         "recipe_id": "5",
         "created_at": "2025-01-02T07:30:00+08:00",
         "updated_at": "",
+        "rating": "",
+        "evaluate": "250",
         "recipe_title": "橄欖油義大利麵",
-        "recipe_image": "img/食譜圖片/橄欖油義大利麵.jpg",
+        "recipe_image": "/小專題網頁/素食網站/img/食譜圖片/橄欖油義大利麵.jpg",
         "recipe_description": "這道橄欖油義大利麵以橄欖油和新鮮香料為主料，簡單易做，味道清新，是一道健康又美味的素食料理。",
         "recipe_cook_time": "20分鐘",
-        "serving_size": "2",
+        "portion": "2",
         "tags": [
             "義大利麵",
             "素食",
@@ -566,11 +576,13 @@
         "recipe_id": "6",
         "created_at": "2025-01-25T14:50:10+08:00",
         "updated_at": "",
+        "rating": "3.9",
+        "evaluate": "210",
         "recipe_title": "香料烤胡蘿蔔",
-        "recipe_image": "img/食譜圖片/香料烤胡蘿蔔.jpg",
+        "recipe_image": "/小專題網頁/素食網站/img/食譜圖片/香料烤胡蘿蔔.jpg",
         "recipe_description": "這道香料烤胡蘿蔔結合了豐富的香料和烤製的甜味，是一道簡單又美味的素食料理，非常適合做為配菜。",
         "recipe_cook_time": "30分鐘",
-        "serving_size": "4",
+        "portion": "4",
         "tags": [
             "胡蘿蔔",
             "健康料理"
@@ -674,11 +686,13 @@
         "recipe_id": "7",
         "created_at": "2025-03-04T14:50:10+08:00",
         "updated_at": "",
+        "rating": "4.4",
+        "evaluate": "220",
         "recipe_title": "綜合烤蔬菜",
-        "recipe_image": "",
+        "recipe_image": "/小專題網頁/素食網站/img/食譜圖片/綜合烤蔬菜.jpg",
         "recipe_description": "這道綜合烤蔬菜混合了多種蔬菜和香料，烤製後風味濃郁，是一道色香味俱全的健康素食料理。",
         "recipe_cook_time": "40分鐘",
-        "serving_size": "4",
+        "portion": "4",
         "tags": [
             "烤蔬菜",
             "健康料理"
