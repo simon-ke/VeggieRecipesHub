@@ -296,9 +296,6 @@
         // 取得數據後，根據網址參數 id 去找到對應的食譜並生成頁面內容
         getRecipesData()
             .then(recipesData => {
-                //   localStorage.setItem('recipes', JSON.stringify(recipes));
-                //   recipe = recipes[recipeId];
-                //   displayRecipe(recipe);
                 // 根據 id 找到對應的一筆數據
                 const recipe = recipesData.find(recipe => recipe.recipe_id === recipeId);
                 if (recipe) {
@@ -306,10 +303,13 @@
 
                     // 左區塊：圖片
                     const recipeImg = document.getElementById('left-section');
-                    if (recipeImg) {
+                    if (recipe.recipe_image) {
                         recipeImg.src = recipe.recipe_image;
-                        recipeImg.alt = recipe.recipe_title;
+                    } else {
+                        recipeImg.className = 'not-found-img';
+                        recipeImg.src = '../img/image_Not_Found.png';
                     }
+                    recipeImg.alt = recipe.recipe_title;
 
                     // 右區塊
 
@@ -494,7 +494,7 @@
                 // 取得容器【.related-carousel】
                 const relatedCarousel = document.querySelector('.related-carousel');
                 // 印出每筆 recipesData 資料
-                recipesData.forEach((recipe) => {
+                recipesData.forEach(recipe => {
                     // 建立一個新的 relatedCard 區塊
                     const relatedCard = document.createElement('div');
                     relatedCard.classList.add('related-recipe-card');
@@ -508,7 +508,7 @@
                     if (recipe.recipe_image) {
                         img.src = recipe.recipe_image;
                     } else {
-                        img.src = "img/image_Not_Found.png";
+                        img.src = "../img/image_Not_Found.png";
                         img.classList.add('not-found-img');
                     }
                     img.alt = recipe.recipe_title;
