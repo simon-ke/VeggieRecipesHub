@@ -163,18 +163,19 @@ p.recipe-description {
 }
 
 /* 最新/推薦食譜 */
-.featured-recipes {
+.suggest-recipes {
     padding: 5px 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 40px 0;
 }
 
-.featured-recipes h2 {
+.suggest-recipes h2 {
     margin: 5px 0 0 10px;
 }
 
-.featured-carousel {
+.suggest-card-container {
     display: flex;
     padding: 5px 15px 15px 15px;
     gap: 15px;
@@ -188,11 +189,11 @@ p.recipe-description {
 }
 
 /* 隱藏滾動條 */
-.featured-carousel::-webkit-scrollbar {
+.suggest-card-container::-webkit-scrollbar {
     display: none;
 }
 
-.featured-recipe-card {
+.suggest-recipe-card {
     width: 300px;
     border: 1px solid #d0d0d0;
     border-radius: 5px;
@@ -205,23 +206,23 @@ p.recipe-description {
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.featured-recipe-card:hover {
+.suggest-recipe-card:hover {
     transform: scale(1.01);
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
 }
 
-.featured-recipe-card img {
+.suggest-recipe-card img {
     width: 100%;
     height: 240px;
     border-radius: 5px;
     object-fit: cover;
 }
 
-.featured-recipe-card h3 {
+.suggest-recipe-card h3 {
     margin: 5px 0;
 }
 
-.featured-recipe-card p {
+.suggest-recipe-card p {
     color: #666;
     padding: 0 10px;
     margin-bottom: 10px;
@@ -236,11 +237,11 @@ p.recipe-description {
     overflow: hidden;
 }
 
-.featured-recipe-card .tags {
+.suggest-recipe-card .tags {
     display: flex;
 }
 
-.featured-recipe-card span {
+.suggest-recipe-card span {
     background-color: #a0d468;
     color: #fff;
     border-radius: 5px;
@@ -248,7 +249,7 @@ p.recipe-description {
     margin: 5px 0 10px 10px;
 }
 
-.featured-recipe-card .actions {
+.suggest-recipe-card .actions {
     border-top: 1px solid #ddd;
     display: flex;
     flex-direction: column;
@@ -256,12 +257,12 @@ p.recipe-description {
     /* 這行確保 actions 貼齊最底部 */
 }
 
-.featured-recipe-card .actions a {
+.suggest-recipe-card .actions a {
     color: #f16e3f;
     margin: 10px;
 }
 
-.featured-recipe-card button {
+.suggest-recipe-card button {
     background-color: #ff7f50;
     color: #fff;
     border: none;
@@ -272,11 +273,11 @@ p.recipe-description {
     transition: background-color 0.2s;
 }
 
-.featured-recipe-card .actions a:hover {
+.suggest-recipe-card .actions a:hover {
     font-weight: 600;
 }
 
-.featured-recipe-card button:hover {
+.suggest-recipe-card button:hover {
     background-color: #ff4500;
 }
 
