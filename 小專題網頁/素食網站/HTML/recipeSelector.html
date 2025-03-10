@@ -10,15 +10,58 @@
 </head>
 
 <body>
+
     <!-- 頁首 -->
     <header>
+        <!-- 登入 Modal -->
+        <div>
+            <div id="login-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn">&times;</span>
+                    <h2>登入</h2>
+                    <form id="login-form">
+                        <label for="login-username">使用者名稱:</label>
+                        <input type="text" id="login-username" required>
+
+                        <label for="login-password">密碼:</label>
+                        <input type="password" id="login-password" required>
+
+                        <button type="submit">登入</button>
+                    </form>
+                    <p>尚未註冊嗎？ <a href="#" id="show-register">註冊</a></p>
+                </div>
+            </div>
+
+            <!-- 註冊 Modal -->
+            <div id="register-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn">&times;</span>
+                    <h2>註冊</h2>
+                    <form id="register-form">
+                        <label for="reg-username">使用者名稱:</label>
+                        <input type="text" id="reg-username" required>
+
+                        <label for="reg-email">電子郵件:</label>
+                        <input type="email" id="reg-email" required>
+
+                        <label for="reg-password">密碼:</label>
+                        <input type="password" id="reg-password" required>
+
+                        <button type="submit">註冊</button>
+                    </form>
+                    <p>已有帳號？ <a href="#" id="show-login">登入</a></p>
+                </div>
+            </div>
+        </div>
         <!-- 導覽列 -->
         <nav class="nav-container">
             <!-- 第一列 -->
             <div class="member-menu">
-                <a href="#">
+                <span id="login-status"></span>
+                <button id="login-out"></button>
+                <a id="register" href="#">
                     <img class="login-singup" src="../img/icons/user.png" alt="登入註冊" />
-                    <span class="tooltip">登入註冊</span>
+                    <span id="user-state" class="tooltip">登入註冊</span>
                 </a>
                 <a href="#">
                     <img class="shopping-cart" src="../img/icons/shopping-cart.png" alt="購物車" />
@@ -50,13 +93,13 @@
                     <li class="dropdown">
                         <a href="#">食譜分類&#9662;</a>
                         <ul class="submenu">
-                            <li><a href="./recipeSelector.html">早餐</a></li>
-                            <li><a href="./recipeSelector.html">飯</a></li>
-                            <li><a href="./recipeSelector.html">麵</a></li>
-                            <li><a href="./recipeSelector.html">米粉</a></li>
-                            <li><a href="./recipeSelector.html">蔬菜</a></li>
-                            <li><a href="./recipeSelector.html">鹹點</a></li>
-                            <li><a href="./recipeSelector.html">甜點</a></li>
+                            <li><a href="./recipeSelector.html?category=早餐">早餐</a></li>
+                            <li><a href="./recipeSelector.html?category=飯">飯</a></li>
+                            <li><a href="./recipeSelector.html?category=麵">麵</a></li>
+                            <li><a href="./recipeSelector.html?category=米粉">米粉</a></li>
+                            <li><a href="./recipeSelector.html?category=蔬菜">蔬菜</a></li>
+                            <li><a href="./recipeSelector.html?category=鹹點">鹹點</a></li>
+                            <li><a href="./recipeSelector.html?category=甜點">甜點</a></li>
                         </ul>
                     </li>
                     <li><a href="#">營養資訊</a></li>
@@ -108,11 +151,7 @@
         </div>
 
         <!-- 頁籤 -->
-        <div class="breadcrumb">
-            <a href="../index.html">首頁</a>
-            >
-            <a href="./recipeSelector.html">蔬菜</a>
-        </div>
+        <div class="breadcrumb"><!-- 動態生成頁籤 --></div>
 
         <!-- 燈箱結構 -->
         <div class="lightbox" id="lightbox">
@@ -125,120 +164,9 @@
         <div id="recipeCardContainer"><!-- 動態生成各類食譜 --></div>
 
         <!-- 最新/推薦食譜 -->
-        <div class="featured-recipes">
+        <div class="suggest-recipes">
             <h2>推薦食譜</h2>
-            <div class="featured-carousel" id="featuredCarousel">
-                <div class="featured-recipe-card">
-                    <a href="./recipe.html">
-                        <img src="../img/食譜圖片/綜合烤蔬菜.jpg" alt="Recipe Image 3" />
-                        <h3>香草烤蔬菜</h3>
-                        <div class="tags">
-                            <span>低碳水</span>
-                        </div>
-                        <p>
-                            這道香草烤蔬菜色彩繽紛，味道濃郁，是一道健康又美味的素食料理。選用新鮮蔬菜，搭配香草和橄欖油烤至香脆，適合作為主菜或配菜。
-                        </p>
-                    </a>
-                    <div class="actions">
-                        <a href="#">評分：4.8 / 5 （250 評價）</a>
-                        <div>
-                            <button>收藏</button>
-                            <button>分享</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="featured-recipe-card">
-                    <a href="./recipe.html">
-                        <img src="../img/食譜圖片/香料烤胡蘿蔔.jpg" alt="Spiced Roasted Carrots" />
-                        <h3>香料烤胡蘿蔔</h3>
-                        <div class="tags">
-                            <span>快速</span>
-                            <span>健康</span>
-                        </div>
-                        <p>利用各種香料和草本來提升胡蘿蔔的風味，簡單美味的健康小吃。</p>
-                    </a>
-                    <div class="actions">
-                        <a href="#">評分：4.7 / 5 （180 評價）</a>
-                        <div>
-                            <button>收藏</button>
-                            <button>分享</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="featured-recipe-card">
-                    <a href="./recipe.html">
-                        <img src="../img/食譜圖片/橄欖油義大利麵.jpg" alt="Garlic Olive Oil Pasta" />
-                        <h3>橄欖油義大利麵</h3>
-                        <div class="tags">
-                            <span>快速</span>
-                        </div>
-                        <p>
-                            簡單的義大利麵食譜，只需幾種食材，就能享受橄欖油的絕妙搭配。
-                        </p>
-                    </a>
-                    <div class="actions">
-                        <a href="#">評分：4.5 / 5 （220 評價）</a>
-                        <div>
-                            <button>收藏</button>
-                            <button>分享</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="featured-recipe-card">
-                    <a href="./recipe.html">
-                        <img src="../img/食譜圖片/香草烤花椰菜.jpg" alt="Herb Roasted Cauliflower" />
-                        <h3>香草烤花椰菜</h3>
-                        <div class="tags">
-                            <span>健康</span>
-                            <span>低熱量</span>
-                        </div>
-                        <p>將花椰菜與新鮮香草和橄欖油一起烘烤，外脆內嫩，口感豐富。</p>
-                    </a>
-                    <div class="actions">
-                        <a href="#">評分：4.6 / 5 （150 評價）</a>
-                        <div>
-                            <button>收藏</button>
-                            <button>分享</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="featured-recipe-card">
-                    <a href="./recipe.html">
-                        <img src="../img/食譜圖片/鮮菇炒菠菜.jpg" alt="Lemon Garlic Sauteed Spinach" />
-                        <h3>鮮菇炒菠菜</h3>
-                        <div class="tags">
-                            <span>快速</span>
-                        </div>
-                        <p>菠菜搭配鮮菇簡單快速的營養佳餚。</p>
-                    </a>
-                    <div class="actions">
-                        <a href="#">評分：4.8 / 5 （200 評價）</a>
-                        <div>
-                            <button>收藏</button>
-                            <button>分享</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="featured-recipe-card">
-                    <a href="./recipe.html">
-                        <img src="../img/食譜圖片/椰奶咖哩豆腐.jpg" alt="Coconut Curry Tofu" />
-                        <h3>椰奶咖哩豆腐</h3>
-                        <div class="tags">
-                            <span>異國風味</span>
-                        </div>
-                        <p>
-                            以椰奶和咖哩燉煮豆腐，搭配米飯或麵食，口感豐富順口且充滿異國風情。
-                        </p>
-                    </a>
-                    <div class="actions">
-                        <a href="#">評分：4.9 / 5 （300 評價）</a>
-                        <div>
-                            <button>收藏</button>
-                            <button>分享</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="suggest-card-container" id="suggestCardContainer"> <!-- 動態生成各類食譜 --></div>
         </div>
 
         <!-- 反饋區塊 -->
@@ -273,9 +201,6 @@
         </div>
     </footer>
 
-    <script src="../JS/recipeSelector.js"></script>
-    <script src="../JS/all.js"></script>
-
     <script>
         // 取得預設數據（從 JSON 檔案）與 localStorage 中的數據
         function getRecipesData() {
@@ -299,57 +224,48 @@
                 // console.log('食譜數據：', recipesData);
                 // 食譜卡片區塊
                 const recipeCardContainer = document.getElementById("recipeCardContainer");
+                // 食譜卡片區塊
+                const suggestCardContainer = document.getElementById("suggestCardContainer");
                 // 使用 DocumentFragment 優化多次 DOM 插入 如果食譜數據筆數較多，插入每個新的元素到 DOM 都可能引發重排（reflow）與重繪（repaint）。使用 DocumentFragment 來先建立所有卡片，最後一次性把碎片插入到 DOM，從而減少瀏覽器的重排次數。
                 const fragment = document.createDocumentFragment();
+                const suggestFragment = document.createDocumentFragment();
                 // 迭代 storedRecipes 並建立食譜卡片
                 recipesData.forEach(recipe => {
+                    // 建立食譜簡介區塊
                     const card = createRecipeCard(recipe);
+                    // 建立食譜推薦區塊
+                    const suggestCard = createSuggestRecipeCard(recipe);
                     // 將 card 插入 fragment
                     fragment.append(card);
+                    // 將 suggestCard 插入 suggestFragment
+                    suggestFragment.append(suggestCard);
                 });
                 // 一次性把所有卡片插入容器
                 recipeCardContainer.append(fragment);
+                suggestCardContainer.append(suggestFragment);
             })
             .catch((error) => console.error("取得食譜數據時出錯:", error));
 
-        //     // 生成推薦卡片
-        //     const featuredCarousel = document.getElementById('featuredCarousel');
-        //     // featuredCarousel.innerHTML = ''; // 清空原本內容
-        //     storedRecipes.forEach((recipe, index) => {
-        //         const featuredCard = document.createElement('div');
-        //         featuredCard.className = 'featured-recipe-card';
-        //         featuredCard.innerHTML = `
-        //             <a href="./recipe.html?id=${index}">
-        //                 <img src="${recipe.recipe_image ? recipe.recipe_image : 'https://i.pinimg.com/736x/e0/a3/21/e0a3218856ac6bf7b68e3a7f7617a828.jpg'}" alt="${recipe.recipe_title || "未命名食譜"}">
-        //                 <h3>${recipe.recipe_title || "未命名食譜"}</h3>
-        //                 <div class="tags">
-        //                     ${(recipe.tags || []).map(tag => `<span>${tag}</span>`).join('') || '<span class="tag">無描述</span>'}
-        //                 </div>
-        //                 <p>${recipe.recipe_description || "無描述"}</p>
-        //             </a>
-        //             <div class="actions">
-        //                 <a href="#">評分：4.1 / 5 （200 評價）</a>
-        //                 <div>
-        //                     <button>收藏</button>
-        //                     <button>分享</button>
-        //                 </div>
-        //             </div>
-        //         `;
-        //         // 將新的 recipeCard 插入到容器的第一個位置
-        //         featuredCarousel.insertBefore(featuredCard, featuredCarousel.firstChild);
-        //     });
-
-        //     console.log('成功生成卡片');
-        // } else {
-        //     console.log('未找到數據');
-        // }
-
-        // 將陣列倒序排列
-        // storedRecipes.reverse();
 
         // 建立食譜卡片函式
         function createRecipeCard(recipe) {
-            // 建立食譜卡片區塊
+            // 解析 URL 中的查詢參數
+            const urlParams = new URLSearchParams(window.location.search);
+            const category = urlParams.get('category'); // 再次取得 category
+
+            // 動態變更頁籤內容
+            const breadcrumb = document.querySelector('.breadcrumb');
+            breadcrumb.innerHTML = `
+                <a href="../index.html">首頁</a>
+            `;
+            if (category) {
+                breadcrumb.innerHTML += `
+                    >
+                    <a href="#">${category}</a>
+                `;
+            }
+
+            // 建立食譜卡片
             const recipeCard = document.createElement("div");
             recipeCard.classList.add("recipe-card");
 
@@ -370,7 +286,7 @@
             // 建立連結區塊
             const recipeLink = document.createElement('a');
             recipeLink.classList.add('content');
-            recipeLink.href = `./recipe.html?id=${recipe.recipe_id}`;
+            recipeLink.href = `./recipe.html?category=${category}&id=${recipe.recipe_id}`;
 
             // 標題
             const recipeTitle = document.createElement('h2');
@@ -378,7 +294,7 @@
 
             // 標籤
             const recipeTag = document.createElement('p');
-            recipe.tags.forEach(tag => {
+            (recipe.tags || []).forEach(tag => {
                 const spanTag = document.createElement('span');
                 spanTag.classList.add('tag');
                 spanTag.textContent = tag;
@@ -390,7 +306,7 @@
             recipeDesc.classList.add('recipe-description');
             recipeDesc.textContent = recipe.recipe_description;
 
-            // 食材（並用「, 」隔開）
+            // 食材（並用「,」隔開）
             const recipeIngredients = document.createElement('p');
             recipeIngredients.textContent = '主要食材：';
             recipe.ingredients.forEach((ingredient, index) => {
@@ -406,20 +322,48 @@
             const recipeTime = document.createElement('p');
             recipeTime.textContent = '製作時間：' + recipe.recipe_cook_time;
 
-            // 將以上區塊組合到連結中
+            // 組合 連結區塊
             recipeLink.append(recipeTitle, recipeTag, recipeDesc, recipeIngredients, recipeTime);
 
             // 建立互動區塊(非使用者輸入數據)
-            const recipeActions = document.createElement("div");
-            recipeActions.classList.add("actions");
-            recipeActions.innerHTML = `
-                <a href="#">評分：${recipe.rating} / 5 （${recipe.evaluate} 評價）</a>
-                <a href="#">作者：栗子</a>
-                <a href="#">喜歡：${recipe.likes}</a>
-                <a href="#">留言：${recipe.comments}</a>
-                <button class="bookmark-button">收藏</button>
-                <button class="share-button">分享</button>
-            `;
+            const recipeActions = document.createElement('div');
+            recipeActions.classList.add('actions');
+
+            const createLink = (text, href = '#') => {
+                const link = document.createElement('a');
+                link.href = href;
+                link.textContent = text;
+                return link;
+            };
+
+            // 評分連結
+            const ratingLink = createLink(`評分：${recipe.rating} / 5 （${recipe.evaluate} 評價）`);
+            // 作者連結(若作者名稱是動態資料，可改由 recipe.author 提供)
+            const authorLink = createLink('作者：栗子');
+            // 喜歡連結
+            const likesLink = createLink(`喜歡：${recipe.likes}`);
+            // 留言連結
+            const commentLink = createLink(`留言：${recipe.comments}`);
+
+
+            // 收藏按鈕
+            const collectBtn = document.createElement('button');
+            collectBtn.classList.add('bookmark-button');
+            collectBtn.textContent = '收藏';
+            collectBtn.addEventListener('click', () => {
+                alert('收藏成功');
+            });
+
+            // 分享按鈕
+            const shareBtn = document.createElement('button');
+            shareBtn.classList.add('share-button');
+            shareBtn.textContent = '分享';
+            shareBtn.addEventListener('click', () => {
+                alert('分享成功');
+            });
+
+            // 組合 互動區塊
+            recipeActions.append(ratingLink, authorLink, likesLink, commentLink, collectBtn, shareBtn);
 
             // 組合 連結區塊、互動區塊
             recipeText.append(recipeLink, recipeActions);
@@ -428,7 +372,87 @@
             return recipeCard;
         }
 
+        // 建立推薦卡片函式
+        function createSuggestRecipeCard(recipe) {
+            // 建立推薦卡片
+            const suggestCard = document.createElement('div');
+            suggestCard.classList.add('suggest-recipe-card');
+
+            // 建立連結元素，並設定連結到詳細食譜頁
+            const link = document.createElement('a');
+            link.href = `./recipe.html?id=${recipe.recipe_id}`;
+
+            // 建立圖片元件
+            const img = document.createElement('img');
+            if (recipe.recipe_image) {
+                img.src = recipe.recipe_image;
+            } else {
+                img.src = "../img/image_Not_Found.png";
+                img.classList.add('not-found-img');
+            }
+            img.alt = recipe.recipe_title;
+
+            // 建立標題 (h3) 元素
+            const title = document.createElement('h3');
+            title.textContent = recipe.recipe_title;
+
+            // 建立標籤區塊
+            const tagBox = document.createElement('div');
+            tagBox.classList.add('tags');
+            // 遍歷每個標籤，並建立 <span>
+            (recipe.tags || []).forEach((tag) => {
+                const suggestTag = document.createElement('span');
+                suggestTag.textContent = tag;
+                tagBox.append(suggestTag);
+            });
+
+            // 建立描述 (p) 元素
+            const description = document.createElement('p');
+            description.textContent = recipe.recipe_description;
+
+            // 將圖、標題、標籤與描述加入連結元素中
+            link.append(img, title, tagBox, description);
+
+            // 建立動作按鈕區塊
+            const actionsBox = document.createElement('div');
+            actionsBox.classList.add('actions');
+
+            // 建立顯示評分的連結文字
+            const actionsLink = document.createElement('a');
+            actionsLink.textContent = `評分：${recipe.rating} / 5（${recipe.evaluate} 評價）`;
+
+            // 建立按鈕容器
+            const actionsBtn = document.createElement('div');
+
+            // 建立收藏按鈕
+            const collectBtn = document.createElement('button');
+            collectBtn.textContent = '收藏';
+            collectBtn.addEventListener('click', () => {
+                alert('收藏成功');
+            });
+
+            // 建立分享按鈕
+            const shareBtn = document.createElement('button');
+            shareBtn.textContent = '分享';
+            shareBtn.addEventListener('click', () => {
+                alert('分享成功');
+            });
+
+            // 將集合按鈕放入按鈕容器中
+            actionsBtn.append(collectBtn, shareBtn);
+
+            // 將評分連結和按鈕容器加入按鈕區塊中
+            actionsBox.append(actionsLink, actionsBtn);
+
+            // 將連結元素與按鈕區塊加入整個 suggestCard
+            suggestCard.append(link, actionsBox);
+            return suggestCard;
+        }
+
     </script>
+
+    <script src="../JS/recipeSelector.js"></script>
+    <script src="../JS/all.js"></script>
 </body>
 
 </html>

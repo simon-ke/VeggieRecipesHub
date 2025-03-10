@@ -1,3 +1,4 @@
+// 食譜圖片燈箱
 document.addEventListener('DOMContentLoaded', function () {
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
@@ -17,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // 卡片滑動
 document.addEventListener("DOMContentLoaded", () => {
-    const carousel = document.querySelector(".featured-carousel");
+    const carousel = document.getElementById("suggestCardContainer");
     let isDragging = false;
     let startX, scrollLeft;
     let velocity = 0;
