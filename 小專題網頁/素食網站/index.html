@@ -13,13 +13,65 @@
 <body>
     <!-- 頁首 -->
     <header>
+        <!-- 登入 Modal -->
+        <div>
+            <div id="login-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn">&times;</span>
+                    <h2>登入</h2>
+                    <form id="login-form">
+                        <label for="login-username">使用者名稱:</label>
+                        <input type="text" id="login-username" required>
+
+                        <label for="login-password">密碼:</label>
+                        <input type="password" id="login-password" required>
+
+                        <button type="submit">登入</button>
+                    </form>
+                    <p>尚未註冊嗎？ <a href="#" id="show-register">註冊</a></p>
+                </div>
+            </div>
+
+            <!-- 註冊 Modal -->
+            <div id="register-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn">&times;</span>
+                    <h2>註冊</h2>
+                    <form id="register-form">
+                        <label for="reg-username">使用者名稱:</label>
+                        <input type="text" id="reg-username" required>
+
+                        <label for="reg-email">電子郵件:</label>
+                        <input type="email" id="reg-email" required>
+
+                        <label for="reg-password">密碼:</label>
+                        <input type="password" id="reg-password" required>
+
+                        <button type="submit">註冊</button>
+                    </form>
+                    <p>已有帳號？ <a href="#" id="show-login">登入</a></p>
+                </div>
+            </div>
+        </div>
+
         <!-- 導覽列 -->
         <nav class="nav-container">
             <!-- 第一列 -->
             <div class="member-menu">
-                <a href="#"><img src="./img/icons/user.png" alt="登入註冊"><span class="tooltip">登入註冊</span></a>
-                <a href="#"><img src="./img/icons/shopping-cart.png" alt="購物車"><span class="tooltip">購物車</span></a>
-                <a href="#"><img src="./img/icons/message.png" alt="聯絡我們"><span class="tooltip">聯絡我們</span></a>
+                <span id="login-status"></span>
+                <button id="login-out"></button>
+                <a id="register" href="#">
+                    <img src="./img/icons/user.png" alt="登入註冊">
+                    <span id="user-state" class="tooltip">登入註冊</span>
+                </a>
+                <a href="#">
+                    <img src="./img/icons/shopping-cart.png" alt="購物車">
+                    <span class="tooltip">購物車</span>
+                </a>
+                <a href="#">
+                    <img src="./img/icons/message.png" alt="聯絡我們">
+                    <span class="tooltip">聯絡我們</span>
+                </a>
             </div>
 
             <!-- 第二列 -->
@@ -42,13 +94,13 @@
                     <li class="dropdown">
                         <a href="#">食譜分類&#9662;</a>
                         <ul class="submenu">
-                            <li><a href="./HTML/recipeSelector.html">早餐</a></li>
-                            <li><a href="./HTML/recipeSelector.html">飯</a></li>
-                            <li><a href="./HTML/recipeSelector.html">麵</a></li>
-                            <li><a href="./HTML/recipeSelector.html">米粉</a></li>
-                            <li><a href="./HTML/recipeSelector.html">蔬菜</a></li>
-                            <li><a href="./HTML/recipeSelector.html">鹹點</a></li>
-                            <li><a href="./HTML/recipeSelector.html">甜點</a></li>
+                            <li><a href="./HTML/recipeSelector.html?category=早餐">早餐</a></li>
+                            <li><a href="./HTML/recipeSelector.html?category=飯">飯</a></li>
+                            <li><a href="./HTML/recipeSelector.html?category=麵">麵</a></li>
+                            <li><a href="./HTML/recipeSelector.html?category=米粉">米粉</a></li>
+                            <li><a href="./HTML/recipeSelector.html?category=蔬菜">蔬菜</a></li>
+                            <li><a href="./HTML/recipeSelector.html?category=鹹點">鹹點</a></li>
+                            <li><a href="./HTML/recipeSelector.html?category=甜點">甜點</a></li>
                         </ul>
                     </li>
                     <li><a href="#">營養資訊</a></li>
@@ -77,7 +129,7 @@
         <div class="hero-banner">
             <div class="overlay"></div>
             <div class="hero-content">
-                <a href="#" class="cta-button">立即探索食譜</a>
+                <a href="./HTML/recipeSelector.html" class="cta-button">立即探索食譜</a>
             </div>
         </div>
     </header>
