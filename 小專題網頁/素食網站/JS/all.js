@@ -77,6 +77,7 @@ loginForm.addEventListener('submit', function (e) {
         closeModal(loginModal);
         // 更新頁面上顯示使用者狀態，例如顯示使用者名稱或改變導覽列內容
         updateLoginStatus();
+        location.reload();
     } else {
         alert('使用者名稱或密碼錯誤！');
     }
@@ -131,6 +132,9 @@ window.addEventListener('click', function (e) {
     if (e.target === registerModal) closeModal(registerModal);
 });
 
+
+
+
 // 示範：更新頁面上登入狀態（例如：更新導覽列）
 function updateLoginStatus() {
     const loggedInUser = localStorage.getItem('loggedInUser');
@@ -139,11 +143,27 @@ function updateLoginStatus() {
     const userState = document.getElementById('user-state');
     if (loggedInUser) {
         statusEl.textContent = `歡迎，${loggedInUser}`;
+        loginOut.style.display = 'block';
         loginOut.textContent = '登出'
         userState.textContent = '個人資訊';
-        // 可增加登出按鈕等
-    } 
+        // 登出
+        loginOut.addEventListener('click', function (e) {
+            e.preventDefault();
+            // 清除登入狀態
+            localStorage.removeItem('loggedInUser');
+            alert('已成功登出！');
+            // 更新登入狀態顯示
+            updateLoginStatus();
+            location.reload();
+        });
+    } else {
+        statusEl.textContent = '未登入';
+        loginOut.style.display = 'none';
+    }
 }
 
 // 初始化頁面時呼叫
 updateLoginStatus();
+
+
+

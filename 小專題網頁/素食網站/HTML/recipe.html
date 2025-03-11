@@ -153,7 +153,7 @@
                 <p class="recipe-description"></p>
                 <div class="recipe-click">
                     <button class="like-button"><img src="../img/icons/heart_empty.png" alt="">0</button>
-                    <button class="comment-button"><img src="../img/icons/message4.png" alt=""><span>0</span></button>
+                    <button class="comment-button"><img src="../img/icons/message4.png" alt="">0</button>
                     <button class="bookmark-button"><img src="../img/icons/bookmark_icon2.png" alt=""></button>
                     <button class="share-button"><img src="../img/icons/share_icon3.png" alt=""></button>
                 </div>
@@ -306,6 +306,9 @@
     <script src="../JS/recipe.js"></script>
 
     <script>
+        // 使用者狀態
+        const loggedInUser = localStorage.getItem('loggedInUser');
+
         // 從 URL 取得所需的 recipe id
         function getQueryParam(param) {
             const urlParams = new URLSearchParams(window.location.search);
@@ -464,9 +467,26 @@
                     }
 
                     // 7. 留言
-                    const commentButtonSpan = document.querySelector('.comment-button span');
-                    if (commentButtonSpan) {
-                        commentButtonSpan.textContent = recipe.comments;
+                    const commentButton = document.querySelector('.comment-button');
+                    if (commentButton && commentButton.childNodes[1]) {
+                        commentButton.childNodes[1].nodeValue = recipe.comments;
+                    }
+
+                    // 8. 收藏
+                    const bookmarkButton = document.querySelector('.bookmark-button');
+                    bookmarkButton.addEventListener('click', () => {
+                        if (!loggedInUser) {
+                            alert('請先登入以收藏食譜！');
+                        } else {
+                            alert(`收藏成功！已收藏食譜：${recipe.recipe_title}`);
+                            // 在此加入收藏邏輯，例如儲存到收藏列表
+                        }
+                    });
+
+                    // 8. 分享
+                    const shareButton = document.querySelector('.share-button span');
+                    if (shareButton) {
+                        // shareButton.textContent = recipe.shares;
                     }
 
                     // ── 食譜資訊 ──
@@ -608,12 +628,17 @@
                     const actionsBtn = document.createElement('div');
 
                     // 建立收藏按鈕，並綁定點擊事件
-                    const collectBtn = document.createElement('button');
-                    collectBtn.textContent = '收藏';
-                    collectBtn.onclick = () => {
-                        alert('使用 onclick 屬性綁定的點擊事件：收藏成功');
-                    };
-
+                    const bookmarkButton = document.createElement('button');
+                    bookmarkButton.textContent = '收藏';
+                    bookmarkButton.addEventListener('click', () => {
+                        if (!loggedInUser) {
+                            alert('請先登入以收藏食譜！');
+                        } else {
+                            alert(`收藏成功！已收藏食譜：${recipe.recipe_title}`);
+                            // 在此加入收藏邏輯，例如儲存到收藏列表
+                        }
+                    });
+                    
                     // 建立分享按鈕，並使用 addEventListener 綁定點擊事件
                     const shareBtn = document.createElement('button');
                     shareBtn.textContent = '分享';
@@ -622,7 +647,7 @@
                     });
 
                     // 將集合按鈕放入按鈕容器中
-                    actionsBtn.append(collectBtn, shareBtn);
+                    actionsBtn.append(bookmarkButton, shareBtn);
 
                     // 將評分連結和按鈕容器加入按鈕區塊中
                     actionsBox.append(actionsLink, actionsBtn);

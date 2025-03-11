@@ -87,7 +87,13 @@ nav.fixed-nav .menu-container {
     width: 30px;
 }
 
+#login-status {
+    font-size: 1em;
+    font-weight: 600;
+}
+
 #login-out {
+    display: none;
     padding: 3px 6px;
     font-size: 1em;
     font-weight: 600;
@@ -99,8 +105,9 @@ nav.fixed-nav .menu-container {
     transition: background-color 0.3s, color 0.3s;
 }
 #login-out:hover {
-    background-color: #e3ffac;
-    transition: background-color 0.3s, color 0.3s;
+    border-color: #4CAF50;
+    color: #4CAF50; 
+    transition: border-color 0.3s, color 0.3s;
 }
 
 .tooltip {
