@@ -208,7 +208,7 @@
         // 取得預設數據（從 JSON 檔案）與 localStorage 中的數據
         function getRecipesData() {
             // 從 localStorage 取得用戶新增的數據
-            const storedData = localStorage.getItem("recipesData");
+            const storedData = localStorage.getItem('recipes');
             const storedRecipes = storedData ? JSON.parse(storedData) : [];
 
             // 透過 fetch 取得預設數據
@@ -224,7 +224,7 @@
         // 取得食譜數據 建立頁面內容
         getRecipesData()
             .then(recipesData => {
-                // console.log('食譜數據：', recipesData);
+                // console.log('食譜數據：', recipes);
                 // 食譜卡片區塊
                 const recipeCardContainer = document.getElementById("recipeCardContainer");
                 // 食譜卡片區塊

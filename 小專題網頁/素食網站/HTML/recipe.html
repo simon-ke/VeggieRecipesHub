@@ -319,7 +319,7 @@
         // 取得預設數據（從 JSON 檔案）與 localStorage 中的數據
         function getRecipesData() {
             // 從 localStorage 取得用戶新增的數據
-            const storedData = localStorage.getItem('recipesData');
+            const storedData = localStorage.getItem('recipes');
             const storedRecipes = storedData ? JSON.parse(storedData) : [];
 
             // 透過 fetch 取得預設數據
@@ -493,7 +493,7 @@
 
                     // 份量與烹調時間
                     const portionElement = document.getElementById('portion');
-                    if (portionElement) portionElement.textContent = recipe.portion;
+                    if (portionElement) portionElement.textContent = recipe.recipe_portion;
                     const timeElement = document.getElementById('time');
                     if (timeElement) timeElement.textContent = recipe.recipe_cook_time;
 
@@ -505,7 +505,7 @@
                             const nameTd = document.createElement('td');
                             nameTd.textContent = ingredient.name;
                             const amountTd = document.createElement('td');
-                            amountTd.textContent = ingredient.amount;
+                            amountTd.textContent = ingredient.value;
                             row.append(nameTd, amountTd);
                             ingredientTable.append(row);
                         });
@@ -519,7 +519,7 @@
                             const nameTd = document.createElement('td');
                             nameTd.textContent = seasoning.name;
                             const amountTd = document.createElement('td');
-                            amountTd.textContent = seasoning.amount;
+                            amountTd.textContent = seasoning.value;
                             row.append(nameTd, amountTd);
                             seasoningTable.append(row);
                         });
@@ -638,7 +638,6 @@
                             // 在此加入收藏邏輯，例如儲存到收藏列表
                         }
                     });
-                    
                     // 建立分享按鈕，並使用 addEventListener 綁定點擊事件
                     const shareBtn = document.createElement('button');
                     shareBtn.textContent = '分享';

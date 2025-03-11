@@ -236,111 +236,176 @@ updateStepNumbers();
 
 // 表單按鈕設定
 document.addEventListener('DOMContentLoaded', () => {
-
-    // 取得表單與按鈕
-    const form = document.getElementById('recipe-form');
-    const publishButton = document.getElementById('publish');
-
-    // **通用函數：提取食材、調味料、營養成分**
-    function extractMaterials(containerId, nameAttr, valueAttr) {
-        return Array.from(document.querySelectorAll(`#${containerId} .material`)).map(material => ({
-            name: material.querySelector(`input[name="${nameAttr}[]"]`).value,
-            value: material.querySelector(`input[name="${valueAttr}[]"]`).value
-        }));
-    }
-
-    // // **圖片處理函數**
-    // const imageInput = document.getElementById('imageInput');
-    // function handleImageUpload(event) {
-    //     const file = event.target.files[0];
-    //     if (file) {
-    //         const reader = new FileReader();
-    //         reader.onload = (e) => {
-    //             localStorage.setItem('recipe_image', e.target.result);
-    //         };
-    //         reader.readAsDataURL(file);
-    //     }
-    // }
-    // // **綁定圖片上傳監聽事件（只執行一次）**
-    // imageInput.addEventListener('change', handleImageUpload);
-
-    // **發布按鈕點擊事件**
-    publishButton.addEventListener('click', (event) => {
-        event.preventDefault(); // 防止表單自動提交
-
-        if (window.confirm("確認發布食譜？")) {
-            // 新增：取得上傳圖片的判斷邏輯
-            const recipeImageElement = document.querySelector('.upload-image img');
-            const defaultImage = 'https://i.pinimg.com/736x/e0/a3/21/e0a3218856ac6bf7b68e3a7f7617a828.jpg';
-            const recipeImage = (!recipeImageElement || recipeImageElement.src === "" || recipeImageElement.src === window.location.href)
-                ? defaultImage : recipeImageElement.src;
-
-            // **整理所有數據**
-            const recipeData = {
-                recipe_image: recipeImage,
-                recipe_title: document.getElementById('recipe-title').value,
-                recipe_description: form.querySelector('textarea[name="recipe_description"]').value,
-                tags: Array.from(document.querySelectorAll('#tagList input[type="hidden"]')).map(input => input.value),
-                recipe_portion: document.getElementById('recipe-portion').value,
-                recipe_cook_time: document.getElementById('recipe-time').value,
-                ingredients: extractMaterials('ingredients', 'ingredient_name', 'ingredient_quantity'),
-                seasonings: extractMaterials('seasonings', 'seasoning_name', 'seasoning_quantity'),
-                nutritions: extractMaterials('nutritions', 'nutrition_name', 'nutrition_value'),
-                steps: Array.from(document.querySelectorAll('#steps .steps')).map(stepDiv => ({
-                    image: (() => {
-                        const imgEl = stepDiv.querySelector('.steps-image img');
-                        return (!imgEl || imgEl.src === "" || imgEl.src === window.location.href)
-                            ? defaultImage : imgEl.src;
-                    })(),
-                    description: stepDiv.querySelector('textarea[name="step_description[]"]').value
-                })),
-            };
-
-            // **從 LocalStorage 取得原有數據**
-            const existingRecipes = JSON.parse(localStorage.getItem('recipes') || '[]');
-
-            // **將新數據插入**
-            existingRecipes.push(recipeData);
-
-            // **存入 LocalStorage**
-            localStorage.setItem('recipes', JSON.stringify(existingRecipes));
-
-            // 顯示遮罩
-            document.getElementById('loading-overlay').style.display = 'flex';
-
-            // **防止多次提交**
-            form.querySelector('button[type="submit"]').disabled = true;
-
-            // 隱藏遮罩
-            setTimeout(() => {
-                document.getElementById('loading-overlay').style.display = 'none'; // 隱藏遮罩
-            }, 2000);
-
-            // **模擬提交過程**
-            setTimeout(() => {
-                alert("食譜已成功發布！ 可至個人食譜中編輯");
-                window.location.href = 'recipeSelector.html';
-            }, 2100);
-        }
-    });
-
-    // 儲存
-    const saveButton = document.getElementById('save');
-    saveButton.addEventListener('click', (event) => {
-        event.preventDefault(); // 防止默認表單提交行為
-        alert("食譜已成功儲存！");
-    });
-    // 取消
-    const cancelButton = document.getElementById('cancel');
-    cancelButton.addEventListener('click', (event) => {
-        event.preventDefault(); // 防止默認表單提交行為
-        const userConfirmed = window.confirm("是否確認取消編輯食譜？");
-        if (userConfirmed) {
-            window.history.back(); // 跳轉回上一頁
-        }
-    });
-
+    initializeRecipes();
+    formPublish();
 });
 
 
+// 定義全域變數來存放合併後的資料
+let existingRecipes = [];
+// 定義 localStorage 來存放食譜發布的資料
+const storageRecipes = JSON.parse(localStorage.getItem('recipes') || '[]');
+
+// 初始化合併後資料：在頁面載入時呼叫
+async function initializeRecipes() {
+    existingRecipes = await loadExistingRecipes(); // 合併 JSON 檔案和 LocalStorage 的資料
+    console.log("初始化合併後的食譜資料：", existingRecipes);
+}
+
+// 載入資料的邏輯
+async function loadExistingRecipes() {
+    // 將 recipes 的數據重置為一個空陣列。
+    // localStorage.setItem('recipes', JSON.stringify([]));
+
+    let fileRecipes = [];
+    try {
+        const response = await fetch('../recipes.json');
+        if (!response.ok) {
+            throw new Error(`讀取 JSON 檔案失敗，狀態碼：${response.status}`);
+        }
+        fileRecipes = await response.json();
+    } catch (error) {
+        console.error("讀取本地 JSON 檔案時發生錯誤：", error);
+    }
+
+    // 合併兩者資料並返回
+    return [...fileRecipes, ...storageRecipes];
+}
+
+// 讀取登入的使用者
+let loggedInUser = localStorage.getItem('loggedInUser');
+
+// **發布按鈕點擊事件 function** 
+function formPublish() {
+    // 取得表單按鈕
+    document.getElementById('publish').addEventListener('click', (event) => {
+        event.preventDefault(); // 防止表單自動提交
+
+        if (!loggedInUser) {
+            alert('請先登入才能發布食譜！');
+        } else {
+            if (window.confirm("確認發布食譜？")) {
+                handleFormPublish();
+            }
+        }
+    });
+}
+// **處理發布 function** 
+function handleFormPublish() {
+    // 自動生成 recipe_id 編號：根據現有數據中最大的 id 遞增 1，若無資料則預設為 1
+    const recipeId = existingRecipes.length > 0 ? Math.max(...existingRecipes.map(recipe => recipe.recipe_id || 0)) + 1 : 1;
+
+    // 食譜發布時間
+    const createdAt = getFormattedLocalDateTime();
+
+    // 驗證圖片是否上傳 並取得上傳食譜圖片，圖片上傳不可空，
+    const recipeImageElement = document.querySelector('.upload-image img');
+    let recipeImage = "";
+
+    // 檢查圖片是否已上傳
+    if (recipeImageElement && recipeImageElement.src && recipeImageElement.src !== "" && recipeImageElement.src !== window.location.href) {
+        recipeImage = recipeImageElement.src;
+    } else {
+        // 顯示提示訊息並阻止提交
+        alert("尚未上傳食譜圖片！");
+        return; // 中止後續邏輯
+    }
+
+    // 整理所有數據
+    const recipeData = {
+        recipe_id: recipeId.toString(), // 或 `${recipeId}`
+        created_at: createdAt,
+        updated_at: "",
+        rating: "",
+        evaluate: "",
+        likes: "0",
+        comments: "0",
+        recipe_title: document.getElementById('recipe-title').value,
+        recipe_image: recipeImage,
+        recipe_description: document.getElementById('recipe-form').querySelector('textarea[name="recipe_description"]').value,
+        recipe_portion: document.getElementById('recipe-portion').value,
+        recipe_cook_time: document.getElementById('recipe-time').value,
+        // 取得所有隱藏的 tag 輸入值
+        tags: Array.from(document.querySelectorAll('#tagList input[type="hidden"]')).map(input => input.value),
+        ingredients: extractMaterials('ingredients', 'ingredient_name', 'ingredient_quantity'),
+        seasonings: extractMaterials('seasonings', 'seasoning_name', 'seasoning_quantity'),
+        nutritions: extractMaterials('nutritions', 'nutrition_name', 'nutrition_value'),
+
+        // 處理每一步驟：允許上傳多張圖片，若沒上傳則返回空陣列
+        steps: Array.from(document.querySelectorAll('#steps .steps')).map(stepDiv => ({
+            images: Array.from(stepDiv.querySelectorAll('.steps-image img'))
+                .map(img => img.src)
+                .filter(src => src && src !== "" && src !== window.location.href),
+            description: stepDiv.querySelector('textarea[name="step_description[]"]').value
+        }))
+    };
+    // 將新數據加入到 storageRecipes 中
+    storageRecipes.push(recipeData);
+
+    // 存回 LocalStorage
+    localStorage.setItem('recipes', JSON.stringify(storageRecipes));
+
+    // 顯示提交中的遮罩畫面
+    document.getElementById('loading-overlay').style.display = 'flex';
+
+    // 取得表單 防止多次提交
+    document.getElementById('recipe-form').querySelector('button[type="submit"]').disabled = true;
+
+    // 過 2 秒隱藏遮罩
+    setTimeout(() => {
+        document.getElementById('loading-overlay').style.display = 'none';
+    }, 2000);
+
+    // 模擬提交過程，完成後顯示提示訊息並轉跳頁面
+    setTimeout(() => {
+        alert("食譜已成功發布！ 可至個人食譜中編輯");
+        window.location.href = 'recipeSelector.html';
+    }, 2100);
+}
+
+// **通用函數：提取食材、調味料、營養成分**
+function extractMaterials(containerId, nameAttr, valueAttr) {
+    return Array.from(document.querySelectorAll(`#${containerId} .material`)).map(material => ({
+        name: material.querySelector(`input[name="${nameAttr}[]"]`).value,
+        value: material.querySelector(`input[name="${valueAttr}[]"]`).value
+    }));
+}
+
+// 儲存
+const saveButton = document.getElementById('save');
+saveButton.addEventListener('click', (event) => {
+    event.preventDefault(); // 防止默認表單提交行為
+    if (!loggedInUser) {
+        alert('請先登入才能儲存食譜！');
+    } else {
+        alert("食譜已成功儲存！");
+    }
+});
+
+// 取消
+const cancelButton = document.getElementById('cancel');
+cancelButton.addEventListener('click', (event) => {
+    event.preventDefault(); // 防止默認表單提交行為
+    const userConfirmed = window.confirm("是否確認取消編輯食譜？");
+    if (userConfirmed) {
+        window.history.back(); // 跳轉回上一頁
+    }
+});
+
+// 時間函數：取得格式化的當地時間 (ISO 8601 格式，包含時區資訊)
+function getFormattedLocalDateTime() {
+    const pad = num => num.toString().padStart(2, '0');
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = pad(now.getMonth() + 1);
+    const day = pad(now.getDate());
+    const hours = pad(now.getHours());
+    const minutes = pad(now.getMinutes());
+    const seconds = pad(now.getSeconds());
+    const offset = -now.getTimezoneOffset(); // 單位：分鐘
+    const sign = offset >= 0 ? '+' : '-';
+    const offsetHours = pad(Math.floor(Math.abs(offset) / 60));
+    const offsetMinutes = pad(Math.abs(offset) % 60);
+    return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${sign}${offsetHours}:${offsetMinutes}`;
+}
 
