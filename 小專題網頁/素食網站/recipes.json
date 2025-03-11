@@ -5,71 +5,71 @@
         "updated_at": "",
         "rating": "4.3",
         "evaluate": "80",
+        "likes": 155,
+        "comments": 36,
         "recipe_title": "清炒蔬菜",
         "recipe_image": "/小專題網頁/素食網站/img/食譜圖片/清炒蔬菜.jpg",
         "recipe_description": "這是一道簡單又美味的蔬菜料理，適合健康飲食的人士。",
         "recipe_cook_time": "30分鐘",
-        "portion": "3",
+        "recipe_portion": "3",
         "tags": [
             "蔬菜",
             "健康料理"
         ],
-        "likes": 155,
-        "comments": 36,
         "ingredients": [
             {
                 "name": "紅椒",
-                "amount": "1顆"
+                "value": "1顆"
             },
             {
                 "name": "黃椒",
-                "amount": "1顆"
+                "value": "1顆"
             },
             {
                 "name": "青椒",
-                "amount": "1顆"
+                "value": "1顆"
             },
             {
                 "name": "胡蘿蔔",
-                "amount": "1根"
+                "value": "1根"
             },
             {
                 "name": "花椰菜",
-                "amount": "1顆"
+                "value": "1顆"
             },
             {
                 "name": "蘑菇",
-                "amount": "200克"
+                "value": "200克"
             },
             {
                 "name": "扁豆",
-                "amount": "200克"
+                "value": "200克"
             }
         ],
         "seasonings": [
             {
                 "name": "橄欖油",
-                "amount": "2湯匙"
+                "value": "2湯匙"
             },
             {
                 "name": "醬油",
-                "amount": "3湯匙"
+                "value": "3湯匙"
             },
             {
                 "name": "紅醋",
-                "amount": "1湯匙"
+                "value": "1湯匙"
             },
             {
                 "name": "糖",
-                "amount": "1茶匙"
+                "value": "1茶匙"
             },
             {
                 "name": "鹽巴",
-                "amount": "1茶匙"
+                "value": "1茶匙"
             },
             {
                 "name": "黑胡椒",
-                "amount": "適量"
+                "value": "適量"
             }
         ],
         "nutritions": [
@@ -135,48 +135,48 @@
         "updated_at": "",
         "rating": "4.2",
         "evaluate": "360",
+        "likes": 170,
+        "comments": 37,
         "recipe_title": "鮮菇炒菠菜",
         "recipe_image": "/小專題網頁/素食網站/img/食譜圖片/鮮菇炒菠菜.jpg",
         "recipe_description": "這道鮮菇炒菠菜是一道簡單卻美味的蔬菜料理，結合了香菇的濃郁風味和菠菜的清新口感，適合各種場合享用。",
         "recipe_cook_time": "20分鐘",
-        "portion": "2",
+        "recipe_portion": "2",
         "tags": [
             "蔬菜",
             "素食",
             "健康料理"
         ],
-        "likes": 170,
-        "comments": 37,
         "ingredients": [
             {
                 "name": "香菇",
-                "amount": "200克"
+                "value": "200克"
             },
             {
                 "name": "菠菜",
-                "amount": "150克"
+                "value": "150克"
             },
             {
                 "name": "橄欖油",
-                "amount": "2湯匙"
+                "value": "2湯匙"
             }
         ],
         "seasonings": [
             {
                 "name": "醬油",
-                "amount": "1湯匙"
+                "value": "1湯匙"
             },
             {
                 "name": "香油",
-                "amount": "1茶匙"
+                "value": "1茶匙"
             },
             {
                 "name": "鹽巴",
-                "amount": "適量"
+                "value": "適量"
             },
             {
                 "name": "黑胡椒",
-                "amount": "適量"
+                "value": "適量"
             }
         ],
         "nutritions": [
@@ -242,60 +242,60 @@
         "updated_at": "",
         "rating": "4.9",
         "evaluate": "170",
+        "likes": 200,
+        "comments": 40,
         "recipe_title": "椰奶咖哩豆腐",
         "recipe_image": "/小專題網頁/素食網站/img/食譜圖片/椰奶咖哩豆腐.jpg",
         "recipe_description": "這道椰奶咖哩豆腐以椰奶和香料為主料，搭配嫩滑的豆腐，充滿濃郁的異國風味，是一道健康又美味的素食料理。",
         "recipe_cook_time": "30分鐘",
-        "portion": "3",
+        "recipe_portion": "3",
         "tags": [
             "豆腐",
             "咖哩",
             "健康料理"
         ],
-        "likes": 200,
-        "comments": 40,
         "ingredients": [
             {
                 "name": "豆腐",
-                "amount": "300克"
+                "value": "300克"
             },
             {
                 "name": "椰奶",
-                "amount": "400毫升"
+                "value": "400毫升"
             },
             {
                 "name": "紅椒",
-                "amount": "1顆"
+                "value": "1顆"
             },
             {
                 "name": "菠菜",
-                "amount": "100克"
+                "value": "100克"
             },
             {
                 "name": "薑末",
-                "amount": "1湯匙"
+                "value": "1湯匙"
             },
             {
                 "name": "咖哩粉",
-                "amount": "2湯匙"
+                "value": "2湯匙"
             },
             {
                 "name": "橄欖油",
-                "amount": "2湯匙"
+                "value": "2湯匙"
             }
         ],
         "seasonings": [
             {
                 "name": "鹽巴",
-                "amount": "1茶匙"
+                "value": "1茶匙"
             },
             {
                 "name": "黑胡椒",
-                "amount": "適量"
+                "value": "適量"
             },
             {
                 "name": "糖",
-                "amount": "1茶匙"
+                "value": "1茶匙"
             }
         ],
         "nutritions": [
@@ -365,51 +365,51 @@
         "updated_at": "",
         "rating": "4.5",
         "evaluate": "290",
+        "likes": 190,
+        "comments": 30,
         "recipe_title": "香草烤花椰菜",
         "recipe_image": "/小專題網頁/素食網站/img/食譜圖片/香草烤花椰菜.jpg",
         "recipe_description": "這道香草烤花椰菜結合了新鮮香草和橄欖油的風味，使花椰菜外脆內嫩，是一道健康又美味的素食料理。",
         "recipe_cook_time": "35分鐘",
-        "portion": "4",
+        "recipe_portion": "4",
         "tags": [
             "花椰菜",
             "健康料理"
         ],
-        "likes": 190,
-        "comments": 30,
         "ingredients": [
             {
                 "name": "花椰菜",
-                "amount": "1顆"
+                "value": "1顆"
             },
             {
                 "name": "橄欖油",
-                "amount": "3湯匙"
+                "value": "3湯匙"
             },
             {
                 "name": "羅勒葉",
-                "amount": "1把"
+                "value": "1把"
             },
             {
                 "name": "百里香",
-                "amount": "1茶匙"
+                "value": "1茶匙"
             },
             {
                 "name": "迷迭香",
-                "amount": "1茶匙"
+                "value": "1茶匙"
             }
         ],
         "seasonings": [
             {
                 "name": "檸檬汁",
-                "amount": "1湯匙"
+                "value": "1湯匙"
             },
             {
                 "name": "鹽巴",
-                "amount": "適量"
+                "value": "適量"
             },
             {
                 "name": "黑胡椒",
-                "amount": "適量"
+                "value": "適量"
             }
         ],
         "nutritions": [
@@ -467,52 +467,52 @@
         "updated_at": "",
         "rating": "",
         "evaluate": "250",
+        "likes": 220,
+        "comments": 50,
         "recipe_title": "橄欖油義大利麵",
         "recipe_image": "/小專題網頁/素食網站/img/食譜圖片/橄欖油義大利麵.jpg",
         "recipe_description": "這道橄欖油義大利麵以橄欖油和新鮮香料為主料，簡單易做，味道清新，是一道健康又美味的素食料理。",
         "recipe_cook_time": "20分鐘",
-        "portion": "2",
+        "recipe_portion": "2",
         "tags": [
             "義大利麵",
             "素食",
             "健康料理"
         ],
-        "likes": 220,
-        "comments": 50,
         "ingredients": [
             {
                 "name": "義大利麵",
-                "amount": "200克"
+                "value": "200克"
             },
             {
                 "name": "橄欖油",
-                "amount": "4湯匙"
+                "value": "4湯匙"
             },
             {
                 "name": "紅辣椒片",
-                "amount": "1/2茶匙"
+                "value": "1/2茶匙"
             },
             {
                 "name": "帕馬森起司",
-                "amount": "適量"
+                "value": "適量"
             },
             {
                 "name": "羅勒葉",
-                "amount": "適量"
+                "value": "適量"
             }
         ],
         "seasonings": [
             {
                 "name": "檸檬汁",
-                "amount": "1湯匙"
+                "value": "1湯匙"
             },
             {
                 "name": "鹽巴",
-                "amount": "適量"
+                "value": "適量"
             },
             {
                 "name": "黑胡椒",
-                "amount": "適量"
+                "value": "適量"
             }
         ],
         "nutritions": [
@@ -578,55 +578,55 @@
         "updated_at": "",
         "rating": "3.9",
         "evaluate": "210",
+        "likes": 210,
+        "comments": 45,
         "recipe_title": "香料烤胡蘿蔔",
         "recipe_image": "/小專題網頁/素食網站/img/食譜圖片/香料烤胡蘿蔔.jpg",
         "recipe_description": "這道香料烤胡蘿蔔結合了豐富的香料和烤製的甜味，是一道簡單又美味的素食料理，非常適合做為配菜。",
         "recipe_cook_time": "30分鐘",
-        "portion": "4",
+        "recipe_portion": "4",
         "tags": [
             "胡蘿蔔",
             "健康料理"
         ],
-        "likes": 210,
-        "comments": 45,
         "ingredients": [
             {
                 "name": "胡蘿蔔",
-                "amount": "500克"
+                "value": "500克"
             },
             {
                 "name": "橄欖油",
-                "amount": "2湯匙"
+                "value": "2湯匙"
             },
             {
                 "name": "大蒜粉",
-                "amount": "1茶匙"
+                "value": "1茶匙"
             },
             {
                 "name": "孜然粉",
-                "amount": "1茶匙"
+                "value": "1茶匙"
             },
             {
                 "name": "紅椒粉",
-                "amount": "1/2茶匙"
+                "value": "1/2茶匙"
             }
         ],
         "seasonings": [
             {
                 "name": "蜂蜜",
-                "amount": "1湯匙"
+                "value": "1湯匙"
             },
             {
                 "name": "檸檬汁",
-                "amount": "1湯匙"
+                "value": "1湯匙"
             },
             {
                 "name": "鹽巴",
-                "amount": "適量"
+                "value": "適量"
             },
             {
                 "name": "黑胡椒",
-                "amount": "適量"
+                "value": "適量"
             }
         ],
         "nutritions": [
@@ -688,63 +688,63 @@
         "updated_at": "",
         "rating": "4.4",
         "evaluate": "220",
+        "likes": 190,
+        "comments": 50,
         "recipe_title": "綜合烤蔬菜",
         "recipe_image": "/小專題網頁/素食網站/img/食譜圖片/綜合烤蔬菜.jpg",
         "recipe_description": "這道香草烤蔬菜色彩繽紛，味道濃郁，是一道健康又美味的素食料理。選用新鮮蔬菜，搭配香草和橄欖油烤至香脆，適合作為主菜或配菜。每一口都讓人感受到蔬菜的鮮嫩和香草的馥鬱香氣，絕對是素食餐桌上的一大亮點。提示：可以根據個人喜好添加不同的香草，如羅勒、百里香或迷迭香，讓這道菜更具風味。此料理富含維生素和礦物質，有助於提升免疫力，保持健康。",
         "recipe_cook_time": "40分鐘",
-        "portion": "4",
+        "recipe_portion": "4",
         "tags": [
             "烤蔬菜",
             "健康料理"
         ],
-        "likes": 190,
-        "comments": 50,
         "ingredients": [
             {
                 "name": "紅椒",
-                "amount": "1顆"
+                "value": "1顆"
             },
             {
                 "name": "黃椒",
-                "amount": "1顆"
+                "value": "1顆"
             },
             {
                 "name": "西蘭花",
-                "amount": "300克"
+                "value": "300克"
             },
             {
                 "name": "胡蘿蔔",
-                "amount": "200克"
+                "value": "200克"
             },
             {
                 "name": "洋蔥",
-                "amount": "1顆"
+                "value": "1顆"
             },
             {
                 "name": "橄欖油",
-                "amount": "3湯匙"
+                "value": "3湯匙"
             }
         ],
         "seasonings": [
             {
                 "name": "鹽巴",
-                "amount": "適量"
+                "value": "適量"
             },
             {
                 "name": "黑胡椒",
-                "amount": "適量"
+                "value": "適量"
             },
             {
                 "name": "百里香",
-                "amount": "1茶匙"
+                "value": "1茶匙"
             },
             {
                 "name": "迷迭香",
-                "amount": "1茶匙"
+                "value": "1茶匙"
             },
             {
                 "name": "檸檬汁",
-                "amount": "1湯匙"
+                "value": "1湯匙"
             }
         ],
         "nutritions": [
