@@ -89,14 +89,14 @@ nav.fixed-nav .menu-container {
 
 #login-status {
     font-size: 1em;
-    font-weight: 600;
+    font-weight: bold;
 }
 
 #login-out {
     display: none;
     padding: 3px 6px;
     font-size: 1em;
-    font-weight: 600;
+    font-weight: bold;
     background-color: #ffffff;
     color: #000000;
     border: 2px solid #000000;;
@@ -221,7 +221,6 @@ ul.submenu {
 
 .search-container label {
     font-size: 1.5em;
-    font-weight: bold;
 }
 
 .search-container form {
