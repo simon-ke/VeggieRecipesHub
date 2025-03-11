@@ -80,15 +80,15 @@
 
 .right-section {
     display: flex;
+    width: 100%;
     flex-direction: column;
     gap: 10px;
 }
 
 .recipe-date {
     color: #777;
-    display: flex;
-    justify-content: end;
     margin-bottom: -30px;
+    margin-left: auto;
 }
 
 .recipe-title {
