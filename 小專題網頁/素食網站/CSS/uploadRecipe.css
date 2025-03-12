@@ -350,7 +350,7 @@ div.submit-btns {
 }
 
 
-button:hover {
+.upload-container button:hover {
     box-shadow: #666 0 0 8px;
     transition: box-shadow 0.3s ease;
 }
