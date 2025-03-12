@@ -43,7 +43,7 @@ nav.fixed-nav {
     background-color: white;
     width: 100%;
     height: 60px;
-    z-index: 1000;
+    z-index: 100;
 }
 
 nav.fixed-nav .member-menu {
@@ -99,14 +99,16 @@ nav.fixed-nav .menu-container {
     font-weight: bold;
     background-color: #ffffff;
     color: #000000;
-    border: 2px solid #000000;;
+    border: 2px solid #000000;
+    ;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
 }
+
 #login-out:hover {
     border-color: #4CAF50;
-    color: #4CAF50; 
+    color: #4CAF50;
     transition: border-color 0.3s, color 0.3s;
 }
 
@@ -343,7 +345,7 @@ footer {
     display: none;
     /* 預設隱藏 */
     position: fixed;
-    z-index: 10;
+    z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
@@ -352,22 +354,91 @@ footer {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
+.modal-container h2 {
+    margin-bottom: 15px;
+}
+
 /* 登入登出 Modal 內容 */
 .modal-content {
     background-color: #fefefe;
     margin: 10% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
+    /* 垂直 10% 空間，上下置中 */
+    padding: 30px;
+    border: none;
     max-width: 500px;
     position: relative;
+    /* 加入圓角和陰影使區塊更柔和 */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* 淡淡的漸層背景，從較輕到較深，呈 135 度方向 */
+    background: linear-gradient(150deg, #fff9e6 0%, #ffd89b 100%);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.btn-primary {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #85bb70;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #79ab65;
+}
+
+#show-login, #show-register {
+    padding: 4px 6px;
+    background-color: #85bb70;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#show-login:hover {
+    background-color: #79ab65;
 }
 
 /* 登入登出 關閉按鈕 */
 .close-btn {
     position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 24px;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    background: none;
+    border: none;
     cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.close-btn:hover {
+    color: #ff6347;
+    /* 懸停時改變顏色，提升可點擊性 */
 }

@@ -157,8 +157,8 @@ function updateLoginStatus() {
             location.reload();
         });
     } else {
-        statusEl.textContent = '未登入';
         loginOut.style.display = 'none';
+        statusEl.textContent = '未登入';
     }
 }
 

@@ -13,45 +13,53 @@
 
     <!-- 頁首 -->
     <header>
-        <!-- 登入 Modal -->
-        <div>
+        <!-- Modal Container -->
+        <div class="modal-container">
+
+            <!-- 登入 Modal -->
             <div id="login-modal" class="modal">
                 <div class="modal-content">
-                    <span class="close-btn">&times;</span>
+                    <button class="close-btn" aria-label="Close">&times;</button>
                     <h2>登入</h2>
                     <form id="login-form">
-                        <label for="login-username">使用者名稱:</label>
-                        <input type="text" id="login-username" required>
-
-                        <label for="login-password">密碼:</label>
-                        <input type="password" id="login-password" required>
-
-                        <button type="submit">登入</button>
+                        <div class="form-group">
+                            <label for="login-username">使用者名稱:</label>
+                            <input type="text" id="login-username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">密碼:</label>
+                            <input type="password" id="login-password" required>
+                        </div>
+                        <button type="submit" class="btn-primary">登入</button>
                     </form>
-                    <p>尚未註冊嗎？ <a href="#" id="show-register">註冊</a></p>
+                    <p>尚未註冊嗎？ <button id="show-register">註冊</button></p>
                 </div>
             </div>
 
             <!-- 註冊 Modal -->
             <div id="register-modal" class="modal">
                 <div class="modal-content">
-                    <span class="close-btn">&times;</span>
+                    <button class="close-btn" aria-label="Close">&times;</button>
                     <h2>註冊</h2>
                     <form id="register-form">
-                        <label for="reg-username">使用者名稱:</label>
-                        <input type="text" id="reg-username" required>
-
-                        <label for="reg-email">電子郵件:</label>
-                        <input type="email" id="reg-email" required>
-
-                        <label for="reg-password">密碼:</label>
-                        <input type="password" id="reg-password" required>
-
-                        <button type="submit">註冊</button>
+                        <div class="form-group">
+                            <label for="reg-username">使用者名稱:</label>
+                            <input type="text" id="reg-username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-email">電子郵件:</label>
+                            <input type="email" id="reg-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-password">密碼:</label>
+                            <input type="password" id="reg-password" required>
+                        </div>
+                        <button type="submit" class="btn-primary">註冊</button>
                     </form>
-                    <p>已有帳號？ <a href="#" id="show-login">登入</a></p>
+                    <p>已有帳號？ <button id="show-login">登入</button></p>
                 </div>
             </div>
+
         </div>
         <!-- 導覽列 -->
         <nav class="nav-container">
@@ -204,7 +212,10 @@
     <script>
         // 使用者狀態
         const loggedInUser = localStorage.getItem('loggedInUser');
-        
+        // 解析 URL 中的查詢參數
+        const urlParams = new URLSearchParams(window.location.search);
+        const category = urlParams.get('category'); // 再次取得 category
+
         // 取得預設數據（從 JSON 檔案）與 localStorage 中的數據
         function getRecipesData() {
             // 從 localStorage 取得用戶新增的數據
@@ -224,7 +235,6 @@
         // 取得食譜數據 建立頁面內容
         getRecipesData()
             .then(recipesData => {
-                // console.log('食譜數據：', recipes);
                 // 食譜卡片區塊
                 const recipeCardContainer = document.getElementById("recipeCardContainer");
                 // 食譜卡片區塊
@@ -252,10 +262,6 @@
 
         // 建立食譜卡片函式
         function createRecipeCard(recipe) {
-            // 解析 URL 中的查詢參數
-            const urlParams = new URLSearchParams(window.location.search);
-            const category = urlParams.get('category'); // 再次取得 category
-
             // 動態變更頁籤內容
             const breadcrumb = document.querySelector('.breadcrumb');
             breadcrumb.innerHTML = `
@@ -340,7 +346,7 @@
             };
 
             // 評分連結
-            const ratingLink = createLink(`評分：${recipe.rating} / 5 （${recipe.evaluate} 評價）`);
+            const ratingLink = createLink(recipe.rating > 0 ? `評分：${recipe.rating} / 5 （${recipe.evaluate} 評價）` : '尚未有評價');
             // 作者連結(若作者名稱是動態資料，可改由 recipe.author 提供)
             const authorLink = createLink('作者：栗子');
             // 喜歡連結
@@ -388,7 +394,7 @@
 
             // 建立連結元素，並設定連結到詳細食譜頁
             const link = document.createElement('a');
-            link.href = `./recipe.html?id=${recipe.recipe_id}`;
+            link.href = `./recipe.html?category=${category}&id=${recipe.recipe_id}`;
 
             // 建立圖片元件
             const img = document.createElement('img');
@@ -427,7 +433,7 @@
 
             // 建立顯示評分的連結文字
             const actionsLink = document.createElement('a');
-            actionsLink.textContent = `評分：${recipe.rating} / 5（${recipe.evaluate} 評價）`;
+            actionsLink.textContent = recipe.rating > 0 ? `評分：${recipe.rating} / 5（${recipe.evaluate} 評價）` : '尚未有評價';
 
             // 建立按鈕容器
             const actionsBtn = document.createElement('div');

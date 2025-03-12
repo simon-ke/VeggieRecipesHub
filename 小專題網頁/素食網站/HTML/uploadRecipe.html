@@ -12,46 +12,55 @@
 <body>
     <!-- 頁首 -->
     <header>
-        <!-- 登入 Modal -->
-        <div>
+        <!-- Modal Container -->
+        <div class="modal-container">
+
+            <!-- 登入 Modal -->
             <div id="login-modal" class="modal">
                 <div class="modal-content">
-                    <span class="close-btn">&times;</span>
+                    <button class="close-btn" aria-label="Close">&times;</button>
                     <h2>登入</h2>
                     <form id="login-form">
-                        <label for="login-username">使用者名稱:</label>
-                        <input type="text" id="login-username" required>
-
-                        <label for="login-password">密碼:</label>
-                        <input type="password" id="login-password" required>
-
-                        <button type="submit">登入</button>
+                        <div class="form-group">
+                            <label for="login-username">使用者名稱:</label>
+                            <input type="text" id="login-username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">密碼:</label>
+                            <input type="password" id="login-password" required>
+                        </div>
+                        <button type="submit" class="btn-primary">登入</button>
                     </form>
-                    <p>尚未註冊嗎？ <a href="#" id="show-register">註冊</a></p>
+                    <p>尚未註冊嗎？ <button id="show-register">註冊</button></p>
                 </div>
             </div>
 
             <!-- 註冊 Modal -->
             <div id="register-modal" class="modal">
                 <div class="modal-content">
-                    <span class="close-btn">&times;</span>
+                    <button class="close-btn" aria-label="Close">&times;</button>
                     <h2>註冊</h2>
                     <form id="register-form">
-                        <label for="reg-username">使用者名稱:</label>
-                        <input type="text" id="reg-username" required>
-
-                        <label for="reg-email">電子郵件:</label>
-                        <input type="email" id="reg-email" required>
-
-                        <label for="reg-password">密碼:</label>
-                        <input type="password" id="reg-password" required>
-
-                        <button type="submit">註冊</button>
+                        <div class="form-group">
+                            <label for="reg-username">使用者名稱:</label>
+                            <input type="text" id="reg-username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-email">電子郵件:</label>
+                            <input type="email" id="reg-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-password">密碼:</label>
+                            <input type="password" id="reg-password" required>
+                        </div>
+                        <button type="submit" class="btn-primary">註冊</button>
                     </form>
-                    <p>已有帳號？ <a href="#" id="show-login">登入</a></p>
+                    <p>已有帳號？ <button id="show-login">登入</button></p>
                 </div>
             </div>
+
         </div>
+
 
         <!-- 導覽列 -->
         <nav class="nav-container">

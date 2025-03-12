@@ -1,5 +1,5 @@
+document.addEventListener("DOMContentLoaded", () => {
 // 食譜圖片燈箱
-document.addEventListener('DOMContentLoaded', function () {
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const recipeImgs = document.querySelectorAll('.recipe-img');
@@ -14,10 +14,8 @@ document.addEventListener('DOMContentLoaded', function () {
     lightbox.addEventListener('click', function () {
         lightbox.style.display = 'none';
     });
-});
 
 // 卡片滑動
-document.addEventListener("DOMContentLoaded", () => {
     const carousel = document.getElementById("suggestCardContainer");
     let isDragging = false;
     let startX, scrollLeft;
