@@ -15,7 +15,6 @@
     <header>
         <!-- Modal Container -->
         <div class="modal-container">
-
             <!-- 登入 Modal -->
             <div id="login-modal" class="modal">
                 <div class="modal-content">
@@ -23,12 +22,12 @@
                     <h2>登入</h2>
                     <form id="login-form">
                         <div class="form-group">
-                            <label for="login-username">使用者名稱:</label>
-                            <input type="text" id="login-username" required>
+                            <label for="login-email">電子郵件:</label>
+                            <input type="email" id="login-email" maxlength="100" required>
                         </div>
                         <div class="form-group">
                             <label for="login-password">密碼:</label>
-                            <input type="password" id="login-password" required>
+                            <input type="password" id="login-password" maxlength="20" required>
                         </div>
                         <button type="submit" class="btn-primary">登入</button>
                     </form>
@@ -43,23 +42,27 @@
                     <h2>註冊</h2>
                     <form id="register-form">
                         <div class="form-group">
-                            <label for="reg-username">使用者名稱:</label>
-                            <input type="text" id="reg-username" required>
+                            <label for="reg-username">姓名:</label>
+                            <input type="text" id="reg-username" maxlength="20" required>
                         </div>
                         <div class="form-group">
                             <label for="reg-email">電子郵件:</label>
-                            <input type="email" id="reg-email" required>
+                            <input type="email" id="reg-email" maxlength="50" required>
+                            <span id="email-error" class="error-message"></span>
                         </div>
                         <div class="form-group">
                             <label for="reg-password">密碼:</label>
-                            <input type="password" id="reg-password" required>
+                            <input type="password" id="reg-password" maxlength="20" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-password">確認密碼:</label>
+                            <input type="password" id="confirm-password" maxlength="20" required>
                         </div>
                         <button type="submit" class="btn-primary">註冊</button>
                     </form>
                     <p>已有帳號？ <button id="show-login">登入</button></p>
                 </div>
             </div>
-
         </div>
 
         <!-- 導覽列 -->
@@ -68,7 +71,7 @@
             <div class="member-menu">
                 <span id="login-status"></span>
                 <button id="login-out"></button>
-                <a id="register" href="#">
+                <a id="login-register" href="#">
                     <img src="./img/icons/user.png" alt="登入註冊">
                     <span id="user-state" class="tooltip">登入註冊</span>
                 </a>
@@ -151,7 +154,7 @@
             <div class="recipe-cards-container">
                 <img class="prev-button" src="./img/icons/left-arrow.png" alt="">
                 <div class="recipe-cards" id="recipe-card-container">
-                    <!-- 熱門食譜卡片 -->
+                    <!-- 動態建立熱門食譜卡片 -->
                 </div>
                 <img class="next-button" src="./img/icons/right-arrow.png" alt="">
             </div>
@@ -300,7 +303,7 @@
         </div>
     </footer>
     <script src="./JS/all.js"></script>
-    <script src="./JS/script.js"></script>
+    <script src="./JS/index.js"></script>
 </body>
 
 </html>
