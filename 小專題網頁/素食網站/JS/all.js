@@ -1,36 +1,33 @@
+// 滾輪事件
 window.onscroll = () => {
-    fixedNav();
-    scrollFunction();
+    // 固定導覽列
+    const fixedNav = () => {
+        const nav = document.querySelector('.nav-container');
+        const search = document.querySelector('.recipe-actions');
+
+        if (window.scrollY > 200) {
+            requestAnimationFrame(() => {
+                nav.classList.add('fixed-nav');
+                search.classList.add('fixed-recipe-actions');
+            });
+        } else {
+            requestAnimationFrame(() => {
+                nav.classList.remove('fixed-nav');
+                search.classList.remove('fixed-recipe-actions');
+            });
+        }
+    }
+
+    // 當頁面滾動時觸發
+    const scrollFunction = () => {
+        const backToTopButton = document.getElementById("back-to-top");
+        if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+            backToTopButton.style.display = "block";
+        } else {
+            backToTopButton.style.display = "none";
+        }
+    }
 };
-
-// 固定導覽列
-const fixedNav = () => {
-    const nav = document.querySelector('.nav-container');
-    const search = document.querySelector('.recipe-actions');
-
-    if (window.scrollY > 200) {
-        requestAnimationFrame(() => {
-            nav.classList.add('fixed-nav');
-            search.classList.add('fixed-recipe-actions');
-        });
-    } else {
-        requestAnimationFrame(() => {
-            nav.classList.remove('fixed-nav');
-            search.classList.remove('fixed-recipe-actions');
-        });
-    }
-}
-
-// 當頁面滾動時觸發
-const scrollFunction = () => {
-    const backToTopButton = document.getElementById("back-to-top");
-    if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
-        backToTopButton.style.display = "block";
-    } else {
-        backToTopButton.style.display = "none";
-    }
-}
-
 // 點擊圖片回到頂部
 document.getElementById("back-to-top").onclick = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -38,71 +35,148 @@ document.getElementById("back-to-top").onclick = () => {
 
 
 
+// 登入註冊處理
+
 // 取得模態框及表單元素
 const loginModal = document.getElementById('login-modal');
 const registerModal = document.getElementById('register-modal');
-const loginForm = document.getElementById('login-form');
-const registerForm = document.getElementById('register-form');
-
 // 開啟與關閉 Modal 的函式
 function openModal(modal) {
     modal.style.display = 'block';
 }
-
 function closeModal(modal) {
     modal.style.display = 'none';
 }
 
-// 試著取得儲存中的使用者資料，若不存在則初始化為空陣列
-function getUsers() {
-    return JSON.parse(localStorage.getItem('users')) || [];
-}
 
-function saveUsers(users) {
-    localStorage.setItem('users', JSON.stringify(users));
-}
-
-// 登入表單提交事件
-loginForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    const username = document.getElementById('login-username').value;
-    const password = document.getElementById('login-password').value;
-
-    const users = getUsers();
-    const matchedUser = users.find(user => user.username === username && user.password === password);
-
-    if (matchedUser) {
-        alert('登入成功！');
-        localStorage.setItem('loggedInUser', username);
-        closeModal(loginModal);
-        // 更新頁面上顯示使用者狀態，例如顯示使用者名稱或改變導覽列內容
-        updateLoginStatus();
-        location.reload();
-    } else {
-        alert('使用者名稱或密碼錯誤！');
+let storageUsers = []; // 初始化數據
+let existingUsers = []; // 初始化合併後的使用者數據
+async function initializeUsers() {
+    // 將 users 的數據重置為一個空陣列。
+    // localStorage.setItem('users', JSON.stringify([]));
+    try {
+        const response = await fetch('/小專題網頁/素食網站/users.json');
+        if (!response.ok) {
+            throw new Error(`讀取 JSON 檔案失敗，狀態碼：${response.status}`);
+        }
+        // 存放 預設JSON 使用者數據
+        const defaultUser = await response.json();
+        // 存放 localStorage 中的使用者數據
+        storageUsers = JSON.parse(localStorage.getItem('users') || '[]');
+        // 合併 JSON 檔案和 LocalStorage 的數據
+        existingUsers = [...defaultUser, ...storageUsers]; 
+        return existingUsers;
+    } catch (error) {
+        console.error("合併 JSON 與 localStorage 數據時發生錯誤：", error);
+        return [];
     }
-});
+}
+// 在頁面載入時呼叫
+document.addEventListener('DOMContentLoaded', initializeUsers);
 
-// 註冊表單提交事件
-registerForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    const username = document.getElementById('reg-username').value;
-    const email = document.getElementById('reg-email').value;
-    const password = document.getElementById('reg-password').value;
+try {
+    // 登入表單提交事件
+    document.getElementById('login-form').addEventListener('submit', (event) => {
+        event.preventDefault();
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
 
-    let users = getUsers();
+        const matchedUser = existingUsers.find(user => user.email === email && user.password === password);
+        // console.log(matchedUser)
+        if (matchedUser) {
+            const loggedInUser = {
+                user_id: matchedUser.user_id,
+                user_name: matchedUser.user_name,
+            };
+            alert('登入成功！');
+            localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+            closeModal(loginModal);
+            // 更新頁面上顯示使用者狀態，例如顯示使用者名稱或改變導覽列內容
+            updateLoginStatus();
+            location.reload();
+        } else {
+            alert('使用者名稱或密碼錯誤！');
+        }
+    });
 
-    // 檢查是否已有相同的使用者名稱
-    if (users.find(user => user.username === username)) {
-        alert('該使用者名稱已被使用！');
-    } else {
-        users.push({ username, email, password });
-        saveUsers(users);
+    // 即時驗證註冊 Email 格式並顯示提示
+    emailVerify();
+
+    // 註冊表單提交事件
+    document.getElementById('register-form').addEventListener('submit', (event) => {
+        event.preventDefault();
+        // 自動生成 user_id 編號：根據現有數據中最大的 id 遞增 1，若無資料則預設為 1
+        const userId = existingUsers.length > 0 ? Math.max(...existingUsers.map(user => user.user_id || 0)) + 1 : 1;
+        // 使用者建立時間
+        const createdAt = getFormattedLocalDateTime();
+
+        const username = document.getElementById('reg-username').value;
+        const email = document.getElementById('reg-email').value;
+        const password = document.getElementById('reg-password').value;
+        const confirmPassword = document.getElementById('confirm-password').value;
+
+        // 檢查是否已有相同的 email
+        if (existingUsers.find(user => user.email === email)) {
+            alert('該電子郵件已被註冊！');
+        }
+        if (password !== confirmPassword) {
+            alert('密碼與確認密碼不一致！');
+            return;
+        }
+
+        const userData = {
+            user_id: userId.toString(),
+            created_at: createdAt,
+            updated_at: "",
+            user_name: username,
+            user_avatar: "",
+            email: email,
+            password: password,
+            total_recipes: "0",
+            fans_count: "0"
+        }
+
+        storageUsers.push(userData);
+        localStorage.setItem('users', JSON.stringify(storageUsers));
         alert('註冊成功！請登入。');
         closeModal(registerModal);
-        openModal(loginModal);
-    }
-});
+        location.reload();
+    });
+} catch (error) {
+    console.error('讀取使用者數據失敗:', error);
+}
+
+// 即時驗證註冊 Email 格式並顯示提示
+function emailVerify() {
+    const emailInput = document.getElementById('reg-email');
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    emailInput.addEventListener('input', function () {
+        const errorMessage = document.getElementById('email-error');
+        if (!emailRegex.test(emailInput.value)) {
+            errorMessage.textContent = '無效的電子郵件地址';
+            return;
+        } else {
+            errorMessage.textContent = '';
+        }
+    });
+}
+// 時間函數：取得格式化的當地時間 (ISO 8601 格式，包含時區資訊)
+function getFormattedLocalDateTime() {
+    const pad = num => num.toString().padStart(2, '0');
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = pad(now.getMonth() + 1);
+    const day = pad(now.getDate());
+    const hours = pad(now.getHours());
+    const minutes = pad(now.getMinutes());
+    const seconds = pad(now.getSeconds());
+    const offset = -now.getTimezoneOffset(); // 單位：分鐘
+    const sign = offset >= 0 ? '+' : '-';
+    const offsetHours = pad(Math.floor(Math.abs(offset) / 60));
+    const offsetMinutes = pad(Math.abs(offset) % 60);
+    return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${sign}${offsetHours}:${offsetMinutes}`;
+}
+
 
 // 切換 Modal 的事件，直接綁定到 member-menu 區塊內的對應按鈕
 function handleRegisterOpen(e) {
@@ -110,9 +184,8 @@ function handleRegisterOpen(e) {
     closeModal(loginModal); // 關閉登入模態框（若開啟中）
     openModal(registerModal); // 打開註冊模態框
 }
-document.getElementById('register').addEventListener('click', handleRegisterOpen)
+document.getElementById('login-register').addEventListener('click', handleRegisterOpen)
 document.getElementById('show-register').addEventListener('click', handleRegisterOpen)
-
 document.getElementById('show-login').addEventListener('click', function (e) {
     e.preventDefault(); // 防止預設行為
     closeModal(registerModal); // 關閉註冊模態框（若開啟中）
@@ -132,20 +205,19 @@ window.addEventListener('click', function (e) {
     if (e.target === registerModal) closeModal(registerModal);
 });
 
-
-
-
 // 示範：更新頁面上登入狀態（例如：更新導覽列）
 function updateLoginStatus() {
-    const loggedInUser = localStorage.getItem('loggedInUser');
+    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
     const statusEl = document.getElementById('login-status');
     const loginOut = document.getElementById('login-out');
+    const LoginRegister = document.getElementById('login-register');
     const userState = document.getElementById('user-state');
     if (loggedInUser) {
-        statusEl.textContent = `歡迎，${loggedInUser}`;
+        statusEl.textContent = `歡迎，${loggedInUser.user_name}`;
         loginOut.style.display = 'block';
         loginOut.textContent = '登出'
         userState.textContent = '個人資訊';
+        LoginRegister.removeEventListener('click', handleRegisterOpen);
         // 登出
         loginOut.addEventListener('click', function (e) {
             e.preventDefault();
