@@ -1,5 +1,3 @@
-// document.addEventListener("DOMContentLoaded", () => {});
-
 // 預覽標題圖片
 const imageInput = document.getElementById("imageInput");
 const preview = document.getElementById("preview");
@@ -60,8 +58,6 @@ const addTag = (tagText) => {
     tagList.appendChild(hiddenInput);
 };
 
-
-
 // 添加食材
 const addIngredient = () => {
     const container = document.getElementById('ingredients');
@@ -106,11 +102,7 @@ const removeMaterial = (button) => {
     button.parentElement.remove();
 };
 
-
-
-
-// 動態生成步驟
-// 動態更新步驟編號與 ID
+// 動態生成步驟 並更新步驟編號與 ID
 const updateStepNumbers = () => {
     const steps = document.querySelectorAll('#steps .steps');
     steps.forEach((step, index) => {
@@ -146,7 +138,6 @@ const updateStepNumbers = () => {
 
 // 記錄目前步驟數量
 let stepCounter = 1;
-
 // 添加步驟
 const addStep = () => {
     const container = document.getElementById('steps');
@@ -226,148 +217,190 @@ const updateImagePreviews = () => {
         input.addEventListener('change', input._listener);
     });
 };
-
 // 初始化事件
 updateImagePreviews();
 updateStepNumbers();
 
 
 
-
-// 表單按鈕設定
-document.addEventListener('DOMContentLoaded', () => {
-    initializeRecipes();
-    formPublish();
-});
-
-
-// 定義全域變數來存放合併後的資料
-let existingRecipes = [];
-// 定義 localStorage 來存放食譜發布的資料
-const storageRecipes = JSON.parse(localStorage.getItem('recipes') || '[]');
-
-// 初始化合併後資料：在頁面載入時呼叫
+let storageRecipes = []; // 初始化數據
+let existingRecipes = []; // 初始化合併後的數據
 async function initializeRecipes() {
-    existingRecipes = await loadExistingRecipes(); // 合併 JSON 檔案和 LocalStorage 的資料
-    console.log("初始化合併後的食譜資料：", existingRecipes);
-}
-
-// 載入資料的邏輯
-async function loadExistingRecipes() {
     // 將 recipes 的數據重置為一個空陣列。
     // localStorage.setItem('recipes', JSON.stringify([]));
-
-    let fileRecipes = [];
     try {
         const response = await fetch('../recipes.json');
         if (!response.ok) {
             throw new Error(`讀取 JSON 檔案失敗，狀態碼：${response.status}`);
         }
-        fileRecipes = await response.json();
+        // 存放 預設JSON 數據
+        const fileRecipes = await response.json();
+        // 存放 localStorage 中食譜發布的數據
+        storageRecipes = JSON.parse(localStorage.getItem('recipes') || '[]');
+        // 合併 JSON 檔案和 LocalStorage 的數據
+        existingRecipes = [...fileRecipes, ...storageRecipes];
     } catch (error) {
-        console.error("讀取本地 JSON 檔案時發生錯誤：", error);
+        console.error("讀取預設 JSON 檔案時發生錯誤：", error);
+        return [];
     }
-
-    // 合併兩者資料並返回
-    return [...fileRecipes, ...storageRecipes];
 }
 
-// 讀取登入的使用者
-let loggedInUser = localStorage.getItem('loggedInUser');
-
-// **發布按鈕點擊事件 function** 
-function formPublish() {
-    // 取得表單按鈕
-    document.getElementById('publish').addEventListener('click', (event) => {
-        event.preventDefault(); // 防止表單自動提交
-
-        if (!loggedInUser) {
-            alert('請先登入才能發布食譜！');
-        } else {
-            if (window.confirm("確認發布食譜？")) {
-                handleFormPublish();
-            }
+let userData = []; // 初始化使用者數據
+let user = []; // 初始化登入的使用者數據
+// 取得 JSON 檔案 與 localStorage 中的使用者數據 儲存到 userData 變數中
+async function getUserData() {
+    try {
+        const response = await fetch('../users.json');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
         }
-    });
-}
-// **處理發布 function** 
-function handleFormPublish() {
-    // 自動生成 recipe_id 編號：根據現有數據中最大的 id 遞增 1，若無資料則預設為 1
-    const recipeId = existingRecipes.length > 0 ? Math.max(...existingRecipes.map(recipe => recipe.recipe_id || 0)) + 1 : 1;
+        const defaultUser = await response.json();
+        // 從 localStorage 取得用戶相關數據
+        const storedData = localStorage.getItem('users');
+        const storedUser = storedData ? JSON.parse(storedData) : [];
+        // 合併預設數據與 localStorage 數據
+        userData = [...defaultUser, ...storedUser];
 
-    // 食譜發布時間
-    const createdAt = getFormattedLocalDateTime();
-
-    // 驗證圖片是否上傳 並取得上傳食譜圖片，圖片上傳不可空，
-    const recipeImageElement = document.querySelector('.upload-image img');
-    let recipeImage = "";
-
-    // 檢查圖片是否已上傳
-    if (recipeImageElement && recipeImageElement.src && recipeImageElement.src !== "" && recipeImageElement.src !== window.location.href) {
-        recipeImage = recipeImageElement.src;
-    } else {
-        // 顯示提示訊息並阻止提交
-        alert("尚未上傳食譜圖片！");
-        return; // 中止後續邏輯
+        if (localStorage.getItem('loggedInUser')) {
+            const userId = JSON.parse(localStorage.getItem('loggedInUser')).user_id;
+            // 在 userData 陣列中尋找 user_id 等於 userId 的物件 
+            user = userData.find(user => user.user_id === userId);
+        }
+        // return user;
+    } catch (error) {
+        console.error("合併 JSON 與 localStorage 數據時發生錯誤：", error);
+        return [];
     }
-
-    // 整理所有數據
-    const recipeData = {
-        recipe_id: recipeId.toString(), // 或 `${recipeId}`
-        created_at: createdAt,
-        updated_at: "",
-        rating: "",
-        evaluate: "",
-        likes: "0",
-        comments: "0",
-        recipe_title: document.getElementById('recipe-title').value,
-        recipe_image: recipeImage,
-        recipe_description: document.getElementById('recipe-form').querySelector('textarea[name="recipe_description"]').value,
-        recipe_portion: document.getElementById('recipe-portion').value,
-        recipe_cook_time: document.getElementById('recipe-time').value,
-        // 取得所有隱藏的 tag 輸入值
-        tags: Array.from(document.querySelectorAll('#tagList input[type="hidden"]')).map(input => input.value),
-        ingredients: extractMaterials('ingredients', 'ingredient_name', 'ingredient_quantity'),
-        seasonings: extractMaterials('seasonings', 'seasoning_name', 'seasoning_quantity'),
-        nutritions: extractMaterials('nutritions', 'nutrition_name', 'nutrition_value'),
-
-        // 處理每一步驟：允許上傳多張圖片，若沒上傳則返回空陣列
-        steps: Array.from(document.querySelectorAll('#steps .steps')).map(stepDiv => ({
-            images: Array.from(stepDiv.querySelectorAll('.steps-image img'))
-                .map(img => img.src)
-                .filter(src => src && src !== "" && src !== window.location.href),
-            description: stepDiv.querySelector('textarea[name="step_description[]"]').value
-        }))
-    };
-    // 將新數據加入到 storageRecipes 中
-    storageRecipes.push(recipeData);
-
-    // 存回 LocalStorage
-    localStorage.setItem('recipes', JSON.stringify(storageRecipes));
-
-    // 顯示提交中的遮罩畫面
-    document.getElementById('loading-overlay').style.display = 'flex';
-
-    // 取得表單 防止多次提交
-    document.getElementById('recipe-form').querySelector('button[type="submit"]').disabled = true;
-
-    // 過 2 秒隱藏遮罩
-    setTimeout(() => {
-        document.getElementById('loading-overlay').style.display = 'none';
-    }, 2000);
-
-    // 模擬提交過程，完成後顯示提示訊息並轉跳頁面
-    setTimeout(() => {
-        alert("食譜已成功發布！ 可至個人食譜中編輯");
-        window.location.href = 'recipeSelector.html';
-    }, 2100);
 }
+// 在頁面載入時呼叫
+document.addEventListener('DOMContentLoaded', () => {
+    initializeRecipes();
+    getUserData();
+});
+
+
+
+// **點擊事件邏輯** 
+// 取得表單發布按鈕
+document.getElementById('publish').addEventListener('click', (event) => {
+    event.preventDefault(); // 防止表單自動提交
+    // 讀取登入的使用者
+    if (!user) {
+        alert('請先登入才能發布食譜！');
+    } else {
+        if (window.confirm("確認發布食譜？")) {
+            // **處理發布** 
+            const userId = user.user_id;
+            // 自動生成 recipe_id 編號：根據現有數據中最大的 id 遞增 1，若無資料則預設為 1
+            const recipeId = existingRecipes.length > 0 ? Math.max(...existingRecipes.map(recipe => recipe.recipe_id || 0)) + 1 : 1;
+
+            // 食譜發布時間
+            const createdAt = getFormattedLocalDateTime();
+
+            // 驗證圖片是否上傳 並取得上傳食譜圖片，圖片上傳不可空，
+            const recipeImageElement = document.querySelector('.upload-image img');
+            let recipeImage = "";
+
+            // 檢查圖片是否已上傳
+            if (recipeImageElement && recipeImageElement.src && recipeImageElement.src !== "" && recipeImageElement.src !== window.location.href) {
+                recipeImage = recipeImageElement.src;
+            } else {
+                // 顯示提示訊息並阻止提交
+                alert("尚未上傳食譜圖片！");
+                return; // 中止後續邏輯
+            }
+
+            // 食譜步驟處理
+            const stepDivs = document.querySelectorAll('#steps .steps');
+            const newStep = processSteps(stepDivs)
+
+            // const userTotalRecipes = loggedInUser.total_recipes;
+            // const newUserTotalRecipes = Number(userTotalRecipes + 1);
+
+            // 整理所有數據
+            const recipeData = {
+                user_id: userId.toString(),
+                recipe_id: recipeId.toString(), // 或 `${recipeId}`
+                created_at: createdAt,
+                updated_at: "",
+                rating: "",
+                evaluate: "",
+                likes: "0",
+                comments: "0",
+                recipe_title: document.getElementById('recipe-title').value,
+                recipe_image: recipeImage,
+                recipe_description: document.getElementById('recipe-form').querySelector('textarea[name="recipe_description"]').value,
+                recipe_portion: document.getElementById('recipe-portion').value,
+                recipe_cook_time: document.getElementById('recipe-time').value,
+                // 取得所有隱藏的 tag 輸入值
+                tags: Array.from(document.querySelectorAll('#tagList input[type="hidden"]')).map(input => input.value),
+                ingredients: extractMaterials('ingredients', 'ingredient_name', 'ingredient_quantity'),
+                seasonings: extractMaterials('seasonings', 'seasoning_name', 'seasoning_quantity'),
+                nutritions: extractMaterials('nutritions', 'nutrition_name', 'nutrition_value'),
+
+                steps: newStep,
+            };
+            // 將新數據加入到 storageRecipes 中
+            storageRecipes.push(recipeData);
+
+            // 存回 LocalStorage
+            localStorage.setItem('recipes', JSON.stringify(storageRecipes));
+
+            // 使用者食譜數更新
+            user.total_recipes = Number(user.total_recipes) + 1;
+            // 將使用者食譜發布數量 存回 LocalStorage
+            localStorage.setItem('users', JSON.stringify(userData));
+
+            // 顯示提交中的遮罩畫面
+            document.getElementById('loading-overlay').style.display = 'flex';
+
+            // 取得表單 防止多次提交
+            document.getElementById('recipe-form').querySelector('button[type="submit"]').disabled = true;
+
+            // 過 2 秒隱藏遮罩
+            setTimeout(() => {
+                document.getElementById('loading-overlay').style.display = 'none';
+            }, 2000);
+
+            // 模擬提交過程，完成後顯示提示訊息並轉跳頁面
+            setTimeout(() => {
+                alert("食譜已成功發布！ 可至個人食譜中編輯");
+                window.location.href = 'recipeSelector.html';
+            }, 2100);
+        }
+    }
+});
+
 
 // **通用函數：提取食材、調味料、營養成分**
 function extractMaterials(containerId, nameAttr, valueAttr) {
     return Array.from(document.querySelectorAll(`#${containerId} .material`)).map(material => ({
         name: material.querySelector(`input[name="${nameAttr}[]"]`).value,
         value: material.querySelector(`input[name="${valueAttr}[]"]`).value
+    }));
+}
+
+// 定義 processSteps 函式處理每一步驟：每個步驟上傳一張圖片與步驟描述，若沒上傳則返回空陣列
+function processSteps(stepDivs) {
+    return Array.from(stepDivs).map(newStep => ({
+        images: (() => {
+            const img = newStep.querySelector('.steps-image img');
+            // 檢查 img 是否存在且 src 有效（排除空值或與當前網頁 URL 相同）
+            return (img && img.src && img.src !== "" && img.src !== window.location.href) ? img.src : "";
+        })(),
+        description: (() => {
+            const descriptionElement = newStep.querySelector('textarea[name="step_description[]"]');
+            const description = descriptionElement.value.trim();
+            // 驗證描述是否為空
+            if (!description) {
+                alert("每個步驟的描述都必須填寫！");
+                // 將焦點設定到錯誤的描述欄位，幫助使用者快速定位
+                descriptionElement.focus();
+                // 拋出錯誤，中斷後續處理
+                throw new Error("步驟描述不得為空");
+            }
+            return description;
+        })(),
     }));
 }
 
