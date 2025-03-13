@@ -5,6 +5,8 @@
         "updated_at": "",
         "user_name": "王小明",
         "user_avatar": "/小專題網頁/素食網站/img/User/user_Avatar2.png",
+        "email": "xiaoming.wang@example.com",
+        "password": "password123",
         "total_recipes": "168",
         "fans_count": "5888"
     },
@@ -14,6 +16,8 @@
         "updated_at": "",
         "user_name": "李小華",
         "user_avatar": "/小專題網頁/素食網站/img/User/大頭照1.jpg",
+        "email": "xiaohua.li@example.com",
+        "password": "securepass456",
         "total_recipes": "215",
         "fans_count": "7321"
     }
