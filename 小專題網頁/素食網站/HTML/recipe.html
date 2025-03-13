@@ -16,7 +16,6 @@
     <header>
         <!-- Modal Container -->
         <div class="modal-container">
-
             <!-- 登入 Modal -->
             <div id="login-modal" class="modal">
                 <div class="modal-content">
@@ -24,12 +23,12 @@
                     <h2>登入</h2>
                     <form id="login-form">
                         <div class="form-group">
-                            <label for="login-username">使用者名稱:</label>
-                            <input type="text" id="login-username" required>
+                            <label for="login-email">電子郵件:</label>
+                            <input type="email" id="login-email" maxlength="100" required>
                         </div>
                         <div class="form-group">
                             <label for="login-password">密碼:</label>
-                            <input type="password" id="login-password" required>
+                            <input type="password" id="login-password" maxlength="20" required>
                         </div>
                         <button type="submit" class="btn-primary">登入</button>
                     </form>
@@ -44,23 +43,27 @@
                     <h2>註冊</h2>
                     <form id="register-form">
                         <div class="form-group">
-                            <label for="reg-username">使用者名稱:</label>
-                            <input type="text" id="reg-username" required>
+                            <label for="reg-username">姓名:</label>
+                            <input type="text" id="reg-username" maxlength="20" required>
                         </div>
                         <div class="form-group">
                             <label for="reg-email">電子郵件:</label>
-                            <input type="email" id="reg-email" required>
+                            <input type="email" id="reg-email" maxlength="50" required>
+                            <span id="email-error" class="error-message"></span>
                         </div>
                         <div class="form-group">
                             <label for="reg-password">密碼:</label>
-                            <input type="password" id="reg-password" required>
+                            <input type="password" id="reg-password" maxlength="20" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reg-password">確認密碼:</label>
+                            <input type="password" id="confirm-password" maxlength="20" required>
                         </div>
                         <button type="submit" class="btn-primary">註冊</button>
                     </form>
                     <p>已有帳號？ <button id="show-login">登入</button></p>
                 </div>
             </div>
-
         </div>
 
         <!-- 導覽列 -->
@@ -69,7 +72,7 @@
             <div class="member-menu">
                 <span id="login-status"></span>
                 <button id="login-out"></button>
-                <a id="register" href="#">
+                <a id="login-register" href="#">
                     <img class="login-singup" src="../img/icons/user.png" alt="登入註冊">
                     <span id="user-state" class="tooltip">登入註冊</span>
                 </a>
@@ -345,7 +348,7 @@
         // 取得使用者數據（從 JSON 檔案）與 localStorage 中的使用者數據
         function getUserData() {
             // 從 localStorage 取得用戶相關數據
-            const storedData = localStorage.getItem('user');
+            const storedData = localStorage.getItem('users');
             const storedUser = storedData ? JSON.parse(storedData) : [];
 
             // 透過 fetch 取得預設使用者數據
@@ -600,33 +603,41 @@
 
             // ── 烹調步驟 ──
             const stepCardContainer = document.getElementById('step_card');
-            if (stepCardContainer) {
-                recipesData.steps.forEach((step, index) => {
-                    const stepCard = document.createElement('div');
-                    stepCard.className = 'recipe-step';
+            recipesData.steps.forEach((step, index) => {
+                const stepCard = document.createElement('div');
+                stepCard.className = 'recipe-step';
 
-                    // 步驟圖片
-                    const stepImg = document.createElement('img');
-                    if (step.image) {
-                        stepImg.src = step.image;
-                    } else {
-                        stepImg.className = 'not-found-img';
-                        stepImg.src = '../img/image_Not_Found.png';
-                    }
-                    stepImg.alt = `步驟 ${index + 1}`;
+                // 步驟圖片
+                const stepImg = document.createElement('img');
+                if (step.images) {
+                    stepImg.src = step.images;
+                } else {
+                    stepImg.className = 'not-found-img';
+                    stepImg.src = '../img/image_Not_Found.png';
+                }
+                // if (Array.isArray(step.images)) {
+                //     step.images.forEach((imgSrc) => {
+                //         stepImg.src = imgSrc;
+                //     });
+                // } else if (step.images) {
+                //     stepImg.src = step.images;
+                // } else {
+                //     stepImg.className = 'not-found-img';
+                //     stepImg.src = '../img/image_Not_Found.png';
+                // }
+                stepImg.alt = `步驟 ${index + 1}`;
 
-                    // 步驟文字內容
-                    const stepContent = document.createElement('div');
-                    const stepTitle = document.createElement('h2');
-                    stepTitle.textContent = index + 1;
-                    const stepText = document.createElement('p');
-                    stepText.textContent = step.description;
+                // 步驟文字內容
+                const stepContent = document.createElement('div');
+                const stepTitle = document.createElement('h2');
+                stepTitle.textContent = index + 1;
+                const stepText = document.createElement('p');
+                stepText.textContent = step.description;
 
-                    stepContent.append(stepTitle, stepText);
-                    stepCard.append(stepImg, stepContent);
-                    stepCardContainer.append(stepCard);
-                });
-            }
+                stepContent.append(stepTitle, stepText);
+                stepCard.append(stepImg, stepContent);
+                stepCardContainer.append(stepCard);
+            });
         }
 
         // 動態生成相關食譜的 HTML 函式
