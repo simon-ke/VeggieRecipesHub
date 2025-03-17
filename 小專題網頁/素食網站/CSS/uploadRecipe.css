@@ -1,3 +1,6 @@
+@import './all.css';
+/* 共同樣式 */
+
 /* 上傳表單的主容器 */
 .upload-container {
     width: auto;

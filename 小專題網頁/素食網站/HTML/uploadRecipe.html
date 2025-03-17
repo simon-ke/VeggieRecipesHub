@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>上傳食譜</title>
-    <link rel="stylesheet" href="../CSS/all.css">
     <link rel="stylesheet" href="../CSS/uploadRecipe.css">
 </head>
 
@@ -125,10 +124,13 @@
         <div class="recipe-actions">
             <!-- 搜尋區塊 -->
             <div class="search-container">
-                <label>探索其他食譜</label>
-                <form>
-                    <input type="text" id="search" name="search" placeholder="搜尋食譜或輸入食材">
-                    <button type="submit"><img class="search-icon" src="../img/icons/search.png" alt="搜尋"></button>
+                <label>立即探索食譜</label>
+                <form id="globalSearchForm">
+                    <input type="text" id="search-input" name="search" placeholder="搜尋食譜或輸入食材" />
+                    <button type="button" id="clear-btn" aria-label="清除">×</button>
+                    <button type="submit" id="search-btn">
+                        <img class="search-icon" src="../img/icons/search.png" alt="搜尋" />
+                    </button>
                 </form>
             </div>
             <!-- 上傳食譜 -->

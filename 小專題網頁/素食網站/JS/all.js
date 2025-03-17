@@ -1,42 +1,58 @@
-// 滾輪事件
+// 觸發事件後 className 的新增與移除
+function toggleClassOnScroll(element, className, condition) {
+    if (condition) {
+        element.classList.add(className);
+    } else {
+        element.classList.remove(className);
+    }
+}
+// 當頁面滾動時觸發滾輪事件
 window.onscroll = () => {
+    const nav = document.querySelector('.nav-container');
+    const searchContainer = document.querySelector('.recipe-actions');
+    const backToTopButton = document.getElementById('back-to-top');
     // 固定導覽列
-    const fixedNav = () => {
-        const nav = document.querySelector('.nav-container');
-        const search = document.querySelector('.recipe-actions');
-
-        if (window.scrollY > 200) {
-            requestAnimationFrame(() => {
-                nav.classList.add('fixed-nav');
-                search.classList.add('fixed-recipe-actions');
-            });
-        } else {
-            requestAnimationFrame(() => {
-                nav.classList.remove('fixed-nav');
-                search.classList.remove('fixed-recipe-actions');
-            });
-        }
-    }
-
-    // 當頁面滾動時觸發
-    const scrollFunction = () => {
-        const backToTopButton = document.getElementById("back-to-top");
-        if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
-            backToTopButton.style.display = "block";
-        } else {
-            backToTopButton.style.display = "none";
-        }
-    }
-};
-// 點擊圖片回到頂部
-document.getElementById("back-to-top").onclick = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    requestAnimationFrame(() => {
+        toggleClassOnScroll(nav, 'fixed-nav', window.scrollY > 200);
+        toggleClassOnScroll(searchContainer, 'fixed-recipe-actions', window.scrollY > 200);
+        toggleClassOnScroll(backToTopButton, 'show', document.documentElement.scrollTop > 500);
+    });
+    // 點擊圖片回到頂部
+    backToTopButton.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 };
 
+
+// 滾輪事件
+// window.onscroll = () => {
+// 固定導覽列
+// const nav = document.querySelector('.nav-container');
+// const searchContainer = document.querySelector('.recipe-actions');
+
+// if (window.scrollY > 200) {
+//     requestAnimationFrame(() => {
+//         nav.classList.add('fixed-nav');
+//         searchContainer.classList.add('fixed-recipe-actions');
+//     });
+// } else {
+//     requestAnimationFrame(() => {
+//         nav.classList.remove('fixed-nav');
+//         searchContainer.classList.remove('fixed-recipe-actions');
+//     });
+// }
+
+// 當頁面滾動時觸發
+//     const backToTopButton = document.getElementById("back-to-top");
+//     if (window.scrollY > 500) {
+//         backToTopButton.style.display = "block";
+//     } else {
+//         backToTopButton.style.display = "none";
+//     }
+// };
 
 
 // 登入註冊處理
-
 // 取得模態框及表單元素
 const loginModal = document.getElementById('login-modal');
 const registerModal = document.getElementById('register-modal');
@@ -47,7 +63,6 @@ function openModal(modal) {
 function closeModal(modal) {
     modal.style.display = 'none';
 }
-
 
 let storageUsers = []; // 初始化數據
 let existingUsers = []; // 初始化合併後的使用者數據
@@ -64,15 +79,13 @@ async function initializeUsers() {
         // 存放 localStorage 中的使用者數據
         storageUsers = JSON.parse(localStorage.getItem('users') || '[]');
         // 合併 JSON 檔案和 LocalStorage 的數據
-        existingUsers = [...defaultUser, ...storageUsers]; 
+        existingUsers = [...defaultUser, ...storageUsers];
         return existingUsers;
     } catch (error) {
         console.error("合併 JSON 與 localStorage 數據時發生錯誤：", error);
         return [];
     }
 }
-// 在頁面載入時呼叫
-document.addEventListener('DOMContentLoaded', initializeUsers);
 
 try {
     // 登入表單提交事件
@@ -177,7 +190,6 @@ function getFormattedLocalDateTime() {
     return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${sign}${offsetHours}:${offsetMinutes}`;
 }
 
-
 // 切換 Modal 的事件，直接綁定到 member-menu 區塊內的對應按鈕
 function handleRegisterOpen(e) {
     e.preventDefault(); // 防止預設行為
@@ -219,8 +231,8 @@ function updateLoginStatus() {
         userState.textContent = '個人資訊';
         LoginRegister.removeEventListener('click', handleRegisterOpen);
         // 登出
-        loginOut.addEventListener('click', function (e) {
-            e.preventDefault();
+        loginOut.addEventListener('click', (event) => {
+            event.preventDefault();
             // 清除登入狀態
             localStorage.removeItem('loggedInUser');
             alert('已成功登出！');
@@ -234,8 +246,60 @@ function updateLoginStatus() {
     }
 }
 
-// 初始化頁面時呼叫
-updateLoginStatus();
 
+// 綁定搜尋按鈕的點擊事件
+const searchBtn = document.getElementById('search-btn');
+const searchInput = document.getElementById('search-input');
+searchBtn.addEventListener('click', (event) => {
+    event.preventDefault(); // 阻止表單的預設提交行為
+    const keyword = searchInput.value; // 取得搜尋框中的關鍵字
+    // 獲取當前頁面的網址參數
+    const urlParams = new URLSearchParams(window.location.search) || '';
+    if (keyword) {
+        // 將搜尋關鍵字加入到網址的 search 參數中
+        urlParams.set('search', keyword);
+    }
+    updateUrlAndReload(urlParams); // 更新網址並重新載入頁面
+});
+// 初始化搜尋輸入框：設定預設值和清除按鈕事件
+function initSearchInput() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const keywordValue = urlParams.get('search'); // 獲取 URL 中的 search 參數值
+    if (keywordValue) {
+        // 將搜尋參數值填入搜尋框中，顯示當前的搜尋關鍵字
+        searchInput.value = keywordValue;
 
+        // 顯示清除按鈕並綁定清除事件
+        const clearButton = document.getElementById('clear-btn');
+        clearButton.classList.add('show'); // 設定清除按鈕為可見
+        clearButton.addEventListener('click', clearSearchHandler, { once: true }); // 使用 { once: true } 確保清除事件只會執行一次，避免多次綁定造成多餘的資源消耗
+    }
+}
+// 清除搜尋的處理函式：重置搜尋框及網址參數
+function clearSearchHandler() {
+    const urlParams = new URLSearchParams(window.location.search);
+    // 清空搜尋框中的文字輸入
+    searchInput.value = '';
+    // 從查詢參數中移除 'search' 參數
+    urlParams.delete('search');
+    // 更新網址並重新載入頁面以反映變更
+    updateUrlAndReload(urlParams);
+}
+// 更新網址並重新載入頁面
+function updateUrlAndReload(urlParams) {
+    // 將查詢參數轉換為字串；若無參數則不附加 '?' 符號
+    const queryString = urlParams.toString();
+    console.log(queryString)
+    const newUrl = window.location.origin + '/小專題網頁/素食網站/HTML/recipeSelector.html' + (queryString ? '?' + queryString : '');
+    // 使用 history API 更新瀏覽器的網址
+    window.history.replaceState(null, '', newUrl);
+    // 重新載入頁面以更新內容
+    location.reload();
+}
 
+// 在頁面載入時呼叫
+document.addEventListener('DOMContentLoaded', () => {
+    initializeUsers();
+    updateLoginStatus();
+    initSearchInput();
+});

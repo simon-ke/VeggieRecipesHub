@@ -126,9 +126,10 @@
             <!-- 搜尋區塊 -->
             <div class="search-container">
                 <label>立即探索食譜</label>
-                <form>
-                    <input type="text" id="search" name="search" placeholder="搜尋食譜或輸入食材" />
-                    <button type="submit">
+                <form id="globalSearchForm">
+                    <input type="text" id="search-input" name="search" placeholder="搜尋食譜或輸入食材" />
+                    <button type="button" id="clear-btn" aria-label="清除">×</button>
+                    <button type="submit" id="search-btn">
                         <img class="search-icon" src="../img/icons/search.png" alt="搜尋" />
                     </button>
                 </form>
@@ -214,55 +215,88 @@
     </footer>
 
     <script>
-        // 使用者狀態
-        const loggedInUser = localStorage.getItem('loggedInUser');
-        // 解析 URL 中的查詢參數
+
+        let loggedInUser = localStorage.getItem('loggedInUser'); // 儲存當前登入的使用者
+        // 解析 URL 中的參數
         const urlParams = new URLSearchParams(window.location.search);
         const category = urlParams.get('category'); // 再次取得 category
+        const keyword = urlParams.get('search'); // 取得搜尋關鍵字參數
 
         // 取得預設數據（從 JSON 檔案）與 localStorage 中的數據
-        function getRecipesData() {
-            // 從 localStorage 取得用戶新增的數據
-            const storedData = localStorage.getItem('recipes');
-            const storedRecipes = storedData ? JSON.parse(storedData) : [];
+        async function getRecipesData() {
+            try {
+                // 透過 fetch 取得預設數據
+                const response = await fetch("../recipes.json");
+                const defaultRecipes = await response.json();
 
-            // 透過 fetch 取得預設數據
-            return fetch("../recipes.json")
-                .then((response) => response.json())
-                .then((defaultRecipes) => {
-                    // 合併預設數據與 localStorage 數據
-                    // 此處假設兩者皆為陣列
-                    return [...defaultRecipes, ...storedRecipes];
-                });
+                // 從 localStorage 取得用戶新增的數據
+                const storedData = localStorage.getItem('recipes');
+                const storedRecipes = storedData ? JSON.parse(storedData) : [];
+
+                // 合併預設數據與 localStorage 中的數據
+                return [...defaultRecipes, ...storedRecipes];
+            } catch (error) {
+                console.error('Error fetching recipes:', error);
+            }
         }
 
-        // 取得食譜數據 建立頁面內容
-        getRecipesData()
-            .then(recipesData => {
-                // 食譜卡片區塊
-                const recipeCardContainer = document.getElementById("recipeCardContainer");
-                // 食譜卡片區塊
-                const suggestCardContainer = document.getElementById("suggestCardContainer");
-                // 使用 DocumentFragment 優化多次 DOM 插入 如果食譜數據筆數較多，插入每個新的元素到 DOM 都可能引發重排（reflow）與重繪（repaint）。使用 DocumentFragment 來先建立所有卡片，最後一次性把碎片插入到 DOM，從而減少瀏覽器的重排次數。
-                const fragment = document.createDocumentFragment();
-                const suggestFragment = document.createDocumentFragment();
-                // 迭代 storedRecipes 並建立食譜卡片
-                recipesData.forEach(recipe => {
-                    // 建立食譜簡介區塊
-                    const card = createRecipeCard(recipe);
-                    // 建立食譜推薦區塊
-                    const suggestCard = createSuggestRecipeCard(recipe);
-                    // 將 card 插入 fragment
-                    fragment.append(card);
-                    // 將 suggestCard 插入 suggestFragment
-                    suggestFragment.append(suggestCard);
-                });
-                // 一次性把所有卡片插入容器
-                recipeCardContainer.append(fragment);
-                suggestCardContainer.append(suggestFragment);
-            })
-            .catch((error) => console.error("取得食譜數據時出錯:", error));
+        // 搜尋篩選函式
+        function search(keyword, recipesData) {
+            // 將關鍵字轉為小寫標準化
+            const searchKeyword = keyword.toLowerCase();
+            // console.log(searchKeyword)
+            // console.log(recipesData)
+            return recipesData.filter(recipe => {
+                // 標題比對
+                const titleMatch = recipe.recipe_title.toLowerCase().includes(searchKeyword);
+                // 描述比對
+                const descriptionMatch = recipe.recipe_description.toLowerCase().includes(searchKeyword);
+                // 食譜標籤陣列比對
+                const tagMatch = recipe.tags && recipe.tags.some(tag =>
+                    tag.toLowerCase().includes(searchKeyword)
+                );
+                return titleMatch || descriptionMatch || tagMatch;
+            });
+        }
 
+        // 取得食譜數據 建立頁面內容 or 關鍵字篩選後的內容
+        function renderRecipes(recipesData) {
+            try {
+                // 將獲取的數據應用於動態生成網頁內容
+                if (recipesData && Array.isArray(recipesData)) {
+                    // 根據 keyword 決定要使用的數據：
+                    // 如果 keyword 存在且有內容，則過濾出符合條件的食譜，否則就使用所有食譜數據
+                    const dataToRender =
+                        keyword && keyword.trim() !== "" ? search(keyword, recipesData) : recipesData;
+                    // 食譜卡片區塊
+                    const recipeCardContainer = document.getElementById("recipeCardContainer");
+                    // 食譜卡片區塊
+                    const suggestCardContainer = document.getElementById("suggestCardContainer");
+                    // 使用 DocumentFragment 優化多次 DOM 插入 如果食譜數據筆數較多，插入每個新的元素到 DOM 都可能引發重排（reflow）與重繪（repaint）。使用 DocumentFragment 來先建立所有卡片，最後一次性把碎片插入到 DOM，從而減少瀏覽器的重排次數。
+                    const fragment = document.createDocumentFragment();
+                    const suggestFragment = document.createDocumentFragment();
+                    // --- 主要食譜區塊依據關鍵字迭代 ---
+                    dataToRender.forEach(recipe => {
+                        // 建立食譜簡介區塊
+                        const card = createRecipeCard(recipe);
+                        // 將 card 插入 fragment
+                        fragment.append(card);
+                    });
+                    // --- 推薦區塊顯示所有的食譜數據 ---
+                    recipesData.forEach(recipe => {
+                        // 建立食譜推薦區塊
+                        const suggestCard = createSuggestRecipeCard(recipe);
+                        // 將 suggestCard 插入 suggestFragment
+                        suggestFragment.append(suggestCard);
+                    });
+                    // 一次性把所有卡片插入容器
+                    recipeCardContainer.append(fragment);
+                    suggestCardContainer.append(suggestFragment);
+                }
+            } catch (error) {
+                console.error('Error processing recipes:', error);
+            }
+        }
 
         // 建立食譜卡片函式
         function createRecipeCard(recipe) {
@@ -472,6 +506,13 @@
             return suggestCard;
         }
 
+        document.addEventListener('DOMContentLoaded', async () => {
+            getRecipesData();
+            const allRecipesData = await getRecipesData();
+            renderRecipes(allRecipesData);
+            // 使用者是否登入
+            loggedInUser = loggedInUser ? JSON.parse(loggedInUser) : null;
+        })
     </script>
 
     <script src="../JS/recipeSelector.js"></script>
