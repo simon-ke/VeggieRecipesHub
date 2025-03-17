@@ -1,3 +1,6 @@
+@import './all.css';
+/* 共同樣式 */
+
 /* 內容區塊 */
 .content-container {
     margin: 0 10%;
