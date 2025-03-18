@@ -143,28 +143,18 @@
     <div class="recipeSelector-container">
         <!-- 頁面頂部篩選和排序選項 -->
         <div class="filter-sort-container">
+            <!-- 頁籤 -->
+            <div class="breadcrumb"><!-- 動態生成頁籤 --></div>
+
             <label for="sort">排序：</label>
-            <select id="sort" name="sort">
-                <option value="all">全部</option>
-                <option value="time">烹飪時間</option>
-                <option value="difficulty">難度</option>
-                <option value="rating">評價</option>
-                <option value="latest">最新</option>
+            <select id="sort-options" name="sort">
+                <option value="date">最新日期</option>
                 <option value="popular">最受歡迎</option>
-            </select>
-            <label for="filter">篩選：</label>
-            <select id="filter" name="filter">
-                <option value="vegetables">蔬菜</option>
-                <option value="quick-dish">快手菜</option>
-                <option value="healthy-cooking">健康料理</option>
-                <option value="vegan">純素</option>
-                <option value="lacto-ovo-vegetarian">蛋奶素</option>
-                <option value="gluten-free">無麩質</option>
+                <option value="time">烹飪時間</option>
+                <option value="rating">評價</option>
             </select>
         </div>
 
-        <!-- 頁籤 -->
-        <div class="breadcrumb"><!-- 動態生成頁籤 --></div>
 
         <!-- 燈箱結構 -->
         <div class="lightbox" id="lightbox">
@@ -215,12 +205,13 @@
     </footer>
 
     <script>
-
-        let loggedInUser = localStorage.getItem('loggedInUser'); // 儲存當前登入的使用者
+        let allRecipesData = []; // 全局變數，用來暫存所有食譜資料
+        let sort = ''; // 全局排序條件（若原本就有用 global 變數，可以直接更新）
         // 解析 URL 中的參數
         const urlParams = new URLSearchParams(window.location.search);
         const category = urlParams.get('category'); // 再次取得 category
         const keyword = urlParams.get('search'); // 取得搜尋關鍵字參數
+        const loggedInUser = localStorage.getItem('loggedInUser'); // 讀取當前登入的使用者
 
         // 取得預設數據（從 JSON 檔案）與 localStorage 中的數據
         async function getRecipesData() {
@@ -259,22 +250,31 @@
             });
         }
 
-        // 取得食譜數據 建立頁面內容 or 關鍵字篩選後的內容
+        // 取得食譜數據 建立頁面內容 or 關鍵字篩選或排序後的內容
         function renderRecipes(recipesData) {
             try {
                 // 將獲取的數據應用於動態生成網頁內容
                 if (recipesData && Array.isArray(recipesData)) {
-                    // 根據 keyword 決定要使用的數據：
-                    // 如果 keyword 存在且有內容，則過濾出符合條件的食譜，否則就使用所有食譜數據
-                    const dataToRender =
+                    // 根據 keyword 存在且有內容，來過濾出符合條件的食譜，否則就使用所有食譜數據
+                    const textFilterData =
                         keyword && keyword.trim() !== "" ? search(keyword, recipesData) : recipesData;
+
+                    // 根據 sort 儲存的排序條件來排序食譜
+                    const dataToRender = sortRecipes(textFilterData, sort);
+
                     // 食譜卡片區塊
                     const recipeCardContainer = document.getElementById("recipeCardContainer");
-                    // 食譜卡片區塊
+                    // 食譜推薦區塊
                     const suggestCardContainer = document.getElementById("suggestCardContainer");
+
+                    // 清空之前的渲染，避免重複插入元素
+                    recipeCardContainer.innerHTML = '';
+                    suggestCardContainer.innerHTML = '';
+
                     // 使用 DocumentFragment 優化多次 DOM 插入 如果食譜數據筆數較多，插入每個新的元素到 DOM 都可能引發重排（reflow）與重繪（repaint）。使用 DocumentFragment 來先建立所有卡片，最後一次性把碎片插入到 DOM，從而減少瀏覽器的重排次數。
                     const fragment = document.createDocumentFragment();
                     const suggestFragment = document.createDocumentFragment();
+
                     // --- 主要食譜區塊依據關鍵字迭代 ---
                     dataToRender.forEach(recipe => {
                         // 建立食譜簡介區塊
@@ -289,6 +289,7 @@
                         // 將 suggestCard 插入 suggestFragment
                         suggestFragment.append(suggestCard);
                     });
+
                     // 一次性把所有卡片插入容器
                     recipeCardContainer.append(fragment);
                     suggestCardContainer.append(suggestFragment);
@@ -506,12 +507,82 @@
             return suggestCard;
         }
 
+
+        // 食譜排序
+        // 根據日期：取最新日期在前（遞減排序）
+        function sortByDate(data) {
+            return data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        }
+
+        // 根據熱門程度：熱門在前（由大到小排序）
+        function sortByLikes(data) {
+            return data.sort((a, b) => b.likes - a.likes);
+        }
+
+        // 根據烹飪時間：較短時間在前（遞增排序）
+        function sortByCookTime(data) {
+            return data.sort((a, b) => a.recipe_cook_time - b.recipe_cook_time);
+        }
+
+        // 根據評價：高評價在前（由大到小排序）
+        function sortByRating(data) {
+            return data.sort((a, b) => b.rating - a.rating);
+        }
+
+        // 根據傳入的排序條件來決定使用哪種排序方式
+        function sortRecipes(data, criteria) {
+            // 為避免修改原始陣列，複製一份（淺拷貝）
+            const recipesCopy = [...data];
+            switch (criteria) {
+                case 'date':
+                    return sortByDate(recipesCopy);
+                case 'popular':
+                    return sortByLikes(recipesCopy);
+                case 'time':
+                    return sortByCookTime(recipesCopy);
+                case 'rating':
+                    return sortByRating(recipesCopy);
+                default:
+                    // 預設使用日期排序
+                    return sortByDate(recipesCopy);
+            }
+        }
+
+        // 初始化排序參數
+        // let sortCriteria = '';
+        function initialSortData(recipesData) {
+            // 取得排序選單 DOM 元素
+            const sortSelect = document.getElementById('sort-options');
+            // 如果 URL 中有排序參數，否則預設 'date'
+            const sortCriteria = urlParams.get('sort') || 'date';
+            // 設定全局排序條件
+            sort = sortCriteria;
+            // 更新下拉選單選項
+            sortSelect.value = sortCriteria;
+            // 更新 URL 中的排序參數
+            urlParams.set('sort', sortCriteria);
+            window.history.replaceState(null, '', '?' + urlParams.toString());
+
+            // 當選單選項改變時
+            sortSelect.addEventListener('change', (event) => {
+                // 根據選取值更新排序條件，沒有則預設為 'date'
+                // 更新排序條件
+                sort = event.target.value || 'date';
+                // 更新 URL 中的排序參數
+                urlParams.set('sort', sortCriteria);
+                window.history.replaceState(null, '', '?' + urlParams.toString());
+                // 重新渲染食譜：先清空原有的 DOM，再以最新的排序條件呼叫 renderRecipes
+                renderRecipes(allRecipesData);
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', async () => {
-            getRecipesData();
-            const allRecipesData = await getRecipesData();
+            // 先初始化排序選單及事件
+            initialSortData();
+            // 取得食譜數據並記錄到全局變數
+            allRecipesData = await getRecipesData();
+            // 初次渲染
             renderRecipes(allRecipesData);
-            // 使用者是否登入
-            loggedInUser = loggedInUser ? JSON.parse(loggedInUser) : null;
         })
     </script>
 
