@@ -148,6 +148,7 @@
             <div class="upload-placeholder" id="uploadPlaceholder">
                 <img src="../img/icons/camera_icon.png" alt="新增圖片">
                 <p>點擊新增圖片</p>
+                <small class="helper-text">建議使用高解析度圖片</small>
             </div>
         </div>
 
@@ -161,7 +162,7 @@
         <div class="upload-box">
             <label class="upload-text" for="tagInput">食譜標籤</label>
             <div class="tag-box">
-                <input class="input-field" type="text" id="tagInput" placeholder="輸入食譜標籤，按Enter新增">
+                <input class="input-field" type="text" id="tagInput" placeholder="輸入標籤後按 Enter 新增，最多 10 個標籤">
                 <div class="tag-list" id="tagList"></div>
             </div>
         </div>
@@ -169,13 +170,13 @@
         <!-- 食譜介紹 -->
         <div class="upload-box">
             <label class="upload-text">食譜介紹</label>
-            <textarea class="input-field upload-introduction" name="recipe_description" placeholder="輸入食譜介紹"></textarea>
+            <textarea class="input-field upload-introduction" name="recipe_description" placeholder="輸入食譜介紹 (最多200字)" maxlength="200"></textarea>
         </div>
 
         <!-- 份量與時間 -->
         <div class="portion-time">
             <div>
-                <label class="upload-text" for="recipe-portion">食譜分量</label>
+                <label class="upload-text" for="recipe-portion">食譜份量</label>
                 <select class="input-field" id="recipe-portion" name="recipe_portion">
                     <!-- <select class="input-field" id="recipe-portion" name="recipe_portion" required> -->
                     <option value="" disabled selected>未選擇</option>
@@ -249,6 +250,7 @@
             <header class="material-title">
                 <label class="upload-text">營養成分</label>
                 <button type="button" onclick="addNutrition()">新增營養成分</button>
+                <small class="helper-text">範例：營養成分名稱：熱量，數值：200 大卡</small>
             </header>
             <div id="nutritions">
                 <div class="material">
@@ -276,6 +278,7 @@
                         <div class="stepsPlaceholder" id="stepsPlaceholder_1">
                             <img src="../img/icons/camera_icon.png" alt="">
                             <p>點擊新增圖片</p>
+                            <small class="helper-text">建議使用高解析度圖片</small>
                         </div>
                     </div>
                     <div class="steps-text">
@@ -285,7 +288,7 @@
                                 <img src="../img/icons/trash_icon.png" alt="">
                             </button>
                         </div>
-                        <textarea class="input-field" name="step_description[]" placeholder="操作步驟描述"></textarea>
+                        <textarea class="input-field" name="step_description[]" placeholder="操作步驟描述 (最多100字)" maxlength="100"></textarea>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,14 @@
 @import './all.css';
 /* 共同樣式 */
 
+/* 提示文字 */
+.helper-text {
+    font-size: 0.8em;
+    color: #777;
+    margin-top: 5px;
+    display: block;
+}
+
 /* 上傳表單的主容器 */
 .upload-container {
     width: auto;

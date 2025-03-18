@@ -612,18 +612,18 @@
 
                 // 步驟圖片
                 const stepImg = document.createElement('img');
-                if (step.images) {
-                    stepImg.src = step.images;
+                if (step.image) {
+                    stepImg.src = step.image;
                 } else {
                     stepImg.className = 'not-found-img';
                     stepImg.src = '../img/image_Not_Found.png';
                 }
-                // if (Array.isArray(step.images)) {
-                //     step.images.forEach((imgSrc) => {
+                // if (Array.isArray(step.image)) {
+                //     step.image.forEach((imgSrc) => {
                 //         stepImg.src = imgSrc;
                 //     });
-                // } else if (step.images) {
-                //     stepImg.src = step.images;
+                // } else if (step.image) {
+                //     stepImg.src = step.image;
                 // } else {
                 //     stepImg.className = 'not-found-img';
                 //     stepImg.src = '../img/image_Not_Found.png';
