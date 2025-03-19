@@ -2,6 +2,7 @@
 const imageInput = document.getElementById('imageInput');
 const preview = document.getElementById('preview');
 const uploadPlaceholder = document.getElementById('uploadPlaceholder');
+const recipeImage = document.querySelector('.upload-image');
 
 imageInput.addEventListener('change', (event) => {
     const file = event.target.files[0];
@@ -11,6 +12,8 @@ imageInput.addEventListener('change', (event) => {
             preview.src = e.target.result;
             preview.style.display = 'block';
             uploadPlaceholder.style.display = 'none';
+            recipeImage.style.border = '';
+            preview.style.outline = ''; // 清除紅色邊框
         };
         reader.readAsDataURL(file);
     }
@@ -336,18 +339,17 @@ document.getElementById('publish').addEventListener('click', (event) => {
         ingredients: extractMaterials('ingredients', 'ingredient_name', 'ingredient_quantity'),
         seasonings: extractMaterials('seasonings', 'seasoning_name', 'seasoning_quantity'),
         nutritions: extractMaterials('nutritions', 'nutrition_name', 'nutrition_value'),
-
         steps: stepsData,
     };
     // 將新數據加入到 storageRecipes 中
     storageRecipes.push(recipeData);
-    // console.log(recipeData);
 
     // 存回 LocalStorage
     localStorage.setItem('recipes', JSON.stringify(storageRecipes));
 
     // 使用者食譜數更新
     user.total_recipes = Number(user.total_recipes) + 1;
+
     // 將使用者食譜發布數量 存回 LocalStorage
     localStorage.setItem('users', JSON.stringify(userData));
 
@@ -380,9 +382,10 @@ function validateRecipeForm() {
     }
 
     // 2. 驗證食譜標題是否已填寫
-    const recipeTitle = document.getElementById('recipe-title').value.trim();
-    if (!recipeTitle) {
+    const recipeTitle = document.getElementById('recipe-title');
+    if (!recipeTitle.value.trim()) {
         alert('請填寫食譜標題');
+        recipeTitle.focus();
         return false;
     }
 
@@ -391,56 +394,62 @@ function validateRecipeForm() {
     // 4. 驗證食譜介紹是否已填寫
     const recipeDescription = document
         .getElementById('recipe-form')
-        .querySelector('textarea[name="recipe_description"]').value.trim();
-    if (!recipeDescription) {
+        .querySelector('textarea[name="recipe_description"]');
+    if (!recipeDescription.value.trim()) {
         alert('請填寫食譜介紹');
+        recipeDescription.focus();
         return false;
     }
 
     // 5. 驗證食譜份量是否已選擇
-    const recipePortion = document.getElementById('recipe-portion').value;
-    if (!recipePortion) {
+    const recipePortion = document.getElementById('recipe-portion');
+    if (!recipePortion.value) {
         alert('請選擇食譜份量');
+        recipePortion.focus();
         return false;
     }
 
     // 6. 驗證食譜烹調時間是否已選擇
-    const recipeCookTime = document.getElementById('recipe-time').value;
-    if (!recipeCookTime) {
+    const recipeCookTime = document.getElementById('recipe-time');
+    if (!recipeCookTime.value) {
         alert('請選擇烹調時間');
+        recipeCookTime.focus();
         return false;
     }
 
     // 7. 驗證食譜食材：必須至少一筆資料，並且每筆的名稱與數量都必填（name 與 value 皆不可空）
     const ingredients = extractMaterials('ingredients', 'ingredient_name', 'ingredient_quantity');
-    if (!ingredients.length) {
-        alert('請至少填寫一筆食材！');
-        return false;
-    }
-    if (ingredients.every(item => !item.name.trim() || !item.value.trim())) {
-        alert('請完整填寫每筆食材的名稱與數量！');
+    if (!validateMaterialSection(
+        '食材',
+        ingredients,
+        'input[name="ingredient_name[]"]',
+        'input[name="ingredient_quantity[]"]',
+        'add-ingredient'
+    )) {
         return false;
     }
 
     // 8. 驗證食譜調味料：必須至少一筆資料，並且每筆的名稱與數量都必填（name 與 value 皆不可空）
     const seasonings = extractMaterials('seasonings', 'seasoning_name', 'seasoning_quantity');
-    if (!seasonings.length) {
-        alert('請至少填寫一筆調味料！');
-        return false;
-    }
-    if (seasonings.every(item => !item.name.trim() && !item.value.trim())) {
-        alert('請完整填寫每筆調味料的名稱與數量！');
+    if (!validateMaterialSection(
+        '調味料',
+        seasonings,
+        'input[name="seasoning_name[]"]',
+        'input[name="seasoning_quantity[]"]',
+        'add-seasoning'
+    )) {
         return false;
     }
 
     // 9. 驗證食譜營養成分：必須至少一筆資料，並且每筆的名稱與數量都必填（name 與 value 皆不可空）
     const nutritions = extractMaterials('nutritions', 'nutrition_name', 'nutrition_value');
-    if (!nutritions.length) {
-        alert('請至少填寫一筆營養成分！');
-        return false;
-    }
-    if (nutritions.every(item => !item.name.trim() && !item.value.trim())) {
-        alert('請完整填寫每筆營養成分的名稱與數量！');
+    if (!validateMaterialSection(
+        '營養成分',
+        nutritions,
+        'input[name="nutrition_name[]"]',
+        'input[name="nutrition_value[]"]',
+        'add-nutrition'
+    )) {
         return false;
     }
 
@@ -451,68 +460,82 @@ function validateRecipeForm() {
 // 圖片上傳驗證
 function validateImageSrc() {
     // 驗證 id 為 "preview" 的圖片
-    const previewElement = document.getElementById('preview');
-    if (previewElement) {
-        const src = previewElement.src;
+    if (preview) {
+        const src = preview.src;
         if (!src || src === '' || src === window.location.href) {
             alert('請上傳食譜圖片！');
+            // 突出顯示圖片（例如加上紅色邊框）
+            recipeImage.style.border = '2px solid red';
+            // recipeImage.style.borderRadius = '5px'; // 可選：為美觀增加圓角
+            recipeImage.focus(); // 嘗試讓圖片獲得焦點
             return false;
         }
         if (!src.startsWith('data:image') && !src.startsWith('blob:')) {
             alert('食譜圖片格式錯誤！');
-            previewElement.src = '';
+            // 清空 src 並提示錯誤
+            preview.src = '';
+            preview.style.outline = '2px solid red'; // 突出錯誤的圖片
+            preview.style.borderRadius = '5px';
+            preview.focus(); // 焦點可聚焦到圖片
             return false;
         }
     }
-
-    // 驗證 class 為 previewStepsImage 的所有步驟的圖片 // 使用 querySelectorAll 取得所有符合的圖片元素，不論只有一個還是多個。
-    const imageElements = document.querySelectorAll('.previewStepsImage');
-    for (const imageElement of imageElements) {
-        const imageSrc = imageElement.src;
-
-        // 如果圖片未設定（例如空字串或者仍是預設狀態），則跳過驗證
-        if (!imageSrc || imageSrc === '' || imageSrc === window.location.href) {
-            continue;
-        }
-
-        // 如果有圖片來源，驗證是否符合正確格式：必須以 "data:image" 或 "blob:" 開頭
-        if (!imageSrc.startsWith('data:image') && !imageSrc.startsWith('blob:')) {
-            alert('步驟圖片格式錯誤！');
-            // 可選：如果需要，也可清除預覽圖片
-            imageElement.src = '';
-            return false;
-        }
-    }
-
     return true;
 }
 
 // 定義 validateSteps 函式處理每一步驟：每個步驟上傳一張圖片與步驟描述，若沒上傳則返回空陣列
 function validateSteps() {
+    // 從 DOM 中選取 ID 為 "steps" 的容器下所有 class 為 "steps" 的元素，並轉換成陣列
     const steps = Array.from(document.querySelectorAll('#steps .steps'));
     const newSteps = [];
 
+    // 檢查是否有找到任何步驟（陣列長度至少應該大於0）
+    // ※ 注意：由於 Array.from() 即使沒找到元素也會返回空陣列，所以 steps 變數不會是 undefined 或 null
+    if (steps.length < 1) {
+        alert('請至少填寫一個步驟！');
+        // 將焦點移到「新增步驟」的按鈕上，提醒使用者需要新增步驟
+        document.getElementById('addStepButton').focus();
+        // 終止後續步驟處理
+        return false;
+    }
+
     // 使用 for…of 搭配 .entries() 明確表達每個循環的索引與內容
     for (const [index, step] of steps.entries()) {
-        // 使用 optional chaining 取得圖片元素與 src
+        // 使用 optional chaining 取得圖片元素與 src 取得 class 為 previewStepsImage 的所有步驟的圖片
         const imgElement = step.querySelector('.previewStepsImage');
-        const image = (imgElement && imgElement.src && imgElement.src.trim() !== '' && imgElement.src !== window.location.href)
-            ? imgElement.src
-            : ''; // 圖片可空
+        const imageSrc = imgElement.src;
 
-        // 使用 optional chaining 與 nullish coalescing operator 來取得描述，若描述不存在則為空字串，，以及 trim() 處理空白
-        const description = step.querySelector('textarea[name="step_description[]"]')?.value.trim() ?? '';
+        // 如果有圖片來源（非空且不等於預設值），再進行驗證是否符合正確格式：必須以 "data:image" 或 "blob:" 開頭
+        if (imageSrc && imageSrc !== '' && imageSrc !== window.location.href) {
+            if (!imageSrc.startsWith('data:image') && !imageSrc.startsWith('blob:')) {
+                alert(`步驟 ${index + 1} 圖片格式錯誤！`);
+                // 清除預覽圖片
+                imgElement.src = '';
+                imgElement.focus();
+                return false;
+            }
+        }
+        // 如果沒有上傳圖片 image 為空
+        const image = (imgElement && imageSrc && imageSrc.trim() !== '' && imageSrc !== window.location.href)
+            ? imageSrc
+            : '';
 
-        // 如果描述為空，立刻提示錯誤、聚焦當前欄位，並終止整個流程
+        // 1. 使用 Optional Chaining 運算子 (?.) 來返回的 DOM 元素，如果是有效的則繼續讀取 .value，如果無效返回 null 或 undefined，表達式會直接返回 undefined，而不會拋出錯誤。.trim() 處理空白
+        // 2. 使用 Nullish Coalescing 運算子 (??) 當前面的結果返回 null 或 undefined 時才運作，並返回預設值（空字串 ''）
+        const descriptionInput = step.querySelector('textarea[name="step_description[]"]');
+        const description = descriptionInput?.value.trim() ?? '';
+
+        // 當 description 為「falsy 值（假值：空字串''、null、undefined）」時立刻提示錯誤、聚焦當前欄位，並終止整個流程
         if (!description) {
             alert(`請填寫烹調步驟 ${index + 1} 的描述！`);
+            descriptionInput.focus();
             // 終止後續步驟處理
             return false;
         }
 
+        // 使用物件簡寫（object shorthand）只能在屬性名稱與變數名稱一致時使用
         newSteps.push({ image, description });
     }
-
     return newSteps;
 }
 
@@ -522,6 +545,47 @@ function extractMaterials(containerId, name, value) {
         name: material.querySelector(`input[name="${name}[]"]`).value,
         value: material.querySelector(`input[name="${value}[]"]`).value
     }));
+}
+
+/**
+ * 驗證某一物料區塊的資料
+ * @param {string} sectionName - 物料區塊名稱（例如 "食材"）
+ * @param {Array} materials - 由 extractMaterials() 取得的陣列，每筆資料預期包含 name 與 value 屬性
+ * @param {string} inputNameSelector - 用於查找物料名稱輸入框的 CSS 選擇器
+ * @param {string} inputQuantitySelector - 用於查找物料數量輸入框的 CSS 選擇器
+ * @param {string} addButtonId - 如果該類別的物料整個都沒有輸入，則聚焦到新增物料按鈕
+ * @returns {boolean} - 若驗證全部通過則返回 true，否則返回 false 並提前中斷流程
+ */
+function validateMaterialSection(sectionName, materials, inputNameSelector, inputQuantitySelector, addButtonId) {
+    // 檢查是否至少存在一個名稱輸入框（代表該物料區塊已新增）
+    if (!document.querySelector(inputNameSelector)) {
+        alert(`請至少填寫一筆${sectionName}！`);
+        document.getElementById(addButtonId).focus();
+        return false;
+    }
+
+    // 檢查陣列是否有資料，或全部資料同時缺少名稱與數值
+    if (!materials.length || materials.every(item => !item.name.trim() && !item.value.trim())) {
+        alert(`${sectionName}名稱與數量尚未新增！`);
+        document.querySelector(inputNameSelector).focus();
+        return false;
+    }
+
+    // 檢查是否有任一筆物料的名稱未填寫
+    if (materials.some(item => !item.name.trim())) {
+        alert(`${sectionName}名稱尚未填寫！`);
+        document.querySelector(inputNameSelector).focus();
+        return false;
+    }
+
+    // 檢查是否有任一筆物料的數值未填寫
+    if (materials.some(item => !item.value.trim())) {
+        alert(`${sectionName}數量尚未填寫！`);
+        document.querySelector(inputQuantitySelector).focus();
+        return false;
+    }
+
+    return true;
 }
 
 // 儲存

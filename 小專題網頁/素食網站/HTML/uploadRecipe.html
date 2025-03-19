@@ -141,10 +141,10 @@
     <!-- 食譜上傳表單 -->
     <form class="upload-container" id="recipe-form">
         <label class="upload-title">上傳食譜</label>
-        <!-- 圖片上傳區塊 -->
-        <div class="upload-image" onclick="document.getElementById('imageInput').click()">
+        <!-- 食譜圖片上傳區塊 -->
+        <div class="upload-image" onclick="document.getElementById('imageInput').click()" tabindex="0">
             <input type="file" id="imageInput" name="recipe_image" accept="image/*" hidden>
-            <img id="preview" class="preview-img" src="" alt="">
+            <img id="preview" class="preview-img" src="" alt="" tabindex="0">
             <div class="upload-placeholder" id="uploadPlaceholder">
                 <img src="../img/icons/camera_icon.png" alt="新增圖片">
                 <p>點擊新增圖片</p>
@@ -215,7 +215,7 @@
         <div class="upload-box">
             <header class="material-title">
                 <label class="upload-text">食材</label>
-                <button type="button" onclick="addIngredient()">新增食材</button>
+                <button id="add-ingredient" type="button" onclick="addIngredient()" tabindex="0">新增食材</button>
             </header>
             <div id="ingredients">
                 <div class="material">
@@ -232,7 +232,7 @@
         <div class="upload-box">
             <header class="material-title">
                 <label class="upload-text">調味料</label>
-                <button type="button" onclick="addSeasoning()">新增調味料</button>
+                <button id="add-seasoning" type="button" onclick="addSeasoning()" tabindex="0">新增調味料</button>
             </header>
             <div id="seasonings">
                 <div class="material">
@@ -249,7 +249,7 @@
         <div class="upload-box">
             <header class="material-title">
                 <label class="upload-text">營養成分</label>
-                <button type="button" onclick="addNutrition()">新增營養成分</button>
+                <button id="add-nutrition" type="button" onclick="addNutrition()" tabindex="0">新增營養成分</button>
                 <small class="helper-text">範例：營養成分名稱：熱量，數值：200 大卡</small>
             </header>
             <div id="nutritions">
@@ -267,7 +267,7 @@
         <div class="upload-box">
             <header class="material-title">
                 <label class="upload-text">烹調步驟</label>
-                <button id="addStepButton" type="button" onclick="addStep()">新增步驟</button>
+                <button id="addStepButton" type="button" onclick="addStep()" tabindex="0">新增步驟</button>
             </header>
             <div id="steps">
                 <div class="steps" id="step_1">
