@@ -141,18 +141,20 @@
 
     <!-- 內容 -->
     <div class="recipeSelector-container">
-        <!-- 頁面頂部篩選和排序選項 -->
-        <div class="filter-sort-container">
+        <!-- 頁籤和排序選項 -->
+        <div class="breadcrumb-sort-container">
             <!-- 頁籤 -->
             <div class="breadcrumb"><!-- 動態生成頁籤 --></div>
-
-            <label for="sort">排序：</label>
-            <select id="sort-options" name="sort">
-                <option value="date">最新日期</option>
-                <option value="popular">最受歡迎</option>
-                <option value="time">烹飪時間</option>
-                <option value="rating">評價</option>
-            </select>
+            <div>
+                <label for="sort">排序：</label>
+                <select id="sort-options" name="sort">
+                    <option value="date">最新日期</option>
+                    <option value="popular">最受歡迎</option>
+                    <option value="time">烹飪時間</option>
+                    <option value="rating">評價</option>
+                </select>
+            </div>
+            <div id="search-results"></div>
         </div>
 
 
@@ -262,6 +264,9 @@
                     // 根據 sort 儲存的排序條件來排序食譜
                     const dataToRender = sortRecipes(textFilterData, sort);
 
+                    // 渲染搜尋結果
+                    renderSearchResults(dataToRender);
+
                     // 食譜卡片區塊
                     const recipeCardContainer = document.getElementById("recipeCardContainer");
                     // 食譜推薦區塊
@@ -299,37 +304,52 @@
             }
         }
 
-        // 建立食譜卡片函式
-        function createRecipeCard(recipe) {
-            // 動態變更頁籤內容
-            const breadcrumb = document.querySelector('.breadcrumb');
-            breadcrumb.innerHTML = `
+        // 動態變更頁籤
+        function createbreadCrumb() {
+            const breadCrumb = document.querySelector('.breadcrumb');
+            breadCrumb.innerHTML = `
                 <a href="../index.html">首頁</a>
             `;
             if (category) {
-                breadcrumb.innerHTML += `
+                breadCrumb.innerHTML += `
                     >
                     <a href="#">${category}</a>
                 `;
             }
+        }
 
+        // 建立食譜卡片函式
+        function createRecipeCard(recipe) {
             // 建立食譜卡片
             const recipeCard = document.createElement("div");
             recipeCard.classList.add("recipe-card");
 
-            // 建立圖片
+            // 建立圖片元素
             const recipeImg = document.createElement('img');
             recipeImg.classList.add('recipe-img');
+
+            // 檢查是否提供圖片網址
             if (recipe.recipe_image) {
                 recipeImg.src = recipe.recipe_image;
             } else {
                 recipeImg.src = '../img/image_Not_Found.png';
                 recipeImg.classList.add('not-found-img');
             }
+
+            // 設定圖片替代文字
             recipeImg.alt = recipe.recipe_title;
+
+            // 當圖片載入失敗時，改用預設圖片，並避免無限迴圈（可檢查一下避免重複設置）
+            recipeImg.onerror = function () {
+                if (!this.classList.contains('not-found-img')) {
+                    this.src = '../img/image_Not_Found.png';
+                    this.classList.add('not-found-img');
+                }
+            };
 
             // 建立內容區塊
             const recipeText = document.createElement('div');
+            recipeText.classList.add('recipe-text');
 
             // 建立連結區塊
             const recipeLink = document.createElement('a');
@@ -339,6 +359,48 @@
             // 標題
             const recipeTitle = document.createElement('h2');
             recipeTitle.textContent = recipe.recipe_title;
+
+            // 發布時間處理
+            function formatDate(createdAt) {
+                const now = new Date();                   // 現在時間
+                const createdDate = new Date(createdAt);    // 建立時間轉 Date 物件
+                const timeDiff = now - createdDate;         // 毫秒差
+
+                const seconds = Math.floor(timeDiff / 1000);
+                const minutes = Math.floor(seconds / 60);
+                const hours = Math.floor(minutes / 60);
+                const days = Math.floor(hours / 24);
+
+                // 小於一天：顯示「幾秒前」、「幾分鐘前」或「幾小時前」
+                if (days < 1) {
+                    if (hours >= 1) {
+                        return `${hours} 小時前`;
+                    } else if (minutes >= 1) {
+                        return `${minutes} 分鐘前`;
+                    } else {
+                        return `${seconds} 秒前`;
+                    }
+                }
+
+                // 大於一天但小於七天：顯示「幾天前」
+                if (days < 7) {
+                    return `${days} 天前`;
+                }
+
+                // 大於或等於八天：若當年度只顯示月日，否則顯示完整年月日
+                const year = createdDate.getFullYear();
+                const month = createdDate.getMonth() + 1;
+                const day = createdDate.getDate();
+
+                if (year === now.getFullYear()) {
+                    return `${month} 月 ${day} 日`;
+                }
+                return `${year} 年 ${month} 月 ${day} 日`;
+            }
+            // 時間
+            const dateElement = document.createElement('span');
+            dateElement.classList.add('date');
+            dateElement.textContent = formatDate(recipe.created_at);
 
             // 標籤
             const recipeTag = document.createElement('p');
@@ -368,7 +430,7 @@
 
             // 時間
             const recipeTime = document.createElement('p');
-            recipeTime.textContent = '製作時間：' + recipe.recipe_cook_time + ' 分鐘';
+            recipeTime.textContent = '製作時間：' + recipe.recipe_cook_time + `${recipe.recipe_cook_time < 180 ? ' 分鐘' : ' 分鐘以上'}`;
 
             // 組合 連結區塊
             recipeLink.append(recipeTitle, recipeTag, recipeDesc, recipeIngredients, recipeTime);
@@ -419,7 +481,7 @@
             recipeActions.append(ratingLink, authorLink, likesLink, commentLink, collectBtn, shareBtn);
 
             // 組合 連結區塊、互動區塊
-            recipeText.append(recipeLink, recipeActions);
+            recipeText.append(dateElement, recipeLink, recipeActions);
             // 組合卡片
             recipeCard.append(recipeImg, recipeText);
             return recipeCard;
@@ -576,13 +638,68 @@
             });
         }
 
+        // 渲染搜尋結果：顯示查詢筆數與結果列表
+        function renderSearchResults(results) {
+            const searchResults = document.getElementById('search-results');
+            // 清空先前搜尋結果
+            searchResults.innerHTML = '';
+
+            // 顯示搜尋結果筆數
+            const countInfo = document.createElement('p');
+            countInfo.textContent = keyword ? `搜尋結果：查詢到 ${results.length} 篇食譜` : `總共 ${results.length} 篇食譜`;
+            searchResults.appendChild(countInfo);
+
+            // 沒有結果時，直接返回
+            if (results.length === 0) return;
+        }
+
+        // 燈箱
+        function lightbox() {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const recipeImgs = document.querySelectorAll('.recipe-img');
+            console.log(recipeImgs);
+            console.log(recipeImgs.length);
+
+            // 當點擊任一食譜圖片時
+            recipeImgs.forEach(img => {
+                img.addEventListener('click', function () {
+                    // 將燈箱圖片的 src 改為點擊的圖片來源
+                    lightboxImg.src = this.src;
+                    // 先設定 display 為 flex 讓燈箱出現
+                    lightbox.style.display = 'flex';
+                    // 使用 setTimeout 確保 display 更新後再啟動淡入效果
+                    setTimeout(() => {
+                        lightbox.style.opacity = 1;
+                    }, 50);
+                });
+            });
+
+            // 當點擊燈箱（背景）時進行關閉操作
+            lightbox.addEventListener('click', () => {
+                // 開始淡出效果
+                lightbox.style.opacity = 0;
+            });
+
+            // 當過渡動畫完成時，若 opacity 為 0 則隱藏燈箱
+            lightbox.addEventListener('transitionend', (e) => {
+                if (e.propertyName === 'opacity' && lightbox.style.opacity === '0') {
+                    lightbox.style.display = 'none';
+                }
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', async () => {
-            // 先初始化排序選單及事件
+            // 初始頁籤
+            createbreadCrumb();
+            // 初始化排序選單及事件
             initialSortData();
             // 取得食譜數據並記錄到全局變數
             allRecipesData = await getRecipesData();
             // 初次渲染
             renderRecipes(allRecipesData);
+            // 燈箱
+            lightbox();
         })
     </script>
 

@@ -1,21 +1,5 @@
-document.addEventListener("DOMContentLoaded", () => {
-// 食譜圖片燈箱
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const recipeImgs = document.querySelectorAll('.recipe-img');
-
-    recipeImgs.forEach(img => {
-        img.addEventListener('click', function () {
-            lightbox.style.display = 'flex';
-            lightboxImg.src = this.src;
-        });
-    });
-
-    lightbox.addEventListener('click', function () {
-        lightbox.style.display = 'none';
-    });
-
-// 卡片滑動
+document.addEventListener('DOMContentLoaded', () => {
+    // 卡片滑動
     const carousel = document.getElementById("suggestCardContainer");
     let isDragging = false;
     let startX, scrollLeft;
@@ -108,7 +92,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // input 高度自適應
 const textarea = document.getElementById('feedback');
-
 textarea.addEventListener('input', () => {
     // 重置高度，以便準確計算捲動高度
     textarea.style.height = 'auto';
@@ -117,4 +100,3 @@ textarea.addEventListener('input', () => {
 });
 
 
-// 生成卡片
