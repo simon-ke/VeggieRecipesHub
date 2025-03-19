@@ -441,7 +441,7 @@
 
             // 右區塊
 
-            // 1. 時間
+            // 發布時間處理
             function formatDate(createdAt) {
                 const now = new Date();                   // 現在時間
                 const createdDate = new Date(createdAt);    // 建立時間轉 Date 物件
@@ -478,16 +478,13 @@
                 }
                 return `${year} 年 ${month} 月 ${day} 日`;
             }
+            // 1. 時間
             const dateElement = document.querySelector('.recipe-date');
-            if (dateElement) {
-                dateElement.textContent = formatDate(recipesData.created_at);
-            }
+            dateElement.textContent = formatDate(recipesData.created_at);
 
             // 2. 標題
             const titleElement = document.querySelector('.recipe-title');
-            if (titleElement) {
-                titleElement.textContent = recipesData.recipe_title;
-            }
+            titleElement.textContent = recipesData.recipe_title;
 
             // 3. 評價（包含數字與星級圖示）
             function generateStars(rating) {
@@ -509,7 +506,7 @@
 
             // 4. 標籤
             const recipeTagElement = document.querySelector('.recipe-tag');
-            if (recipeTagElement) {
+            if (recipesData.tags) {
                 recipesData.tags.forEach(tagText => {
                     const tag = document.createElement('span');
                     tag.className = 'tag';
@@ -520,22 +517,16 @@
 
             // 5. 介紹
             const descriptionElement = document.querySelector('.recipe-description');
-            if (descriptionElement) {
-                descriptionElement.textContent = recipesData.recipe_description;
-            }
+            descriptionElement.textContent = recipesData.recipe_description;
 
             // 6. 喜歡數
             const likeButton = document.querySelector('.like-button');
             // childNodes 包含了所有類型節點，數字在第二個節點（索引 1）
-            if (likeButton && likeButton.childNodes[1]) {
-                likeButton.childNodes[1].nodeValue = recipesData.likes;
-            }
+            likeButton.childNodes[1].nodeValue = recipesData.likes;
 
             // 7. 留言
             const commentButton = document.querySelector('.comment-button');
-            if (commentButton && commentButton.childNodes[1]) {
-                commentButton.childNodes[1].nodeValue = recipesData.comments;
-            }
+            commentButton.childNodes[1].nodeValue = recipesData.comments;
 
             // 8. 收藏
             const bookmarkButton = document.querySelector('.bookmark-button');
@@ -548,61 +539,49 @@
                 }
             });
 
-            // 8. 分享
-            const shareButton = document.querySelector('.share-button span');
-            if (shareButton) {
-                // shareButton.textContent = recipesData.shares;
-            }
-
             // ── 食譜資訊 ──
 
             // 份量與烹調時間
             const portionElement = document.getElementById('portion');
-            if (portionElement) portionElement.textContent = recipesData.recipe_portion;
+            portionElement.textContent = recipesData.recipe_portion + `${recipesData.recipe_portion < 10 ? ' 人份' : ' 人份以上'}`;
             const timeElement = document.getElementById('time');
-            if (timeElement) timeElement.textContent = recipesData.recipe_cook_time;
+            timeElement.textContent = recipesData.recipe_cook_time + `${recipesData.recipe_cook_time < 180 ? ' 分鐘' : ' 分鐘以上'}`;
 
             // 食材
             const ingredientTable = document.getElementById('ingredient_table');
-            if (ingredientTable) {
-                recipesData.ingredients.forEach(ingredient => {
-                    const row = document.createElement('tr');
-                    const nameTd = document.createElement('td');
-                    nameTd.textContent = ingredient.name;
-                    const amountTd = document.createElement('td');
-                    amountTd.textContent = ingredient.value;
-                    row.append(nameTd, amountTd);
-                    ingredientTable.append(row);
-                });
-            }
+            recipesData.ingredients.forEach(ingredient => {
+                const row = document.createElement('tr');
+                const nameTd = document.createElement('td');
+                nameTd.textContent = ingredient.name;
+                const amountTd = document.createElement('td');
+                amountTd.textContent = ingredient.value;
+                row.append(nameTd, amountTd);
+                ingredientTable.append(row);
+            });
 
             // 調味料
             const seasoningTable = document.getElementById('seasoning_table');
-            if (seasoningTable) {
-                recipesData.seasonings.forEach(seasoning => {
-                    const row = document.createElement('tr');
-                    const nameTd = document.createElement('td');
-                    nameTd.textContent = seasoning.name;
-                    const amountTd = document.createElement('td');
-                    amountTd.textContent = seasoning.value;
-                    row.append(nameTd, amountTd);
-                    seasoningTable.append(row);
-                });
-            }
+            recipesData.seasonings.forEach(seasoning => {
+                const row = document.createElement('tr');
+                const nameTd = document.createElement('td');
+                nameTd.textContent = seasoning.name;
+                const amountTd = document.createElement('td');
+                amountTd.textContent = seasoning.value;
+                row.append(nameTd, amountTd);
+                seasoningTable.append(row);
+            });
 
             // 營養成分
             const nutritionTable = document.getElementById('nutrition_table');
-            if (nutritionTable) {
-                recipesData.nutritions.forEach(nutrition => {
-                    const row = document.createElement('tr');
-                    const nameTd = document.createElement('td');
-                    nameTd.textContent = nutrition.name;
-                    const valueTd = document.createElement('td');
-                    valueTd.textContent = nutrition.value;
-                    row.append(nameTd, valueTd);
-                    nutritionTable.append(row);
-                });
-            }
+            recipesData.nutritions.forEach(nutrition => {
+                const row = document.createElement('tr');
+                const nameTd = document.createElement('td');
+                nameTd.textContent = nutrition.name;
+                const valueTd = document.createElement('td');
+                valueTd.textContent = nutrition.value;
+                row.append(nameTd, valueTd);
+                nutritionTable.append(row);
+            });
 
             // ── 烹調步驟 ──
             const stepCardContainer = document.getElementById('step_card');
@@ -618,18 +597,9 @@
                     stepImg.className = 'not-found-img';
                     stepImg.src = '../img/image_Not_Found.png';
                 }
-                // if (Array.isArray(step.image)) {
-                //     step.image.forEach((imgSrc) => {
-                //         stepImg.src = imgSrc;
-                //     });
-                // } else if (step.image) {
-                //     stepImg.src = step.image;
-                // } else {
-                //     stepImg.className = 'not-found-img';
-                //     stepImg.src = '../img/image_Not_Found.png';
-                // }
-                stepImg.alt = `步驟 ${index + 1}`;
 
+                stepImg.alt = `步驟 ${index + 1}`;
+                
                 // 步驟文字內容
                 const stepContent = document.createElement('div');
                 const stepTitle = document.createElement('h2');
