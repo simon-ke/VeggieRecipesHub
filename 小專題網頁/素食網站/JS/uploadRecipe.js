@@ -301,9 +301,14 @@ document.getElementById('publish').addEventListener('click', (event) => {
         // validateRecipeForm() 內部會提示錯誤訊息，此時中斷提交
         return;
     }
+    // **處理發布** 
 
-    // 通過 validateRecipeForm() 驗證  **處理發布** 
+    // 取得使用者 ID
     const userId = user.user_id;
+
+    // 取得使用者 名稱
+    const recipeAuthor = user.user_name;
+
     // 自動生成 recipe_id 編號：根據現有數據中最大的 id 遞增 1，若無資料則預設為 1
     const recipeId = existingRecipes.length > 0 ? Math.max(...existingRecipes.map(recipe => recipe.recipe_id || 0)) + 1 : 1;
 
@@ -316,12 +321,14 @@ document.getElementById('publish').addEventListener('click', (event) => {
 
     // 食譜步驟步驟（假設 validateSteps() 也會做內部提醒並返回資料或 false）
     const stepsData = validateSteps();
+
     // 若步驟驗證失敗，validateSteps() 會處理提醒，此處中斷後續程序
     if (!stepsData) { return; }
 
     // 整理所有輸入的數據
     const recipeData = {
         user_id: userId.toString(),
+        recipe_author: recipeAuthor.toString(),
         recipe_id: recipeId.toString(), // 或 `${recipeId}`
         created_at: createdAt,
         updated_at: '',
@@ -347,7 +354,7 @@ document.getElementById('publish').addEventListener('click', (event) => {
     // 存回 LocalStorage
     localStorage.setItem('recipes', JSON.stringify(storageRecipes));
 
-    // 使用者食譜數更新
+    // 使用者食譜數更新，user 直接來自 userData（二者指向同一個物件），在修改了 user 之後，userData 中的資料也已更新
     user.total_recipes = Number(user.total_recipes) + 1;
 
     // 將使用者食譜發布數量 存回 LocalStorage
@@ -548,7 +555,7 @@ function extractMaterials(containerId, name, value) {
 }
 
 /**
- * 驗證某一物料區塊的資料
+ * 驗證原物料區塊的資料
  * @param {string} sectionName - 物料區塊名稱（例如 "食材"）
  * @param {Array} materials - 由 extractMaterials() 取得的陣列，每筆資料預期包含 name 與 value 屬性
  * @param {string} inputNameSelector - 用於查找物料名稱輸入框的 CSS 選擇器
