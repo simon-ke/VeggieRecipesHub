@@ -70,14 +70,7 @@
         <div id="trash-modal" class="modal">
             <div class="modal-content">
                 <button class="close-btn" aria-label="Close">&times;</button>
-                <h2>垃圾桶</h2>
-                <div id="trash-recipes">
-                    <!-- 假設在垃圾桶頁面用迴圈列出 trashData 的各個食譜 -->
-                    <div class="trash-item">
-                        <span class="recipe-title">食譜名稱</span>
-                        <button onclick="restoreRecipe(食譜ID)">復原</button>
-                    </div>
-                </div>
+                <div id="trash-recipes"><!-- 動態生成多個 trash-item 項目 --></div>
             </div>
         </div>
 
@@ -225,7 +218,6 @@
     <script>
         let allRecipesData = []; // 全局變數，用來暫存所有食譜資料
         let sort = ''; // 全局排序條件（若原本就有用 global 變數，可以直接更新）
-        console.log(localStorage.getItem('trash'));
 
         const urlParams = new URLSearchParams(window.location.search);// 解析 URL 中的參數
         const category = urlParams.get('category'); // 再次取得 category
@@ -547,7 +539,8 @@
                     localStorageRecipes = localStorageRecipes.filter(item => item.recipe_id !== recipe.recipe_id);
                     localStorage.setItem('recipes', JSON.stringify(localStorageRecipes));
 
-                    alert('已成功將食譜移至垃圾桶！');
+                    // 在刪除後顯示提示訊息
+                    showToast('食譜已移至垃圾桶！您可以前往個人資訊中的垃圾桶中復原。');
                     renderRecipes(allRecipesData); // 重新渲染網頁上的食譜
                 }
             });
@@ -753,6 +746,18 @@
                     lightbox.style.display = 'none';
                 }
             });
+        }
+
+        // 提示訊息
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.remove();
+            }, 6000);
         }
 
         document.addEventListener('DOMContentLoaded', async () => {

@@ -24,34 +24,6 @@ window.onscroll = () => {
 };
 
 
-// 滾輪事件
-// window.onscroll = () => {
-// 固定導覽列
-// const nav = document.querySelector('.nav-container');
-// const searchContainer = document.querySelector('.recipe-actions');
-
-// if (window.scrollY > 200) {
-//     requestAnimationFrame(() => {
-//         nav.classList.add('fixed-nav');
-//         searchContainer.classList.add('fixed-recipe-actions');
-//     });
-// } else {
-//     requestAnimationFrame(() => {
-//         nav.classList.remove('fixed-nav');
-//         searchContainer.classList.remove('fixed-recipe-actions');
-//     });
-// }
-
-// 當頁面滾動時觸發
-//     const backToTopButton = document.getElementById("back-to-top");
-//     if (window.scrollY > 500) {
-//         backToTopButton.style.display = "block";
-//     } else {
-//         backToTopButton.style.display = "none";
-//     }
-// };
-
-
 // 登入註冊處理
 // 取得模態框及表單元素
 const loginModal = document.getElementById('login-modal');
@@ -96,7 +68,6 @@ try {
         const password = document.getElementById('login-password').value;
 
         const matchedUser = existingUsers.find(user => user.email === email && user.password === password);
-        // console.log(matchedUser)
         if (matchedUser) {
             const loggedInUser = {
                 user_id: matchedUser.user_id,
@@ -230,12 +201,19 @@ function updateLoginStatus() {
         loginOut.style.display = 'block';
         loginOut.textContent = '登出'
         userState.textContent = '個人資訊';
+        getTrashText(loggedInUser);
         LoginRegister.removeEventListener('click', handleRegisterOpen);
-        LoginRegister.addEventListener('click', (event) => {
-            event.preventDefault();
-            openModal(trashModal);
-            restoreRecipe();
-        });// 復原垃圾桶數據
+        LoginRegister.addEventListener('click', () => {
+            localStorage.setItem('openModal', true); // 保存狀態到 localStorage
+            location.reload(); // 重整頁面
+        });
+        window.addEventListener('load', () => {
+            const shouldOpenModal = localStorage.getItem('openModal'); // 取出保存的狀態
+            if (shouldOpenModal) {
+                localStorage.removeItem('openModal'); // 用完後清除狀態，避免多次執行
+                openModal(trashModal); // 執行 modal 打開邏輯
+            }
+        });
         // 登出
         loginOut.addEventListener('click', (event) => {
             event.preventDefault();
@@ -295,7 +273,6 @@ function clearSearchHandler() {
 function updateUrlAndReload(urlParams) {
     // 將查詢參數轉換為字串；若無參數則不附加 '?' 符號
     const queryString = urlParams.toString();
-    console.log(queryString)
     const newUrl = window.location.origin + '/小專題網頁/素食網站/HTML/recipeSelector.html' + (queryString ? '?' + queryString : '');
     // 使用 history API 更新瀏覽器的網址
     window.history.replaceState(null, '', newUrl);
@@ -303,33 +280,131 @@ function updateUrlAndReload(urlParams) {
     location.reload();
 }
 
-// 處理垃圾桶數據
-function restoreRecipe() {
-    // // 1. 從 localStorage 中取得垃圾桶資料
-    // let trashData = JSON.parse(localStorage.getItem('trash')) || [];
-    // // 取得該筆被復原的食譜
-    // const recipeToRestore = trashData.find(item => item.recipe_id === recipeID);
 
-    // if (recipeToRestore) {
-    //     // 2. 從垃圾桶中移除該食譜
-    //     trashData = trashData.filter(item => item.recipe_id !== recipeID);
-    //     localStorage.setItem('trash', JSON.stringify(trashData));
+// 印出垃圾桶數據
+let trashData = [];
+trashData = JSON.parse(localStorage.getItem('trash')) || [];
+function getTrashText(loggedInUser) {
+    // 尋找該使用者刪除的數據
+    const userTrashData = trashData.filter(item => item.user_id === loggedInUser.user_id);
 
-    //     // 3. 將該食譜加入主食譜資料
-    //     let recipes = JSON.parse(localStorage.getItem('recipes')) || [];
-    //     recipes.push(recipeToRestore);
-    //     localStorage.setItem('recipes', JSON.stringify(recipes));
+    // 垃圾桶區塊
+    const trashContainer = document.getElementById('trash-recipes');
+    trashContainer.innerHTML = ""; // 清空之前的垃圾桶項目
 
-    //     // 可同步更新 in-memory 的 allRecipesData（若有用到）
-    //     allRecipesData.push(recipeToRestore);
+    if (userTrashData.length === 0) {
+        // 當垃圾桶沒任何內容時，插入一條提示訊息
+        const emptyMessage = document.createElement('p');
+        emptyMessage.textContent = "目前垃圾桶中沒有任何食譜";
+        emptyMessage.classList.add('empty-message'); // 可以在 CSS 做進一步樣式設置
+        trashContainer.appendChild(emptyMessage);
+    } else {
+        // 使用 DocumentFragment 收集所有要新增的 DOM 元素
+        const fragment = document.createDocumentFragment();
 
-    //     alert(`食譜「${recipeToRestore.recipe_title}」已復原！`);
-    //     // 在復原後，可以重新導向到主要介面或是刷新頁面以反映最新資料
-    //     window.location.reload();
-    // } else {
-    //     alert('找不到該食譜，無法復原！');
-    // }
+        userTrashData.forEach(item => {
+            // 建立垃圾桶項目容器
+            const trashItem = document.createElement('div');
+            trashItem.classList.add('trash-item');
+            trashItem.setAttribute('data-id', item.recipe_id);
+
+            // 建立並設置食譜標題
+            const itemTitle = document.createElement('span');
+            itemTitle.classList.add('recipe-title');
+            itemTitle.textContent = item.recipe_title;
+
+            // 建立刪除按鈕
+            const deleteBtn = document.createElement('button');
+            deleteBtn.classList.add('delete-btn');
+            deleteBtn.textContent = '永久刪除';
+
+            // 建立復原按鈕
+            const restoreBtn = document.createElement('button');
+            restoreBtn.classList.add('restore-btn');
+            restoreBtn.textContent = '復原';
+
+            // 將標題和按鈕新增到 trashItem 中
+            trashItem.append(itemTitle, deleteBtn, restoreBtn);
+
+            // 將 trashItem 加入 DocumentFragment 中
+            fragment.appendChild(trashItem);
+
+        });
+        // 一次性將所有垃圾桶項目加入到目標容器中
+        trashContainer.innerHTML += '<h2>垃圾桶</h2>';
+        trashContainer.append(fragment);
+    }
 }
+
+// 處復原理垃圾桶數據
+function restoreRecipe(recipeID) {
+    if (!recipeID) {
+        alert('找不到該食譜，無法復原！');
+        return;
+    }
+    if (confirm(`確定要將食譜復原？`)) {
+        // 1. 從 localStorage 中取得垃圾桶資料並找出該筆被復原的食譜
+        const recipeToRestore = trashData.find(item => item.recipe_id === recipeID);
+        if (!recipeToRestore) {
+            alert('找不到該食譜數據，無法復原！');
+            return;
+        }
+
+        // 2. 從垃圾桶中移除該食譜
+        trashData = trashData.filter(item => item.recipe_id !== recipeID);
+        localStorage.setItem('trash', JSON.stringify(trashData));
+
+        // 3. 將該食譜加入主食譜資料
+        const recipes = JSON.parse(localStorage.getItem('recipes')) || [];
+        recipes.push(recipeToRestore);
+        localStorage.setItem('recipes', JSON.stringify(recipes));
+
+        alert(`食譜「${recipeToRestore.recipe_title}」已復原！`);
+        // 刷新頁面反映最新資料
+        window.location.reload();
+    }
+}
+// 處理永久刪除數據
+function deleteRecipe(recipeID) {
+    if (!recipeID) {
+        alert('找不到該食譜，無法刪除！');
+        return;
+    }
+    if (confirm(`確定要將食譜永久刪除？刪除後即無法復原！`)) {
+        // 1. 從 localStorage 中取得垃圾桶資料並找出該筆要永久刪除的食譜
+        const recipeToDelete = trashData.find(item => item.recipe_id === recipeID);
+        if (!recipeToDelete) {
+            alert('找不到該食譜數據，無法刪除！');
+            return;
+        }
+        // 2. 更新垃圾桶資料，過濾掉已刪除的食譜
+        trashData = trashData.filter(item => item.recipe_id !== recipeID);
+        localStorage.setItem('trash', JSON.stringify(trashData));
+
+        alert(`食譜「${recipeToDelete.recipe_title}」已刪除！`);
+        // 刷新頁面反映最新資料
+        window.location.reload();
+    }
+}
+
+// 為垃圾桶內容區添加一個點擊事件監聽器，利用事件監聽管理所有復原按鈕的點擊事件
+document.getElementById('trash-recipes').addEventListener('click', function (event) {
+    // 判斷觸發點擊事件的元素 (event.target) 是否存在以及是否帶有 'restore-btn' 這個 class，以確保只有點擊到復原按鈕時才執行以下程式碼
+    if (event.target && event.target.classList.contains('restore-btn')) {
+        // 使用 closest() 方法從點擊的按鈕向上查找最近的父元素，該元素應包含整個垃圾桶項目資訊，並帶有 'trash-item' 這個 class
+        const trashItem = event.target.closest('.trash-item');
+        // 從該垃圾桶項目元素的 data-id 屬性取得該食譜的唯一辨識 ID
+        const recipeID = trashItem.getAttribute('data-id');
+        // 呼叫已定義的復原函式 restoreRecipe，並傳入食譜的 ID，以便從垃圾桶中恢復這筆食譜
+        restoreRecipe(recipeID);
+    }
+    // 處理永久刪除按鈕事件
+    if (event.target && event.target.classList.contains('delete-btn')) {
+        const trashItem = event.target.closest('.trash-item');
+        const recipeID = trashItem.getAttribute('data-id');
+        deleteRecipe(recipeID);
+    }
+});
 
 // 在頁面載入時呼叫
 document.addEventListener('DOMContentLoaded', () => {

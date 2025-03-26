@@ -66,6 +66,13 @@
             </div>
         </div>
 
+        <div id="trash-modal" class="modal">
+            <div class="modal-content">
+                <button class="close-btn" aria-label="Close">&times;</button>
+                <div id="trash-recipes"><!-- 動態生成多個 trash-item 項目 --></div>
+            </div>
+        </div>
+
         <!-- 導覽列 -->
         <nav class="nav-container">
             <!-- 第一列 -->
@@ -747,7 +754,7 @@
                     localStorage.setItem('recipes', JSON.stringify(localStorageRecipes));
 
                     alert('已成功將食譜移至垃圾桶！');
-                    
+
                     if (!category || category === "null") {
                         // 當 category 為 null、undefined 或者字串 "null" 時
                         window.location.href = './recipeSelector.html';

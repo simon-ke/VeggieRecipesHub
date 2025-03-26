@@ -63,6 +63,13 @@
             </div>
         </div>
 
+        <div id="trash-modal" class="modal">
+            <div class="modal-content">
+                <button class="close-btn" aria-label="Close">&times;</button>
+                <div id="trash-recipes"><!-- 動態生成多個 trash-item 項目 --></div>
+            </div>
+        </div>
+
         <!-- 導覽列 -->
         <nav class="nav-container">
             <!-- 第一列 -->
@@ -170,7 +177,8 @@
         <!-- 食譜介紹 -->
         <div class="upload-box">
             <label class="upload-text">食譜介紹</label>
-            <textarea class="input-field upload-introduction" name="recipe_description" placeholder="輸入食譜介紹 (最多200字)" maxlength="200"></textarea>
+            <textarea class="input-field upload-introduction" name="recipe_description" placeholder="輸入食譜介紹 (最多200字)"
+                maxlength="200"></textarea>
         </div>
 
         <!-- 份量與時間 -->
@@ -288,7 +296,8 @@
                                 <img src="../img/icons/trash_icon.png" alt="">
                             </button>
                         </div>
-                        <textarea class="input-field" name="step_description[]" placeholder="操作步驟描述 (最多100字)" maxlength="100"></textarea>
+                        <textarea class="input-field" name="step_description[]" placeholder="操作步驟描述 (最多100字)"
+                            maxlength="100"></textarea>
                     </div>
                 </div>
             </div>

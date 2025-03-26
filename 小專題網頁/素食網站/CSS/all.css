@@ -472,3 +472,106 @@ footer {
     color: #ff6347;
     /* 懸停時改變顏色，提升可點擊性 */
 }
+
+
+/* 垃圾桶樣式 */
+#trash-recipes {
+    padding: 0 10px;
+}
+
+/* 標題樣式 */
+#trash-recipes h2 {
+    text-align: center;
+    color: #333;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+}
+
+/* 單個垃圾項目樣式 */
+.trash-item {
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.trash-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 食譜標題樣式 */
+.recipe-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #555;
+}
+
+/* 永久刪除按鈕樣式 */
+.delete-btn {
+    justify-content: end;
+    margin: 0 20px 0 auto;
+    padding: 4px 8px;
+    font-size: 1.1em;
+    color: white;
+    background-color: #e33333;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+    background-color: #d81111;
+}
+
+/* 復原按鈕樣式 */
+.restore-btn {
+    padding: 4px 8px;
+    font-size: 1.1em;
+    color: white;
+    background-color: #3b9f53;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.restore-btn:hover {
+    background-color: #218838;
+}
+
+/* 垃圾桶為空的樣式 */
+.empty-message {
+    font-size: 1.8em;
+    text-align: center;
+    color: #888;
+    font-style: italic;
+}
+
+/* 提示訊息 */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #28a745; /* 綠色提示背景 */
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    animation: fadeInOut 6s ease;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(10px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(10px); }
+}
