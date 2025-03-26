@@ -737,7 +737,6 @@
                     let trashData = JSON.parse(localStorage.getItem('trash')) || [];
                     trashData.push(recipe);
                     localStorage.setItem('trash', JSON.stringify(trashData));
-                    console.log(trashData);
 
                     // 2. 更新 allRecipesData：過濾掉要刪除的食譜
                     allRecipesData = allRecipesData.filter(item => item.recipe_id !== recipe.recipe_id);
@@ -748,6 +747,7 @@
                     localStorage.setItem('recipes', JSON.stringify(localStorageRecipes));
 
                     alert('已成功將食譜移至垃圾桶！');
+                    
                     if (!category || category === "null") {
                         // 當 category 為 null、undefined 或者字串 "null" 時
                         window.location.href = './recipeSelector.html';
