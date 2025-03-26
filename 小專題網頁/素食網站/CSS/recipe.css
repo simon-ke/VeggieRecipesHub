@@ -27,7 +27,11 @@
 .user-info {
     display: flex;
     align-items: center;
-    width: 500px;
+}
+
+.user-info p {
+    margin-left: 10px;
+    color: #777;
 }
 
 .user-avatar {
@@ -43,9 +47,27 @@
     font-size: 1.5em;
 }
 
-.user-info p {
-    margin-left: 10px;
-    color: #777;
+.user-link {
+    display: flex;
+    align-items: center;
+}
+
+/* 刪除按鈕 */
+.delete-button {
+    display: none;
+    padding: 5px 10px;
+    margin-left: auto;
+    background-color: #e24040;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 1em;
+}
+
+.delete-button:hover {
+    background-color: #ce1c1c;
 }
 
 /* 食譜介紹 */
@@ -254,20 +276,6 @@
 .not-found-img {
     border: 1px solid #ccc;
 }
-
-/* .progress-bar {
-    width: 100%;
-    background-color: #f3f3f3;
-    border-radius: 5px;
-    padding: 5px;
-}
-
-.progress {
-    width: 20%;
-    background-color: #4caf50;
-    height: 5px;
-    border-radius: 5px;
-} */
 
 /* 用戶評論 */
 .comments h2 {

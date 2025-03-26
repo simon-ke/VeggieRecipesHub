@@ -79,6 +79,13 @@ nav.fixed-nav .menu-container {
     gap: 20px;
 }
 
+.member-menu #login-register {
+    position: relative;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
 .member-menu a {
     position: relative;
 }
@@ -112,6 +119,10 @@ nav.fixed-nav .menu-container {
     transition: border-color 0.3s, color 0.3s;
 }
 
+#user-state {
+    font-size: 1.1em;
+}
+
 .tooltip {
     visibility: hidden;
     background-color: #8f8f8f;
@@ -128,6 +139,7 @@ nav.fixed-nav .menu-container {
     transition: opacity 0.3s;
 }
 
+#login-register:hover .tooltip,
 .member-menu a:hover .tooltip {
     visibility: visible;
     opacity: 1;
@@ -248,6 +260,7 @@ ul.submenu {
     margin: 0 10px 0 -32px;
     visibility: hidden;
 }
+
 #clear-btn.show {
     visibility: visible;
 }

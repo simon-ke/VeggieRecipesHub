@@ -65,16 +65,32 @@
             </div>
         </div>
 
+        <!-- 個人資訊 -->
+        <!-- 垃圾桶 -->
+        <div id="trash-modal" class="modal">
+            <div class="modal-content">
+                <button class="close-btn" aria-label="Close">&times;</button>
+                <h2>垃圾桶</h2>
+                <div id="trash-recipes">
+                    <!-- 假設在垃圾桶頁面用迴圈列出 trashData 的各個食譜 -->
+                    <div class="trash-item">
+                        <span class="recipe-title">食譜名稱</span>
+                        <button onclick="restoreRecipe(食譜ID)">復原</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- 導覽列 -->
         <nav class="nav-container">
             <!-- 第一列 -->
             <div class="member-menu">
                 <span id="login-status"></span>
                 <button id="login-out"></button>
-                <a id="login-register" href="#">
+                <button id="login-register" href="#">
                     <img class="login-singup" src="../img/icons/user.png" alt="登入註冊" />
                     <span id="user-state" class="tooltip">登入註冊</span>
-                </a>
+                </button>
                 <a href="#">
                     <img class="shopping-cart" src="../img/icons/shopping-cart.png" alt="購物車" />
                     <span class="tooltip">購物車</span>
@@ -209,11 +225,12 @@
     <script>
         let allRecipesData = []; // 全局變數，用來暫存所有食譜資料
         let sort = ''; // 全局排序條件（若原本就有用 global 變數，可以直接更新）
-        // 解析 URL 中的參數
-        const urlParams = new URLSearchParams(window.location.search);
+
+        const urlParams = new URLSearchParams(window.location.search);// 解析 URL 中的參數
         const category = urlParams.get('category'); // 再次取得 category
         const keyword = urlParams.get('search'); // 取得搜尋關鍵字參數
         const loggedInUser = localStorage.getItem('loggedInUser'); // 讀取當前登入的使用者
+        const userId = loggedInUser ? JSON.parse(loggedInUser).user_id : null;
 
         // 取得預設數據（從 JSON 檔案）與 localStorage 中的數據
         async function getRecipesData() {
@@ -298,6 +315,9 @@
                     // 一次性把所有卡片插入容器
                     recipeCardContainer.append(fragment);
                     suggestCardContainer.append(suggestFragment);
+
+                    // 燈箱
+                    lightbox();
                 }
             } catch (error) {
                 console.error('Error processing recipes:', error);
@@ -318,6 +338,25 @@
             }
         }
 
+        // 渲染搜尋結果：顯示查詢筆數與結果列表
+        function renderSearchResults(results) {
+            const searchResults = document.getElementById('search-results');
+            // 清空先前搜尋結果
+            searchResults.innerHTML = '';
+
+            // 顯示搜尋結果筆數
+            const countInfo = document.createElement('p');
+            if (results.length < 1) {
+                countInfo.textContent = '很抱歉，目前沒有找到相關的食譜。';
+            } else {
+                countInfo.textContent = keyword ? `搜尋結果：查詢到 ${results.length} 篇食譜` : `總共 ${results.length} 篇食譜`;
+            }
+            searchResults.appendChild(countInfo);
+
+            // 沒有結果時，直接返回
+            if (results.length === 0) return;
+        }
+
         // 建立食譜卡片函式
         function createRecipeCard(recipe) {
             // 建立食譜卡片
@@ -327,25 +366,18 @@
             // 建立圖片元素
             const recipeImg = document.createElement('img');
             recipeImg.classList.add('recipe-img');
-
-            // 檢查是否提供圖片網址
+            // 當圖片載入失敗觸發 onerror 事件時，瀏覽器會自動呼叫這個函式(不加括號：事件觸發才執行)
+            recipeImg.onerror = imgOnerror;
+            // 檢查是否存在圖片
             if (recipe.recipe_image) {
                 recipeImg.src = recipe.recipe_image;
             } else {
                 recipeImg.src = '../img/image_Not_Found.png';
                 recipeImg.classList.add('not-found-img');
             }
-
-            // 設定圖片替代文字
             recipeImg.alt = recipe.recipe_title;
 
-            // 當圖片載入失敗時，改用預設圖片，並避免無限迴圈（可檢查一下避免重複設置）
-            recipeImg.onerror = function () {
-                if (!this.classList.contains('not-found-img')) {
-                    this.src = '../img/image_Not_Found.png';
-                    this.classList.add('not-found-img');
-                }
-            };
+
 
             // 建立內容區塊
             const recipeText = document.createElement('div');
@@ -354,7 +386,13 @@
             // 建立連結區塊
             const recipeLink = document.createElement('a');
             recipeLink.classList.add('content');
-            recipeLink.href = `./recipe.html?category=${category}&id=${recipe.recipe_id}`;
+            if (!category || category === "null") {
+                // 當 category 為 null、undefined 或者字串 "null" 時
+                recipeLink.href = `./recipe.html?id=${recipe.recipe_id}`;
+            } else {
+                // 當 category 有正常值時
+                recipeLink.href = `./recipe.html?category=${category}&id=${recipe.recipe_id}`;
+            }
 
             // 標題
             const recipeTitle = document.createElement('h2');
@@ -448,8 +486,8 @@
 
             // 評分連結
             const ratingLink = createLink(recipe.rating > 0 ? `評分：${recipe.rating} / 5 （${recipe.evaluate} 評價）` : '尚未有評價');
-            // 作者連結(若作者名稱是動態資料，可改由 recipe.author 提供)
-            const authorLink = createLink('作者：栗子');
+            // 作者連結
+            const authorLink = createLink(`作者：${recipe.recipe_author}`);
             // 喜歡連結
             const likesLink = createLink(`喜歡：${recipe.likes}`);
             // 留言連結
@@ -477,8 +515,45 @@
                 alert('分享成功');
             });
 
+            // 刪除食譜按鈕
+            const deleteBtn = document.createElement('button');
+            if (userId === recipe.user_id) {
+                deleteBtn.classList.add('delete-button');
+                deleteBtn.textContent = '刪除';
+            }
+            // 使用刪除功能
+            deleteBtn.addEventListener('click', () => {
+                if (!allRecipesData.some(item => item.recipe_id === recipe.recipe_id)) {
+                    console.log(recipe.recipe_id)
+                    alert('找不到該食譜，無法刪除！');
+                    return;
+                }
+                // console.log(recipe.recipe_id)
+                const confirmed = confirm(`確定要將食譜「${recipe.recipe_title}」移至垃圾桶？`);
+                if (confirmed) {
+                    // 把食譜移到垃圾桶 (暫存處)
+                    // 從 localStorage 取出原有垃圾桶資料，若不存在便建立一個空陣列
+                    let trashData = JSON.parse(localStorage.getItem('trash')) || [];
+                    trashData.push(recipe);
+                    localStorage.setItem('trash', JSON.stringify(trashData));
+                    console.log(trashData);
+
+                    // 使用 filter 方法過濾掉指定的食譜，更新 allRecipesData
+                    // 遍歷 allRecipesData 陣列中的每個項目 (item)，保留 item.recipe_id 與 recipe.recipe_id 不相等的食譜，移除 recipe_id 與目標食譜 recipe_id 相同的項目，過濾後的結果回傳為一個新的陣列並賦值給 allRecipesData
+                    allRecipesData = allRecipesData.filter(item => item.recipe_id !== recipe.recipe_id);
+
+                    // 如果 localStorage 有存取食譜資料，則一併更新
+                    let localStorageRecipes = JSON.parse(localStorage.getItem('recipes')) || [];
+                    localStorageRecipes = localStorageRecipes.filter(item => item.recipe_id !== recipe.recipe_id);
+                    localStorage.setItem('recipes', JSON.stringify(localStorageRecipes));
+
+                    renderRecipes(allRecipesData); // 重新渲染網頁上的食譜
+                    alert('已成功將食譜移至垃圾桶！');
+                }
+            });
+
             // 組合 互動區塊
-            recipeActions.append(ratingLink, authorLink, likesLink, commentLink, collectBtn, shareBtn);
+            recipeActions.append(ratingLink, authorLink, likesLink, commentLink, collectBtn, shareBtn, deleteBtn);
 
             // 組合 連結區塊、互動區塊
             recipeText.append(dateElement, recipeLink, recipeActions);
@@ -499,6 +574,8 @@
 
             // 建立圖片元件
             const img = document.createElement('img');
+            img.onerror = imgOnerror;
+
             if (recipe.recipe_image) {
                 img.src = recipe.recipe_image;
             } else {
@@ -593,20 +670,18 @@
 
         // 根據傳入的排序條件來決定使用哪種排序方式
         function sortRecipes(data, criteria) {
-            // 為避免修改原始陣列，複製一份（淺拷貝）
-            const recipesCopy = [...data];
             switch (criteria) {
                 case 'date':
-                    return sortByDate(recipesCopy);
+                    return sortByDate(data);
                 case 'popular':
-                    return sortByLikes(recipesCopy);
+                    return sortByLikes(data);
                 case 'time':
-                    return sortByCookTime(recipesCopy);
+                    return sortByCookTime(data);
                 case 'rating':
-                    return sortByRating(recipesCopy);
+                    return sortByRating(data);
                 default:
                     // 預設使用日期排序
-                    return sortByDate(recipesCopy);
+                    return sortByDate(data);
             }
         }
 
@@ -638,19 +713,12 @@
             });
         }
 
-        // 渲染搜尋結果：顯示查詢筆數與結果列表
-        function renderSearchResults(results) {
-            const searchResults = document.getElementById('search-results');
-            // 清空先前搜尋結果
-            searchResults.innerHTML = '';
-
-            // 顯示搜尋結果筆數
-            const countInfo = document.createElement('p');
-            countInfo.textContent = keyword ? `搜尋結果：查詢到 ${results.length} 篇食譜` : `總共 ${results.length} 篇食譜`;
-            searchResults.appendChild(countInfo);
-
-            // 沒有結果時，直接返回
-            if (results.length === 0) return;
+        // 當圖片載入失敗時，改用預設圖片，並透過狀態檢查避免無限迴圈（這裡利用 class 標記）
+        function imgOnerror() {
+            if (!this.classList.contains('not-found-img')) {
+                this.src = '../img/image_Not_Found.png';
+                this.classList.add('not-found-img');
+            }
         }
 
         // 燈箱
@@ -658,8 +726,6 @@
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
             const recipeImgs = document.querySelectorAll('.recipe-img');
-            console.log(recipeImgs);
-            console.log(recipeImgs.length);
 
             // 當點擊任一食譜圖片時
             recipeImgs.forEach(img => {
@@ -698,8 +764,6 @@
             allRecipesData = await getRecipesData();
             // 初次渲染
             renderRecipes(allRecipesData);
-            // 燈箱
-            lightbox();
         })
     </script>
 

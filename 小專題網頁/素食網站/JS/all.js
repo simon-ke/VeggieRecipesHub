@@ -56,6 +56,7 @@ window.onscroll = () => {
 // 取得模態框及表單元素
 const loginModal = document.getElementById('login-modal');
 const registerModal = document.getElementById('register-modal');
+const trashModal = document.getElementById('trash-modal');
 // 開啟與關閉 Modal 的函式
 function openModal(modal) {
     modal.style.display = 'block';
@@ -230,6 +231,11 @@ function updateLoginStatus() {
         loginOut.textContent = '登出'
         userState.textContent = '個人資訊';
         LoginRegister.removeEventListener('click', handleRegisterOpen);
+        LoginRegister.addEventListener('click', (event) => {
+            event.preventDefault();
+            openModal(trashModal);
+            restoreRecipe();
+        });// 復原垃圾桶數據
         // 登出
         loginOut.addEventListener('click', (event) => {
             event.preventDefault();
@@ -295,6 +301,34 @@ function updateUrlAndReload(urlParams) {
     window.history.replaceState(null, '', newUrl);
     // 重新載入頁面以更新內容
     location.reload();
+}
+
+// 處理垃圾桶數據
+function restoreRecipe() {
+    // // 1. 從 localStorage 中取得垃圾桶資料
+    // let trashData = JSON.parse(localStorage.getItem('trash')) || [];
+    // // 取得該筆被復原的食譜
+    // const recipeToRestore = trashData.find(item => item.recipe_id === recipeID);
+
+    // if (recipeToRestore) {
+    //     // 2. 從垃圾桶中移除該食譜
+    //     trashData = trashData.filter(item => item.recipe_id !== recipeID);
+    //     localStorage.setItem('trash', JSON.stringify(trashData));
+
+    //     // 3. 將該食譜加入主食譜資料
+    //     let recipes = JSON.parse(localStorage.getItem('recipes')) || [];
+    //     recipes.push(recipeToRestore);
+    //     localStorage.setItem('recipes', JSON.stringify(recipes));
+
+    //     // 可同步更新 in-memory 的 allRecipesData（若有用到）
+    //     allRecipesData.push(recipeToRestore);
+
+    //     alert(`食譜「${recipeToRestore.recipe_title}」已復原！`);
+    //     // 在復原後，可以重新導向到主要介面或是刷新頁面以反映最新資料
+    //     window.location.reload();
+    // } else {
+    //     alert('找不到該食譜，無法復原！');
+    // }
 }
 
 // 在頁面載入時呼叫

@@ -127,7 +127,7 @@ p.recipe-description {
 
 .recipe-card .actions a {
     color: #f16e3f;
-    margin-right: 20px;
+    margin-right: 15px;
 }
 
 .recipe-card .actions a:hover {
@@ -137,17 +137,34 @@ p.recipe-description {
 .recipe-card .bookmark-button,
 .recipe-card .share-button {
     padding: 5px 10px;
-    margin-right: 20px;
+    margin-right: 15px;
     background-color: #f16e3f;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .recipe-card .bookmark-button:hover,
 .recipe-card .share-button:hover {
     background-color: #ff4500;
+}
+
+/* 刪除按鈕 */
+.recipe-card .delete-button {
+    padding: 5px 10px;
+    margin-left: auto;
+    background-color: #e33333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.recipe-card .delete-button:hover {
+    background-color: #d81111;
 }
 
 /* 燈箱樣式 */
@@ -291,6 +308,10 @@ p.recipe-description {
 
 .suggest-recipe-card button:hover {
     background-color: #ff4500;
+}
+
+.not-found-img {
+    border: 1px solid #ccc;
 }
 
 /* 反饋區塊 */

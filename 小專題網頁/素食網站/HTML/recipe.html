@@ -148,7 +148,10 @@
         <div class="breadcrumb"><!-- 動態生成頁籤 --></div>
 
         <!-- 用戶資訊 -->
-        <a class="user-info" href=""></a>
+        <div class="user-info">
+            <a class="user-link" href=""></a>
+            <button class="delete-button">將該食譜移至垃圾桶</button>
+        </div>
 
         <!-- 食譜介紹 -->
         <div class="recipe-header">
@@ -311,14 +314,13 @@
         </div>
     </footer>
 
-    <script src="../JS/all.js"></script>
-    <script src="../JS/recipe.js"></script>
-
     <script>
-        // 使用者狀態
-        const loggedInUser = localStorage.getItem('loggedInUser');
-        // 解析 URL 中的查詢參數
-        const urlParams = new URLSearchParams(window.location.search);
+        let allRecipesData = []; // 全局變數，用來暫存所有食譜資料
+
+        const loggedInUser = localStorage.getItem('loggedInUser'); // 讀取當前登入的使用者
+        const userId = loggedInUser ? JSON.parse(loggedInUser).user_id : null;
+
+        const urlParams = new URLSearchParams(window.location.search); // 解析 URL 中的查詢參數
         const category = urlParams.get('category'); // 再次取得 category
 
         // 從 URL 取得所需的 recipe id
@@ -372,38 +374,37 @@
         async function init() {
             try {
                 // 取得數據
-                const recipesData = await getRecipesData();
+                allRecipesData = await getRecipesData();
                 // 根據網址參數 id 找到對應的一筆數據
                 // find 方法 只會回傳第一個符合條件的元素，一旦找到第一個符合條件的元素後 find 就會立即停止搜尋，如果找不到符合的元素則回傳 undefined。
                 // filter 方法 回傳所有符合條件的元素
-                // 在 recipesData 陣列中尋找 recipe_id 等於 recipeId 的物件 
-                const recipe = recipesData.find(recipe => String(recipe.recipe_id) === String(recipeId));
+                // 在 allRecipesData 陣列中尋找 recipe_id 等於 recipeId 的物件 
+                const recipe = allRecipesData.find(recipe => String(recipe.recipe_id) === String(recipeId));
                 if (!recipe) {
                     console.error(`找不到 recipe_id 等於 ${recipeId} 的食譜`);
                     return;
                 }
                 // 建立食譜內容
                 renderRecipesData(recipe);
-                renderRelatedRecipe(recipesData);
+                renderRelatedRecipe(allRecipesData);
 
                 // 在 recipe 物件中獲取 user_id
-                const userId = recipe.user_id;
+                const recipeUserId = recipe.user_id;
                 const userData = await getUserData();
-                // 在 userData 陣列中尋找 user_id 等於 userId 的物件
-                const user = userData.find(user => String(user.user_id) === String(userId));
+                // 在 userData 陣列中尋找 user_id 等於 recipeUserId 的物件
+                const user = userData.find(user => String(user.user_id) === String(recipeUserId));
                 if (!user) {
-                    console.error(`找不到 user_id 等於 ${userId} 的使用者資料`);
+                    console.error(`找不到 user_id 等於 recipe.user_id 的使用者資料`);
                     document.querySelector('.user-info').innerHTML = '<p>找不到對應的使用者數據</p>';
                     return;
                 } else {
                     // 建立使用者內容
-                    renderUserData(user);
+                    renderUserData(user, recipe);
                 }
             } catch (error) {
                 console.error('初始化錯誤：', error);
             }
         }
-        document.addEventListener('DOMContentLoaded', init);
 
         // 動態生成食譜的 HTML 函式
         function renderRecipesData(recipesData) {
@@ -429,18 +430,19 @@
             }
 
             // ── 食譜介紹 ──
-            // 左區塊：圖片
+            // 左測圖片區塊
             const recipeImg = document.getElementById('left-section');
+            recipeImg.onerror = imgOnerror;
+            // 檢查是否存在圖片，若無則顯示預設圖片
             if (recipesData.recipe_image) {
                 recipeImg.src = recipesData.recipe_image;
             } else {
-                recipeImg.className = 'not-found-img';
                 recipeImg.src = '../img/image_Not_Found.png';
+                recipeImg.classList.add('not-found-img');
             }
             recipeImg.alt = recipesData.recipe_title;
 
             // 右區塊
-
             // 發布時間處理
             function formatDate(createdAt) {
                 const now = new Date();                   // 現在時間
@@ -599,7 +601,7 @@
                 }
 
                 stepImg.alt = `步驟 ${index + 1}`;
-                
+
                 // 步驟文字內容
                 const stepContent = document.createElement('div');
                 const stepTitle = document.createElement('h2');
@@ -630,6 +632,7 @@
 
                 // 建立圖片元件
                 const img = document.createElement('img');
+                img.onerror = imgOnerror;
                 if (recipe.recipe_image) {
                     img.src = recipe.recipe_image;
                 } else {
@@ -702,8 +705,8 @@
         }
 
         // 動態生成使用者的 HTML 函式
-        function renderUserData(userData) {
-            const userSection = document.querySelector('.user-info');
+        function renderUserData(userData, recipe) {
+            const userSection = document.querySelector('.user-link');
 
             const userAvatar = document.createElement('img');
             userAvatar.classList.add('user-avatar');
@@ -720,10 +723,57 @@
             const fansCount = document.createElement('p');
             fansCount.textContent = `${userData.fans_count || 0}粉絲`;
 
+            // 刪除食譜按鈕
+            const deleteBtn = document.querySelector('.delete-button');
+            if (userId === recipe.user_id) {
+                deleteBtn.style.display = 'block';
+            }
+            // 使用刪除功能
+            deleteBtn.addEventListener('click', () => {
+                const confirmed = confirm(`確定要將食譜「${recipe.recipe_title}」移至垃圾桶？`);
+                if (confirmed) {
+                    // 1. 把食譜移到垃圾桶 (暫存處)
+                    // 從 localStorage 取出原有垃圾桶資料，若不存在便建立一個空陣列
+                    let trashData = JSON.parse(localStorage.getItem('trash')) || [];
+                    trashData.push(recipe);
+                    localStorage.setItem('trash', JSON.stringify(trashData));
+                    console.log(trashData);
+
+                    // 2. 更新 allRecipesData：過濾掉要刪除的食譜
+                    allRecipesData = allRecipesData.filter(item => item.recipe_id !== recipe.recipe_id);
+
+                    // 3. 更新主食譜在 localStorage 中的資料 (存於 'recipes' key)
+                    let localStorageRecipes = JSON.parse(localStorage.getItem('recipes')) || [];
+                    localStorageRecipes = localStorageRecipes.filter(item => item.recipe_id !== recipe.recipe_id);
+                    localStorage.setItem('recipes', JSON.stringify(localStorageRecipes));
+
+                    alert('已成功將食譜移至垃圾桶！');
+                    if (!category || category === "null") {
+                        // 當 category 為 null、undefined 或者字串 "null" 時
+                        window.location.href = './recipeSelector.html';
+                    } else {
+                        // 當 category 有正常值時
+                        window.location.href = `./recipeSelector.html?category=${category}`;
+                    }
+                }
+            });
             // 將使用者資料組合至 userSection
             userSection.append(userAvatar, userName, totalRecipes, fansCount);
         }
+
+        // 為 img 元素綁定錯誤處理。
+        function imgOnerror() {
+            if (!this.classList.contains('not-found-img')) {
+                this.src = '../img/image_Not_Found.png';
+                this.classList.add('not-found-img');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
     </script>
+
+    <script src="../JS/all.js"></script>
+    <script src="../JS/recipe.js"></script>
 
 </body>
 
