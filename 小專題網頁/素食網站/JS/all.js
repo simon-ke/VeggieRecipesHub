@@ -187,6 +187,7 @@ document.querySelectorAll('.modal .close-btn').forEach(btn => {
 window.addEventListener('click', function (e) {
     if (e.target === loginModal) closeModal(loginModal);
     if (e.target === registerModal) closeModal(registerModal);
+    if (e.target === trashModal) closeModal(trashModal);
 });
 
 // 示範：更新頁面上登入狀態（例如：更新導覽列）
@@ -222,11 +223,17 @@ function updateLoginStatus() {
             alert('已成功登出！');
             // 更新登入狀態顯示
             updateLoginStatus();
-            location.reload();
+            window.location.replace('/小專題網頁/素食網站/index.html'); // 登出後跳轉首頁，並移除當前頁面的歷史紀錄
         });
     } else {
         loginOut.style.display = 'none';
         statusEl.textContent = '未登入';
+        // 未登入無法進入食譜發布頁面
+        document.querySelector('.upload-button').addEventListener('click', (event) => {
+            event.preventDefault();
+            alert('您尚未登入！');
+            openModal(loginModal);
+        });
     }
 }
 
