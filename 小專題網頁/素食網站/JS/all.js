@@ -168,7 +168,7 @@ function handleRegisterOpen(e) {
     closeModal(loginModal); // 關閉登入模態框（若開啟中）
     openModal(registerModal); // 打開註冊模態框
 }
-document.getElementById('login-register').addEventListener('click', handleRegisterOpen)
+document.querySelectorAll('.login-register').forEach(btn => { btn.addEventListener('click', handleRegisterOpen); });
 document.getElementById('show-register').addEventListener('click', handleRegisterOpen)
 document.getElementById('show-login').addEventListener('click', function (e) {
     e.preventDefault(); // 防止預設行為
@@ -193,21 +193,31 @@ window.addEventListener('click', function (e) {
 // 示範：更新頁面上登入狀態（例如：更新導覽列）
 function updateLoginStatus() {
     const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-    const statusEl = document.getElementById('login-status');
-    const loginOut = document.getElementById('login-out');
-    const LoginRegister = document.getElementById('login-register');
-    const userState = document.getElementById('user-state');
+    const statusEl = document.querySelectorAll('.login-status');
+    const loginOut = document.querySelectorAll('.login-out');
+    const LoginRegister = document.querySelectorAll('.login-register');
+    const userState = document.querySelectorAll('.user-state');
     if (loggedInUser) {
-        statusEl.textContent = `歡迎，${loggedInUser.user_name}`;
-        loginOut.style.display = 'block';
-        loginOut.textContent = '登出'
-        userState.textContent = '個人資訊';
-        getTrashText(loggedInUser);
-        LoginRegister.removeEventListener('click', handleRegisterOpen);
-        LoginRegister.addEventListener('click', () => {
-            localStorage.setItem('openModal', true); // 保存狀態到 localStorage
-            location.reload(); // 重整頁面
+        statusEl.forEach(el => el.textContent = `歡迎，${loggedInUser.user_name}`); // 隱藏登入狀態
+        loginOut.forEach(el => {
+            el.style.display = 'block';
+            el.textContent = '登出';
         });
+        userState.forEach(el => el.textContent = '個人資訊');
+        // userState.textContent = '個人資訊';
+        getTrashText(loggedInUser);
+        LoginRegister.forEach(el => {
+            el.removeEventListener('click', handleRegisterOpen);
+            el.addEventListener('click', () => {
+                localStorage.setItem('openModal', true); // 保存狀態到 localStorage
+                location.reload(); // 重整頁面
+            });
+        });
+        // LoginRegister.removeEventListener('click', handleRegisterOpen);
+        // LoginRegister.addEventListener('click', () => {
+        //     localStorage.setItem('openModal', true); // 保存狀態到 localStorage
+        //     location.reload(); // 重整頁面
+        // });
         window.addEventListener('load', () => {
             const shouldOpenModal = localStorage.getItem('openModal'); // 取出保存的狀態
             if (shouldOpenModal) {
@@ -216,18 +226,20 @@ function updateLoginStatus() {
             }
         });
         // 登出
-        loginOut.addEventListener('click', (event) => {
-            event.preventDefault();
-            // 清除登入狀態
-            localStorage.removeItem('loggedInUser');
-            alert('已成功登出！');
-            // 更新登入狀態顯示
-            updateLoginStatus();
-            window.location.replace('/小專題網頁/素食網站/index.html'); // 登出後跳轉首頁，並移除當前頁面的歷史紀錄
+        loginOut.forEach(el => {
+            el.addEventListener('click', (event) => {
+                event.preventDefault();
+                // 清除登入狀態
+                localStorage.removeItem('loggedInUser');
+                alert('已成功登出！');
+                // 更新登入狀態顯示
+                updateLoginStatus();
+                window.location.replace('/小專題網頁/素食網站/index.html'); // 登出後跳轉首頁，並移除當前頁面的歷史紀錄
+            });
         });
     } else {
-        loginOut.style.display = 'none';
-        statusEl.textContent = '未登入';
+        loginOut.forEach(el => el.style.display = 'none'); // 隱藏登出按鈕
+        statusEl.forEach(el => el.textContent = '未登入'); // 隱藏登入狀態
         // 未登入無法進入食譜發布頁面
         document.querySelector('.upload-button').addEventListener('click', (event) => {
             event.preventDefault();
@@ -412,6 +424,17 @@ document.getElementById('trash-recipes').addEventListener('click', function (eve
         deleteRecipe(recipeID);
     }
 });
+
+// 漢堡選單
+const hamburger = document.getElementById('hamburger-menu');
+hamburger.addEventListener('click', () => {
+    const mainMenu = document.querySelector('.main-menu');
+    const combintMenu = document.querySelector('.combint-menu');
+    hamburger.classList.toggle('active');
+    mainMenu.classList.toggle('active');
+    combintMenu.classList.toggle('active');
+});
+
 
 // 在頁面載入時呼叫
 document.addEventListener('DOMContentLoaded', () => {

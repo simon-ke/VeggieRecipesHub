@@ -20,16 +20,20 @@ html {
 a {
     text-decoration: none;
     color: inherit;
+    white-space: nowrap;
+}
+
+ul {
+    list-style: none;
 }
 
 /* 導覽列 */
 .nav-container {
-    height: 200px;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    border-bottom: 1px solid white;
+    background-color: #f9f9f9;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     top: 100px;
     transition: height 0.5s;
@@ -40,7 +44,7 @@ nav.fixed-nav {
     position: fixed;
     flex-direction: row;
     top: 0px;
-    background-color: white;
+    background-color: #f9f9f9;
     width: 100%;
     height: 60px;
     z-index: 100;
@@ -48,11 +52,12 @@ nav.fixed-nav {
 
 nav.fixed-nav .member-menu {
     order: 3;
+    margin: 0;
 }
 
 nav.fixed-nav .logo-container {
     order: 1;
-    margin: 0 100px;
+    margin: 0 0 0 100px;
 }
 
 nav.fixed-nav .logo-container img {
@@ -62,12 +67,30 @@ nav.fixed-nav .logo-container img {
 }
 
 nav.fixed-nav .logo-container .site-title {
-    font-size: 1.6em;
+    font-size: 1.8em;
 }
 
 nav.fixed-nav .menu-container {
     order: 2;
     margin: 0 auto;
+}
+
+nav.fixed-nav .main-menu li {
+    /* gap: 30px; */
+    /* padding-top: 10px; */
+}
+
+nav.fixed-nav ul.main-menu a {
+    padding: 15px 15px;
+    font-size: 1.2em;
+}
+
+nav.fixed-nav ul.submenu {
+    top: 57px;
+}
+
+nav.fixed-nav ul.submenu>li a {
+    padding: 10px 20px;
 }
 
 /* 第一列 */
@@ -76,10 +99,10 @@ nav.fixed-nav .menu-container {
     padding: 16px;
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
 }
 
-.member-menu #login-register {
+.login-register {
     position: relative;
     border: none;
     background: none;
@@ -94,12 +117,12 @@ nav.fixed-nav .menu-container {
     width: 30px;
 }
 
-#login-status {
-    font-size: 1em;
+.login-status {
+    font-size: 1.2em;
     font-weight: bold;
 }
 
-#login-out {
+.login-out {
     display: none;
     padding: 3px 6px;
     font-size: 1em;
@@ -107,19 +130,18 @@ nav.fixed-nav .menu-container {
     background-color: #ffffff;
     color: #000000;
     border: 2px solid #000000;
-    ;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
 }
 
-#login-out:hover {
+.login-out:hover {
     border-color: #4CAF50;
     color: #4CAF50;
     transition: border-color 0.3s, color 0.3s;
 }
 
-#user-state {
+.user-state {
     font-size: 1.1em;
 }
 
@@ -127,19 +149,19 @@ nav.fixed-nav .menu-container {
     visibility: hidden;
     background-color: #8f8f8f;
     color: #fff;
-    width: 80px;
+    width: auto;
+    white-space: nowrap;
     text-align: center;
     border-radius: 5px;
     padding: 5px;
     position: absolute;
-    /* 提示框的位置 */
     top: 120%;
-    margin-left: -70px;
+    margin-left: -60px;
     opacity: 0;
-    transition: opacity 0.3s;
+    transition: opacity 0.5s;
 }
 
-#login-register:hover .tooltip,
+.login-register:hover .tooltip,
 .member-menu a:hover .tooltip {
     visibility: visible;
     opacity: 1;
@@ -147,10 +169,9 @@ nav.fixed-nav .menu-container {
 
 /* 第二列 */
 .logo-container {
-    margin-top: -50px;
+    margin: -50px 0 10px 0;
     display: flex;
     align-items: center;
-    justify-content: center;
 }
 
 img.logo {
@@ -165,43 +186,47 @@ img.logo {
 }
 
 /* 第三列 */
-.menu-container {
-    display: flex;
-    justify-content: center;
-    padding: 20px 0;
-    margin-top: -10px;
-}
-
 .main-menu {
     display: flex;
-    list-style: none;
 }
 
-ul li {
-    margin: 0 15px;
+ul.main-menu li {
     position: relative;
 }
 
-ul a {
-    text-decoration: none;
+ul.main-menu a {
+    display: block;
+    width: 100%;
+    padding: 0 30px 10px 30px;
+    /* padding-bottom: 10px; */
     color: black;
     font-size: 1.2em;
-}
-
-.submenu>li {
-    margin: 10px 22px;
+    transition: color 0.3s ease;
 }
 
 ul.submenu {
     visibility: hidden;
-    opacity: 0;
     position: absolute;
-    top: 100%;
-    left: -8%;
-    background-color: white;
-    list-style-type: none;
-    z-index: 1;
+    z-index: 10;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0;
     transition: opacity 0.3s ease, visibility 0.3s ease;
+    width: 80%;
+    top: 37px;
+    left: 10px;
+}
+
+/* ul.submenu>li {
+    margin: 10px 0;
+} */
+
+ul.submenu>li a {
+    /* display: block; */
+    padding: 10px 20px;
 }
 
 .dropdown:hover .submenu {
@@ -218,6 +243,12 @@ ul.submenu {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* 漢堡選單 */
+/* 預設：大螢幕時讓主要選單呈現，漢堡選單隱藏 */
+#hamburger-menu {
+    display: none;
 }
 
 /* 固定導覽列搜尋區塊修正 */
@@ -560,7 +591,7 @@ footer {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: #28a745; /* 綠色提示背景 */
+    background-color: #28a745;
     color: white;
     padding: 10px 15px;
     border-radius: 5px;
@@ -570,8 +601,225 @@ footer {
 }
 
 @keyframes fadeInOut {
-    0% { opacity: 0; transform: translateY(10px); }
-    10% { opacity: 1; transform: translateY(0); }
-    90% { opacity: 1; transform: translateY(0); }
-    100% { opacity: 0; transform: translateY(10px); }
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    10% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    90% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+}
+
+/* 整合選單 */
+.combint-menu {
+    visibility: hidden;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 30%;
+    height: 100%;
+    background-color: #fff;
+    flex-direction: column;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.combint {
+    padding: 30px 10px 0 10px;
+}
+
+.combint .login-status {
+    display: block;
+    margin: 20px 0;
+}
+
+.combint .member button,
+.combint .login-out {
+    margin: 0 10px 20px 0;
+}
+
+.combint .member a {
+    margin-right: 10px;
+}
+
+.combint .member img {
+    width: 30px;
+}
+
+.combint .main a {
+    display: block;
+    padding-bottom: 20px;
+}
+
+@media (max-width: 1300px) {
+    nav.fixed-nav .member-menu {
+        gap: 10px;
+    }
+
+    nav.fixed-nav .logo-container {
+        margin: 0 15px;
+    }
+
+    nav.fixed-nav .logo-container .site-title {
+        font-size: 1.4em;
+    }
+
+    nav.fixed-nav .main-menu {
+        font-size: 0.9em;
+    }
+
+    nav.fixed-nav ul.main-menu a {
+        padding: 15px 10px;
+    }
+
+    nav.fixed-nav .login-status {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 1024px) {
+
+    /* LOGO */
+    nav.fixed-nav .logo-container {
+        margin: 0 30px 0 60px;
+    }
+
+    /* 會員 */
+    nav.fixed-nav .member-menu {
+        margin-left: auto;
+        gap: 20px;
+    }
+
+    /* 漢堡選單按鈕 */
+    nav.fixed-nav #hamburger-menu {
+        display: block;
+        width: 30px;
+        height: 25px;
+        position: relative;
+        cursor: pointer;
+        z-index: 1;
+        order: 4;
+        margin: 0 20px;
+    }
+
+    /* 漢堡按鈕內的橫線 */
+    nav.fixed-nav #hamburger-menu span {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 3px;
+        background: #333;
+        /* 可依需求調整顏色 */
+        border-radius: 2px;
+        /* left: 0; */
+        transition: transform 0.3s ease;
+    }
+
+    /* 定義每條橫線的位置 */
+    nav.fixed-nav #hamburger-menu span:nth-child(1) {
+        top: 0;
+    }
+
+    nav.fixed-nav #hamburger-menu span:nth-child(2) {
+        top: 10px;
+    }
+
+    nav.fixed-nav #hamburger-menu span:nth-child(3) {
+        top: 20px;
+    }
+
+    /* 漢堡按鈕在 active 狀態下，將第一及第三條旋轉並位移，中間隱藏 */
+    nav.fixed-nav #hamburger-menu.active span:nth-child(1) {
+        transform: translateY(10px) rotate(45deg);
+    }
+
+    nav.fixed-nav #hamburger-menu.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    nav.fixed-nav #hamburger-menu.active span:nth-child(3) {
+        transform: translateY(-10px) rotate(-45deg);
+    }
+
+    /* 下拉選單 */
+    nav.fixed-nav .main-menu {
+        visibility: hidden;
+        position: absolute;
+        top: 39px;
+        right: 0;
+        opacity: 0;
+        transform: scale(0.95) translateY(0);
+        transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+        flex-direction: column;
+
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+        border-top: none;
+        border-right: none;
+        border-radius: 0 0 0 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 10px;
+    }
+
+    nav.fixed-nav .main-menu .submenu {
+        background-color: #f9f9f9;
+        color: #333;
+        border-radius: 0 0 5px 5px;
+    }
+
+    /* 選單展開 */
+    nav.fixed-nav .main-menu.active {
+        visibility: visible;
+        opacity: 1;
+        transform: scale(1) translateY(20px);
+    }
+}
+
+@media (max-width: 700px) {
+
+    /* 會員 */
+    nav.fixed-nav .member-menu {
+        display: none;
+    }
+
+    /* 會員 */
+    /* nav.fixed-nav .menu-container {
+        display: none;
+    } */
+    nav.fixed-nav .main-menu {
+        display: none;
+    }
+
+    /* 漢堡選單按鈕 */
+    nav.fixed-nav #hamburger-menu {
+        margin-left: auto;
+    }
+
+    /* 整合選單 */
+    nav.fixed-nav .combint-menu {
+        transform: translateX(100%);
+        transition: transform 0.3s ease, visibility 0.3s ease;
+    }
+
+    nav.fixed-nav .combint-menu.active {
+        /* display: flex; */
+        visibility: visible;
+        transform: translateX(0);
+    }
+
+
+    /* nav .main-menu {} */
+
+    /* nav .main-menu.active {} */
 }

@@ -12,7 +12,7 @@
 <body>
     <!-- 頁首 -->
     <header>
-        <!-- Modal Container -->
+        <!-- Modal Container 透過點擊按鈕開啟 登入、註冊 視窗 -->
         <div class="modal-container">
             <!-- 登入 Modal -->
             <div id="login-modal" class="modal">
@@ -64,6 +64,7 @@
             </div>
         </div>
 
+        <!-- 透過點擊按鈕開啟 垃圾桶 -->
         <div id="trash-modal" class="modal">
             <div class="modal-content">
                 <button class="close-btn" aria-label="Close">&times;</button>
@@ -73,14 +74,22 @@
 
         <!-- 導覽列 -->
         <nav class="nav-container">
+
+            <!-- 漢堡按鈕 -->
+            <div id="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
             <!-- 第一列 -->
             <div class="member-menu">
-                <span id="login-status"></span>
-                <button id="login-out"></button>
-                <a id="login-register" href="#">
-                    <img src="./img/icons/user.png" alt="登入註冊">
-                    <span id="user-state" class="tooltip">登入註冊</span>
-                </a>
+                <span class="login-status"></span>
+                <button class="login-out"></button>
+                <button class="login-register">
+                    <img class="login-singup" src="./img/icons/user.png" alt="登入註冊" />
+                    <span class="user-state tooltip">登入註冊</span>
+                </button>
                 <a href="#">
                     <img src="./img/icons/shopping-cart.png" alt="購物車">
                     <span class="tooltip">購物車</span>
@@ -101,11 +110,6 @@
 
             <!-- 第三列 -->
             <div class="menu-container">
-                <div class="hamburger-menu" onclick="toggleMenu()">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
                 <ul class="main-menu">
                     <li><a href="./index.html">首頁</a></li>
                     <li class="dropdown">
@@ -126,6 +130,52 @@
                     <li><a href="#">常見問題</a></li>
                 </ul>
             </div>
+
+            <!-- 介面小於700px 整合選單 -->
+            <div class="combint-menu">
+                <!-- 第一列: 會員相關選單 -->
+                <ul class="combint">
+                    <li><span class="login-status"></span></li>
+                    <li><button class="login-out">登出</button></li>
+                    <li>
+                        <div class="member">
+                            <button class="login-register">
+                                <img class="login-singup" src="./img/icons/user.png" alt="登入註冊" />
+                                <span class="user-state tooltip">登入註冊</span>
+                            </button>
+                            <a href="#">
+                                <img src="./img/icons/shopping-cart.png" alt="購物車">
+                                <span class="tooltip">購物車</span>
+                            </a>
+                            <a href="#">
+                                <img src="./img/icons/message.png" alt="聯絡我們">
+                                <span class="tooltip">聯絡我們</span>
+                            </a>
+                        </div>
+                    </li>
+                    <!-- 第三列: 原本的主選單 -->
+                    <div class="main">
+                        <li><a href="./index.html">首頁</a></li>
+                        <li class="dropdown">
+                            <a href="#">食譜分類&#9662;</a>
+                            <ul class="submenu">
+                                <li><a href="./HTML/recipeSelector.html?category=早餐">早餐</a></li>
+                                <li><a href="./HTML/recipeSelector.html?category=飯">飯</a></li>
+                                <li><a href="./HTML/recipeSelector.html?category=麵">麵</a></li>
+                                <li><a href="./HTML/recipeSelector.html?category=米粉">米粉</a></li>
+                                <li><a href="./HTML/recipeSelector.html?category=蔬菜">蔬菜</a></li>
+                                <li><a href="./HTML/recipeSelector.html?category=鹹點">鹹點</a></li>
+                                <li><a href="./HTML/recipeSelector.html?category=甜點">甜點</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">營養資訊</a></li>
+                        <li><a href="#">購物清單</a></li>
+                        <li><a href="#">聯絡我們</a></li>
+                        <li><a href="#">常見問題</a></li>
+                    </div>
+                </ul>
+            </div>
+
         </nav>
 
         <!-- 第四列 -->
