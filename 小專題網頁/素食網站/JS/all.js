@@ -1,27 +1,67 @@
-// 觸發事件後 className 的新增與移除
+// 定義函數，用來根據條件切換某個元素的 class
 function toggleClassOnScroll(element, className, condition) {
     if (condition) {
-        element.classList.add(className);
+        element.classList.add(className);  // 當條件為 true 時，加入指定的 class
     } else {
-        element.classList.remove(className);
+        element.classList.remove(className);  // 當條件為 false 時，移除指定的 class
     }
 }
-// 當頁面滾動時觸發滾輪事件
-window.onscroll = () => {
-    const nav = document.querySelector('.nav-container');
-    const searchContainer = document.querySelector('.recipe-actions');
-    const backToTopButton = document.getElementById('back-to-top');
-    // 固定導覽列
+
+// 操作的 DOM 元素
+const nav = document.querySelector('.nav-container');
+const searchContainer = document.querySelector('.recipe-actions');
+const backToTopButton = document.getElementById('back-to-top');
+const dropDown = document.getElementById('dropdown');
+
+/*
+ * 更新介面函數
+ * 說明：
+ * - 根據視窗寬度（小於 768px 與大於等於 768px）設定不同的固定導覽列行為
+ * - 根據滾動位置切換 "back-to-top" 按鈕與下拉選單的狀態
+ * - 當滾動位置過低時，移除漢堡選單、主選單、其他選單及遮罩的 active 狀態
+ */
+function updateInterface() {
+    // 使用 requestAnimationFrame 在瀏覽器準備重繪畫面前呼叫特定的回調函數，讓更新動作剛好和畫面刷新結合，使動畫與介面更新效果更流暢。並根據瀏覽器的刷新率來執行回調，如果使用者瀏覽器處於非可見狀態（例如標籤頁切換到背景），瀏覽器會自動降低或暫停回調執行，這樣可以降低 CPU 負擔。
     requestAnimationFrame(() => {
-        toggleClassOnScroll(nav, 'fixed-nav', window.scrollY > 200);
-        toggleClassOnScroll(searchContainer, 'fixed-recipe-actions', window.scrollY > 200);
+        // 當視窗寬度小於 768px 時：導覽列及食譜操作區塊始終固定（條件：scrollY >= 0）
+        if (window.innerWidth < 768) {
+            toggleClassOnScroll(nav, 'fixed-nav', window.scrollY >= 0);
+            toggleClassOnScroll(searchContainer, 'fixed-recipe-actions', window.scrollY >= 0);
+        } else {
+            // 當視窗寬度大於等於 768px 時：僅在滾動超過 200px 後才固定導覽列與操作區塊
+            toggleClassOnScroll(nav, 'fixed-nav', window.scrollY > 200);
+            toggleClassOnScroll(searchContainer, 'fixed-recipe-actions', window.scrollY > 200);
+        }
+        // 根據文件滾動的狀態來切換 "back-to-top" 按鈕的顯示狀態
         toggleClassOnScroll(backToTopButton, 'show', document.documentElement.scrollTop > 500);
+        // 根據滾動位置來切換下拉選單 (例如，當滾動位置小於 200px 時加入 'dropdown' class)
+        toggleClassOnScroll(dropDown, 'dropdown', window.scrollY < 200);
     });
-    // 點擊圖片回到頂部
-    backToTopButton.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-};
+
+    // 當頁面滾動位置很靠上（低於 200px）時，移除部分元素的 active 狀態
+    if (window.scrollY < 200 && window.innerWidth >= 768) {
+        hamburger.classList.remove('active');
+        mainMenu.classList.remove('active');
+        combintMenu.classList.remove('active');
+        openBackground.classList.remove('active');
+        // 移除所有 submenu 的 active 狀態
+        submenu.forEach(el => el.classList.remove('active'));
+        // 移除所有 liActive 元素的 active 狀態
+        liActive.forEach(el => el.classList.remove('active'));
+    }
+}
+
+// 綁定滾動事件：每當頁面滾動時都呼叫 updateInterface() 更新介面
+window.addEventListener('scroll', updateInterface);
+
+// 綁定視窗調整大小事件：使用戶變更瀏覽器大小時，同樣呼叫 updateInterface()
+// 可確保介面根據最新視窗尺寸即時更新樣式與行為
+window.addEventListener('resize', updateInterface);
+
+// 當按下該按鈕時，平滑捲回頁面頂部
+backToTopButton.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 
 
 // 登入註冊處理
@@ -427,12 +467,35 @@ document.getElementById('trash-recipes').addEventListener('click', function (eve
 
 // 漢堡選單
 const hamburger = document.getElementById('hamburger-menu');
+const mainMenu = document.querySelector('.main-menu'); // 主選單
+const combintMenu = document.querySelector('.combint-menu'); // 小介面選單
+const openBackground = document.querySelector('.combint-background')
 hamburger.addEventListener('click', () => {
-    const mainMenu = document.querySelector('.main-menu');
-    const combintMenu = document.querySelector('.combint-menu');
     hamburger.classList.toggle('active');
     mainMenu.classList.toggle('active');
     combintMenu.classList.toggle('active');
+    openBackground.classList.toggle('active');
+    submenu.forEach(el => { el.classList.remove('active'); });
+    liActive.forEach(el => { el.classList.remove('active') });
+});
+
+// 分類選單
+const submenu = document.querySelectorAll('.submenu'); // 食譜分類
+const liActive = document.querySelectorAll('.submenu-open'); // 食譜分類的下一個 li 元素
+const recipeCategory = document.querySelectorAll('.recipe-category');
+recipeCategory.forEach(element => {
+    element.addEventListener('click', function (e) {
+        e.preventDefault(); // 阻止預設的連結跳轉行為
+        submenu.forEach(el => { el.classList.toggle('active') }); // 切換 submenu 的 "active" 狀態
+
+        // 檢查是否至少一個 submenu 擁有 "active" class
+        const hasActiveSubmenu = Array.from(submenu).some(el => el.classList.contains('active'));
+        if (hasActiveSubmenu) {
+            liActive.forEach(el => el.classList.add('active'));
+        } else {
+            liActive.forEach(el => el.classList.remove('active'));
+        }
+    });
 });
 
 
@@ -441,4 +504,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeUsers();
     updateLoginStatus();
     initSearchInput();
+    updateInterface();
 });

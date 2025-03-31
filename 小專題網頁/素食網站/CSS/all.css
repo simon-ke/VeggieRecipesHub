@@ -2,7 +2,6 @@ html {
     box-sizing: border-box;
     scroll-behavior: smooth;
     transition: top 0.3s ease-in-out;
-    /* 添加過渡效果 */
 }
 
 *,
@@ -36,7 +35,7 @@ ul {
     background-color: #f9f9f9;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     top: 100px;
-    transition: height 0.5s;
+    transition: height 0.3s;
 }
 
 /* 固定導覽列 */
@@ -75,11 +74,6 @@ nav.fixed-nav .menu-container {
     margin: 0 auto;
 }
 
-nav.fixed-nav .main-menu li {
-    /* gap: 30px; */
-    /* padding-top: 10px; */
-}
-
 nav.fixed-nav ul.main-menu a {
     padding: 15px 15px;
     font-size: 1.2em;
@@ -102,15 +96,13 @@ nav.fixed-nav ul.submenu>li a {
     gap: 15px;
 }
 
-.login-register {
+.login-register,
+.shopping-cart,
+.message {
     position: relative;
     border: none;
     background: none;
     cursor: pointer;
-}
-
-.member-menu a {
-    position: relative;
 }
 
 .member-menu img {
@@ -141,10 +133,6 @@ nav.fixed-nav ul.submenu>li a {
     transition: border-color 0.3s, color 0.3s;
 }
 
-.user-state {
-    font-size: 1.1em;
-}
-
 .tooltip {
     visibility: hidden;
     background-color: #8f8f8f;
@@ -158,11 +146,12 @@ nav.fixed-nav ul.submenu>li a {
     top: 120%;
     margin-left: -60px;
     opacity: 0;
-    transition: opacity 0.5s;
+    transition: opacity 0.3s;
 }
 
 .login-register:hover .tooltip,
-.member-menu a:hover .tooltip {
+.shopping-cart:hover .tooltip,
+.message:hover .tooltip {
     visibility: visible;
     opacity: 1;
 }
@@ -198,9 +187,8 @@ ul.main-menu a {
     display: block;
     width: 100%;
     padding: 0 30px 10px 30px;
-    /* padding-bottom: 10px; */
     color: black;
-    font-size: 1.2em;
+    font-size: 1.3em;
     transition: color 0.3s ease;
 }
 
@@ -214,19 +202,14 @@ ul.submenu {
     border-radius: 0 0 5px 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     opacity: 0;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition: opacity 0.3s ease;
     width: 80%;
     top: 37px;
     left: 10px;
 }
 
-/* ul.submenu>li {
-    margin: 10px 0;
-} */
-
 ul.submenu>li a {
-    /* display: block; */
-    padding: 10px 20px;
+    padding: 10px 35px;
 }
 
 .dropdown:hover .submenu {
@@ -346,7 +329,7 @@ ul.submenu>li a {
     position: fixed;
     bottom: 150px;
     right: 40px;
-    z-index: 100;
+    z-index: 10;
     cursor: pointer;
     transition: opacity 0.3s;
 }
@@ -628,38 +611,56 @@ footer {
     position: fixed;
     top: 0;
     right: 0;
-    width: 30%;
+    width: 240px;
     height: 100%;
+    padding-top: 10px;
     background-color: #fff;
     flex-direction: column;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
 }
 
-.combint {
-    padding: 30px 10px 0 10px;
+.combint-menu ul li {
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid #ccc;
 }
 
-.combint .login-status {
-    display: block;
-    margin: 20px 0;
+.combint-status {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
-.combint .member button,
-.combint .login-out {
-    margin: 0 10px 20px 0;
+.combint-menu .member {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
-.combint .member a {
-    margin-right: 10px;
+.combint-menu .member>* {
+    text-align: center;
+    width: 100%;
+    height: 100%;
 }
 
-.combint .member img {
+.combint-menu .member img {
     width: 30px;
+    height: 30px;
+    object-fit: cover;
 }
 
-.combint .main a {
+.combint-menu .main li>a {
     display: block;
-    padding-bottom: 20px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.combint-menu ul li>a:hover {
+    background-color: #f9f9f9;
+    color: #4CAF50;
 }
 
 @media (max-width: 1300px) {
@@ -668,7 +669,7 @@ footer {
     }
 
     nav.fixed-nav .logo-container {
-        margin: 0 15px;
+        margin: 0 10px;
     }
 
     nav.fixed-nav .logo-container .site-title {
@@ -688,7 +689,17 @@ footer {
     }
 }
 
+@media (min-width: 1024px) {
+    #dropdown:hover .submenu {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
 @media (max-width: 1024px) {
+    ul.main-menu a {
+        padding: 0 20px 10px 20px ;
+    }
 
     /* LOGO */
     nav.fixed-nav .logo-container {
@@ -697,7 +708,6 @@ footer {
 
     /* 會員 */
     nav.fixed-nav .member-menu {
-        margin-left: auto;
         gap: 20px;
     }
 
@@ -752,64 +762,150 @@ footer {
         transform: translateY(-10px) rotate(-45deg);
     }
 
-    /* 下拉選單 */
+    /* 主選單 */
     nav.fixed-nav .main-menu {
         visibility: hidden;
         position: absolute;
-        top: 39px;
+        top: 40px;
         right: 0;
         opacity: 0;
         transform: scale(0.95) translateY(0);
-        transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+        transition: opacity 0.3s ease, transform 0.3s ease;
         flex-direction: column;
+        width: 160px;
 
         background-color: #f9f9f9;
         border: 1px solid #ccc;
-        border-top: none;
         border-right: none;
         border-radius: 0 0 0 5px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        padding: 10px;
+
+
+        max-height: calc(100vh - 80px);
+        /*  100vh 減去上方空隙 */
+        overflow-y: auto;
+        /* 超出部分顯示捲軸 */
     }
 
-    nav.fixed-nav .main-menu .submenu {
-        background-color: #f9f9f9;
-        color: #333;
-        border-radius: 0 0 5px 5px;
+    nav.fixed-nav ul.main-menu li {
+        border-bottom: 1px solid #ccc;
     }
 
-    /* 選單展開 */
+    nav.fixed-nav ul.main-menu a {
+        display: block;
+        width: 100%;
+        height: 100%;
+        padding: 10px 30px;
+    }
+
+    /* 主選單展開 */
     nav.fixed-nav .main-menu.active {
         visibility: visible;
         opacity: 1;
         transform: scale(1) translateY(20px);
+        z-index: 100;
+    }
+
+    /* 分類選單展開 */
+    nav.fixed-nav #dropdown .submenu {
+        transform: translateY(0);
+    }
+
+    nav.fixed-nav #dropdown .submenu.active {
+        visibility: visible;
+        border: none;
+        box-shadow: none;
+        opacity: 1;
+        color: #333;
+        width: 100%;
+        left: 0;
+        top: 0;
+        transform: translateY(45px);
+        background-color: inherit;
+        transition: display 0.3s ease;
+    }
+
+    nav.fixed-nav #dropdown .submenu a {
+        height: 0;
+    }
+
+    nav.fixed-nav #dropdown .submenu.active a {
+        border: none;
+        height: 45px;
+        padding-left: 50px;
+    }
+
+    /* nav.fixed-nav #dropdown .submenu.active {
+        display: block;
+        visibility: visible;
+    } */
+
+    /* 當展開 submenu 時 推移內容 */
+    nav.fixed-nav .submenu-open.active {
+        margin-top: 320px;
+        transition: margin-top 0.2s ease;
     }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
+    .tooltip {
+        top: 45px;
+        margin-left: -45px;
+    }
 
     /* 會員 */
     nav.fixed-nav .member-menu {
         display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+    }
+
+    nav.fixed-nav .combint-menu {
+        z-index: 10;
+
+    }
+
+    nav.fixed-nav .combint-background.active {
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
     }
 
     /* 會員 */
-    /* nav.fixed-nav .menu-container {
+    nav.fixed-nav .menu-container {
         display: none;
-    } */
+    }
+
     nav.fixed-nav .main-menu {
-        display: none;
+        /* display: none; */
     }
 
     /* 漢堡選單按鈕 */
     nav.fixed-nav #hamburger-menu {
         margin-left: auto;
+        z-index: 1000;
     }
 
     /* 整合選單 */
     nav.fixed-nav .combint-menu {
         transform: translateX(100%);
         transition: transform 0.3s ease, visibility 0.3s ease;
+
+        max-height: calc(100%);
+        /*  100vh 減去上方空隙 */
+        overflow-y: auto;
+        /* 超出部分顯示捲軸 */
     }
 
     nav.fixed-nav .combint-menu.active {
@@ -818,8 +914,33 @@ footer {
         transform: translateX(0);
     }
 
+    nav.fixed-nav #dropdown-btn {
+        position: relative;
+    }
 
-    /* nav .main-menu {} */
+    nav.fixed-nav #dropdown-btn .submenu.active {
+        visibility: visible;
+        border: none;
+        /* border-top: 1px solid #ccc; */
+        box-shadow: none;
+        opacity: 1;
+        color: #333;
+        width: 100%;
+        left: 0;
+        top: 0;
+        margin-top: 5px;
+        transform: translateY(45px);
+        background-color: inherit;
+        transition: display 0.3s ease;
+    }
 
-    /* nav .main-menu.active {} */
+    /* 當展開 submenu 時 推移內容 */
+    nav.fixed-nav .submenu-open.active {
+        margin-top: 344px;
+        transition: margin-top 0.2s ease;
+    }
+
+    .fixed-recipe-actions {
+        padding-top: 60px;
+    }
 }

@@ -88,16 +88,16 @@
                 <button class="login-out"></button>
                 <button class="login-register">
                     <img class="login-singup" src="./img/icons/user.png" alt="登入註冊" />
-                    <span class="user-state tooltip">登入註冊</span>
+                    <span class="tooltip">登入註冊</span>
                 </button>
-                <a href="#">
+                <button class="shopping-cart">
                     <img src="./img/icons/shopping-cart.png" alt="購物車">
                     <span class="tooltip">購物車</span>
-                </a>
-                <a href="#">
+                </button>
+                <button class="message">
                     <img src="./img/icons/message.png" alt="聯絡我們">
                     <span class="tooltip">聯絡我們</span>
-                </a>
+                </button>
             </div>
 
             <!-- 第二列 -->
@@ -112,8 +112,8 @@
             <div class="menu-container">
                 <ul class="main-menu">
                     <li><a href="./index.html">首頁</a></li>
-                    <li class="dropdown">
-                        <a href="#">食譜分類&#9662;</a>
+                    <li id="dropdown" class="dropdown">
+                        <a href="#" class="recipe-category">食譜分類<span class="arrow">&#9662;</span></a>
                         <ul class="submenu">
                             <li><a href="./HTML/recipeSelector.html?category=早餐">早餐</a></li>
                             <li><a href="./HTML/recipeSelector.html?category=飯">飯</a></li>
@@ -124,40 +124,40 @@
                             <li><a href="./HTML/recipeSelector.html?category=甜點">甜點</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">營養資訊</a></li>
+                    <li class="submenu-open"><a href="#">營養資訊</a></li>
                     <li><a href="#">購物清單</a></li>
                     <li><a href="#">聯絡我們</a></li>
                     <li><a href="#">常見問題</a></li>
                 </ul>
             </div>
 
-            <!-- 介面小於700px 整合選單 -->
+            <!-- 介面小於768px 整合選單 -->
+            <div class="combint-background"></div>
             <div class="combint-menu">
                 <!-- 第一列: 會員相關選單 -->
                 <ul class="combint">
-                    <li><span class="login-status"></span></li>
-                    <li><button class="login-out">登出</button></li>
-                    <li>
-                        <div class="member">
-                            <button class="login-register">
-                                <img class="login-singup" src="./img/icons/user.png" alt="登入註冊" />
-                                <span class="user-state tooltip">登入註冊</span>
-                            </button>
-                            <a href="#">
-                                <img src="./img/icons/shopping-cart.png" alt="購物車">
-                                <span class="tooltip">購物車</span>
-                            </a>
-                            <a href="#">
-                                <img src="./img/icons/message.png" alt="聯絡我們">
-                                <span class="tooltip">聯絡我們</span>
-                            </a>
-                        </div>
+                    <li></li>
+                    <li class="combint-status"><span class="login-status"></span><button class="login-out">登出</button>
+                    </li>
+                    <li class="member">
+                        <button class="login-register">
+                            <img class="login-singup" src="./img/icons/user.png" alt="登入註冊" />
+                            <span class="user-state tooltip">登入註冊</span>
+                        </button>
+                        <button class="shopping-cart">
+                            <img src="./img/icons/shopping-cart.png" alt="購物車">
+                            <span class="tooltip">購物車</span>
+                        </button>
+                        <button class="message">
+                            <img src="./img/icons/message.png" alt="聯絡我們">
+                            <span class="tooltip">聯絡我們</span>
+                        </button>
                     </li>
                     <!-- 第三列: 原本的主選單 -->
                     <div class="main">
                         <li><a href="./index.html">首頁</a></li>
-                        <li class="dropdown">
-                            <a href="#">食譜分類&#9662;</a>
+                        <li id="dropdown-btn">
+                            <a href="#" class="recipe-category">食譜分類&#9662;</a>
                             <ul class="submenu">
                                 <li><a href="./HTML/recipeSelector.html?category=早餐">早餐</a></li>
                                 <li><a href="./HTML/recipeSelector.html?category=飯">飯</a></li>
@@ -168,7 +168,7 @@
                                 <li><a href="./HTML/recipeSelector.html?category=甜點">甜點</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">營養資訊</a></li>
+                        <li class="submenu-open"><a href="#">營養資訊</a></li>
                         <li><a href="#">購物清單</a></li>
                         <li><a href="#">聯絡我們</a></li>
                         <li><a href="#">常見問題</a></li>

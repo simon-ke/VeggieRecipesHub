@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="綠藝饗宴 - 最佳素食食譜平台" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="綠藝饗宴 - 最佳素食食譜平台">
     <title>食譜瀏覽 - 綠藝饗宴</title>
     <link rel="stylesheet" href="../CSS/recipeSelector.css" />
 </head>
@@ -76,27 +76,35 @@
 
         <!-- 導覽列 -->
         <nav class="nav-container">
+
+            <!-- 漢堡按鈕 -->
+            <div id="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
             <!-- 第一列 -->
             <div class="member-menu">
-                <span id="login-status"></span>
-                <button id="login-out"></button>
-                <button id="login-register">
+                <span class="login-status"></span>
+                <button class="login-out"></button>
+                <button class="login-register">
                     <img class="login-singup" src="../img/icons/user.png" alt="登入註冊" />
-                    <span id="user-state" class="tooltip">登入註冊</span>
+                    <span class="tooltip">登入註冊</span>
                 </button>
-                <a href="#">
-                    <img class="shopping-cart" src="../img/icons/shopping-cart.png" alt="購物車" />
+                <button class="shopping-cart">
+                    <img src="../img/icons/shopping-cart.png" alt="購物車">
                     <span class="tooltip">購物車</span>
-                </a>
-                <a href="#">
-                    <img class="contact-us" src="../img/icons/message.png" alt="聯絡我們" />
+                </button>
+                <button class="message">
+                    <img src="../img/icons/message.png" alt="聯絡我們">
                     <span class="tooltip">聯絡我們</span>
-                </a>
+                </button>
             </div>
 
             <!-- 第二列 -->
             <div class="logo-container">
-                <a href="../index.html"><img class="logo" src="../img/vegetable_LOGO.jpg" alt="綠藝饗宴 LOGO" /></a>
+                <a href="../index.html"><img class="logo" src="../img/vegetable_LOGO.jpg" alt="綠藝饗宴 LOGO"></a>
                 <a href="../index.html">
                     <h1 class="site-title">綠藝饗宴</h1>
                 </a>
@@ -104,15 +112,10 @@
 
             <!-- 第三列 -->
             <div class="menu-container">
-                <div class="hamburger-menu" onclick="toggleMenu()">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
                 <ul class="main-menu">
                     <li><a href="../index.html">首頁</a></li>
-                    <li class="dropdown">
-                        <a href="#">食譜分類&#9662;</a>
+                    <li id="dropdown" class="dropdown">
+                        <a href="#" class="recipe-category">食譜分類<span class="arrow">&#9662;</span></a>
                         <ul class="submenu">
                             <li><a href="./recipeSelector.html?category=早餐">早餐</a></li>
                             <li><a href="./recipeSelector.html?category=飯">飯</a></li>
@@ -123,13 +126,60 @@
                             <li><a href="./recipeSelector.html?category=甜點">甜點</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">營養資訊</a></li>
+                    <li class="submenu-open"><a href="#">營養資訊</a></li>
                     <li><a href="#">購物清單</a></li>
                     <li><a href="#">聯絡我們</a></li>
                     <li><a href="#">常見問題</a></li>
                 </ul>
             </div>
+
+            <!-- 介面小於768px 整合選單 -->
+            <div class="combint-background"></div>
+            <div class="combint-menu">
+                <!-- 第一列: 會員相關選單 -->
+                <ul class="combint">
+                    <li></li>
+                    <li class="combint-status"><span class="login-status"></span><button class="login-out">登出</button>
+                    </li>
+                    <li class="member">
+                        <button class="login-register">
+                            <img class="login-singup" src="../img/icons/user.png" alt="登入註冊" />
+                            <span class="user-state tooltip">登入註冊</span>
+                        </button>
+                        <button class="shopping-cart">
+                            <img src="../img/icons/shopping-cart.png" alt="購物車">
+                            <span class="tooltip">購物車</span>
+                        </button>
+                        <button class="message">
+                            <img src="../img/icons/message.png" alt="聯絡我們">
+                            <span class="tooltip">聯絡我們</span>
+                        </button>
+                    </li>
+                    <!-- 第三列: 原本的主選單 -->
+                    <div class="main">
+                        <li><a href="./index.html">首頁</a></li>
+                        <li id="dropdown-btn">
+                            <a href="#" class="recipe-category">食譜分類&#9662;</a>
+                            <ul class="submenu">
+                                <li><a href="./HTML/recipeSelector.html?category=早餐">早餐</a></li>
+                                <li><a href="./HTML/recipeSelector.html?category=飯">飯</a></li>
+                                <li><a href="./HTML/recipeSelector.html?category=麵">麵</a></li>
+                                <li><a href="./HTML/recipeSelector.html?category=米粉">米粉</a></li>
+                                <li><a href="./HTML/recipeSelector.html?category=蔬菜">蔬菜</a></li>
+                                <li><a href="./HTML/recipeSelector.html?category=鹹點">鹹點</a></li>
+                                <li><a href="./HTML/recipeSelector.html?category=甜點">甜點</a></li>
+                            </ul>
+                        </li>
+                        <li class="submenu-open"><a href="#">營養資訊</a></li>
+                        <li><a href="#">購物清單</a></li>
+                        <li><a href="#">聯絡我們</a></li>
+                        <li><a href="#">常見問題</a></li>
+                    </div>
+                </ul>
+            </div>
+
         </nav>
+
         <!-- 第四列 -->
         <div class="recipe-actions">
             <!-- 搜尋區塊 -->
