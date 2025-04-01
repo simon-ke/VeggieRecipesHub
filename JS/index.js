@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 利用本地端JSON檔案 動態生成熱門食譜卡片
     // 發送請求載入預設數據
-    fetch('/recipes.json')
+    fetch('./recipes.json')
         // （原始數據）轉換成（JSON格式）
         .then(response => response.json())
         .then(recipesData => {
