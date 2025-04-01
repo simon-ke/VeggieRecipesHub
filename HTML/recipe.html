@@ -393,7 +393,7 @@
             const storedRecipes = storedData ? JSON.parse(storedData) : [];
 
             // 透過 fetch 取得預設數據
-            return fetch('../recipes.json')
+            return fetch('../data/recipes.json')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -413,7 +413,7 @@
             const storedUser = storedData ? JSON.parse(storedData) : [];
 
             // 透過 fetch 取得預設使用者數據
-            return fetch('../users.json')
+            return fetch('../data/users.json')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');

@@ -83,7 +83,7 @@ async function initializeUsers() {
     // 將 users 的數據重置為一個空陣列。
     // localStorage.setItem('users', JSON.stringify([]));
     try {
-        const response = await fetch('./data/users.json');
+        const response = await fetch('../data/users.json');
         if (!response.ok) {
             throw new Error(`讀取 JSON 檔案失敗，狀態碼：${response.status}`);
         }
