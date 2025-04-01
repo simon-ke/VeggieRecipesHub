@@ -393,7 +393,7 @@
             const storedRecipes = storedData ? JSON.parse(storedData) : [];
 
             // 透過 fetch 取得預設數據
-            return fetch('../data/recipes.json')
+            return fetch('https://simon-ke.github.io/VeggieRecipesHub/data/recipes.json')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -413,7 +413,7 @@
             const storedUser = storedData ? JSON.parse(storedData) : [];
 
             // 透過 fetch 取得預設使用者數據
-            return fetch('../data/users.json')
+            return fetch('https://simon-ke.github.io/VeggieRecipesHub/data/users.json')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');

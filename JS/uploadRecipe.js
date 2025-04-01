@@ -233,7 +233,7 @@ async function initializeRecipes() {
     // 將 recipes 的數據重置為一個空陣列。
     // localStorage.setItem('recipes', JSON.stringify([]));
     try {
-        const response = await fetch('../data/recipes.json');
+        const response = await fetch('https://simon-ke.github.io/VeggieRecipesHub/data/recipes.json');
         if (!response.ok) {
             throw new Error(`讀取 JSON 檔案失敗，狀態碼：${response.status}`);
         }
@@ -254,7 +254,7 @@ let user = []; // 初始化登入的使用者數據
 // 取得 JSON 檔案 與 localStorage 中的使用者數據 儲存到 userData 變數中
 async function getUserData() {
     try {
-        const response = await fetch('../data/users.json');
+        const response = await fetch('https://simon-ke.github.io/VeggieRecipesHub/data/users.json');
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }

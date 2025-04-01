@@ -279,7 +279,7 @@
         async function getRecipesData() {
             try {
                 // 透過 fetch 取得預設數據
-                const response = await fetch("../data/recipes.json");
+                const response = await fetch('https://simon-ke.github.io/VeggieRecipesHub/data/recipes.json');
                 const defaultRecipes = await response.json();
 
                 // 從 localStorage 取得用戶新增的數據
