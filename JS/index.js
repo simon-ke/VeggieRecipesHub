@@ -211,9 +211,13 @@ function initCardSlider(containerID, cardSelector, prevButtonSelector, nextButto
 
 
 document.addEventListener("DOMContentLoaded", async () => {
-    // 取得食譜數據並記錄到全局變數
-    const allRecipesData = await getRecipesData();
-    // 初次渲染
-    renderRecipes(allRecipesData);
-    console.log(allRecipesData); // 檢查資料內容
+    try {
+        const allRecipesData = await getRecipesData(); // 確保取得資料
+        if (!Array.isArray(allRecipesData)) {
+            throw new Error("資料非陣列格式");
+        }
+        renderRecipes(allRecipesData); // 渲染食譜
+    } catch (error) {
+        console.error("載入資料時發生錯誤:", error);
+    }
 });
