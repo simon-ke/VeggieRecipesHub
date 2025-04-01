@@ -26,7 +26,7 @@ function renderRecipes(recipesData) {
     const newRecipeContainer = document.getElementById('new-recipe-container');// 取得 new-recipe-container 元素，後續將 recipeCard 元素加入其中
 
     // 篩選並排序：僅保留最多 likes 的前六個食譜
-    const topRecipes = [...recipesData].sort((a, b) => b.likes - a.likes).slice(0, 6);
+    const topRecipes = recipesData.sort((a, b) => b.likes - a.likes).slice(0, 6);
 
     // 遍歷每一個 recipe 物件，並在 top-recipe-container 元素中建立 recipeCard 元素
     topRecipes.forEach(recipe => {
