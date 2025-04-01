@@ -83,7 +83,7 @@ async function initializeUsers() {
     // 將 users 的數據重置為一個空陣列。
     // localStorage.setItem('users', JSON.stringify([]));
     try {
-        const response = await fetch('/小專題網頁/素食網站/users.json');
+        const response = await fetch('/users.json');
         if (!response.ok) {
             throw new Error(`讀取 JSON 檔案失敗，狀態碼：${response.status}`);
         }
@@ -274,7 +274,7 @@ function updateLoginStatus() {
                 alert('已成功登出！');
                 // 更新登入狀態顯示
                 updateLoginStatus();
-                window.location.replace('/小專題網頁/素食網站/index.html'); // 登出後跳轉首頁，並移除當前頁面的歷史紀錄
+                window.location.replace('/index.html'); // 登出後跳轉首頁，並移除當前頁面的歷史紀錄
             });
         });
     } else {
@@ -332,7 +332,7 @@ function clearSearchHandler() {
 function updateUrlAndReload(urlParams) {
     // 將查詢參數轉換為字串；若無參數則不附加 '?' 符號
     const queryString = urlParams.toString();
-    const newUrl = window.location.origin + '/小專題網頁/素食網站/HTML/recipeSelector.html' + (queryString ? '?' + queryString : '');
+    const newUrl = window.location.origin + '/HTML/recipeSelector.html' + (queryString ? '?' + queryString : '');
     // 使用 history API 更新瀏覽器的網址
     window.history.replaceState(null, '', newUrl);
     // 重新載入頁面以更新內容
