@@ -117,7 +117,7 @@ function createTopRecipeCard(recipe) {
         return null; // 若發生錯誤，回傳 null 以避免程式崩潰
     }
 }
-// 熱門食譜卡片內容
+// 最新食譜卡片內容
 function createNewRecipeCard(recipe) {
     try {
         // 建立一個新的 recipeCard 元素，並加入 標籤 CSS class
