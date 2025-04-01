@@ -13,11 +13,23 @@ async function getRecipesData() {
         return [...defaultRecipes, ...storedRecipes];
     } catch (error) {
         console.error('Error fetching recipes:', error);
-        const errorMessage = document.createElement('p');
-        errorMessage.textContent = '無法載入食譜資料，請稍後再試。';
-        document.getElementById('top-recipe-container').appendChild(errorMessage);
-        document.getElementById('new-recipe-container').appendChild(errorMessage);
-    };
+
+        // 找到容器元素
+        const containers = ['top-recipe-container', 'new-recipe-container'];
+        containers.forEach(containerId => {
+            const container = document.getElementById(containerId);
+
+            // 清除舊的錯誤訊息
+            const oldErrorMessage = container.querySelector('.error-message');
+            if (oldErrorMessage) container.removeChild(oldErrorMessage);
+
+            // 新增新的錯誤訊息
+            const errorMessage = document.createElement('p');
+            errorMessage.className = 'error-message'; // 為錯誤訊息新增 class 以便操作
+            errorMessage.textContent = '無法載入食譜資料，請稍後再試。';
+            container.appendChild(errorMessage);
+        });
+    }
 }
 
 function renderRecipes(recipesData) {
