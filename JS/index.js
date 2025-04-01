@@ -2,7 +2,7 @@
 async function getRecipesData() {
     try {
         // 透過 fetch 取得預設數據
-        const response = await fetch("../recipes.json");
+        const response = await fetch("/recipes.json");
         const defaultRecipes = await response.json();
 
         // 從 localStorage 取得用戶新增的數據
