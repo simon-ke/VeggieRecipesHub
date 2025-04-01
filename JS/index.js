@@ -208,7 +208,7 @@ function initCardSlider(containerID, cardSelector, prevButtonSelector, nextButto
 
 document.addEventListener("DOMContentLoaded", async () => {
     // 取得食譜數據並記錄到全局變數
-    allRecipesData = await getRecipesData();
+    const allRecipesData = await getRecipesData();
     // 初次渲染
     renderRecipes(allRecipesData);
 });
