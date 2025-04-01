@@ -16,6 +16,7 @@ async function getRecipesData() {
         const errorMessage = document.createElement('p');
         errorMessage.textContent = '無法載入食譜資料，請稍後再試。';
         document.getElementById('top-recipe-container').appendChild(errorMessage);
+        document.getElementById('new-recipe-container').appendChild(errorMessage);
     };
 }
 
