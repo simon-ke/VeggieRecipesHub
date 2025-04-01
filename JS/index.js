@@ -39,7 +39,9 @@ function renderRecipes(recipesData) {
     const newRecipeContainer = document.getElementById('new-recipe-container');// 取得 new-recipe-container 元素，後續將 recipeCard 元素加入其中
 
     // 篩選並排序：僅保留最多 likes 的前六個食譜
-    const topRecipes = recipesData.sort((a, b) => b.likes - a.likes).slice(0, 6);
+    const topRecipes = recipesData
+        .sort((a, b) => Number(b.likes) - Number(a.likes)) // 將 likes 轉為數字進行比較
+        .slice(0, 6);
 
     // 遍歷每一個 recipe 物件，並在 top-recipe-container 元素中建立 recipeCard 元素
     topRecipes.forEach(recipe => {
@@ -55,7 +57,9 @@ function renderRecipes(recipesData) {
     topRecipeContainer.appendChild(topFragment);
 
     // 篩選並排序：最新 created_at 的前六個食譜
-    const newRecipes = recipesData.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).slice(0, 6); // 取前六項
+    const newRecipes = recipesData
+        .sort((a, b) => new Date(b.created_at) - new Date(a.created_at)) // 使用日期排序
+        .slice(0, 6);
 
     newRecipes.forEach(recipe => {
         const recipeCard = createNewRecipeCard(recipe);
@@ -198,17 +202,18 @@ function initCardSlider(containerID, cardSelector, prevButtonSelector, nextButto
         updateCards();
     }
 
+    // 初始化兩組不同的卡片輪播效果
     nextButton.addEventListener("click", showNext);
     prevButton.addEventListener("click", showPrev);
 
     updateCards();
 }
 
-// 初始化兩組不同的卡片輪播效果
 
 document.addEventListener("DOMContentLoaded", async () => {
     // 取得食譜數據並記錄到全局變數
     const allRecipesData = await getRecipesData();
     // 初次渲染
     renderRecipes(allRecipesData);
+    console.log(allRecipesData); // 檢查資料內容
 });
