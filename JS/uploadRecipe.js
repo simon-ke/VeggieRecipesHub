@@ -599,7 +599,7 @@ function validateMaterialSection(sectionName, materials, inputNameSelector, inpu
 const saveButton = document.getElementById('save');
 saveButton.addEventListener('click', (event) => {
     event.preventDefault(); // 防止默認表單提交行為
-    if (!loggedInUser) {
+    if (!user) {
         alert('請先登入才能儲存食譜！');
     } else {
         alert('食譜已成功儲存！');
