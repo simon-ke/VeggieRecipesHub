@@ -217,6 +217,12 @@
             <div class="right-section">
                 <span class="recipe-date"></span>
                 <h2 class="recipe-title"></h2>
+                <div class="portion-time">
+                    <img src="../img/icons/fork_spoon_icon.png" alt="">
+                    <span id="portion"></span>
+                    <img src="../img/icons/clock_time_icon.png" alt="">
+                    <span id="time"></span>
+                </div>
                 <a class="rating" href="#"></a>
                 <p class="recipe-tag"></p>
                 <p class="recipe-description"></p>
@@ -234,21 +240,9 @@
 
             <!-- 食譜列表 -->
             <section class="ingredient">
-                <!-- 食材 -->
                 <div>
-                    <div class="ingredient-info">
-                        <h2>食材</h2>
-                        <div>
-                            <img src="../img/icons/fork_spoon_icon.png" alt="">
-                            <span id="portion"></span>
-                        </div>
-                        <div>
-                            <img src="../img/icons/clock_time_icon.png" alt="">
-                            <span id="time"></span>
-                        </div>
-                    </div>
+                    <h2 class="section-title">食材</h2>
                     <table id="ingredient_table"><!-- 動態生成食材表格 --></table>
-
                 </div>
             </section>
 

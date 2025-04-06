@@ -100,7 +100,7 @@
     display: flex;
     width: 100%;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
 }
 
 .recipe-date {
@@ -114,15 +114,26 @@
     color: #333;
 }
 
+.portion-time {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.portion-time img {
+    width: 20px;
+}
+.portion-time span {
+    margin-right: 20px;
+}
+
 .rating {
-    font-size: 0.8em;
+    font-size: 1em;
     color: #777;
-    margin-top: -10px;
 }
 
 .rating span {
-    font-size: 1.5em;
-    margin: 0 10px;
+    margin: 0 15px;
     color: rgb(255, 196, 0);
 }
 
@@ -185,30 +196,13 @@
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
+    letter-spacing: 2px;
 }
 
 .ingredient:hover,
 .seasoning:hover,
 .nutrition:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.ingredient-info {
-    display: flex;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 5px;
-}
-
-.ingredient-info div {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.ingredient-info img {
-    width: 20px;
-    margin-right: 10px;
 }
 
 .section-title {
