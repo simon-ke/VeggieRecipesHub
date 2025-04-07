@@ -71,9 +71,6 @@ function renderRecipes(recipesData) {
         }
     });
     newRecipeContainer.appendChild(newFragment);
-
-    initCardSlider("top-recipe-container", ".recipe-card", ".prev-button", ".next-button");
-    initCardSlider("new-recipe-container", ".new-recipe-card", ".new-prev-button", ".new-next-button");
 }
 
 // 熱門食譜卡片內容
@@ -159,57 +156,6 @@ function createNewRecipeCard(recipe) {
     }
 }
 
-// 卡片的切換功能
-function initCardSlider(containerID, cardSelector, prevButtonSelector, nextButtonSelector, cardsPerGroup = 3) {
-    const cardsContainer = document.getElementById(containerID);
-    const cards = Array.from(cardsContainer.querySelectorAll(cardSelector));
-    const prevButton = document.querySelector(prevButtonSelector);
-    const nextButton = document.querySelector(nextButtonSelector);
-    let currentIndex = 0;
-    const totalCards = cards.length;
-
-    if (!cardsContainer || cards.length === 0 || !prevButton || !nextButton) return;
-
-    function updateCards() {
-        cards.forEach((card, index) => {
-            const isVisible = (index >= currentIndex && index < currentIndex + cardsPerGroup) ||
-                (currentIndex + cardsPerGroup >= totalCards && index < (currentIndex + cardsPerGroup) % totalCards);
-            card.classList.toggle("active", isVisible);
-            card.style.visibility = isVisible ? 'visible' : 'hidden';
-        });
-
-        cardsContainer.innerHTML = "";
-        for (let i = 0; i < cardsPerGroup; i++) {
-            const index = (currentIndex + i) % totalCards;
-            cardsContainer.appendChild(cards[index]);
-        }
-    }
-
-    function applyAnimation(outCard, inCard, outClass, inClass) {
-        if (outCard) outCard.classList.add(outClass);
-        if (inCard) inCard.classList.add(inClass);
-    }
-
-    function showNext() {
-        applyAnimation(cards[currentIndex], cards[(currentIndex + cardsPerGroup) % totalCards], "slide-out-left", "slide-in-right");
-        currentIndex = (currentIndex + 1) % totalCards;
-        updateCards();
-    }
-
-    function showPrev() {
-        applyAnimation(cards[(currentIndex + cardsPerGroup - 1) % totalCards], cards[currentIndex], "slide-out-right", "slide-in-left");
-        currentIndex = (currentIndex - 1 + totalCards) % totalCards;
-        updateCards();
-    }
-
-    // 初始化兩組不同的卡片輪播效果
-    nextButton.addEventListener("click", showNext);
-    prevButton.addEventListener("click", showPrev);
-
-    updateCards();
-}
-
-
 document.addEventListener("DOMContentLoaded", async () => {
     try {
         const allRecipesData = await getRecipesData(); // 確保取得資料
@@ -220,4 +166,129 @@ document.addEventListener("DOMContentLoaded", async () => {
     } catch (error) {
         console.error("載入資料時發生錯誤:", error);
     }
+    mouseCarousel(carouselTop); // 初始化滑動效果
+    mouseCarousel(carouselNew); // 初始化滑動效果
 });
+
+
+
+
+
+
+
+
+// 建立推薦卡片函式
+function createSuggestRecipeCard(recipe) {
+    // 建立圖片元件
+    const img = document.createElement('img');
+    img.onerror = imgOnerror;
+
+    if (recipe.recipe_image) {
+        img.src = recipe.recipe_image;
+    } else {
+        img.src = "../img/image_Not_Found.png";
+        img.classList.add('not-found-img');
+    }
+    img.alt = recipe.recipe_title;
+}
+
+// 當圖片載入失敗時，改用預設圖片，並透過狀態檢查避免無限迴圈（這裡利用 class 標記）
+function imgOnerror() {
+    if (!this.classList.contains('not-found-img')) {
+        this.src = '../img/image_Not_Found.png';
+        this.classList.add('not-found-img');
+    }
+}
+
+// 卡片滑動
+const carouselTop = document.getElementById("top-recipe-container");
+const carouselNew = document.getElementById("new-recipe-container");
+function mouseCarousel(element) {
+    let isDragging = false;
+    let startX, scrollLeft;
+    let velocity = 0;
+    let momentumID;
+    let lastMove = 0;
+    let moved = false;
+
+    // 取消動量追蹤
+    function cancelMomentumTracking() {
+        cancelAnimationFrame(momentumID);
+    }
+
+    // 開始動量追蹤
+    function beginMomentumTracking() {
+        cancelMomentumTracking();
+
+        function momentumLoop() {
+            element.scrollLeft += velocity;
+            velocity *= 0.95; // 緩慢減速
+
+            // 當速度過小時停止動畫
+            if (Math.abs(velocity) > 0.5) {
+                momentumID = requestAnimationFrame(momentumLoop);
+            } else {
+                cancelMomentumTracking();
+            }
+        }
+        momentumLoop();
+    }
+
+    // 滑鼠按下
+    element.addEventListener("mousedown", (e) => {
+        e.preventDefault();
+        isDragging = true;
+        moved = false;
+        element.style.cursor = "grabbing";
+        startX = e.pageX - element.offsetLeft;
+        scrollLeft = element.scrollLeft;
+        velocity = 0;
+        lastMove = 0;
+        cancelMomentumTracking();
+    });
+
+    // 滑鼠移動
+    element.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        moved = true;
+        element.style.cursor = "grabbing";
+        const x = e.pageX - element.offsetLeft;
+        const move = x - startX;
+
+        // 記錄當前速度 (修正方向)
+        velocity = (lastMove - move) * 0.3;
+        lastMove = move;
+
+        element.scrollLeft = scrollLeft - move;
+    });
+
+    // 滑鼠放開
+    element.addEventListener("mouseup", (e) => {
+        isDragging = false;
+        element.style.cursor = "grab";
+
+        // 確保拖動後不會觸發點擊
+        if (moved) {
+            e.preventDefault();
+        }
+
+        // 如果有移動才啟動動量效果
+        if (moved) {
+            beginMomentumTracking();
+        }
+    });
+
+    // 滑鼠離開
+    element.addEventListener("mouseleave", () => {
+        isDragging = false;
+        element.style.cursor = "grab";
+    });
+
+    // 防止 a 標籤在拖動時觸發點擊
+    element.addEventListener("click", (e) => {
+        if (moved) {
+            e.preventDefault();
+        }
+    });
+}
