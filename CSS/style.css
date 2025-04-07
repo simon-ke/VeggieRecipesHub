@@ -89,8 +89,10 @@
 .health-articles,
 .partner-logos {
     display: flex;
-    gap: 15px;
+    flex-wrap: nowrap;
+    gap: 30px;
     margin: 10px 0;
+    justify-content: center;
 }
 
 /* 卡片設定 */
@@ -267,4 +269,139 @@
     height: 300px;
     border-radius: 5px;
     object-fit: cover;
+}
+
+
+@media (max-width: 1024px) {
+
+    /* 主打橫幅 */
+    .hero-banner {
+        height: 400px;
+        margin: 0 10%;
+    }
+
+    /* 主內容區塊 */
+    .content-container {
+        margin: 40px 5%;
+    }
+
+    /* 個人化、健康與營養、合作品牌區塊 */
+    .recommendation-cards,
+    .health-articles,
+    .partner-logos {
+        width: auto;
+        gap: 15px;
+    }
+
+    /* 卡片設定 */
+    .recommendation-card,
+    .health-article {
+        width: auto;
+        flex: 1;
+        padding: 10px;
+    }
+
+    .recommendation-card h4,
+    .health-article h4 {
+        font-size: 1.2em;
+        margin-top: 5px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* 主打橫幅 */
+    .hero-banner {
+        height: 300px;
+        margin: 0 5%;
+    }
+
+    /* 主打橫幅按鈕 */
+    .cta-button {
+        padding: 12px 24px;
+        font-size: 1.1em;
+    }
+
+    /* 主內容區塊 */
+    .content-container {
+        margin: 20px 5%;
+    }
+
+    .content-container h2 {
+        margin-top: 5px;
+        font-size: 1.5em;
+    }
+
+    /* 卡片設定 */
+    .recipe-card,
+    .new-recipe-card,
+    .recommendation-card,
+    .health-article,
+    .partner-logo {
+        width: 300px;
+    }
+
+    /* 推薦與最新區塊 */
+    .recommended-recipes,
+    .new-recipes {
+        padding: 5px 5px;
+    }
+
+    .recipe-cards-container {
+        gap: 10px;
+        padding: 10px 5px;
+    }
+
+    /* 個人化、健康與營養、合作品牌區塊 */
+    .recommendation-cards,
+    .health-articles,
+    .partner-logos {
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+
+    /* 合作品牌區塊 */
+    .partner-logo {
+        padding: 12px;
+        border: 2px solid #e7e7e7;
+        border-radius: 5px;
+        width: 400px;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .partner-logo img {
+        width: 100%;
+        height: 240px;
+        border-radius: 5px;
+        object-fit: cover;
+    }
+}
+
+@media (max-width: 480px) {
+
+    /* 主打橫幅 */
+    .hero-banner {
+        height: 200px;
+        margin: 0 5%;
+    }
+
+    /* 主打橫幅按鈕 */
+    .cta-button {
+        padding: 8px 16px;
+        font-size: 1em;
+    }
+
+    /* 卡片設定 */
+    .recipe-card,
+    .new-recipe-card,
+    .recommendation-card,
+    .health-article,
+    .partner-logo {
+        width: 280px;
+        padding: 10px;
+    }
 }

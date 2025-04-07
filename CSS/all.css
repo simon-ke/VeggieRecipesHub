@@ -324,7 +324,6 @@ ul.submenu>li a {
     width: 40px;
     height: 40px;
     display: none;
-    /* 預設隱藏 */
     position: fixed;
     bottom: 150px;
     right: 40px;
@@ -697,7 +696,7 @@ footer {
 
 @media (max-width: 1024px) {
     ul.main-menu a {
-        padding: 0 20px 10px 20px ;
+        padding: 0 20px 10px 20px;
     }
 
     /* LOGO */
@@ -941,5 +940,23 @@ footer {
 
     .fixed-recipe-actions {
         padding-top: 60px;
+    }
+
+    /* 搜尋區塊 */
+    .recipe-actions {
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+
+    .search-container {
+        flex-direction: column;
+        margin: 20px 20px;
+    }
+
+    /* 回到頂部 */
+    #back-to-top {
+        width: 30px;
+        height: 30px;
+        bottom: 180px;
     }
 }
