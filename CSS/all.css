@@ -45,7 +45,7 @@ nav.fixed-nav {
     background-color: #f9f9f9;
     width: 100%;
     height: 60px;
-    z-index: 100;
+    z-index: 10;
 }
 
 nav.fixed-nav .member-menu {
@@ -81,11 +81,11 @@ nav.fixed-nav ul.main-menu a {
 nav.fixed-nav ul.submenu {
     top: 57px;
     left: 0;
-    width: 100%;
+    width: 90%;
 }
 
 nav.fixed-nav ul.submenu>li a {
-    padding: 10px 20px;
+    padding: 10px 25px;
     width: 100%;
 }
 
@@ -231,9 +231,52 @@ ul.submenu>li a {
 }
 
 /* 漢堡選單 */
-/* 預設：大螢幕時讓主要選單呈現，漢堡選單隱藏 */
 #hamburger-menu {
     display: none;
+    width: 30px;
+    height: 25px;
+    position: relative;
+    cursor: pointer;
+    order: 4;
+    margin: 0 20px;
+    z-index: 100;
+}
+
+/* 漢堡按鈕內的橫線 */
+#hamburger-menu span {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background: #333;
+    border-radius: 2px;
+    transition: transform 0.3s ease;
+}
+
+/* 定義每條橫線的位置 */
+#hamburger-menu span:nth-child(1) {
+    top: 0;
+}
+
+#hamburger-menu span:nth-child(2) {
+    top: 10px;
+}
+
+#hamburger-menu span:nth-child(3) {
+    top: 20px;
+}
+
+/* 漢堡按鈕在 active 狀態下，將第一及第三條旋轉並位移，中間隱藏 */
+#hamburger-menu.active span:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+}
+
+#hamburger-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+
+#hamburger-menu.active span:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg);
 }
 
 /* 固定導覽列搜尋區塊修正 */
@@ -606,6 +649,19 @@ footer {
     }
 }
 
+/* 展開整合選單的灰色背景 */
+.combint-background {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+}
+
 /* 整合選單 */
 .combint-menu {
     visibility: hidden;
@@ -618,6 +674,7 @@ footer {
     background-color: #fff;
     flex-direction: column;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+    z-index: 10;
 }
 
 .combint-menu ul li {
@@ -715,52 +772,6 @@ footer {
     /* 漢堡選單按鈕 */
     nav.fixed-nav #hamburger-menu {
         display: block;
-        width: 30px;
-        height: 25px;
-        position: relative;
-        cursor: pointer;
-        z-index: 1;
-        order: 4;
-        margin: 0 20px;
-    }
-
-    /* 漢堡按鈕內的橫線 */
-    nav.fixed-nav #hamburger-menu span {
-        display: block;
-        position: absolute;
-        width: 100%;
-        height: 3px;
-        background: #333;
-        /* 可依需求調整顏色 */
-        border-radius: 2px;
-        /* left: 0; */
-        transition: transform 0.3s ease;
-    }
-
-    /* 定義每條橫線的位置 */
-    nav.fixed-nav #hamburger-menu span:nth-child(1) {
-        top: 0;
-    }
-
-    nav.fixed-nav #hamburger-menu span:nth-child(2) {
-        top: 10px;
-    }
-
-    nav.fixed-nav #hamburger-menu span:nth-child(3) {
-        top: 20px;
-    }
-
-    /* 漢堡按鈕在 active 狀態下，將第一及第三條旋轉並位移，中間隱藏 */
-    nav.fixed-nav #hamburger-menu.active span:nth-child(1) {
-        transform: translateY(10px) rotate(45deg);
-    }
-
-    nav.fixed-nav #hamburger-menu.active span:nth-child(2) {
-        opacity: 0;
-    }
-
-    nav.fixed-nav #hamburger-menu.active span:nth-child(3) {
-        transform: translateY(-10px) rotate(-45deg);
     }
 
     /* 主選單 */
@@ -854,52 +865,28 @@ footer {
         margin-left: -45px;
     }
 
-    /* 會員 */
+    /* 隱藏大介面會員 */
     nav.fixed-nav .member-menu {
         display: none;
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        justify-content: center;
     }
 
-    nav.fixed-nav .combint-menu {
-        z-index: 10;
-
-    }
-
-    nav.fixed-nav .combint-background.active {
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        justify-content: center;
-    }
-
-    /* 會員 */
+    /* 隱藏大介面選單 */
     nav.fixed-nav .menu-container {
         display: none;
-    }
-
-    nav.fixed-nav .main-menu {
-        /* display: none; */
     }
 
     /* 漢堡選單按鈕 */
     nav.fixed-nav #hamburger-menu {
         margin-left: auto;
-        z-index: 1000;
+    }
+
+    /* 展開整合選單的灰色背景 */
+    .combint-background.active {
+        display: block;
     }
 
     /* 整合選單 */
-    nav.fixed-nav .combint-menu {
+    .combint-menu {
         transform: translateX(100%);
         transition: transform 0.3s ease, visibility 0.3s ease;
 
@@ -909,20 +896,18 @@ footer {
         /* 超出部分顯示捲軸 */
     }
 
-    nav.fixed-nav .combint-menu.active {
-        /* display: flex; */
+    .combint-menu.active {
         visibility: visible;
         transform: translateX(0);
     }
 
-    nav.fixed-nav #dropdown-btn {
+    #dropdown-btn {
         position: relative;
     }
 
-    nav.fixed-nav #dropdown-btn .submenu.active {
+    #dropdown-btn .submenu.active {
         visibility: visible;
         border: none;
-        /* border-top: 1px solid #ccc; */
         box-shadow: none;
         opacity: 1;
         color: #333;
@@ -936,7 +921,7 @@ footer {
     }
 
     /* 當展開 submenu 時 推移內容 */
-    nav.fixed-nav .submenu-open.active {
+    .submenu-open.active {
         margin-top: 344px;
         transition: margin-top 0.2s ease;
     }
