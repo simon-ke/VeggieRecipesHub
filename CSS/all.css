@@ -80,10 +80,13 @@ nav.fixed-nav ul.main-menu a {
 
 nav.fixed-nav ul.submenu {
     top: 57px;
+    left: 0;
+    width: 100%;
 }
 
 nav.fixed-nav ul.submenu>li a {
     padding: 10px 20px;
+    width: 100%;
 }
 
 /* 第一列 */
@@ -208,7 +211,7 @@ ul.submenu {
 }
 
 ul.submenu>li a {
-    padding: 10px 35px;
+    padding: 10px 25px;
 }
 
 .dropdown:hover .submenu {
@@ -955,8 +958,9 @@ footer {
 
     /* 回到頂部 */
     #back-to-top {
-        width: 30px;
-        height: 30px;
-        bottom: 180px;
+        width: 40px;
+        height: 40px;
+        bottom: 200px;
+        right: 5px;
     }
 }
