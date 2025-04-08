@@ -59,7 +59,7 @@ nav.fixed-nav .logo-container {
 }
 
 nav.fixed-nav .logo-container img {
-    width: 100%;
+    width: 60px;
     height: 60px;
     border-radius: 50px;
 }
@@ -167,6 +167,7 @@ nav.fixed-nav ul.submenu>li a {
 
 img.logo {
     width: 120px;
+    height: 120px;
     border-radius: 70px;
 }
 
