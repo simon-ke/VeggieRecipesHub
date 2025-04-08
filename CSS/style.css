@@ -439,4 +439,22 @@
         width: 280px;
         padding: 10px;
     }
+
+    /* 熱門食譜 */
+    .recipe-card::after {
+        top: 10px;
+        right: 10px;
+    }
+
+    /* 最新食譜 */
+    .new-recipe-card::after {
+        top: 10px;
+        right: 10px;
+    }
+
+    /* 個人化推薦 */
+    .recommendation-card::after {
+        top: 10px;
+        left: 10px;
+    }
 }

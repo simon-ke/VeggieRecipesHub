@@ -25,8 +25,9 @@ function updateInterface() {
     requestAnimationFrame(() => {
         // 當視窗寬度小於 768px 時：導覽列及食譜操作區塊始終固定（條件：scrollY >= 0）
         if (window.innerWidth < 768) {
-            nav.classList.add('fixed-nav'); // 導覽列固定
-            searchContainer.classList.add('fixed-recipe-actions'); // 導覽列固定
+            // 導覽列固定
+            nav.classList.add('fixed-nav');
+            searchContainer.classList.add('fixed-recipe-actions');
         } else {
             // 當視窗寬度大於等於 768px 時：僅在滾動超過 200px 後才固定導覽列與操作區塊
             toggleClassOnScroll(nav, 'fixed-nav', window.scrollY > 200);
