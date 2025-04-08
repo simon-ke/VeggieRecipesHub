@@ -149,6 +149,7 @@ nav.fixed-nav ul.submenu>li a {
     margin-left: -60px;
     opacity: 0;
     transition: opacity 0.3s;
+    font-size: 1.2em;
 }
 
 .login-register:hover .tooltip,
@@ -929,6 +930,10 @@ footer {
 
     .fixed-recipe-actions {
         padding-top: 60px;
+    }
+
+    .tooltip {
+        font-size: 1.1em;
     }
 
     /* 搜尋區塊 */

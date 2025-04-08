@@ -10,8 +10,6 @@
     <link rel="stylesheet" href="../CSS/recipe.css">
 </head>
 
-<!-- 此頁面為素食食譜詳細資訊的瀏覽頁 專題網站單純使用前端技術不加入後端相關技術 -->
-
 <body>
     <!-- 頁首 -->
     <header>
@@ -67,6 +65,7 @@
             </div>
         </div>
 
+        <!-- 垃圾桶 -->
         <div id="trash-modal" class="modal">
             <div class="modal-content">
                 <button class="close-btn" aria-label="Close">&times;</button>
@@ -157,17 +156,17 @@
                     </li>
                     <!-- 第三列: 原本的主選單 -->
                     <div class="main">
-                        <li><a href="./index.html">首頁</a></li>
+                        <li><a href="../index.html">首頁</a></li>
                         <li id="dropdown-btn">
                             <a href="#" class="recipe-category">食譜分類&#9662;</a>
                             <ul class="submenu">
-                                <li><a href="./HTML/recipeSelector.html?category=早餐">早餐</a></li>
-                                <li><a href="./HTML/recipeSelector.html?category=飯">飯</a></li>
-                                <li><a href="./HTML/recipeSelector.html?category=麵">麵</a></li>
-                                <li><a href="./HTML/recipeSelector.html?category=米粉">米粉</a></li>
-                                <li><a href="./HTML/recipeSelector.html?category=蔬菜">蔬菜</a></li>
-                                <li><a href="./HTML/recipeSelector.html?category=鹹點">鹹點</a></li>
-                                <li><a href="./HTML/recipeSelector.html?category=甜點">甜點</a></li>
+                                <li><a href="./recipeSelector.html?category=早餐">早餐</a></li>
+                                <li><a href="./recipeSelector.html?category=飯">飯</a></li>
+                                <li><a href="./recipeSelector.html?category=麵">麵</a></li>
+                                <li><a href="./recipeSelector.html?category=米粉">米粉</a></li>
+                                <li><a href="./recipeSelector.html?category=蔬菜">蔬菜</a></li>
+                                <li><a href="./recipeSelector.html?category=鹹點">鹹點</a></li>
+                                <li><a href="./recipeSelector.html?category=甜點">甜點</a></li>
                             </ul>
                         </li>
                         <li class="submenu-open"><a href="#">營養資訊</a></li>
@@ -177,14 +176,13 @@
                     </div>
                 </ul>
             </div>
-
         </nav>
 
         <!-- 第四列 -->
         <div class="recipe-actions">
             <!-- 搜尋區塊 -->
             <div class="search-container">
-                <label>立即探索食譜</label>
+                <label>搜尋其他素食料理</label>
                 <form id="globalSearchForm">
                     <input type="text" id="search-input" name="search" placeholder="搜尋食譜或輸入食材" />
                     <button type="button" id="clear-btn" aria-label="清除">×</button>

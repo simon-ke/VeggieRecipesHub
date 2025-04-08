@@ -13,7 +13,7 @@
 <body>
     <!-- 頁首 -->
     <header>
-        <!-- 登入、註冊 視窗 -->
+        <!-- Modal Container -->
         <div class="modal-container">
             <!-- 登入 Modal -->
             <div id="login-modal" class="modal">
@@ -156,17 +156,17 @@
                     </li>
                     <!-- 第三列: 原本的主選單 -->
                     <div class="main">
-                        <li><a href="./index.html">首頁</a></li>
+                        <li><a href="../index.html">首頁</a></li>
                         <li id="dropdown-btn">
                             <a href="#" class="recipe-category">食譜分類&#9662;</a>
                             <ul class="submenu">
-                                <li><a href="./HTML/recipeSelector.html?category=早餐">早餐</a></li>
-                                <li><a href="./HTML/recipeSelector.html?category=飯">飯</a></li>
-                                <li><a href="./HTML/recipeSelector.html?category=麵">麵</a></li>
-                                <li><a href="./HTML/recipeSelector.html?category=米粉">米粉</a></li>
-                                <li><a href="./HTML/recipeSelector.html?category=蔬菜">蔬菜</a></li>
-                                <li><a href="./HTML/recipeSelector.html?category=鹹點">鹹點</a></li>
-                                <li><a href="./HTML/recipeSelector.html?category=甜點">甜點</a></li>
+                                <li><a href="./recipeSelector.html?category=早餐">早餐</a></li>
+                                <li><a href="./recipeSelector.html?category=飯">飯</a></li>
+                                <li><a href="./recipeSelector.html?category=麵">麵</a></li>
+                                <li><a href="./recipeSelector.html?category=米粉">米粉</a></li>
+                                <li><a href="./recipeSelector.html?category=蔬菜">蔬菜</a></li>
+                                <li><a href="./recipeSelector.html?category=鹹點">鹹點</a></li>
+                                <li><a href="./recipeSelector.html?category=甜點">甜點</a></li>
                             </ul>
                         </li>
                         <li class="submenu-open"><a href="#">營養資訊</a></li>
@@ -176,14 +176,13 @@
                     </div>
                 </ul>
             </div>
-
         </nav>
 
         <!-- 第四列 -->
         <div class="recipe-actions">
             <!-- 搜尋區塊 -->
             <div class="search-container">
-                <label>立即探索食譜</label>
+                <label>搜尋其他素食料理</label>
                 <form id="globalSearchForm">
                     <input type="text" id="search-input" name="search" placeholder="搜尋食譜或輸入食材" />
                     <button type="button" id="clear-btn" aria-label="清除">×</button>
