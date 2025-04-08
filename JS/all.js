@@ -25,20 +25,20 @@ function updateInterface() {
     requestAnimationFrame(() => {
         // 當視窗寬度小於 768px 時：導覽列及食譜操作區塊始終固定（條件：scrollY >= 0）
         if (window.innerWidth < 768) {
-            toggleClassOnScroll(nav, 'fixed-nav', window.scrollY >= 0);
-            toggleClassOnScroll(searchContainer, 'fixed-recipe-actions', window.scrollY >= 0);
+            nav.classList.add('fixed-nav'); // 導覽列固定
+            searchContainer.classList.add('fixed-recipe-actions'); // 導覽列固定
         } else {
             // 當視窗寬度大於等於 768px 時：僅在滾動超過 200px 後才固定導覽列與操作區塊
             toggleClassOnScroll(nav, 'fixed-nav', window.scrollY > 200);
             toggleClassOnScroll(searchContainer, 'fixed-recipe-actions', window.scrollY > 200);
+            // 根據滾動位置來切換下拉選單 (當滾動位置小於 200px 時加入 'dropdown' class)
+            toggleClassOnScroll(dropDown, 'dropdown', window.scrollY < 200);
         }
         // 根據文件滾動的狀態來切換 "back-to-top" 按鈕的顯示狀態
         toggleClassOnScroll(backToTopButton, 'show', document.documentElement.scrollTop > 500);
-        // 根據滾動位置來切換下拉選單 (例如，當滾動位置小於 200px 時加入 'dropdown' class)
-        toggleClassOnScroll(dropDown, 'dropdown', window.scrollY < 200);
     });
 
-    // 當頁面滾動位置很靠上（低於 200px）時，移除部分元素的 active 狀態
+    // 當頁面滾動位置（低於 200px）時，移除部分元素的 active 狀態
     if (window.scrollY < 200 && window.innerWidth >= 768) {
         hamburger.classList.remove('active');
         mainMenu.classList.remove('active');
