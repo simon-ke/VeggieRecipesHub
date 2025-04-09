@@ -314,6 +314,62 @@ p.recipe-description {
     border: 1px solid #ccc;
 }
 
+/* 分享選單 */
+.share-menu {
+    display: none;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: #fff;
+    padding: 5px 10px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    z-index: 10;
+}
+
+.share-menu img {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.share-menu button {
+    cursor: pointer;
+    border: none;
+    width: 80px;
+    height: 100px;
+    /* background-color: #e3e3e3; */
+    background-color: #fff;
+    color: #333;
+    border-radius: 5px;
+    transition: transform 0.2s;
+}
+
+.share-menu button:hover {
+    transform: scale(1.03);
+}
+
+/* 分享遮罩 */
+#overlay {
+    display: none;
+    /* 初始隱藏 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.1);
+    /* 淺灰色背景，帶點透明度 */
+    z-index: 5;
+    /* 確保遮罩層在其他元素之上 */
+}
+
 /* 反饋區塊 */
 .feedback-section {
     background-color: #fff;
@@ -354,3 +410,27 @@ p.recipe-description {
 .feedback-section button:hover {
     background-color: #138496;
 }
+
+@media (max-width: 1024px) {
+    .recipeSelector-container {
+        width: 800px;
+    }
+
+}
+
+@media (max-width: 768px) {}
+
+
+@media (max-width: 540px) {
+    .share-menu button {
+        width: 60px;
+        height: 80px;
+        background-color: #fff;
+    }
+
+    .share-menu img {
+        margin: 0;
+    }
+}
+
+@media (max-width: 0) {}

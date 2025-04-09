@@ -8,6 +8,8 @@
     <title>食譜瀏覽 - 綠藝饗宴</title>
     <link rel="icon" href="../veggie-leaf.ico" type="image/x-icon">
     <link rel="stylesheet" href="../CSS/recipeSelector.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
@@ -230,6 +232,29 @@
         <div class="suggest-recipes">
             <h2>推薦食譜</h2>
             <div class="suggest-card-container" id="suggestCardContainer"> <!-- 動態生成各類食譜 --></div>
+        </div>
+
+        <!-- 分享選單外層遮罩 -->
+        <div id="overlay">
+            <!-- 分享平台選單 -->
+            <div id="shareMenu" class="share-menu">
+                <button class="shareBtn" data-platform="facebook">
+                    <img src="../img/icons/facebook.png" alt="分享至facebook">
+                    <p>Facebook</p>
+                </button>
+                <button class="shareBtn" data-platform="instagram">
+                    <img src="../img/icons/instagram.png" alt="分享至instagram">
+                    <p>Instagram</p>
+                </button>
+                <button class="shareBtn" data-platform="line">
+                    <img src="../img/icons/line.png" alt="分享至line">
+                    <p>Line</p>
+                </button>
+                <button id="copyUrlBtn">
+                    <img src="../img/icons/link.png" alt="分享至link">
+                    <p>複製連結</p>
+                </button>
+            </div>
         </div>
 
         <!-- 反饋區塊 -->
@@ -553,9 +578,28 @@
             const shareBtn = document.createElement('button');
             shareBtn.classList.add('share-button');
             shareBtn.textContent = '分享';
-            shareBtn.addEventListener('click', () => {
-                alert('分享成功');
+            // 為分享按鈕添加點擊事件
+            shareBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+
+                if (isMobileDevice() && navigator.share) {
+                    // 如果是在行動裝置且支援原生分享功能，則使用 navigator.share
+                    navigator.share({
+                        title: document.title,
+                        text: "發現一份超美味、健康的素食食譜！快來試試這道美味吧！",
+                        url: window.location.href,
+                    })
+                        .then(() => console.log("分享成功")) // 成功分享後的回調
+                        .catch((error) => console.log("分享失敗:", error)); // 分享失敗時的錯誤回調
+                } else {
+                    // 如果不是行動裝置，顯示自訂的分享選單
+                    const isMenuOpen = shareMenu.style.display === "flex";
+                    // 切換分享選單和遮罩的顯示狀態
+                    shareMenu.style.display = isMenuOpen ? "none" : "flex";
+                    overlay.style.display = isMenuOpen ? "none" : "block";
+                }
             });
+
 
             // 刪除食譜按鈕
             const deleteBtn = document.createElement('button');
@@ -673,8 +717,25 @@
             // 建立分享按鈕
             const shareBtn = document.createElement('button');
             shareBtn.textContent = '分享';
-            shareBtn.addEventListener('click', () => {
-                alert('分享成功');
+            shareBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+
+                if (isMobileDevice() && navigator.share) {
+                    // 如果是在行動裝置且支援原生分享功能，則使用 navigator.share
+                    navigator.share({
+                        title: document.title,
+                        text: "發現一份超美味、健康的素食食譜！快來試試這道美味吧！",
+                        url: window.location.href,
+                    })
+                        .then(() => console.log("分享成功")) // 成功分享後的回調
+                        .catch((error) => console.log("分享失敗:", error)); // 分享失敗時的錯誤回調
+                } else {
+                    // 如果不是行動裝置，顯示自訂的分享選單
+                    const isMenuOpen = shareMenu.style.display === "flex";
+                    // 切換分享選單和遮罩的顯示狀態
+                    shareMenu.style.display = isMenuOpen ? "none" : "flex";
+                    overlay.style.display = isMenuOpen ? "none" : "block";
+                }
             });
 
             // 將集合按鈕放入按鈕容器中
@@ -796,6 +857,58 @@
                 }
             });
         }
+
+        // 判斷是否為行動裝置
+        function isMobileDevice() {
+            return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+        }
+
+        // 為每個分享平台按鈕添加點擊事件
+        document.querySelectorAll(".shareBtn[data-platform]").forEach((button) => {
+            button.addEventListener("click", (e) => {
+                e.preventDefault();
+                const platform = button.getAttribute("data-platform"); // 取得分享平台
+                const currentUrl = encodeURIComponent(window.location.href); // 編碼目前的 URL
+                let shareUrl = "";
+
+                switch (platform) {
+                    case "facebook":
+                        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`;
+                        break;
+                    case "twitter":
+                        shareUrl = `https://twitter.com/intent/tweet?url=${currentUrl}`;
+                        break;
+                    case "line":
+                        shareUrl = `https://social-plugins.line.me/lineit/share?url=${currentUrl}`;
+                        break;
+                }
+
+                // 在新窗口中打開分享 URL
+                window.open(shareUrl, "_blank");
+                // 點擊後關閉分享選單和遮罩
+                shareMenu.style.display = "none";
+                overlay.style.display = "none";
+            });
+        });
+
+        // 為「複製網址」按鈕添加事件
+        document.getElementById("copyUrlBtn").addEventListener("click", () => {
+            // 使用 Clipboard API 複製 URL 到剪貼簿
+            navigator.clipboard.writeText(window.location.href)
+                .then(() => alert("網址已複製到剪貼簿！"))
+                .catch((err) => alert("複製失敗: " + err));
+        });
+
+        // 點擊遮罩時關閉分享選單和遮罩
+        const shareMenu = document.getElementById("shareMenu");
+        const overlay = document.getElementById("overlay");
+        overlay.addEventListener("click", (e) => {
+            // 僅當點擊遮罩本身時觸發
+            if (e.target === overlay) {
+                shareMenu.style.display = "none";
+                overlay.style.display = "none";
+            }
+        });
 
         // 提示訊息
         function showToast(message) {
