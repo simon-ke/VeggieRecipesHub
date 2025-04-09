@@ -12,7 +12,7 @@
 /* 上傳表單的主容器 */
 .upload-container {
     width: auto;
-    margin: 40px 20%;
+    margin: 40px 15%;
     padding: 30px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -224,13 +224,7 @@
     border-radius: 5px;
 }
 
-#steps {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-/* 圖片上傳區塊 */
+/* 步驟圖片上傳區塊 */
 .steps-image {
     flex: 40%;
     width: 100%;
@@ -409,5 +403,60 @@ div.submit-btns {
 
     100% {
         transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 1024px) {}
+
+@media (max-width: 768px) {
+
+    /* 預覽區塊的文字與圖示 */
+    .upload-placeholder {
+        font-size: 1.2em;
+    }
+
+    .upload-placeholder img {
+        width: 40px;
+    }
+
+    /* 食譜步驟 */
+    .steps {
+        flex-direction: column;
+    }
+
+    /* 步驟圖片上傳區塊 */
+    .steps-image {
+        order: 2;
+    }
+
+    /* 步驟文字 */
+    .steps-text {
+        order: 1;
+    }
+
+    /* 步驟輸入框 */
+    .steps .input-field {
+        height: 140px;
+    }
+
+}
+
+@media (max-width: 500px) {
+
+    /* 上傳表單的主容器 */
+    .upload-container {
+        margin: 40px 5%;
+    }
+}
+
+@media (max-width: 400px) {
+    .upload-container {
+        padding: 10px;
+        gap: 15px;
+    }
+
+    /* 步驟輸入框 */
+    .tag-box .input-field {
+        font-size: 0.8em;
     }
 }
