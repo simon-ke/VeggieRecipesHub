@@ -198,7 +198,7 @@ p.recipe-description {
     max-height: 95%;
 }
 
-/* 最新/推薦食譜 */
+/* 推薦食譜 */
 .suggest-recipes {
     padding: 5px 10px;
     border: 1px solid #ddd;
@@ -477,6 +477,11 @@ p.recipe-description {
 
 @media (max-width: 500px) {
 
+    /* 主內容 */
+    .recipeSelector-container {
+        width: 95%;
+    }
+
     .search-container label {
         font-size: 1.2em;
         margin-bottom: 5px;
@@ -514,6 +519,25 @@ p.recipe-description {
         width: 100%;
         margin-top: 10px;
         padding: 6px;
+    }
+
+    /* 推薦食譜 */
+    .suggest-recipes {
+        margin: 20px 0;
+        padding: 5px 5px;
+    }
+
+    .suggest-card-container {
+        padding: 5px 10px 10px 8px;
+        gap: 10px;
+    }
+
+    .suggest-recipe-card {
+        width: 280px;
+    }
+
+    .suggest-recipe-card img {
+        height: 200px;
     }
 }
 

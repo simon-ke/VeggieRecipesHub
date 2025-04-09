@@ -4,14 +4,12 @@
 /* 食譜詳情頁面樣式 */
 .recipe-detail {
     margin: 0 10%;
-    padding: 20px;
-
 }
 
 /* 導航面包屑 */
 .breadcrumb {
     border-top: 1px solid #e7e7e7;
-    padding: 20px 0;
+    padding: 20px;
     font-size: 1.1em;
 }
 
@@ -29,9 +27,12 @@
     align-items: center;
 }
 
-.user-info p {
-    margin-left: 10px;
+.user-link {
+    display: flex;
+    align-items: center;
+    gap: 30px;
     color: #777;
+    font-size: 1.1em;
 }
 
 .user-avatar {
@@ -40,16 +41,10 @@
     object-fit: cover;
     object-position: center;
     border-radius: 50%;
-    margin-left: 10px;
 }
 
 .user-name {
     font-size: 1.5em;
-}
-
-.user-link {
-    display: flex;
-    align-items: center;
 }
 
 /* 刪除按鈕 */
@@ -73,6 +68,7 @@
 /* 食譜介紹 */
 .recipe-header {
     display: flex;
+    gap: 20px;
     margin: 20px 0;
     border: 1px solid #ddd;
     padding: 15px;
@@ -86,13 +82,13 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* 食譜圖片 */
 .left-section {
     width: 50%;
     height: auto;
     aspect-ratio: 4 / 3;
     object-fit: cover;
     object-position: center;
-    margin-right: 20px;
     border-radius: 5px;
 }
 
@@ -100,18 +96,23 @@
     display: flex;
     width: 100%;
     flex-direction: column;
-    gap: 12px;
+    gap: 15px;
+}
+
+.recipe-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.recipe-name {
+    font-size: 2em;
+    color: #333;
 }
 
 .recipe-date {
     color: #777;
     margin-bottom: -30px;
     margin-left: auto;
-}
-
-.recipe-title {
-    font-size: 2em;
-    color: #333;
 }
 
 .portion-time {
@@ -234,8 +235,14 @@
     color: #333;
 }
 
+#step_card {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
 .recipe-step {
-    margin-top: 20px;
     display: flex;
     gap: 20px;
     border: 1px solid #ddd;
@@ -353,7 +360,7 @@ div.comment-user-avatar span {
     transform: scale(0.98);
 }
 
-/* 最新/推薦食譜 */
+/* 相關食譜 */
 .related-recipes {
     margin: 20px 10px;
     padding: 5px 10px;
@@ -529,16 +536,87 @@ div.comment-user-avatar span {
 }
 
 @media (max-width: 1024px) {
-    .recipeSelector-container {
-        width: 800px;
+
+    /* 食譜介紹 */
+    .recipe-header {
+        flex-direction: column;
     }
 
+    /* 食譜圖片 */
+    .left-section {
+        width: 100%;
+    }
+
+    /* 食譜資訊 */
+    .recipe-info {
+        flex-direction: column;
+        gap: 15px;
+    }
 }
 
-@media (max-width: 768px) {}
+@media (max-width: 768px) {
+
+    /* 用戶 */
+    .user-info {
+        flex-wrap: wrap;
+    }
+
+    .user-link {
+        flex: 0 0 100%;
+        gap: 10px;
+    }
+
+    .user-avatar {
+        width: 60px;
+        height: 60px;
+    }
+
+    .user-name {
+        font-size: 1.3em;
+    }
+
+    .delete-button {
+        flex: 0 0 auto;
+    }
+
+    /* 食譜詳情頁面樣式 */
+    .recipe-step {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .recipe-step img {
+        width: 100%;
+    }
+
+    .recipe-step>div {
+        padding: 0 10px;
+    }
+}
 
 
 @media (max-width: 540px) {
+
+    /* 食譜詳情頁面樣式 */
+    .recipe-detail {
+        margin: 0 5%;
+    }
+
+    /* 用戶 */
+    .user-link {
+        font-size: 1em;
+    }
+
+    .user-avatar {
+        width: 50px;
+        height: 50px;
+    }
+
+    .user-name {
+        font-size: 1.2em;
+    }
+
+    /* 分享 */
     .share-menu button {
         width: 60px;
         height: 80px;
@@ -548,6 +626,30 @@ div.comment-user-avatar span {
     .share-menu img {
         margin: 0;
     }
-}
 
-@media (max-width: 0) {}
+    /* 食譜資訊 */
+    .ingredient,
+    .seasoning,
+    .nutrition {
+        letter-spacing: 0;
+    }
+
+    /* 相關食譜 */
+    .related-recipes {
+        margin: 20px 0;
+        padding: 5px 5px;
+    }
+
+    .related-carousel {
+        padding: 5px 10px 10px 8px;
+        gap: 10px;
+    }
+
+    .related-recipe-card {
+        width: 280px;
+    }
+
+    .related-recipe-card img {
+        height: 200px;
+    }
+}

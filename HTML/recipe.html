@@ -213,8 +213,10 @@
             <!-- 動態生成食譜介紹 -->
             <img class="left-section" id="left-section" src="" alt="">
             <div class="right-section">
-                <span class="recipe-date"></span>
-                <h2 class="recipe-title"></h2>
+                <div class="recipe-title">
+                    <h2 class="recipe-name"></h2>
+                    <span class="recipe-date"></span>
+                </div>
                 <div class="portion-time">
                     <img src="../img/icons/fork_spoon_icon.png" alt="">
                     <span id="portion"></span>
@@ -558,7 +560,7 @@
             dateElement.textContent = formatDate(recipesData.created_at);
 
             // 2. 標題
-            const titleElement = document.querySelector('.recipe-title');
+            const titleElement = document.querySelector('.recipe-name');
             titleElement.textContent = recipesData.recipe_title;
 
             // 3. 評價（包含數字與星級圖示）
