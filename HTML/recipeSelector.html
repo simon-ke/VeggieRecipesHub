@@ -462,8 +462,10 @@
             }
 
             // 標題
-            const recipeTitle = document.createElement('h2');
-            recipeTitle.textContent = recipe.recipe_title;
+            const recipeTitle = document.createElement('div');
+            recipeTitle.classList.add('recipe-title');
+            const recipeName = document.createElement('h2');
+            recipeName.textContent = recipe.recipe_title;
 
             // 發布時間處理
             function formatDate(createdAt) {
@@ -506,6 +508,9 @@
             const dateElement = document.createElement('span');
             dateElement.classList.add('date');
             dateElement.textContent = formatDate(recipe.created_at);
+
+            // 將標題與時間加入到 recipeTitle 區塊
+            recipeTitle.append(recipeName, dateElement);
 
             // 標籤
             const recipeTag = document.createElement('p');
@@ -642,7 +647,7 @@
             recipeActions.append(ratingLink, authorLink, likesLink, commentLink, collectBtn, shareBtn, deleteBtn);
 
             // 組合 連結區塊、互動區塊
-            recipeText.append(dateElement, recipeLink, recipeActions);
+            recipeText.append(recipeLink, recipeActions);
             // 組合卡片
             recipeCard.append(recipeImg, recipeText);
             return recipeCard;

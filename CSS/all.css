@@ -566,13 +566,6 @@ footer {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* 食譜標題樣式 */
-.recipe-title {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #555;
-}
-
 /* 永久刪除按鈕樣式 */
 .delete-btn {
     justify-content: end;
