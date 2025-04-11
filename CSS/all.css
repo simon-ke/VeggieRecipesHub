@@ -849,7 +849,7 @@ footer {
     } */
 
     /* 當展開 submenu 時 推移內容 */
-    nav.fixed-nav .submenu-open.active {
+    .submenu-open.active {
         margin-top: 320px;
         transition: margin-top 0.2s ease;
     }
@@ -918,8 +918,7 @@ footer {
 
     /* 當展開 submenu 時 推移內容 */
     .submenu-open.active {
-        margin-top: 344px;
-        transition: margin-top 0.2s ease;
+        margin-top: 350px;
     }
 
     .tooltip {
