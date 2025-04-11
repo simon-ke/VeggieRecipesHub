@@ -13,18 +13,12 @@ const searchContainer = document.querySelector('.recipe-actions');
 const backToTopButton = document.getElementById('back-to-top');
 const dropDown = document.getElementById('dropdown');
 
-/*
- * 更新介面函數
- * 說明：
- * - 根據視窗寬度（小於 768px 與大於等於 768px）設定不同的固定導覽列行為
- * - 根據滾動位置切換 "back-to-top" 按鈕與下拉選單的狀態
- * - 當滾動位置過低時，移除漢堡選單、主選單、其他選單及遮罩的 active 狀態
- */
 function updateInterface() {
+    const viewportWidth = document.documentElement.clientWidth;
     // 使用 requestAnimationFrame 在瀏覽器準備重繪畫面前呼叫特定的回調函數，讓更新動作剛好和畫面刷新結合，使動畫與介面更新效果更流暢。並根據瀏覽器的刷新率來執行回調，如果使用者瀏覽器處於非可見狀態（例如標籤頁切換到背景），瀏覽器會自動降低或暫停回調執行，這樣可以降低 CPU 負擔。
     requestAnimationFrame(() => {
-        // 當視窗寬度小於 768px 時：導覽列及食譜操作區塊始終固定（條件：scrollY >= 0）
-        if (window.innerWidth < 768) {
+        // 當視窗寬度小於 768px 時：導覽列及食譜操作區塊始終固定
+        if (viewportWidth < 768) {
             // 導覽列固定
             nav.classList.add('fixed-nav');
             searchContainer.classList.add('fixed-recipe-actions');
@@ -40,7 +34,7 @@ function updateInterface() {
     });
 
     // 當頁面滾動位置（低於 200px）時，移除部分元素的 active 狀態
-    if (window.scrollY < 200 && window.innerWidth >= 768) {
+    if (window.scrollY < 200 && viewportWidth >= 768) {
         hamburger.classList.remove('active');
         mainMenu.classList.remove('active');
         combintMenu.classList.remove('active');

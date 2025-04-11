@@ -185,7 +185,7 @@
         <div class="recipe-actions">
             <!-- 搜尋區塊 -->
             <div class="search-container">
-                <label>立即探索美味素食料理的秘密</label>
+                <label>立即探索食譜</label>
                 <form id="globalSearchForm">
                     <input type="text" id="search-input" name="search" placeholder="搜尋食譜或輸入食材" />
                     <button type="button" id="clear-btn" aria-label="清除">×</button>
@@ -605,13 +605,18 @@
                 }
             });
 
-
             // 刪除食譜按鈕
             const deleteBtn = document.createElement('button');
+            // 判斷登入者是否為該食譜作者
             if (userId === recipe.user_id) {
-                deleteBtn.classList.add('delete-button');
-                deleteBtn.textContent = '刪除';
+                // 如果是作者，則顯示刪除按鈕
+                deleteBtn.style.display = 'block';
+            } else {
+                // 如果不是作者，則隱藏刪除按鈕
+                deleteBtn.style.display = 'none';
             }
+            deleteBtn.classList.add('delete-button');
+            deleteBtn.textContent = '刪除';
             // 使用刪除功能
             deleteBtn.addEventListener('click', () => {
                 if (!allRecipesData.some(item => item.recipe_id === recipe.recipe_id)) {
@@ -642,6 +647,8 @@
                     renderRecipes(allRecipesData); // 重新渲染網頁上的食譜
                 }
             });
+
+
 
             // 組合 互動區塊
             recipeActions.append(ratingLink, authorLink, likesLink, commentLink, collectBtn, shareBtn, deleteBtn);

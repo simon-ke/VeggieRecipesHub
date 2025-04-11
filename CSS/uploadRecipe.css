@@ -176,6 +176,7 @@
 .material {
     display: flex;
     gap: 10px;
+    align-items: center;
 }
 
 .material input {
@@ -200,7 +201,7 @@
     background-color: rgb(231, 63, 63);
     border-radius: 5px;
     cursor: pointer;
-    transition: box-shadow 0.6s ease;
+    transition: box-shadow 0.3s ease;
 }
 
 .material :nth-child(3) img {
@@ -216,6 +217,12 @@
 }
 
 /* 食譜步驟 */
+#steps {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 .steps {
     display: flex;
     gap: 20px;
@@ -280,6 +287,7 @@
 .steps-text div {
     display: flex;
     margin-bottom: 5px;
+    align-items: center;
 }
 
 .steps-text h2 {
@@ -294,13 +302,11 @@
     border-radius: 5px;
     margin-left: auto;
     cursor: pointer;
-    transition: box-shadow 0.6s ease;
+    transition: box-shadow 0.3s ease;
 }
 
 .steps-text button img {
     width: 24px;
-    /* display: block;
-    margin: auto; */
 }
 
 .steps-text textarea {
@@ -406,9 +412,20 @@ div.submit-btns {
     }
 }
 
-@media (max-width: 1024px) {}
+@media (max-width: 1024px) {
+
+    /* 上傳表單的主容器 */
+    .upload-container {
+        margin: 40px 10%;
+    }
+}
 
 @media (max-width: 768px) {
+
+    /* 上傳表單的主容器 */
+    .upload-container {
+        margin: 40px 5%;
+    }
 
     /* 預覽區塊的文字與圖示 */
     .upload-placeholder {
@@ -418,10 +435,24 @@ div.submit-btns {
     .upload-placeholder img {
         width: 40px;
     }
+}
+
+@media (max-width: 600px) {
+
+    /* 上傳表單的主容器 */
+    .upload-container {
+        padding: 15px;
+    }
+
+    /* 標籤輸入框 */
+    .tag-box .input-field {
+        font-size: 0.8em;
+    }
 
     /* 食譜步驟 */
     .steps {
         flex-direction: column;
+        gap: 10px;
     }
 
     /* 步驟圖片上傳區塊 */
@@ -436,27 +467,6 @@ div.submit-btns {
 
     /* 步驟輸入框 */
     .steps .input-field {
-        height: 140px;
-    }
-
-}
-
-@media (max-width: 500px) {
-
-    /* 上傳表單的主容器 */
-    .upload-container {
-        margin: 40px 5%;
-    }
-}
-
-@media (max-width: 400px) {
-    .upload-container {
-        padding: 10px;
-        gap: 15px;
-    }
-
-    /* 步驟輸入框 */
-    .tag-box .input-field {
-        font-size: 0.8em;
+        height: 100px;
     }
 }
