@@ -299,6 +299,7 @@ document.getElementById('publish').addEventListener('click', (event) => {
     // 驗證表單必填欄位是否皆已填寫
     if (!validateRecipeForm()) {
         // validateRecipeForm() 內部會提示錯誤訊息，此時中斷提交
+        alert('表單驗證失敗!');
         return;
     }
     // **處理發布** 
