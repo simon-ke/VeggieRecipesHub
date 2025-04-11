@@ -351,26 +351,24 @@ document.getElementById('publish').addEventListener('click', (event) => {
         nutritions: extractMaterials('nutritions', 'nutrition_name', 'nutrition_value'),
         steps: stepsData,
     };
-    // 將新數據加入到 storageRecipes 中
-    try {
-        storageRecipes.push(recipeData);
-    } catch (e) {
-        console.error("儲存 recipes 發生錯誤：", e);
-    }
 
-    // 存回 LocalStorage
     try {
+        // 將新數據加入到 storageRecipes 中
+        storageRecipes.push(recipeData);
+        // 存回 LocalStorage
         localStorage.setItem('recipes', JSON.stringify(storageRecipes));
     } catch (e) {
-        console.error("儲存 recipes 發生錯誤：", e);
+        if (e.name === 'QuotaExceededError' || e.code === 22) {
+            alert('您的儲存空間不足，請清除舊的食譜或資料後再試！');
+        } else {
+            console.error("儲存 recipes 發生錯誤：", e);
+        }
+        return; // 終止後續發布流程
     }
+
     // 使用者食譜數更新，user 直接來自 userData（二者指向同一個物件），在修改了 user 之後，userData 中的資料也已更新
-    try {
-        user.total_recipes = Number(user.total_recipes) + 1;
-    } catch (e) {
-        console.error("儲存 users 發生錯誤：", e);
-    }
-    
+    user.total_recipes = Number(user.total_recipes) + 1;
+
     // 將使用者食譜發布數量 存回 LocalStorage
     try {
         localStorage.setItem('users', JSON.stringify(userData));
