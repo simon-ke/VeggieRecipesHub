@@ -297,79 +297,79 @@ document.getElementById('publish').addEventListener('click', (event) => {
         return;  // 使用者取消發布
     }
 
-    // 驗證表單必填欄位是否皆已填寫
-    if (!validateRecipeForm()) {
-        // validateRecipeForm() 內部會提示錯誤訊息，此時中斷提交
-        return;
-    }
-    // **處理發布** 
+    // // 驗證表單必填欄位是否皆已填寫
+    // if (!validateRecipeForm()) {
+    //     // validateRecipeForm() 內部會提示錯誤訊息，此時中斷提交
+    //     return;
+    // }
+    // // **處理發布** 
 
-    // 取得使用者 ID
-    const userId = user.user_id;
+    // // 取得使用者 ID
+    // const userId = user.user_id;
 
-    // 取得使用者 名稱
-    const recipeAuthor = user.user_name;
+    // // 取得使用者 名稱
+    // const recipeAuthor = user.user_name;
 
-    // 自動生成 recipe_id 編號：根據現有數據中最大的 id 遞增 1，若無資料則預設為 1
-    const recipeId = existingRecipes.length > 0 ? Math.max(...existingRecipes.map(recipe => recipe.recipe_id || 0)) + 1 : 1;
+    // // 自動生成 recipe_id 編號：根據現有數據中最大的 id 遞增 1，若無資料則預設為 1
+    // const recipeId = existingRecipes.length > 0 ? Math.max(...existingRecipes.map(recipe => recipe.recipe_id || 0)) + 1 : 1;
 
-    // 食譜發布時間
-    const createdAt = getFormattedLocalDateTime();
+    // // 食譜發布時間
+    // const createdAt = getFormattedLocalDateTime();
 
-    // 驗證圖片是否上傳 並取得上傳食譜圖片，圖片上傳不可空
-    const recipeImageElement = document.querySelector('.upload-image img');
-    const recipeImage = recipeImageElement.src;
+    // // 驗證圖片是否上傳 並取得上傳食譜圖片，圖片上傳不可空
+    // const recipeImageElement = document.querySelector('.upload-image img');
+    // const recipeImage = recipeImageElement.src;
 
-    // 食譜步驟步驟（假設 validateSteps() 也會做內部提醒並返回資料或 false）
-    const stepsData = validateSteps();
+    // // 食譜步驟步驟（假設 validateSteps() 也會做內部提醒並返回資料或 false）
+    // const stepsData = validateSteps();
 
-    // 若步驟驗證失敗，validateSteps() 會處理提醒，此處中斷後續程序
-    if (!stepsData) {
-        alert('表單驗證失敗!');
-        return;
-    }
+    // // 若步驟驗證失敗，validateSteps() 會處理提醒，此處中斷後續程序
+    // if (!stepsData) {
+    //     alert('表單驗證失敗!');
+    //     return;
+    // }
 
-    // 整理所有輸入的數據
-    const recipeData = {
-        user_id: userId.toString(),
-        recipe_author: recipeAuthor.toString(),
-        recipe_id: recipeId.toString(), // 或 `${recipeId}`
-        created_at: createdAt,
-        updated_at: '',
-        rating: '',
-        evaluate: '',
-        likes: '0',
-        comments: '0',
-        recipe_title: document.getElementById('recipe-title').value,
-        recipe_image: recipeImage,
-        recipe_description: document.getElementById('recipe-form').querySelector('textarea[name="recipe_description"]').value,
-        recipe_portion: document.getElementById('recipe-portion').value,
-        recipe_cook_time: document.getElementById('recipe-time').value,
-        // 取得所有隱藏的 tag 輸入值
-        tags: Array.from(document.querySelectorAll('#tagList input[type="hidden"]')).map(input => input.value),
-        ingredients: extractMaterials('ingredients', 'ingredient_name', 'ingredient_quantity'),
-        seasonings: extractMaterials('seasonings', 'seasoning_name', 'seasoning_quantity'),
-        nutritions: extractMaterials('nutritions', 'nutrition_name', 'nutrition_value'),
-        steps: stepsData,
-    };
-    // 將新數據加入到 storageRecipes 中
-    storageRecipes.push(recipeData);
+    // // 整理所有輸入的數據
+    // const recipeData = {
+    //     user_id: userId.toString(),
+    //     recipe_author: recipeAuthor.toString(),
+    //     recipe_id: recipeId.toString(), // 或 `${recipeId}`
+    //     created_at: createdAt,
+    //     updated_at: '',
+    //     rating: '',
+    //     evaluate: '',
+    //     likes: '0',
+    //     comments: '0',
+    //     recipe_title: document.getElementById('recipe-title').value,
+    //     recipe_image: recipeImage,
+    //     recipe_description: document.getElementById('recipe-form').querySelector('textarea[name="recipe_description"]').value,
+    //     recipe_portion: document.getElementById('recipe-portion').value,
+    //     recipe_cook_time: document.getElementById('recipe-time').value,
+    //     // 取得所有隱藏的 tag 輸入值
+    //     tags: Array.from(document.querySelectorAll('#tagList input[type="hidden"]')).map(input => input.value),
+    //     ingredients: extractMaterials('ingredients', 'ingredient_name', 'ingredient_quantity'),
+    //     seasonings: extractMaterials('seasonings', 'seasoning_name', 'seasoning_quantity'),
+    //     nutritions: extractMaterials('nutritions', 'nutrition_name', 'nutrition_value'),
+    //     steps: stepsData,
+    // };
+    // // 將新數據加入到 storageRecipes 中
+    // storageRecipes.push(recipeData);
 
-    // 存回 LocalStorage
-    try {
-        localStorage.setItem('recipes', JSON.stringify(storageRecipes));
-    } catch (e) {
-        console.error("儲存 recipes 發生錯誤：", e);
-    }
-    // 使用者食譜數更新，user 直接來自 userData（二者指向同一個物件），在修改了 user 之後，userData 中的資料也已更新
-    user.total_recipes = Number(user.total_recipes) + 1;
+    // // 存回 LocalStorage
+    // try {
+    //     localStorage.setItem('recipes', JSON.stringify(storageRecipes));
+    // } catch (e) {
+    //     console.error("儲存 recipes 發生錯誤：", e);
+    // }
+    // // 使用者食譜數更新，user 直接來自 userData（二者指向同一個物件），在修改了 user 之後，userData 中的資料也已更新
+    // user.total_recipes = Number(user.total_recipes) + 1;
     
-    // 將使用者食譜發布數量 存回 LocalStorage
-    try {
-        localStorage.setItem('users', JSON.stringify(userData));
-    } catch (e) {
-        console.error("儲存 recipes 發生錯誤：", e);
-    }
+    // // 將使用者食譜發布數量 存回 LocalStorage
+    // try {
+    //     localStorage.setItem('users', JSON.stringify(userData));
+    // } catch (e) {
+    //     console.error("儲存 users 發生錯誤：", e);
+    // }
 
     // 顯示提交中的遮罩畫面
     document.getElementById('loading-overlay').style.display = 'flex';
