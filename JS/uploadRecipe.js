@@ -296,7 +296,7 @@ document.getElementById('publish').addEventListener('click', (event) => {
     if (!window.confirm('確認發布食譜？')) {
         return;  // 使用者取消發布
     }
-    alert('表單驗證失敗!');
+
     // 驗證表單必填欄位是否皆已填寫
     if (!validateRecipeForm()) {
         // validateRecipeForm() 內部會提示錯誤訊息，此時中斷提交
@@ -379,9 +379,6 @@ document.getElementById('publish').addEventListener('click', (event) => {
         window.location.href = 'recipeSelector.html';
     }, 2100);
 });
-
-
-
 
 // 整體驗證函式
 function validateRecipeForm() {
