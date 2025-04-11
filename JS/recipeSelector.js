@@ -444,7 +444,7 @@ function createRecipeCard(recipe) {
             localStorage.setItem('recipes', JSON.stringify(localStorageRecipes));
 
             // 在刪除後顯示提示訊息
-            showToast('食譜已移至垃圾桶！您可以前往個人資訊中的垃圾桶中復原。');
+            showToast();
             renderRecipes(allRecipesData); // 重新渲染網頁上的食譜
         }
     });
@@ -724,14 +724,11 @@ overlay.addEventListener("click", (e) => {
 });
 
 // 提示訊息
-function showToast(message) {
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.textContent = message;
-    document.body.appendChild(toast);
-
+function showToast() {
+    const toast = document.getElementById('toast');
+    toast.style.display = 'block';
     setTimeout(() => {
-        toast.remove();
+        toast.style.display = 'none';
     }, 6000);
 }
 

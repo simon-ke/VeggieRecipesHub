@@ -147,8 +147,6 @@ nav.fixed-nav ul.submenu>li a {
     position: absolute;
     top: 120%;
     margin-left: -60px;
-    opacity: 0;
-    transition: opacity 0.3s;
     font-size: 1.2em;
 }
 
@@ -156,7 +154,6 @@ nav.fixed-nav ul.submenu>li a {
 .shopping-cart:hover .tooltip,
 .message:hover .tooltip {
     visibility: visible;
-    opacity: 1;
 }
 
 /* 第二列 */
@@ -610,7 +607,8 @@ footer {
 }
 
 /* 提示訊息 */
-.toast {
+#toast {
+    display: none;
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -946,5 +944,17 @@ footer {
         height: 40px;
         bottom: 200px;
         right: 5px;
+    }
+}
+
+@media (max-width: 500px) {
+
+    /* 提示訊息 */
+    #toast {
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        width: fit-content;
+        max-width: calc(100% - 30px);
     }
 }

@@ -359,7 +359,7 @@ document.getElementById('publish').addEventListener('click', (event) => {
         localStorage.setItem('recipes', JSON.stringify(storageRecipes));
     } catch (e) {
         if (e.name === 'QuotaExceededError' || e.code === 22) {
-            alert('您的儲存空間不足，請清除舊的食譜或資料後再試！');
+            alert('localstorage測試空間不足，請注意圖片大小清或除舊的食譜或資料後再試！');
         } else {
             console.error("儲存 recipes 發生錯誤：", e);
         }
