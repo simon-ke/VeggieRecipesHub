@@ -300,7 +300,6 @@ document.getElementById('publish').addEventListener('click', (event) => {
     // 驗證表單必填欄位是否皆已填寫
     if (!validateRecipeForm()) {
         // validateRecipeForm() 內部會提示錯誤訊息，此時中斷提交
-        alert('表單驗證失敗!');
         return;
     }
     // **處理發布** 
@@ -325,7 +324,10 @@ document.getElementById('publish').addEventListener('click', (event) => {
     const stepsData = validateSteps();
 
     // 若步驟驗證失敗，validateSteps() 會處理提醒，此處中斷後續程序
-    if (!stepsData) { return; }
+    if (!stepsData) {
+        alert('表單驗證失敗!');
+        return;
+    }
 
     // 整理所有輸入的數據
     const recipeData = {
