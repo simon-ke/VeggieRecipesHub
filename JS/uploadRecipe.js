@@ -356,13 +356,20 @@ document.getElementById('publish').addEventListener('click', (event) => {
     storageRecipes.push(recipeData);
 
     // 存回 LocalStorage
-    localStorage.setItem('recipes', JSON.stringify(storageRecipes));
-
+    try {
+        localStorage.setItem('recipes', JSON.stringify(storageRecipes));
+    } catch (e) {
+        console.error("儲存 recipes 發生錯誤：", e);
+    }
     // 使用者食譜數更新，user 直接來自 userData（二者指向同一個物件），在修改了 user 之後，userData 中的資料也已更新
     user.total_recipes = Number(user.total_recipes) + 1;
-
+    
     // 將使用者食譜發布數量 存回 LocalStorage
-    localStorage.setItem('users', JSON.stringify(userData));
+    try {
+        localStorage.setItem('users', JSON.stringify(userData));
+    } catch (e) {
+        console.error("儲存 recipes 發生錯誤：", e);
+    }
 
     // 顯示提交中的遮罩畫面
     document.getElementById('loading-overlay').style.display = 'flex';
