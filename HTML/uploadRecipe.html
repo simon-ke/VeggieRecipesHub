@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="綠藝饗宴 - 最佳素食食譜平台">
     <title>上傳食譜</title>
-    <link rel="icon" href="../veggie-leaf.ico" type="image/x-icon">
+    <link rel="icon" href="../img/veggie-leaf.ico" type="image/x-icon">
     <link rel="stylesheet" href="../CSS/uploadRecipe.css">
 </head>
 
@@ -182,7 +182,7 @@
         <div class="recipe-actions">
             <!-- 搜尋區塊 -->
             <div class="search-container">
-                <label>搜尋其他素食料理</label>
+                <label for="search-input">搜尋其他素食料理</label>
                 <form id="globalSearchForm">
                     <input type="text" id="search-input" name="search" placeholder="搜尋食譜或輸入食材" />
                     <button type="button" id="clear-btn" aria-label="清除">×</button>
@@ -198,7 +198,7 @@
 
     <!-- 食譜上傳表單 -->
     <form class="upload-container" id="recipe-form">
-        <label class="upload-title">上傳食譜</label>
+        <h2 class="upload-title">上傳食譜</h2>
         <!-- 食譜圖片上傳區塊 -->
         <div class="upload-image" onclick="document.getElementById('imageInput').click()" tabindex="0">
             <input type="file" id="imageInput" name="recipe_image" accept="image/*" hidden>
@@ -227,9 +227,8 @@
 
         <!-- 食譜介紹 -->
         <div class="upload-box">
-            <label class="upload-text">食譜介紹</label>
-            <textarea class="input-field upload-introduction" name="recipe_description" placeholder="輸入食譜介紹 (最多200字)"
-                maxlength="200"></textarea>
+            <label class="upload-text" for="introduction">食譜介紹</label>
+            <textarea class="input-field upload-introduction" id="introduction" name="recipe_description" placeholder="輸入食譜介紹 (最多200字)" maxlength="200"></textarea>
         </div>
 
         <!-- 份量與時間 -->
@@ -273,7 +272,7 @@
         <!-- 食材 -->
         <div class="upload-box">
             <header class="material-title">
-                <label class="upload-text">食材</label>
+                <label class="upload-text" for="add-ingredient">食材</label>
                 <button id="add-ingredient" type="button" onclick="addIngredient()" tabindex="0">新增食材</button>
             </header>
             <div id="ingredients">
@@ -290,7 +289,7 @@
         <!-- 調味料 -->
         <div class="upload-box">
             <header class="material-title">
-                <label class="upload-text">調味料</label>
+                <label class="upload-text" for="add-seasoning">調味料</label>
                 <button id="add-seasoning" type="button" onclick="addSeasoning()" tabindex="0">新增調味料</button>
             </header>
             <div id="seasonings">
@@ -307,7 +306,7 @@
         <!-- 營養成分 -->
         <div class="upload-box">
             <header class="material-title">
-                <label class="upload-text">營養成分</label>
+                <label class="upload-text" for="add-nutrition">營養成分</label>
                 <button id="add-nutrition" type="button" onclick="addNutrition()" tabindex="0">新增營養成分</button>
                 <small class="helper-text">範例：營養成分名稱：熱量，數值：200 大卡</small>
             </header>
@@ -325,7 +324,7 @@
         <!-- 烹調步驟 -->
         <div class="upload-box">
             <header class="material-title">
-                <label class="upload-text">烹調步驟</label>
+                <label class="upload-text" for="addStepButton">烹調步驟</label>
                 <button id="addStepButton" type="button" onclick="addStep()" tabindex="0">新增步驟</button>
             </header>
             <div id="steps">
