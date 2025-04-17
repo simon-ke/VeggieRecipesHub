@@ -248,11 +248,6 @@ function updateLoginStatus() {
                 location.reload(); // 重整頁面
             });
         });
-        // LoginRegister.removeEventListener('click', handleRegisterOpen);
-        // LoginRegister.addEventListener('click', () => {
-        //     localStorage.setItem('openModal', true); // 保存狀態到 localStorage
-        //     location.reload(); // 重整頁面
-        // });
         window.addEventListener('load', () => {
             const shouldOpenModal = localStorage.getItem('openModal'); // 取出保存的狀態
             if (shouldOpenModal) {
@@ -269,7 +264,7 @@ function updateLoginStatus() {
                 alert('已成功登出！');
                 // 更新登入狀態顯示
                 updateLoginStatus();
-                window.location.replace('/index.html'); // 登出後跳轉首頁，並移除當前頁面的歷史紀錄
+                window.location.replace('./index.html'); // 登出後跳轉首頁，並移除當前頁面的歷史紀錄
             });
         });
     } else {
