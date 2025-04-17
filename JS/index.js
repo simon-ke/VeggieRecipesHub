@@ -82,6 +82,7 @@ function createTopRecipeCard(recipe) {
 
         // 建立 recipeCard 子元素 img
         const img = document.createElement('img');
+        img.onerror = imgOnerror; // 圖片載入錯誤時的處理
         if (recipe.recipe_image) {
             img.src = recipe.recipe_image;
         } else {
@@ -123,6 +124,7 @@ function createNewRecipeCard(recipe) {
 
         // 建立 recipeCard 子元素 img
         const img = document.createElement('img');
+        img.onerror = imgOnerror; // 圖片載入錯誤時的處理
         if (recipe.recipe_image) {
             img.src = recipe.recipe_image;
         } else {
@@ -154,42 +156,6 @@ function createNewRecipeCard(recipe) {
         console.error('在生成或添加卡片時出現錯誤:', error);
         return null; // 若發生錯誤，回傳 null 以避免程式崩潰
     }
-}
-
-document.addEventListener("DOMContentLoaded", async () => {
-    try {
-        const allRecipesData = await getRecipesData(); // 確保取得資料
-        if (!Array.isArray(allRecipesData)) {
-            throw new Error("資料非陣列格式");
-        }
-        renderRecipes(allRecipesData); // 渲染食譜
-    } catch (error) {
-        console.error("載入資料時發生錯誤:", error);
-    }
-    mouseCarousel(carouselTop); // 初始化滑動效果
-    mouseCarousel(carouselNew); // 初始化滑動效果
-});
-
-
-
-
-
-
-
-
-// 建立推薦卡片函式
-function createSuggestRecipeCard(recipe) {
-    // 建立圖片元件
-    const img = document.createElement('img');
-    img.onerror = imgOnerror;
-
-    if (recipe.recipe_image) {
-        img.src = recipe.recipe_image;
-    } else {
-        img.src = "../img/image_Not_Found.png";
-        img.classList.add('not-found-img');
-    }
-    img.alt = recipe.recipe_title;
 }
 
 // 當圖片載入失敗時，改用預設圖片，並透過狀態檢查避免無限迴圈（這裡利用 class 標記）
@@ -292,3 +258,17 @@ function mouseCarousel(element) {
         }
     });
 }
+
+document.addEventListener("DOMContentLoaded", async () => {
+    try {
+        const allRecipesData = await getRecipesData(); // 確保取得資料
+        if (!Array.isArray(allRecipesData)) {
+            throw new Error("資料非陣列格式");
+        }
+        renderRecipes(allRecipesData); // 渲染食譜
+    } catch (error) {
+        console.error("載入資料時發生錯誤:", error);
+    }
+    mouseCarousel(carouselTop); // 初始化滑動效果
+    mouseCarousel(carouselNew); // 初始化滑動效果
+});
